@@ -1,0 +1,903 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
+	<title>ThinkPHP框架 | 中文最佳实践PHP开源框架,专注WEB应用快速开发8年！  </title>
+	<meta name="keywords" content="php框架,thinkphp框架，web应用，tp官方网站，简洁开发，快速开发,开源框架,开发框架,MVC,thinkphp,tp官方网站"/>
+	<meta name="description" content="ThinkPHP框架 - 是由上海顶想公司开发维护的MVC结构的开源PHP框架，遵循Apache2开源协议发布，是为了敏捷WEB应用开发和简化企业应用开发而诞生的。"/>
+	<meta property="wb:webmaster" content="06779971d6009b5a" />
+	<link rel="alternate" type="application/rss+xml" title="ThinkPHP官方资讯" href="/rss/index.xml" />
+	<link href="/Public/favicon.ico" rel="shortcut icon">
+	<link rel="stylesheet" type="text/css" href="/Public/new/css/base.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/Public/new/css/header.css?v1.000" media="all">
+	<link rel="stylesheet" type="text/css" href="/Public/new/css/module.css?v1.007" media="all">
+	<link rel="stylesheet" href="/Public/common/ThinkBox/skin/default/style.css">
+	<link rel="stylesheet" href="/Public/new/css/img.css">
+	<link rel="stylesheet" type="text/css" href="/Public/common/prettify/prettify.css" />
+	<script type="text/javascript" src="/Public/common/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/Public/common/prettify/prettify.js"></script>
+	<script type="text/javascript" src="/Public/common/zclip/jquery.zclip.min.js"></script>
+	<script type="text/javascript" src="/Public/common/ThinkBox/jquery.ThinkBox.min.js"></script>
+	<script type="text/javascript" src="/Public/common/Validform_v5.3.2.js"></script>
+	<script type="text/javascript" src="/Public/new/js/jquery.masonry.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		//翻页快捷键
+		$(document).keyup(function(event){
+			if(event.keyCode == 37){
+				$('.prev span').click();
+			}else if(event.keyCode == 39){
+				$('.next span').click();
+			}
+		});
+
+		//阻止事件的冒泡
+		$(':text,textarea').keyup(function(event){
+			event.stopPropagation();
+		});
+
+		$("#header-search").hover(function(){
+			$("#search-sort-list").show();
+		},function(){
+			$("#search-sort-list").hide();
+		});
+		//搜索选项选择
+		$("#search-sort-list li").click(function(){
+			var curTxt = $(this).text();
+			var type = $(this).val();
+			$('#search').val(type);
+			$(this).addClass("current").siblings().removeClass("current");
+			$(this).parent().siblings(".search-sort-txt").text(curTxt);
+			$(this).parent().hide();
+		});
+
+
+		//入口图标菜单
+		$(".entrance").mouseenter(function(){
+			var userMenu = $(this).children(".user-menu");
+			userMenu.show();
+			clearTimeout(userMenu.data("timeout"));
+		}).mouseleave(function(){
+			var userMenu = $(this).children(".user-menu");
+			userMenu.data("timeout") && clearTimeout(userMenu.data("timeout"));
+			userMenu.data("timeout", setTimeout(function(){userMenu.hide()}, 100));
+		});
+
+		$(".user-menu").mouseover(function(){
+			clearTimeout($(this).data("timeout"));
+			$(this).removeData("timeout");
+		});
+
+
+		//返回顶部
+		function gotoTop(min_height){
+		    //预定义返回顶部的html代码，它的css样式默认为不显示
+		    var gotoTop_html = '<div id="gotoTop">返回顶部</div>';
+		    //将返回顶部的html代码插入页面上id为page的元素的末尾
+		    $("body").append(gotoTop_html);
+		    $("#gotoTop").click(//定义返回顶部点击向上滚动的动画
+		        function(){ $('html,body').animate({scrollTop:0},700);
+		    }).hover(//为返回顶部增加鼠标进入的反馈效果，用添加删除css类实现
+		        function(){ $(this).addClass("hover");},
+		        function(){ $(this).removeClass("hover");
+		    });
+
+		    //获取页面的最小高度，无传入值则默认为600像素
+		    min_height ? min_height = min_height : min_height = 600;
+		    //为窗口的scroll事件绑定处理函数
+		    $(window).scroll(function(){
+		        //获取窗口的滚动条的垂直位置
+		        var s = $(window).scrollTop();
+		        //当窗口的滚动条的垂直位置大于页面的最小高度时，让返回顶部元素渐现，否则渐隐
+		        if( s > min_height){
+		            $("#gotoTop").fadeIn(100);
+		        }else{
+		            $("#gotoTop").fadeOut(200);
+		        };
+		    });
+		};
+		gotoTop();
+		//代码高亮
+		$('code').each(function(){
+	        $(this).data('think-source', (this.innerText || this.textContent).replace(/ /g, ' '));
+	    });
+	    prettyPrint();
+	    $('code').each(function(){
+	        var self = $(this);
+	        var copy = $('<div><span>复制代码</span></div>')
+	            .addClass('think-copy')
+	            .appendTo(self)
+	            .zclip({
+	                'path':'/Public/common/zclip/ZeroClipboard.swf',
+	                'afterCopy' : function(){
+	                    $.ThinkBox.success('复制成功');
+	                },
+	                'copy': function(){
+	                    return self.closest('code').data('think-source');
+	                }
+	            });
+	    });
+	  	//每隔一段时间ajax加载提醒
+		setInterval("ajaxGetNotify()", parseInt(120) * 1000);
+		//修改用户名
+		$(document).delegate('.change-name','submit', function(){
+			var ele = $(this);
+			$.post('/user/changeUsername',
+				{'username' : ele.find('input[name=username]').val()},
+				function(data){
+					if(data.status){
+						box.hide();
+						$.ThinkBox.success(data.info);
+					}else{
+						$.ThinkBox.error(data.info);
+					}
+				},
+				'json'
+			);
+			return false;
+		});
+	})
+
+	function ajaxGetNotify(){
+  		$.get('/notify/getNotifyCount',
+			{},
+			function(data){
+				$('#review_num').text(data.review_count);
+				$('#letter_num').text(data.letter_count);
+				if(data.num != 0){
+					$('#all_notify').html("<em>"+data.num+"</em>");
+				}else{
+					$('#all_notify').html("");
+				}
+			},
+			'json'
+		);
+	}
+	var box;
+	</script>
+	<script type="text/javascript" src="/Public/new/js/common.js"></script>
+	<script type="text/javascript" src="/public/checkSyncLogin.html"></script>
+</head>
+<body>
+	<!-- 头部 -->
+	<div class="header">
+		<div class="hd-main cf">
+			<!-- logo -->
+			<h3 class="logo"><a href="/" title="返回首页"></a></h3>
+			<!-- /logo -->
+
+			<!-- 主导航 -->
+			<ul class="main-nav">
+				<li><a href="/">首页</a></li>
+				<li><a href="/down.html">下载</a></li>
+				<li><a href="/extend/index.html">扩展</a></li>
+				<li><a href="http://www.topthink.com/products.html" target="app">应用</a></li>
+				<li><a href="/document/index.html">教程</a></li>
+				<li><a href="/code/index.html">代码</a></li>
+				<li><a href="http://www.topthink.com/group/1525.html" target="case">案例</a></li>
+				<li><a href="http://www.topthink.com/topics.html" target="topic">资讯</a></li>
+				<li><a href="/topic/index.html">讨论</a></li>
+			</ul>
+			<script type="text/javascript">
+            (function(){
+                //导航选中
+                var url = location.pathname, navg = $('.main-nav li');
+                if(url == '/' || url == '/index'){
+                    navg.eq(0).addClass('current');
+                }else if(!url.indexOf('/down')){
+                    navg.eq(1).addClass('current');
+                }else if(!url.indexOf('/extend')){
+                    navg.eq(2).addClass('current');
+                }else if(!url.indexOf('/app')){
+                    navg.eq(3).addClass('current');
+                }else if(!url.indexOf('/info')){
+                    if(!url.indexOf('/info/document') || !url.indexOf('/info/add/cate_id/36') || !url.indexOf('/info/zhuanti')){
+                        navg.eq(4).addClass('current');
+                    }else{
+                        navg.eq(7).addClass('current');
+                    }
+                }else if(!url.indexOf('/code')){
+                    navg.eq(5).addClass('current');
+                }else if(!url.indexOf('/case')){
+                    navg.eq(6).addClass('current');
+                }else if(!url.indexOf('/topic')){
+                    navg.eq(8).addClass('current');
+                }else if(!url.indexOf('/document')){
+                    navg.eq(4).addClass('current');
+                }
+            })()
+            </script>
+			<!-- /主导航 -->
+
+			<div class="header-bar">
+				<!-- 搜索 -->
+				<form action="/Search/" method="post" class="search cf">
+					<div id="header-search" class="search-sort">
+						<span class="search-sort-txt">全部</span><em></em>						<input type="hidden" name="type" id="search" value="10"/>
+						<ul id="search-sort-list" class="search-sort-list">
+							<li value="10">全部</li>
+							<li value="0">资讯</li>
+    						<li value="1">下载</li>
+    						<li value="2">讨论</li>
+    						<li value="6">代码</li>
+    						<li value="3">BUG</li>
+    						<li value="4">建议</li>
+    						<li value="5">更新</li>
+                            <li value="7">应用</li>
+						</ul>
+					</div>
+					<input type="hidden" name="time" value="0">
+					<input type="text" name="name" class="search-input" x-webkit-speech>
+					<a class="search-btn" onclick="$(this).parent().submit();">搜索</a>
+				</form>
+				<!-- /搜索 -->
+				<script type="text/javascript" src="/member/getInfo.html"></script>
+			</div>
+		</div>
+	</div>
+	<div class="changeName" style="display:none;">
+		<form action="/user/changeUsername" method="post" class="change-name">
+			<div class="error-tips"> 系统检测到您的用户名不符合规范：<span></span> </div>
+			<label class="lab">用户名</label>
+			<input type="text" class="text" name="username" datatype="*1-16" errormsg="用户名不超过16个字节" nullmsg="用户名不能为空"/>
+			<input type="submit" value="提交" class="btn">
+		</form>
+	</div>
+	<!-- 主体 -->
+	<div class="main por cf">
+		<!-- 对联广告位 -->
+		<div class="a1"></div>
+		<div class="a2"></div>
+		<!-- /对联广告位 -->
+
+		<!-- 左边 -->
+		<div class="wrapper">
+<script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script>
+<thinkad id="ad_b6d60e8a3b9b7e25"></thinkad>
+			<!-- 资讯教程 -->
+			<div class="box news">
+
+				<div class="index-hd cf">
+					<div class="title"><i class="t-icon"></i><em>热点信息</em></div>
+				</div>
+
+				<div class="index-bd cf">
+					<!-- 置顶区 -->
+					<div style="width:430px;height:230px;float:left;">
+					   <div style="width:430px;height:115px;">
+                           <div style="border:1px solid #d4d4d4;width:100px;height:100px;float: left;margin-right: 8px;padding: 3px;">
+                                <a href="/da/count/id/63.html" target="_blank" title="看云文档定价和付费阅读功能上线"><img src="/Uploads/da/2016-02-04/56b2c02b56263.jpg" alt="看云文档定价和付费阅读功能上线"/></a>                           </div>
+                           <div style="width:310px;height:110px;float: left;line-height:1.7">
+                                <a href="http://www.kancloud.cn/blog/notice/36712" target="_blank"><b>看云文档定价和付费阅读功能上线<br />
+ </b></a> 作为技术文档和书籍的写作、阅读及电子出版平台，现已上线定价和付费阅读功能，技术宅们行动起来吧^_^<br />
+<br />
+                           </div>
+					   </div>
+					   <div style="border-top:1px solid #d4d4d4;width:420px;height:115px;line-height:28px;padding: 5px;">
+                            <b><a href="http://www.thinkphp.cn/topic/35391.html" target="_blank"><font color="red">ThinkPHP V5.0RC1发布——为API开发而设计！</font></a></b> <br />
+<b><a href="http://www.kancloud.cn/thinkphp/thinkphp_quickstart" target="_blank"><font color="green">ThinkPHP3.2.3快速入门 [ 持续更新中 ] </font></a></b><br />
+<b><a href="http://www.kancloud.cn/manual/thinkphp/1678" target="_blank"><font color="red">ThinkPHP3.2.3完全开发手册 [ 最新 ]</font></a></b><br />
+<b><a href="http://www.kancloud.cn/kancloud/a-programmer-prepares" target="_blank">程序员的自我修养</a></b> [ <b><a href="http://www.topthink.com/event/1144.html" target="_blank">七牛优惠码：<font color="red">39a81a89</font></a></b> ]<br />
+                       </div>
+					</div>
+                    <div style="border-left:1px solid #d4d4d4;width:255px;height:230px;line-height:1.76;float:left;padding-left:10px;margin-left: 10px;">
+                        <a href="http://www.kancloud.cn/digest/details-itguys" target="_blank">IT痴汉的工作现状</a><br />
+<a href="http://www.kancloud.cn/kancloud/the-art-of-programming" target="_blank">编程之法：面试和算法心得</a><br />
+<a href="http://www.kancloud.cn/thinkphp/nodejs-mini-book" target="_blank">深入浅出Node.js迷你书</a><br />
+<font color="red"><a href="http://www.kancloud.cn/kancloud/swift" target="_blank">Swift2.0编程中文版</a></font><br />
+<a href="http://www.kancloud.cn/thinkphp/node-beginner" target="_blank">Node.Js入门</a><br />
+<a href="http://www.kancloud.cn/kancloud/deep-understand-javascript" target="_blank">深入理解JavaScript系列</a><br />
+<a href="http://www.topthink.com/topic/10271.html" target="_blank">17款最佳的代码审查工具</a><br />
+<a href="http://www.topthink.com/topic/10983.html" target="_blank">APP快速开发：用这些工具更给力</a>                    </div>
+				</div>
+			</div>
+			<!-- /资讯教程 -->
+
+			<!-- 一行三列广告 -->
+			<div class="a3-wrap">
+				<div class="a3"><thinkad id="ad_53053dac8c7184ea"></thinkad></div>
+				<div class="a3"><thinkad id="ad_edfee46059bccd59"></thinkad></div>
+				<div class="a3"><thinkad id="ad_e05bc666bbccc015"></thinkad></div>
+			</div>
+			<!-- 一行三列广告 -->
+
+			<!-- 话题讨论 -->
+			<div class="box topic">
+				<div class="index-hd cf">
+					<div class="title"><i class="t-icon"></i><em>话题讨论</em></div>
+					<ul class="t-sort">
+						<li><a href="/topic/ask.html">求助交流</a></li><li><a href="/topic/share.html">技术分享</a></li><li><a href="/topic/front.html">前端开发</a></li><li><a href="/topic/job.html">招聘求职</a></li><li><a href="/topic/procoop.html">项目合作</a></li><li><a href="/topic/mood.html">心情闲聊</a></li><li><a href="/topic/staffers.html">职场感悟</a></li>					</ul>
+					<a class="release-btn" href="/topic/add.html" target="_blank">+发表话题</a>
+				</div>
+
+				<div class="index-bd">
+				<thinkad id="ad_b0c192229011326e"></thinkad>
+					<ul class="list">
+						<li>
+								<div class="listfr">
+									<span>cloudwise</span>
+									<span>16:09</span>
+								</div>
+								<i class="list-arrow"></i><a href="/topic/36932.html" target="_blank" title="监控宝妙招：批量修改告警通知联系人">监控宝妙招：批量修改告警通知联系人</a>
+							</li><li>
+								<div class="listfr">
+									<span>limingjunvip</span>
+									<span>15:20</span>
+								</div>
+								<i class="list-arrow"></i><a href="/topic/36931.html" target="_blank" title="在thinkPHP中的入口文件定义的常量为什么不能使用">在thinkPHP中的入口文件定义的常量为什么不能使用</a>
+							</li><li>
+								<div class="listfr">
+									<span>qq10044375</span>
+									<span>14:32</span>
+								</div>
+								<i class="list-arrow"></i><a href="/topic/36930.html" target="_blank" title="一个经典的TP中遇到的问题">一个经典的TP中遇到的问题</a>
+							</li><li>
+								<div class="listfr">
+									<span>大漠孤冷</span>
+									<span>13:51</span>
+								</div>
+								<i class="list-arrow"></i><a href="/topic/36928.html" target="_blank" title="AppCan 移动应用开发项目源码分享：嗡嗡旅游App开发">AppCan 移动应用开发项目源码分享：嗡嗡旅游App开发</a>
+							</li><li>
+								<div class="listfr">
+									<span>雀牌传说</span>
+									<span>12:07</span>
+								</div>
+								<i class="list-arrow"></i><a href="/topic/36927.html" target="_blank" title="vendor方法引入类文件可以，但是就是实例化不了类">vendor方法引入类文件可以，但是就是实例化不了类</a>
+							</li><li>
+								<div class="listfr">
+									<span>易咨酷</span>
+									<span>11:59</span>
+								</div>
+								<i class="list-arrow"></i><a href="/topic/36926.html" target="_blank" title="thinkphp 这个php代码怎么写啊？">thinkphp 这个php代码怎么写啊？</a>
+							</li><li>
+								<div class="listfr">
+									<span>夜色如水</span>
+									<span>11:36</span>
+								</div>
+								<i class="list-arrow"></i><a href="/topic/36925.html" target="_blank" title="3.2修改输出模版状态进行修改，怎么整">3.2修改输出模版状态进行修改，怎么整</a>
+							</li><li>
+								<div class="listfr">
+									<span>落殇</span>
+									<span>10:50</span>
+								</div>
+								<i class="list-arrow"></i><a href="/topic/36924.html" target="_blank" title="thinkphp3.2.3整合dwz">thinkphp3.2.3整合dwz</a>
+							</li><li>
+								<div class="listfr">
+									<span>85541585</span>
+									<span>10:19</span>
+								</div>
+								<i class="list-arrow"></i><a href="/topic/36923.html" target="_blank" title="关于模板中日期增减求助！">关于模板中日期增减求助！</a>
+							</li><li>
+								<div class="listfr">
+									<span>谨菘</span>
+									<span>10:12</span>
+								</div>
+								<i class="list-arrow"></i><a href="/topic/36922.html" target="_blank" title="tp怎么实现登录">tp怎么实现登录</a>
+							</li>					</ul>
+				</div>
+			</div>
+			<!-- /话题讨论 -->
+
+			<!-- 一行三列广告 -->
+            <div class="aw720">
+				<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- 首页横幅 -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:90px"
+				     data-ad-client="ca-pub-2076739524120221"
+				     data-ad-slot="5295221043"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({ });
+				</script>
+            </div>
+            <!-- 一行三列广告 -->
+
+			<!-- 代码分享 -->
+			<div class="box code">
+				<div class="index-hd cf">
+					<div class="title"><i class="t-icon"></i><em>代码分享</em></div>
+					<ul class="t-sort">
+						<li><a href="/code/system.html" target="_blank">系统代码</a></li><li><a href="/code/algorithm.html" target="_blank">基础算法</a></li><li><a href="/code/logic.html" target="_blank">业务逻辑</a></li><li><a href="/code/functions.html" target="_blank">功能实现</a></li><li><a href="/code/examples.html" target="_blank">用法示例</a></li>					</ul>
+					<a class="release-btn" href="/code/add.html" target="_blank">+发布代码</a>
+				</div>
+
+				<div class="index-bd ">
+					<ul class="list">
+						<li>
+								<div class="listfr">
+									<span>铭扬致远</span>
+									<span>10:29</span>
+								</div>
+								<i class="list-arrow"></i><a href="/code/1752.html" title="AUTH权限通用后台管理系统 高端大气阿里云UI" target="_blank">AUTH权限通用后台管理系统 高端大气阿里云UI</a>
+							</li><li>
+								<div class="listfr">
+									<span>蓝图网络</span>
+									<span>02-20</span>
+								</div>
+								<i class="list-arrow"></i><a href="/code/1751.html" title="【出售】微客农场源码,微客农场复利源码" target="_blank">【出售】微客农场源码,微客农场复利源码</a>
+							</li><li>
+								<div class="listfr">
+									<span>francymiky</span>
+									<span>02-20</span>
+								</div>
+								<i class="list-arrow"></i><a href="/code/1750.html" title="THINKPHP与ACEadmin开发的后台管理系统" target="_blank">THINKPHP与ACEadmin开发的后台管理系统</a>
+							</li><li>
+								<div class="listfr">
+									<span>flc1125</span>
+									<span>02-18</span>
+								</div>
+								<i class="list-arrow"></i><a href="/code/1749.html" title="阿里大鱼API接口（短信接口）范例" target="_blank">阿里大鱼API接口（短信接口）范例</a>
+							</li><li>
+								<div class="listfr">
+									<span>ζั͡ޓއއއ๓</span>
+									<span>02-16</span>
+								</div>
+								<i class="list-arrow"></i><a href="/code/1748.html" title="PhpExcel中文帮助手册|thinkphp适用3.1.2" target="_blank">PhpExcel中文帮助手册|thinkphp适用3.1.2</a>
+							</li><li>
+								<div class="listfr">
+									<span>greedisland1017</span>
+									<span>02-15</span>
+								</div>
+								<i class="list-arrow"></i><a href="/code/1747.html" title="Hi ThinkPHP 模板标签教程" target="_blank">Hi ThinkPHP 模板标签教程</a>
+							</li><li>
+								<div class="listfr">
+									<span>ζั͡ޓއއއ๓</span>
+									<span>02-04</span>
+								</div>
+								<i class="list-arrow"></i><a href="/code/1746.html" title="在服务器上搭建SVN" target="_blank">在服务器上搭建SVN</a>
+							</li><li>
+								<div class="listfr">
+									<span>ζั͡ޓއއއ๓</span>
+									<span>02-04</span>
+								</div>
+								<i class="list-arrow"></i><a href="/code/1745.html" title="一个新手从零搭建服务器的笔记教程" target="_blank">一个新手从零搭建服务器的笔记教程</a>
+							</li><li>
+								<div class="listfr">
+									<span>左边的雨</span>
+									<span>02-04</span>
+								</div>
+								<i class="list-arrow"></i><a href="/code/1744.html" title="微信红包，企业支付完整命名空间版" target="_blank">微信红包，企业支付完整命名空间版</a>
+							</li><li>
+								<div class="listfr">
+									<span>marshalmackes</span>
+									<span>02-03</span>
+								</div>
+								<i class="list-arrow"></i><a href="/code/1743.html" title="Thinkphp3.2.x 多图上传几个注意点" target="_blank">Thinkphp3.2.x 多图上传几个注意点</a>
+							</li>					</ul>
+				</div>
+			</div>
+			<!-- /代码分享 -->
+
+			<!-- h60横幅广告位 -->
+			<div class="aw720">
+				<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- 首页横幅 -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:90px"
+				     data-ad-client="ca-pub-2076739524120221"
+				     data-ad-slot="5295221043"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({ });
+				</script>
+			</div>
+			<!-- /h60横幅广告位 -->
+
+			<!-- 扩展中心 -->
+			<div class="box extends">
+				<div class="index-hd cf">
+					<div class="title"><i class="t-icon"></i><em>扩展中心</em></div>
+					<ul class="t-sort">
+						<li><a href="/extend/engine.html" target="_blank">引擎</a></li><li><a href="/extend/function.html" target="_blank">函数</a></li><li><a href="/extend/library.html" target="_blank">类库</a></li><li><a href="/extend/driver.html" target="_blank">驱动</a></li><li><a href="/extend/action.html" target="_blank">控制器</a></li><li><a href="/extend/model.html" target="_blank">模型</a></li><li><a href="/extend/behavior.html" target="_blank">行为</a></li><li><a href="/extend/mode.html" target="_blank">模式</a></li><li><a href="/extend/example.html" target="_blank">示例</a></li><li><a href="/extend/others.html" target="_blank">其他</a></li>					</ul>
+					<a class="release-btn" href="/extend/add.html" target="_blank">+提交扩展</a>
+				</div>
+
+				<div class="index-bd cf">
+					<ul class="list">
+						<li>
+								<div class="listfr">
+									<span>
+										IT牛人																			</span>
+									<span>02-21</span>
+								</div>
+								<i class="list-arrow"></i><a href="/extend/720.html" title="ThinkPHP5.0视频教程,TP大型真实项目视频教程第1讲" target="_blank">ThinkPHP5.0视频教程,TP大型真实项目视频教程第1讲</a>
+							</li><li>
+								<div class="listfr">
+									<span>
+										solomon_zjf																			</span>
+									<span>02-19</span>
+								</div>
+								<i class="list-arrow"></i><a href="/extend/719.html" title="定时任务行为扩展" target="_blank">定时任务行为扩展</a>
+							</li><li>
+								<div class="listfr">
+									<span>
+										月夕人																			</span>
+									<span>02-01</span>
+								</div>
+								<i class="list-arrow"></i><a href="/extend/718.html" title="修改分页类，使其兼容Bootstrap pagination样式" target="_blank">修改分页类，使其兼容Bootstrap pagination样式</a>
+							</li><li>
+								<div class="listfr">
+									<span>
+										hjl416148489																			</span>
+									<span>01-25</span>
+								</div>
+								<i class="list-arrow"></i><a href="/extend/717.html" title="Thinkphp+Ajax+Table无刷新分页" target="_blank">Thinkphp+Ajax+Table无刷新分页</a>
+							</li><li>
+								<div class="listfr">
+									<span>
+										andy_php																			</span>
+									<span>01-21</span>
+								</div>
+								<i class="list-arrow"></i><a href="/extend/716.html" title="ThinkPHP3.2.3 page类自定义分页样式" target="_blank">ThinkPHP3.2.3 page类自定义分页样式</a>
+							</li><li>
+								<div class="listfr">
+									<span>
+										solomon_zjf																			</span>
+									<span>01-21</span>
+								</div>
+								<i class="list-arrow"></i><a href="/extend/715.html" title="封装大P方法实现分页" target="_blank">封装大P方法实现分页</a>
+							</li><li>
+								<div class="listfr">
+									<span>
+										foryoufeng																			</span>
+									<span>01-19</span>
+								</div>
+								<i class="list-arrow"></i><a href="/extend/714.html" title="thinkmobile商城手机端app接口系统" target="_blank">thinkmobile商城手机端app接口系统</a>
+							</li><li>
+								<div class="listfr">
+									<span>
+										汉王																			</span>
+									<span>01-19</span>
+								</div>
+								<i class="list-arrow"></i><a href="/extend/713.html" title="ThinkPHP3.2.3扩展之二维码" target="_blank">ThinkPHP3.2.3扩展之二维码</a>
+							</li><li>
+								<div class="listfr">
+									<span>
+										梦雪																			</span>
+									<span>01-12</span>
+								</div>
+								<i class="list-arrow"></i><a href="/extend/712.html" title="梦雪实体小店收款系统 v2.1" target="_blank">梦雪实体小店收款系统 v2.1</a>
+							</li><li>
+								<div class="listfr">
+									<span>
+										IT牛人																			</span>
+									<span>01-10</span>
+								</div>
+								<i class="list-arrow"></i><a href="/extend/711.html" title="redis,memcahed,php缓存,视频教程,热播中..." target="_blank">redis,memcahed,php缓存,视频教程,热播中...</a>
+							</li>					</ul>
+				</div>
+			</div>
+			<!-- /扩展中心 -->
+
+			<!-- h60横幅广告位 -->
+			<div class="aw720">
+				<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- 首页横幅 -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:90px"
+				     data-ad-client="ca-pub-2076739524120221"
+				     data-ad-slot="5295221043"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({ });
+				</script>
+			</div>
+			<!-- /h60横幅广告位 -->
+
+			<!-- BUG反馈 -->
+			<div class="box feedback h367">
+				<div class="index-hd cf">
+					<div class="title"><i class="t-icon"></i><em>BUG反馈</em></div>
+					<a class="more" target="_blank" href="/bug/index.html">更多>></a>
+					<!-- <a class="release-btn" href="/bug/add.html" target="_blank">+提交BUG</a> -->
+				</div>
+
+				<div class="index-bd">
+					<ul class="list ellipsis">
+						<li>
+								<i class="list-arrow"></i><a href="/bug/3709.html" title="tp5 shouji  不能做做数据表的字段名吗？" target="_blank">tp5 shouji  不能做做数据表的字段名吗？</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/bug/3708.html" title="thinkphp5 model setDec setInc 问题" target="_blank">thinkphp5 model setDec setInc 问题</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/bug/3707.html" title="model使用了$updateFields后，save方法失败" target="_blank">model使用了$updateFields后，save方法失败</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/bug/3706.html" title="Tp5 扩展库中的验证码Bug" target="_blank">Tp5 扩展库中的验证码Bug</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/bug/3705.html" title="TP5 缺少 _before_delete" target="_blank">TP5 缺少 _before_delete</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/bug/3704.html" title="volist标签key值 在内部嵌套标签中出错" target="_blank">volist标签key值 在内部嵌套标签中出错</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/bug/3703.html" title="读写分离 - 事务提交错误" target="_blank">读写分离 - 事务提交错误</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/bug/3700.html" title="Model 中exp表达式 bug" target="_blank">Model 中exp表达式 bug</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/bug/3699.html" title="Model模型 join 问题" target="_blank">Model模型 join 问题</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/bug/3698.html" title="域名部署环境下U函数生成URL的问题" target="_blank">域名部署环境下U函数生成URL的问题</a>
+							</li>					</ul>
+				</div>
+			</div>
+			<!-- /BUG反馈 -->
+
+			<!-- 功能建议 -->
+			<div class="box suggestion h367">
+				<div class="index-hd cf">
+					<div class="title"><i class="t-icon"></i><em>功能建议</em></div>
+					<a class="more" target="_blank" href="/suggest/index.html">更多>></a>
+					<!-- <a class="release-btn" href="/suggest/add.html" target="_blank">+发表建议</a> -->
+				</div>
+
+				<div class="index-bd">
+					<ul class="list ellipsis">
+						<li>
+								<i class="list-arrow"></i><a href="/suggest/592.html" title="onethink 公共函数 list_sort_by 里面的引用没有必要，为什么要用引用呢？" target="_blank">onethink 公共函数 list_sort_by 里面的引用没有必要，为什么要用引用呢？</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/suggest/591.html" title="url_domain_rules 怎么用" target="_blank">url_domain_rules 怎么用</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/suggest/590.html" title="错误类型是否可以指定" target="_blank">错误类型是否可以指定</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/suggest/589.html" title="加入BUG修复更新功能" target="_blank">加入BUG修复更新功能</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/suggest/588.html" title="表单令牌 提示 Cannot unset string offsets   ------Model.class.php 　LINE: 952" target="_blank">表单令牌 提示 Cannot unset string offsets   ------Model.class.php 　LINE: 952</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/suggest/587.html" title="在 关联模型 的 MANY_TO_MANY 中使用 视图模型 " target="_blank">在 关联模型 的 MANY_TO_MANY 中使用 视图模型 </a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/suggest/586.html" title="显示年份信息" target="_blank">显示年份信息</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/suggest/585.html" title="A方法跨项目实例化不了" target="_blank">A方法跨项目实例化不了</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/suggest/584.html" title="msubstr类似这样的函数手册里没有,那在那里查看？" target="_blank">msubstr类似这样的函数手册里没有,那在那里查看？</a>
+							</li><li>
+								<i class="list-arrow"></i><a href="/suggest/583.html" title="希望TP支持路由反解析到U函数" target="_blank">希望TP支持路由反解析到U函数</a>
+							</li>					</ul>
+				</div>
+			</div>
+			<!-- /功能建议 -->
+
+		</div>
+		<!-- /左边主要内容去 -->
+
+		<!-- 右边边栏 -->
+		<div class="sidebar">
+
+			<!-- 下载 -->
+			<div class="box download">
+				<div class="index-hd cf">
+					<div class="title"><i class="t-icon"></i><em>最新下载</em></div>
+					<a href="/down.html" class="more" target="_blank">更多>></a>
+				</div>
+
+				<div class="index-bd">
+					<a class="core-package" href="/donate/download/id/703.html">ThinkPHP5.0.0 RC1版本</a><a class="core-package" href="/donate/download/id/610.html">ThinkPHP3.2.3完整版</a>					<a class="core-package" href="https://github.com/liu21st/thinkphp" target="_blank">Github获取地址</a>
+					<dl class="manual">
+						<dt>3.1手册</dt>
+						<dd class="mversion">
+							<a class="web" href="http://doc.thinkphp.cn/manual/" title="3.1开发手册在线版" target="_blank"></a>
+							<a class="android" href="/download/274.html" title="3.1安卓版下载"></a>
+							<a class="ios" href="/download/275.html" title="3.1IOS版下载"></a>
+							<a class="chm" href="/download/267.html" title="3.1CHM版下载"></a>
+						</dd>
+					</dl>
+					<dl class="manual">
+						<dt>3.2手册</dt>
+						<dd class="mversion">
+							<a class="web" href="http://document.thinkphp.cn/manual_3_2.html" title="3.2开发手册在线版" target="_blank"></a>
+							<a class="chm" href="/download/545.html" title="3.2CHM版下载"></a>
+							<a class="pdf" href="/download/546.html" title="3.2PDF版下载"></a>
+						</dd>
+					</dl>
+				</div>
+			</div>
+			<!-- /下载 -->
+
+			<!-- h100边栏横幅广告 -->
+            <div class="aw270">
+                <thinkad id="ad_7eba11e3a6a74eec"></thinkad>
+            </div>
+            <!-- /h100边栏横幅广告 -->
+
+            <!-- 福利 -->
+            <div class="box download" style="height:auto;">
+                <div class="index-hd cf">
+                    <div class="title"><i class="t-icon" style="background-position: -178px -51px;"></i><em>旗下平台</em></div>
+                </div>
+
+                <div class="index-bd">
+                    <div class=""><a href="http://www.topthink.com" target="_blank" title="开发者媒体服务平台"><img src="/Uploads/da/2014-08-06/53e1c37d08df1.jpg" alt="开发者媒体服务平台"/></a></div>
+                    <div class=""><a href="http://www.kancloud.cn" target="_blank" title="文档创作和托管平台"><img src="/Uploads/editor/2015-04-17/5530b7ad82e8b.png" alt="文档创作和托管平台"/></a></div>
+					
+                </div>
+            </div>
+            <!-- /福利载 -->
+
+			<!-- 捐赠我们列表 -->
+			<div class="box side-donate">
+				<div class="index-hd">
+					<a href="/donate.html" class="more" target="_blank">更多>></a>
+					<div class="title"><i class="t-icon"></i><em>捐赠墙</em></div>
+				</div>
+				<div class="index-bd">
+					<ul class="ellipsis">
+					<li class="cf">
+							<span class="user">段樟根：</span>
+							<span class="txt" title="账户码-转账">
+							     							     账户码-转账							</span>
+						</li><li class="cf">
+							<span class="user">陆元：</span>
+							<span class="txt" title="账户码-转账">
+							     							     账户码-转账							</span>
+						</li><li class="cf">
+							<span class="user">晴：</span>
+							<span class="txt" title="账户码-转账">
+							     							     账户码-转账							</span>
+						</li><li class="cf">
+							<span class="user">立国：</span>
+							<span class="txt" title="账户码-转账">
+							     							     账户码-转账							</span>
+						</li><li class="cf">
+							<span class="user">小宝：</span>
+							<span class="txt" title="希望继续做下去，钱少是心意，以后还会捐">
+							     							     希望继续做下去，钱少是心意，以后还会捐							</span>
+						</li><li class="cf">
+							<span class="user">光定：</span>
+							<span class="txt" title="不要嫌弃……">
+							     							     不要嫌弃……							</span>
+						</li><li class="cf">
+							<span class="user">泰峰：</span>
+							<span class="txt" title="加油">
+							     							     加油							</span>
+						</li><li class="cf">
+							<span class="user">智勇：</span>
+							<span class="txt" title="刘大哥加油">
+							     							     刘大哥加油							</span>
+						</li><li class="cf">
+							<span class="user">尤龙：</span>
+							<span class="txt" title="开源月捐计划-ThinkPHP">
+							     							     开源月捐计划-ThinkPHP							</span>
+						</li><li class="cf">
+							<span class="user">映峤：</span>
+							<span class="txt" title="账户码-转账">
+							     							     账户码-转账							</span>
+						</li>					</ul>
+				</div>
+			</div>
+			<!-- /捐赠我们列表 -->
+
+			<!-- 关注我们 -->
+            <div class="box follow">
+                <div class="index-hd cf">
+                    <div class="title"><i class="t-icon"></i><em>关注我们</em></div>
+                </div>
+
+                <div class="index-bd follow">
+                    <a class="fsina" href="http://weibo.com/thinkphp" title="新浪微博"><i></i>新浪微博</a>
+                    <a class="ftencent" href="http://t.qq.com/topthink" title="腾讯微博"><i></i>腾讯微博</a>
+                </div>
+            </div>
+            <!-- /关注我们 -->
+
+            <!-- 官方微信 -->
+            <div class="box weixin">
+                <div class="index-hd">
+                    <div class="title"><i class="t-icon"></i><em>官方微信</em></div>
+                </div>
+
+                <div class="index-bd">
+                    <img src="/Public/new/img/weixin.jpg" alt="">
+                </div>
+            </div>
+            <!-- /官方微信 -->
+
+			<!-- 合作 -->
+			<div class="box cooperation">
+				<div class="index-hd">
+					<div class="title"><i class="t-icon"></i><em>战略合作</em></div>
+				</div>
+
+				<div class="index-bd">
+					<a href="http://www.51idc.com/index.html?origin=41c7d9f57d88b63abf8e9a245bb29108" title="51IDC" target="_blank">
+						<img src="/Public/common/banner_index_51idc.jpg" alt="51IDC.COM"/>
+					</a>
+					<a href="http://www.ucloud.cn/" title="ucloud" target="_blank">
+						<img src="/Public/img/ucloud.jpg" alt="ucloud"/>
+					</a>
+				</div>
+			</div>
+			<!-- /合作 -->
+
+			<!-- 广告 -->
+			<div class="a6">
+			<thinkad id="ad_b79826e33a9c33b0"></thinkad>
+			</div>
+		</div>
+		<!-- /右边边栏 -->
+
+		<!-- 合作伙伴 -->
+		<div class="box friends-link">
+			<div class="index-hd">
+				<div class="title"><i class="t-icon"></i><em>合作伙伴</em></div>
+			</div>
+			<div class="index-bd">
+				                    <a target="_blank" href="http://click.aliyun.com/m/2042/">阿里云</a>&nbsp;                    <a target="_blank" href="http://www.phpxy.com/">PHP学院</a>&nbsp;                    <a target="_blank" href="http://www.oneapm.com/">OneAPM</a>&nbsp;                    <a target="_blank" href="http://www.0hi.cn">0HiCN猿团</a>&nbsp;                    <a target="_blank" href="http://www.kancloud.cn">看云文档托管</a>&nbsp;                    <a target="_blank" href="http://anywood.com/">木材圈</a>&nbsp;                    <a target="_blank" href="https://www.apicloud.com/">APICloud</a>&nbsp;                    <a target="_blank" href="http://www.3798.com">常旅客网站</a>&nbsp;                    <a target="_blank" href="http://www.topthink.com">极思维</a>&nbsp;                    <a target="_blank" href="http://www.ucloud.cn">UCloud云主机</a>&nbsp;                    <a target="_blank" href="http://www.lagou.com">互联网招聘</a>&nbsp;                    <a target="_blank" href="http://www.jeecg.org/">jeecg微云开发</a>&nbsp;                    <a target="_blank" href="http://rd.kuaijianli.com/">快简历</a>&nbsp;                    <a target="_blank" href="http://www.eoeandroid.com">Android开发</a>&nbsp;                    <a target="_blank" href="http://www.neitui.me">内推网</a>&nbsp;                    <a target="_blank" href="http://www.onethink.cn">OneThink开源内容管理框架</a>&nbsp;                    <a target="_blank" href="http://edu.cnzz.cn">中国站长学院</a>&nbsp;                    <a target="_blank" href="http://bbs.houdunwang.com/">后盾网</a>&nbsp;                    <a target="_blank" href="http://www.php-z.com/">PHP站中文网</a>&nbsp;                    <a target="_blank" href="http://down.cnzz.cn">源码下载</a>&nbsp;                    <a target="_blank" href="http://www.bccn.net">编程中国</a>&nbsp;                    <a target="_blank" href="http://www.yuntongxun.com/">云通讯平台</a>&nbsp;                    <a target="_blank" href="http://www.zzzj.com">站长之家</a>&nbsp;                    <a target="_blank" href="http://www.chinahtml.com/">站长资讯</a>&nbsp;                    <a target="_blank" href="http://www.lampbrother.net/">LAMP兄弟连</a>&nbsp;			</div>
+		</div>
+		<!-- /友情链接 -->
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		$('#rssSubmit').click(function(){
+			$('#rssForm').submit();
+		});
+	})
+	</script>
+	<!-- /主体 -->
+
+	<!-- 底部 -->
+	<div class="footer">
+		<div class="ft-main cf">
+			<div class="ft-col">
+				<h3>我们</h3>
+				<ul>
+					<li><a href="/about/index.html">关于我们</a></li>
+					<li><a href="/7year.html">公司动态</a></li>
+					<li><a href="/about/contact.html">联系我们</a></li>
+					<li><a href="/about/disclaimer.html">免责声明</a></li>
+					<li><a href="/about/join_us.html">加入我们</a></li>
+					<li><a href="/about/donate.html">捐赠我们</a></li>
+				</ul>
+			</div>
+			<div class="ft-col">
+				<h3>合作</h3>
+				<ul>
+					<li><a href="/cooperation/training.html">技术培训</a></li>
+					<li><a href="/cooperation/adcoop.html">广告合作</a></li>
+					<li><a href="/cooperation/projectcoop.html">项目合作</a></li>
+					<li><a href="/cooperation/investcoop.html">投资合作</a></li>
+					<li><a href="/cooperation/partner.html">合作伙伴</a></li>
+					<li><a href="/cooperation/bussiness.html">商务合作</a></li>
+				</ul>
+			</div>
+			<div class="ft-col">
+				<h3>网站</h3>
+				<ul>
+					<li><a href="/rss.html">RSS订阅</a></li>
+					<li><a href="/help/contribute.html">投稿指南</a></li>
+					<li><a href="/help/sitehelp.html">网站帮助</a></li>
+					<li><a href="/link/index.html">友情链接</a></li>
+				</ul>
+			</div>
+			<div class="ft-col">
+				<h3>信息</h3>
+				<ul>
+					<li><a href="/update/index.html">更新列表</a></li>
+					<li><a href="/bug/index.html">BUG反馈</a></li>
+					<li><a href="/topic/index.html">技术讨论</a></li>
+					<li><a href="/info/index.html">教程资讯</a></li>
+				</ul>
+			</div>
+			<div class="ft-intro">
+				<div class="btm-logo">
+					<p>ThinkPHP 是一个免费开源的，快速、简单的面向对象的 轻量级PHP开发框架 ，创立于2006年初，遵循Apache2开源协议发布，是为了敏捷WEB应用开发和简化企业应用开发而诞生的。ThinkPHP从诞生以来一直秉承简洁实用的设计原则，在保持出色的性能和至简的代码的同时，也注重易用性。并且拥有众多的原创功能和特性，在社区团队的积极参与下，在易用性、扩展性和性能方面不断优化和改进，已经成长为国内最领先和最具影响力的WEB应用开发框架，众多的典型案例确保可以稳定用于商业以及门户级的开发。</p>
+					<div class="copyright">沪ICP备12007941号-2</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /底部 -->
+<div style="display:none">
+    <script charset="UTF-8" src="http://tajs.qq.com/stats?sId=8801910" type="text/javascript"></script>
+    本站由 <a href="http://www.51idc.com/index.html?origin=41c7d9f57d88b63abf8e9a245bb29108" target="_blank" title="国内优秀云主机提供商"><strong>51idc</strong></a> 提供高性能Web服务器
+    <script src="http://s9.cnzz.com/stat.php?id=5393271&web_id=5393271" language="JavaScript"></script>
+	<SCRIPT type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-35820034-1']);
+	_gaq.push(['_setDomainName', 'thinkphp.cn']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	</SCRIPT>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>退换货列表-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/css/page.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/css/outhu.css" type="text/css">
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+<!--------头部开始--------------> 
+<include file="Public/header" /> 
+<!--------头部结束-------------->
+
+<div class="layout ov-hi">
+  <div class="breadcrumb-area">
+    <foreach name="navigate_user" key="k" item="v">
+      <if condition="$k neq '首页'"> > </if>
+      <a href="{$v}">{$k}</a> </foreach>
+  </div>
+</div>
+<div class="layout pa-to-10 fo-fa-ar"> 
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->
+  <div class="fr wi940">
+    <div id="main">
+      <div class="mod-main mod-comm">         
+        <div class="mc">
+          <tbdoy> </tbdoy>
+          <table class="tb-void tb-top">
+          	<caption class="dayr">
+          	<span>我是代言人：一级代言人（4）人</span>
+          	<div class="endorse_dyr" style="float: right;">
+							<form action="" method="post">
+								<input class="endor_text" type="text" id="" value="" />
+								<input class="endor_but" type="button" value="搜索"/>
+							</form>
+						</div>
+          	</caption>
+            <colgroup>
+            <col width="110">
+            <col width="120">
+            <col width="">
+            <col width="120">
+            <col width="120">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>昵称</th>
+                <th>会员</th>
+                <th>会员ID</th>
+                <th>关注时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>某某某</td>
+                <td>否</td>
+                <td>20160615031521</td>
+                <td>2016-06-15</td>
+                <td><a href="">留言</a></td>
+              </tr>
+              <tr>
+                <td>某某某</td>
+                <td>否</td>
+                <td>20160615031521</td>
+                <td>2016-06-15</td>
+                <td><a href="">留言</a></td>
+              </tr>
+              <tr>
+                <td>某某某</td>
+                <td>否</td>
+                <td>20160615031521</td>
+                <td>2016-06-15</td>
+                <td><a href="">留言</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt10 clearfix" style="text-align:center">{$page}</div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<div class="he80"></div>
+<!--------footer-开始--------------> 
+<include file="Public/footer2" /> 
+<!--------footer-结束-------------->
+</body>
+</html>

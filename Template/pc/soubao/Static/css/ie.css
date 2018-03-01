@@ -1,0 +1,87 @@
+﻿.icon-mobile-s:before,.icon-clear:before,.icon-cart-s:before,.icon-bookmark-s:before,.icon-weibo:before,.icon-wechat:before,
+.icon-feiniu:before,.icon-location:before,.icon-cart-hd:before,.icon-cart-sleeping:before,.icon-drink:before,.icon-dessert:before,
+.icon-perfume:before,.icon-tissue:before,.icon-bowl:before,.icon-box:before,.icon-mobile:before,.icon-computer:before,
+.icon-lamp:before,.icon-pen:before,.icon-clothing:before,.icon-highheel:before,.icon-bed:before,.icon-pacifier:before,
+.icon-biology:before,.icon-bone:before,.icon-taiwan:before,.icon-phone:before,.icon-drink-g:before,.icon-drink-g:before,
+.icon-dessert-g:before,.icon-camera-g:before,.icon-perfume-g:before,.icon-clothing-g:before,.icon-bed-g:before,
+.icon-pacifier-g:before,.icon-user:before,.icon-shakehand:before,.icon-diamond:before,.icon-truck:before,.icon-seven:before,
+.icon-cart-index:before{background-image:url("../images/feiniu-index-icon.png");background-repeat:no-repeat;content:"\0020";
+	position:relative;display:inline-block;*display:inline;vertical-align:middle;overflow:hidden;zoom:1}
+
+#global-nav .catagories [class*=icon-]{display:inline-block;width:20px;height:20px;margin:6px 8px 0 0;overflow: hidden;zoom:1;
+    vertical-align: top;background-image:url("../images/feiniu-floor-icon.png")}
+.mod-account .feature .icon-default:before,.icon-default{background:url("../images/feiniu-index-icon.png")!important;background-position:0 -175px}
+
+.icon-drink{background-position:0 0}
+.icon-dessert{background-position:-20px 0}
+.icon-perfume{background-position:-40px 0}
+.icon-tissue{background-position:-60px 0}
+.icon-bow{background-position:-80px 0}
+.icon-box{background-position:-100px 0}
+.icon-mobile{background-position:-120px 0}
+.icon-computer{background-position:-140px 0}
+.icon-lamp{background-position:-160px 0}
+.icon-pen{background-position:-180px 0}
+.icon-clothing{background-position:-200px 0}
+.icon-highheel{background-position:-220px 0}
+.icon-bed{background-position:-240px 0}
+.icon-pacifier{background-position:-260px 0}
+.icon-biology{background-position:-280px 0}
+.icon-bone{background-position:-300px 0}
+.icon-taiwan{background-position:-320px 0}
+
+.maintainHover .icon-default{background-position:-20px -175px}
+.maintainHover .icon-drink{background-position:0 -21px}
+.maintainHover .icon-dessert{background-position:-20px -21px}
+.maintainHover .icon-perfume{background-position:-40px -21px}
+.maintainHover .icon-tissue{background-position:-60px -21px}
+.maintainHover .icon-bowl{background-position:-80px -21px}
+.maintainHover .icon-box{background-position:-100px -21px}
+.maintainHover .icon-mobile{background-position:-120px -21px}
+.maintainHover .icon-computer{background-position:-140px -21px}
+.maintainHover .icon-lamp{background-position:-160px -21px}
+.maintainHover .icon-pen{background-position:-180px -21px}
+.maintainHover .icon-clothing{background-position:-200px -21px}
+.maintainHover .icon-highheel{background-position:-220px -21px}
+.maintainHover .icon-bed{background-position:-240px -21px}
+.maintainHover .icon-pacifier{background-position:-260px -21px}
+.maintainHover .icon-biology{background-position:-280px -21px}
+.maintainHover .icon-bone{background-position:-300px -21px}
+.maintainHover .icon-taiwan{background-position:-320px -21px}
+
+.icon-drink:hover,.icon-dessert:hover,.icon-perfume:hover,.icon-tissue:hover,.icon-bowl:hover,.icon-box:hover,
+.icon-mobile:hover,.icon-computer:hover,.icon-lamp:hover,.icon-pen:hover,.icon-clothing:hover,.icon-highheel:hover,
+.icon-bed:hover,.icon-pacifier:hover,.icon-biology:hover,.icon-bone:hover,.icon-taiwan:hover
+	{color:#fff;background-color:#f22e00 !important}
+
+.icon-drink:hover .catagory a,.icon-drink:hover .catagory .highlight,.icon-dessert:hover .catagory a,
+.icon-dessert:hover .catagory .highlight,.icon-perfume:hover .catagory a,.icon-perfume:hover .catagory .highlight,
+.icon-tissue:hover .catagory a,.icon-tissue:hover .catagory .highlight,.icon-bowl:hover .catagory a,
+.icon-bowl:hover .catagory .highlight,.icon-box:hover .catagory a,.icon-box:hover .catagory .highlight,
+.icon-mobile:hover .catagory a,.icon-mobile:hover .catagory .highlight,.icon-computer:hover .catagory a,
+.icon-computer:hover .catagory .highlight,.icon-lamp:hover .catagory a,.icon-lamp:hover .catagory .highlight,
+.icon-pen:hover .catagory a,.icon-pen:hover .catagory .highlight,.icon-clothing:hover .catagory a,
+.icon-clothing:hover .catagory .highlight,.icon-highheel:hover .catagory a,.icon-highheel:hover .catagory .highlight,
+.icon-bed:hover .catagory a,.icon-bed:hover .catagory .highlight,.icon-pacifier:hover .catagory a,
+.icon-pacifier:hover .catagory .highlight,.icon-biology:hover .catagory a,.icon-biology:hover .catagory .highlight,
+.icon-bone:hover .catagory a,.icon-bone:hover .catagory .highlight,.icon-taiwan:hover .catagory a,
+.icon-taiwan:hover .catagory .highlight{color:#fff!important}
+
+/*.icon-drink-g:before,.icon-drink-g:before,.icon-dessert-g:before,.icon-camera-g:before,.icon-perfume-g:before,
+.icon-clothing-g:before,.icon-bed-g:before,.icon-pacifier-g:before{width:30px;height:30px;top:3px;left:10px;
+	background-image:url("../images/feiniu-floor-icon.png");display:block} */
+
+.icon-shakehand:before,.icon-diamond:before,.icon-truck:before,.icon-seven:before{width:21px;height:21px;
+	background-image:url("../images/feiniu-feature-icon.png");margin:0 5px 0 2px}
+
+.icon-drink-g,.icon-dessert-g,.icon-camera-g,.icon-perfume-g,.icon-clothing-g,.icon-bed-g,.icon-pacifier-g
+	{display:block;width:30px;height:25px;padding-top:30px;background-image:url("../images/feiniu-floor-icon.png");white-space:nowrap;
+		text-indent:110%;overflow:hidden;*text-indent:0;*font:0/0 serif;*color:transparent;}
+
+#global-topbar{top:0;left:0;right:0;padding-top:6px;color:#6c6c6c;line-height:1.5em;background:#f9f9f9;
+    border-bottom:#f4f4f4 1px solid;z-index:99;font-family:Tahoma, Arial, "Simsun", sans-serif}
+
+#global-header{margin:20px auto 20px;padding-bottom: 0;}
+
+#hd-banner{}
+#headerall{}

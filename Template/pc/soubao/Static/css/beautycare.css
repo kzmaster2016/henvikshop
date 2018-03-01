@@ -1,0 +1,58 @@
+﻿.editable{
+	position:relative;
+}
+
+
+.drop-left,.drop-right {
+width: 20px;
+height: 60px;
+float: left;
+}
+
+.editPicDiv
+{
+padding-top:19px;
+}
+
+.drop-div {
+width:159px;
+height:142px;
+float:left;
+margin-left:40px;
+margin-top:8px;
+
+}
+
+.prod{
+	background: url(../images/logo.png) center center no-repeat;
+}
+
+.iconBox{ width:36px; overflow:hidden; float:left; margin-right:15px; text-align:center;}
+.iconBox span{ width:30px; height:30px; border:1px #dddddd solid;font-size:20px}
+.current1 span{border:2px #F00 solid;}
+.current2 span{border:2px #F00 solid;}
+
+.ico_select{
+	overflow:scroll;width:220px; height:200px; position:absolute; margin-left: 130px;background: none repeat scroll 0 0 #fff;display:none;z-index:99999;border:1px solid #a9c9e2;
+}
+
+.ico_select span {
+ 	/*background-image: url("../images/feiniu-floor-icon.png");*/
+    display: inline-block;
+    float: left;
+    height: 20px;
+    overflow: hidden;
+    vertical-align: top;
+    width: 20px;
+    margin:4px;
+}
+
+.catagories-title {
+    margin-left: 15px;
+    width: 152px;
+}
+
+.fn-prompt-loading {
+   	display: block;
+	center;
+}

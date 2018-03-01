@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>账号设置-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+    <script src="__STATIC__/js/slider.js"></script>
+</head>
+
+<body style="background:RGB(242,242,242)">
+<div class="uc">
+    <div class="uc_head">
+        <div class="uc_head_middle">
+            <div class="uc_head_middle_left">我的帐号</div>
+          <!--  <div class="uc_head_middle_right"><a class="logout_c" href="">问问</a> | <a class="logout_c" href="">退出</a></div>-->
+        </div>
+    </div>
+    <!--step1 验证原邮箱-->
+    <if condition="$step eq 1">
+        <div class="uc_body pa-to-30">
+            <div class="uc_body_form">
+                <div class="diraction_icon dir_icon1">
+                    <ul class="diraction_dl">
+                        <li class="li_selected">1 验证原邮箱</li>
+                        <li>2 安全验证</li>
+                        <li>3 新邮箱绑定</li>
+                        <li>4 验证新邮箱</li>
+                    </ul>
+                </div>
+                <table class="changeAccount_theme">
+                    <tbody>
+                    <tr class="tr_height">
+                        <td class="cl_left fo-si-12" align="right"><label class="fo-si-12">原邮箱：</label></td>
+                        <td class="cl_middle">
+                            <input type="text" class="imput_text text_width foce" id="txtMailAccount" validator="validator11449046116955">
+                        </td>
+                        <td>
+                            <span id="msg_txtMailAccount"></span>
+                        </td>
+                    </tr>
+                    <tr class="tr_height">
+                        <td valign="middle" align="center" colspan="3" style="height:120px;">
+                            <input type="button" value="下一步" class="btn_midefy" id="btn_next">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </if>
+    <!--step1 验证原邮箱结束-->
+
+    <!--step2 安全验证-->
+    <if condition="$step eq 2">
+        <div class="uc_body pa-to-30">
+            <div class="uc_body_form">
+                <div class="diraction_icon dir_icon1">
+                    <ul class="diraction_dl">
+                        <li class="li_selected">1 验证原邮箱</li>
+                        <li>2 安全验证</li>
+                        <li>3 新邮箱绑定</li>
+                        <li>4 验证新邮箱</li>
+                    </ul>
+                </div>
+                <table class="changeAccount_theme">
+                    <tbody>
+                    <tr class="tr_height">
+                        <td class="cl_left fo-si-12" align="right"><label class="fo-si-12">原邮箱：</label></td>
+                        <td class="cl_middle">
+                            <input type="text" class="imput_text text_width foce" id="txtMailAccount" validator="validator11449046116955">
+                        </td>
+                        <td>
+                            <span id="msg_txtMailAccount"></span>
+                        </td>
+                    </tr>
+                    <tr class="tr_height">
+                        <td valign="middle" align="center" colspan="3" style="height:120px;">
+                            <input type="button" value="下一步" class="btn_midefy" id="btn_next">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </if>
+    <!--step2 安全验证结束-->
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<foreach name="list" item="v" > 
+<tr>
+    <td>{$v['id']}</td>
+    <td>{$v['create_time']|date="Y-m-d",###}</td>
+    <td>{$v['money']}</td>
+    <td>
+        <if condition="$v[status] eq 0">Applying</if>
+        <if condition="$v[status] eq 1">Successful apply</if>
+        <if condition="$v[status] eq 2">Apply failure</if>                   
+    </td>
+</tr>
+</foreach>

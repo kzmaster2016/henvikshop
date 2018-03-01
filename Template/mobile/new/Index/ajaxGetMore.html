@@ -1,0 +1,17 @@
+<foreach name="favourite_goods" item="v" key="k">
+<li>
+     <a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$v[goods_id]))}" title="{$v.goods_name}">
+     <div class="index_pro">
+	       <div class="products_kuang">
+	         <img src="{$v.goods_id|goods_thum_images=400,400}"></div>
+	       <div class="goods_name">{$v.goods_name}</div>
+	       <div class="price">
+	         <a href="javascript:AjaxAddCart({$v[goods_id]},1,0);" class="btns">
+	             <img src="__STATIC__/images/index_flow.png">
+	         </a>
+	       <span href="{:U('Mobile/Goods/goodsInfo',array('id'=>$v[goods_id]))}" class="price_pro">￥{$v.shop_price}</span>
+	       </div>
+      </div>
+     </a>
+</li>
+</foreach>

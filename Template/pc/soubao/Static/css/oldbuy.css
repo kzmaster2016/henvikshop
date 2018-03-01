@@ -1,0 +1,334 @@
+﻿@charset "UTF-8";
+/**
+ * @name tongao.tong
+ * @date 2015.01.13 (周二下午1:38)
+ * @description 曾经购买页面样式
+ * @update 2015.01.14 (周三下午18:57)
+ */
+@import "kissy-reset.css";
+@import "icon.css";
+@import "user-icon.css";
+.user-side {
+    z-index: 1000;
+}
+.main {padding: 15px 0;}
+.old-content {
+    *width: 1010px;
+    padding-left: 10px;
+    margin-top: -15px;
+    position: relative;
+    *zoom: 1;
+}
+
+.un-block {
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    top: 0;
+    left:-2px;
+    background-color: #FFF;
+    z-index: 10;
+}
+
+.old-tips {
+    font-family: 'Hiragino Sans GB',SimSun;
+}
+.old-tips .tips-con {
+    width: 120px;
+    position: relative;
+    top: -71px;
+    left: -30px;
+    background-color: #FFFCEF;
+    border: 1px solid #ffbb76;
+    padding: 5px 15px;
+    text-align: center;
+    zoom: 1;
+    _display: inline;
+    z-index: 1000;
+}
+.old-tips .tips-arrow {
+    position: absolute;
+    left: 45%;
+    bottom: 1px;
+    background-color: #f90;
+}
+.old-tips .tips-arrow em, .old-tips .tips-arrow span {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    _border-color: tomato;
+    _filter: chroma(color=tomato);
+    border-style: solid;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}
+.old-tips .tips-arrow em {
+    border-width: 6px 6px 0;
+    border-top-color: #FFBB76;
+    top: 1px;
+    left: 0;
+}
+.old-tips .tips-arrow span {
+    border-width: 6px 6px 0;
+    border-top-color: #FFFCEF;
+}
+
+.no-time .old-time {
+    width: 293px;
+    overflow: hidden;
+}
+.no-time .old-buy-tit {
+    margin-left: 0;
+}
+.no-time .old-title {
+    display: none;
+}
+
+.old-time {
+    position: relative;
+    height: 32px;
+    margin: 20px 0;
+}
+.old-time .old-title {
+    width: 144px;
+    height: 32px;
+    position: relative;
+    right: 20px;
+    padding-left: 20px;
+    background-color: #FFF;
+    z-index: 1;
+}
+.old-time .title {
+    padding: 0 10px;
+    border-left: 2px solid #DDD;
+    color: #3C3C3C;
+    font-size: 20px;
+    top: 0px;
+}
+.old-time .title p {
+    height: 14px;
+    line-height: 14px;
+    color: #9C9C9C;
+    font-family: 'Hiragino Sans GB',SimSun;
+    font-size: 12px;
+}
+.old-time .title h3 {
+    height: 18px;
+    line-height: 18px;
+    font-family: Tahoma,arial,sans-serif;
+    font-weight: 100;
+}
+.old-time .title b {
+    font-weight: 700;
+}
+.old-time .title em {
+    color: #9C9C9C;
+    margin-right: 8px;
+}
+.old-time .border {
+    width: 252px;
+    position: absolute;
+    height: 1px;
+    line-height: 1px;
+    top: 30px;
+    right: 0;
+    background-color: #DDD;
+}
+
+.old-list {
+    width: 230px;
+    float: left;
+    *display: inline;
+    margin-left: 10px;
+}
+.old-list .fn-rmb {
+    font-family: Microsoft YaHei,arial;
+    font-style: normal;
+}
+.old-list .fn-rmb-num {
+    font-family: Tahoma,arial,sans-serif;
+}
+.old-list .list-li {
+    width: 226px;
+    height: 321px;
+    position: relative;
+    padding: 10px 7px;
+    border: 1px solid #FFF;
+    transition: border 0.2s ease-in-out;
+    -webkit-transition: border 0.2s ease-in-out;
+    -moz-transition: border 0.2s ease-in-out;
+}
+.old-list .list-li:hover {
+    border-color: #F22E00;
+}
+.old-list .buy-img {
+    display: block;
+    width: 220px;
+    height: 220px;
+    margin-left: 3px;
+}
+.old-list .buy-img img {
+    width: 220px;
+    height: 220px;
+}
+.old-list .buy-txt {
+    margin-top: 8px;
+    margin-left: 5px;
+    height: 37px;
+    overflow: hidden;
+    line-height: 18px;
+    font-family: 'Hiragino Sans GB',SimSun;
+}
+.old-list .buy-txt a {
+    color: #3C3C3C;
+}
+.old-list .buy-txt a:hover {
+    color: #F22E00;
+}
+.old-list .buy-num {
+    height: 20px;
+    margin-left: 5px;
+}
+.old-list .buy-num .txt {
+    color: #6C6C6C;
+    font-family: 'Hiragino Sans GB',SimSun;
+}
+.old-list .buy-num .fn-rmb {
+    margin-right: 2px;
+}
+.old-list .buy-num .fn-rmb, .old-list .buy-num .fn-rmb-num {
+    color: #F22E00;
+    font-weight: 700;
+}
+.old-list .buy-num .fn-rmb-num {
+    font-size: 16px;
+    vertical-align: -1px;
+}
+.old-list .buy-con {
+    margin: 12px 0 10px;
+}
+.old-list .num-count {
+    width: 75px;
+    height: 22px;
+    border: 1px solid #DDD;
+    float: left;
+    margin: 0 10px 0 3px;
+}
+.old-list .num-count .mins, .old-list .num-count .add {
+    width: 22px;
+    height: 22px;
+    float: left;
+    background-image: url(../images/oldbuy_btn.png);
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+.old-list .num-count .mins {
+    border-right: 1px solid #DDD;
+    background-position: 0 -23px;
+}
+.old-list .num-count .mins:hover {
+    background-position: 0 0;
+}
+.old-list .num-count .no-mins {
+    cursor: not-allowed;
+    background-position: 0 0;
+}
+.old-list .num-count .add {
+    border-left: 1px solid #DDD;
+    background-position: -23px -23px;
+}
+.old-list .num-count .add:hover {
+    background-position: -23px 0;
+}
+.old-list .num-count .no-add {
+    cursor: not-allowed;
+    background-position: -23px 0;
+}
+.old-list .num-count input:focus {border: none !important;}
+.old-list .num-count .number {
+    padding: 5px 4px;
+    width: 21px;
+    height: 12px;
+    line-height: 12px;
+    font-size: 14px;
+    border: 0;
+    float: left;
+    text-align: center;
+    color: #3C3C3C;
+    font-family: Arial;
+}
+.old-list .buy-btn {
+    width: 90px;
+    height: 25px;
+    float: left;
+}
+.old-list .buy-btn .buy-btn-cart {
+    display: block;
+    width: 90px;
+    height: 25px;
+    background: url(../images/oldbuy_btn.png) no-repeat -48px 0;
+}
+
+.old-list .buy-btn .buy-btn-cart:hover {
+    background-position: -48px -26px;
+}
+.old-list .buy-btn .buy-btn-null {
+    display: block;
+    width: 90px;
+    height: 25px;
+    background: url(../images/oldbuy_btn.png) no-repeat -48px -52px;
+}
+.old-list .buy-btn .buy-btn-nul:hover {
+    background-position: -48px -78px;
+}
+.old-list .sub-mark {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    display: block;
+    top: 0;
+    right: 0;
+    background-color: #f90;
+}
+
+
+.old-list .outsale {
+    font-size: 15px;
+    color:#f50;
+    font-weight: bolder;
+}
+.old-loading{
+    text-align: center; height: 50px; line-height: 50px; margin-top: 10px;
+}
+.old-loading img{ vertical-align: middle}
+.old-notice{
+    text-align: center; height: 30px; line-height: 30px;
+}
+.page-more {
+    margin-top: 20px;
+    height: 35px;
+    line-height: 35px;
+    border-top: 1px solid #DDD;
+    text-align: center;
+    font-family: 'Hiragino Sans GB',SimSun;
+}
+.page-more a {
+    color: #6C6C6C;
+}
+.page-more a:hover {
+    color: red;
+}
+
+.old-null p {
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+.old-null p a {
+    color: #0063CF;
+}
+.old-null p a:hover {
+    color: #F22E00;
+}

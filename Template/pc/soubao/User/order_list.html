@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>订单列表-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<!-- 头部-e -->
+<link rel="stylesheet" href="__STATIC__/css/favorite.css">
+
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">我的订单</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+    <div class="col_main">
+    <div class="main my_order">
+      <div class="ui_tab">
+        <ul class="ui_tab_nav clearfix">
+          <li class="<if condition="$_GET[type] eq ''">active</if>"><a class="target_no" href="{:U('Home/User/order_list')}">全部订单</a><span class="v_line"></span></li>
+          <li class="<if condition="$_GET[type] eq 'WAITPAY'">active</if>"><a class="target_no" href="{:U('Home/User/order_list',array('type'=>'WAITPAY'))}">待付款</a><span class="v_line"></span></li>
+          <li class="<if condition="$_GET[type] eq 'WAITSEND'">active</if>"><a class="target_no" href="{:U('Home/User/order_list',array('type'=>'WAITSEND'))}">待发货</a><span class="v_line"></span></li>
+          <li class="<if condition="$_GET[type] eq 'WAITRECEIVE'">active</if>"><a class="target_no" href="{:U('Home/User/order_list',array('type'=>'WAITRECEIVE'))}">待收货</a><span class="v_line"></span></li>
+          <li class="<if condition="$_GET[type] eq 'WAITCCOMMENT'">active</if>"><a class="target_no" href="{:U('Home/User/order_list',array('type'=>'WAITCCOMMENT'))}">待评价</a></li>
+        </ul>
+        <div class="nav_line" 
+        style="left:<if condition="$_GET[type] eq ''">0px;</if>
+        <if condition="$_GET[type] eq 'WAITPAY'">120px;</if> 
+        <if condition="$_GET[type] eq 'WAITSEND'">240px;</if> 
+        <if condition="$_GET[type] eq 'WAITRECEIVE'">360px;</if> 
+        <if condition="$_GET[type] eq 'WAITCCOMMENT'">480px;</if> 
+        width: 120px;"></div>
+        <div style="border-top: 0;" class="ui_tab_content">
+          <div style="display: block;" class="ui_panel">
+            <form action="{:U('/Home/User/order_list')}" method="post" id="search_order" name="search_order">
+              <div class="query_area">
+                <div class="order_select clearfix">
+                  <div class="order_select_l">
+                    <div class="select_l_top">
+                      <input type="text" placeholder="商品名称 , 订单编号" class="select_name" value="{$_REQUEST['search_key']}" name="search_key">
+                      <button class="inquery" type="submit">查询</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div style="margin-top:20px;" class="order_title clearfix">
+              <ul>
+                <li class="th_01">商品信息</li>
+                <li class="th_02">交易状态</li>
+                <li class="th_03">操作</li>
+              </ul>
+            </div>
+            <div class="order_list J_order_list">
+            <volist name="lists" id="list">
+              <table class="paying">
+                <tbody>
+                <tr class="list_top">
+                  <td colspan="3">
+                  <div class="f_left order_info">
+                  	<span class="time num">{$list.add_time|date='Y-m-d H:i:s',###}</span>
+                    <span class="order_No"> 订单号：<small class="num">{$list.order_sn}</small> </span> 
+                  </div>
+                    <div class="f_right order_tip">
+                    	<span class="num">应付金额：<em class="rmb">￥</em>{$list['order_amount']}</span>
+						<if condition="$list.cancel_btn eq 1"><a class="cancel J_cancel" onClick="cancel_order({$list.order_id})" >取消订单</a></if>
+						<if condition="$list.pay_btn eq 1">
+                           <a class="btn_pay" href="{:U('/Home/Cart/cart4',array('order_id'=>$list[order_id]))}" target="_blank">立即支付</a>
+                        </if>                            
+						<if condition="$list.receive_btn eq 1">
+                       		 <a class="btn_pay" onclick=" if(confirm('你确定收到货了吗?')) location.href='{:U('Home/User/order_confirm',array('id'=>$list['order_id']))}'" target="_blank">收货确认</a>
+                        </if>                                      
+                    </div>
+                   </td>
+                </tr>
+				<volist name="list.goods_list" id="good" key="k">                
+                    <tr class="list_cont ">
+                      <td class="td_01">                  
+                        <div class="list_main clearfix"> 
+                            <a class="J_hover" href="{:U('Home/Goods/goodsInfo',array('id'=>$good['goods_id']))}" target="_blank"><img alt="{$good.goods_name}" src="{$good.goods_id|goods_thum_images=80,80}"></a> 
+                            {$good.goods_name}
+                        </div>
+                      </td>     
+                      <if condition="$k eq 1">             
+                          <td class="td_02"  rowspan="<?php echo count($list[goods_list]);?>">
+                            <p>{$list['order_status_desc']}</p>
+                            <p><a href="{:U('Home/User/order_detail',array('id'=>$list['order_id']))}" class="target_no">订单详情</a></p>
+                          </td>
+                       </if>
+                      <td class="td_03">                      
+                        <if condition="($list[comment_btn] eq 1) and ($good[is_comment] eq 0)">
+	                        <p><a class="btn-02" href="{:U('Home/User/comment')}">评价</a></p>                            
+                        </if>
+                        <p><a class="btn-02" href="{:U('Home/Goods/goodsInfo',array('id'=>$good['goods_id']))}">再次购买</a></p>
+                        <if condition="($list[return_btn] eq 1) and ($good[is_send] eq 1)">
+                            <p class="p-link"><a style="color:#999;" href="{:U('Home/User/return_goods',array('order_id'=>$list['order_id'],'order_sn'=>$list['order_sn'],'goods_id'=>$good['goods_id'],'spec_key'=>$good['spec_key']))}">申请退款</a></p>    
+                        </if>                                                                      
+                       </td>
+                    </tr>                
+                </volist>             
+              </tbody>
+             </table>
+            </volist>  
+            </div>            
+            <!-- page next star -->
+            <div class="operating fixed" id="bottom">
+                <div class="fn_page clearfix">
+                        {$page} 
+                </div>
+            </div>             
+            <!-- page next end --> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div style="clear: both;"></div>
+<include file="User/footer" />
+<script>
+    //取消订单
+    function cancel_order(id){
+        if(!confirm("确定取消订单?"))
+            return false;
+        location.href = "/index.php?m=Home&c=User&a=cancel_order&id="+id;
+    }
+</script>
+</body>
+</html>

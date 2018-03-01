@@ -1,0 +1,185 @@
+
+<!--最顶部-->
+<include file="Public/siteTopbar" />
+ 
+<!--顶部banner开始-->    
+<?php if(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME == 'Home/Index/index' && $_COOKIE["top-banner"] == null){ ?>
+<!-- <div class="top-banner" id="top-banner-block">
+    <div class="top-banner-max">
+   //广告 select * from __PREFIX__ad where position_id = 1 limit 1
+    <adv pid = "1" limit="1" item="v">
+    <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>> <img src="{$v[ad_code]}"  title="{$v[title]}" style="{$v[style]}"/></a>    
+    <a class="button-top-banner-close" href="javascript:;" title="关闭" id="top-banner-min-close" onClick="javascript:$('#top-banner-block').hide();">－</a>
+    </adv>
+   </div>
+</div> -->
+<?php 
+		setcookie("top-banner", "1", time()+ 3600); // 弹过窗的 不在弹窗
+	} 
+?>
+<!--顶部banner结束-->    
+
+<header>   
+    <div class="layout">
+    
+    <!--logo开始-->
+        <div class="logo"><a href="/" title="henvikshop"><img src="{$tpshop_config['shop_info_store_logo']}" alt="henvik"></a></div>
+    <!--logo结束-->
+    
+    <!-- 搜索开始-->
+        <div class="searchBar">
+            <div class="searchBar-form">
+                <form name="sourch_form" id="sourch_form" method="post" action="{:U("/Home/Goods/search")}">
+                    <input type="text" class="text" name="q" id="q" value="<?php echo I('q'); ?>"  placeholder="Search"/>
+                    <input type="button" class="button" value="Search" onclick="if($.trim($('#q').val()) != '') $('#sourch_form').submit();"/>
+                </form>
+            </div>
+            <div class="searchBar-hot">
+                <b>Popular Search:</b>
+               	<foreach name="tpshop_config.hot_keywords" item="wd" key="k">
+        			   <a target="_blank" href="{:U('Home/Goods/search',array('q'=>$wd))}" <if condition="$k eq 0">class="ht"</if>>{$wd}</a>
+        		    </foreach>
+            </div>
+        </div>
+    <!-- 搜索结束-->
+        
+        <div class="ri-mall">
+            <!-- <div class="my-mall">
+              <div class="mall h-account">
+                  <div class="le"><a href="{:U('/Home/User')}" >My Account</a></div> 
+              </div>          
+            </div> -->
+
+            <div class="my-mall">
+                <div class="mall h-favorite">
+                    <div class="le"><a href="{:U('/Home/User/goods_collect')}" >My Favorites</a></div> 
+                </div>
+            </div>
+            <div class="my-mall" id="header_cart_list">
+                <!---购物车-开始 -->
+                <div class="micart">
+                    <div class="le les">
+                    	<a href="{:U('Home/Cart/cart')}" >Cart
+                        <span class="shopping-num"><em id="cart_quantity"></em><b></b></span>
+                      </a>                       
+                    </div>
+                    
+                    <div class="ri ris" style="">
+                       <if condition="count($cartList) eq 0">
+                            <div class="micart-about">
+                                <span class="micart-xg">There are currently no items in your Shopping Cart</span>
+                            </div>
+                        </if>
+                        <div class="commod">
+                          <ul>
+                              <foreach name="cartList" item="v"  key="k">
+                              <li class="goods">
+                                  <div>
+                                      <div class="p-img">
+                                          <a href="">
+                                              <img src="{$v.goods_id|goods_thum_images=428,428}" alt="">
+                                          </a>
+                                       </div>
+                                       <div class="p-name">
+                                          <a href="">
+                                              <span class="p-slogan">{$v[goods_name]}</span>
+                                              <span class="p-promotions hide"></span>
+                                          </a>
+                                       </div>
+                                       <div class="p-status">
+                                          <div class="p-price">
+                                              <b>$&nbsp;{$v[goods_price]}</b>
+                                              <em>x</em>
+                                              <span>{$v[goods_num]}</span>
+                                          </div>
+                                          <div class="p-tags"></div>
+                                       </div>                                  
+                                                              
+                                  </div>
+                              </li>
+                              </foreach>   							
+                          </ul>
+                        </div>
+                        <div class="settle">
+                            <p>All<em>{$cart_total_price[anum]}</em>Pieces Goods，Total<b>$ &nbsp;{$cart_total_price[total_fee]}</b></p>
+                            <a class="js-button" href="{:U('Home/Cart/cart')}">To Checkout</a>
+                        </div>
+                    </div>
+                </div>
+                <!---购物车-结束 -->      
+            </div>
+        </div>
+        <!-- <div class="qr-code">
+            <img src="__STATIC__/images/qrcode_vmall_app01.png" alt="二维码" />
+            <p>Sweep It</p>
+        </div> -->
+    </div>
+</header>
+   <!-- 导航-开始-->  
+   	<div class="navigation">
+    	<div class="layout">              
+            <div class="ongoods">
+            	<ul class="navlist">
+                <li class="homepage"><a href="{:U('Home/Index/index','nav=home')}"><h1><span>Home</span></h1><em class="bg-border"></em></a></li>
+                <tpshop sql="SELECT * FROM `__PREFIX__navigation` where is_show = 1 ORDER BY `sort` DESC" key="k" item='v'>
+                	<li <if  condition="$v[name] eq I('nav')">class="page active" <else/> class="page"</if>>
+                    <a href="{$v[url]}/nav/{$v[name]}" <if condition="$v[is_new] eq 1">target="_blank"</if>> <h1><span>{$v[name]}</span></h1><em class="bg-border"></em></a>
+                  </li>
+      					</tpshop> 
+            	</ul>
+            </div>
+        </div>
+    </div>
+   <!-- 导航-结束-->
+<script>
+$(function(){
+    var active_li = '{$active}';
+    if(active_li){
+        $('li').remove('curr-res');
+        $('#'+active_li).addClass('curr-res');
+    } 	
+    
+    get_cart_num();
+})
+
+
+
+function get_cart_num(){
+	  var cart_cn = getCookie('cn');
+	  if(cart_cn == ''){
+		$.ajax({
+			type : "GET",
+			url:"/index.php?m=Home&c=Cart&a=header_cart_list",//+tab,
+			success: function(data){								 
+				cart_cn = getCookie('cn');		
+				$('#cart_quantity').html(cart_cn);
+			}
+		});	
+	  }
+	  $('#cart_quantity').html(cart_cn);
+}
+/**
+* 鼠标移动端到头部购物车上面 就ajax 加载
+*/
+// 鼠标是否移动到了上方
+var header_cart_list_over = 0; 
+$("#header_cart_list > .micart > .les").hover(function(){	 
+       if(header_cart_list_over == 1) 
+			return false;	
+        header_cart_list_over = 1; 
+		$.ajax({
+			type : "GET",
+			url:"/index.php?m=Home&c=Cart&a=header_cart_list",//+tab,
+			success: function(data){								 
+			 	$("#header_cart_list > .micart > .ris").html(data);	
+			 	get_cart_num();
+			}
+		});			
+}).mouseout(function(){
+	
+	 (typeof(t) == "undefined") || clearTimeout(t); 	 
+	 t = setTimeout(function () { 
+			header_cart_list_over = 0; /// 标识鼠标已经离开
+		}, 1000);		
+});
+</script>

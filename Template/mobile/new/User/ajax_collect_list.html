@@ -1,0 +1,19 @@
+<foreach name="goods_list" item="goods">
+  		<li>
+              <div class="imgurl">
+              	<a href="{:U('Goods/goodsInfo',array('id'=>$goods[goods_id]))}" >
+              	<img src="{$goods.goods_id|goods_thum_images=200,200}" width="100" height="100"></a>
+              </div>
+              <a href="{:U('Goods/goodsInfo',array('id'=>$goods[goods_id]))}">
+              <div class="order_info">
+                <dl>
+                  <dt>{$goods.goods_name|getSubstr=0,14}</dt>
+                  <dd><strong>{$goods.shop_price}</strong></dd>
+                </dl>
+              </div>
+              </a>
+              <div class="dingdancaozuo" >
+              <a href="javascript:AjaxAddCart({$goods.goods_id},1)" class="s_flow" style=" color:#fff">Add to cart</a>
+              <a href="{:U('User/cancel_collect',array('collect_id'=>$goods[collect_id]))}" class="s_out" style=" color:#fff" >Delete</a></div>
+        </li>
+</foreach>

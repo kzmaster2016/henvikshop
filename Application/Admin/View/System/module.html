@@ -1,0 +1,120 @@
+<include file="Public/min-header"/>
+<style>
+ul.group-list {
+    width: 96%;min-width: 1000px; margin: auto 5px;list-style: disc outside none;
+}
+ul.group-list li {
+    white-space: nowrap;float: left;
+    width: 150px; height: 25px;
+    padding: 3px 5px;list-style-type: none;
+    list-style-position: outside;border: 0px;margin: 0px;
+}
+</style>
+<div class="wrapper">
+	<include file="Public/breadcrumb"/>
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+					<nav class="navbar navbar-default">	
+						<div class="navbar-form">
+			               	<label><a href="javascript:void(0)" class="btn btn-block btn-primary" data-url="{:U('System/ctl_detail')}" id="add_ctl">添加控制模块</a></label>			        
+			        		<a href="javascript:history.go(-1)" data-toggle="tooltip" title="" class="btn pull-right btn-default" data-original-title=""><i class="fa fa-reply"></i></a>
+				            <a href="javascript:;" class="btn pull-right btn-default" data-url="http://www.tp-shop.cn/Doc/Index/article/id/259/developer/phper.html" onclick="get_help(this)"><i class="fa fa-question-circle"></i> 帮助</a>
+			        	</div>
+			        </nav>
+					</div>
+		            <div class="box-body">
+			           <div class="row">
+			            	<div class="col-sm-12">
+				            <table id="list-table" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+								<foreach name="tree" item="v">
+								<foreach name="v.menu" item="vv">
+								<tr>
+									<td class="" style="padding-right:50px;">
+										{$v.title} &gt; {$vv.title}
+										<span class="pull-right">
+											<a href="javascript:void(0)" class="btn btn-default model_edit" data-url="{:U('System/ctl_detail',array('mod_id'=>$vv[mod_id]))}">管理模型</a>
+											<a href="javascript:void(0)" class="btn btn-info menu_edit" data-url="{:U('System/create_menu',array('mod_id'=>$vv[mod_id],'action'=>'edit'))}">编辑导航</a>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<ul class="group-list">
+										<empty name="vv.menu">
+											<li style="color:#FF3300;">未添加模型</li>
+										<else/>
+											<foreach name="vv.menu" item="vo">
+												<li>{$vo.title}[<if condition="$vo.visible eq 0"><b class="bg-red">显示</b><else/>隐藏</if>]</li>
+											</foreach>
+										</empty>
+										</ul>
+									</td>
+								</tr>
+								</foreach>
+								</foreach>
+				            </table>
+			               </div>
+			          </div>
+		          </div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script>
+$('.menu_edit').click(function(){
+    var url = $(this).attr('data-url');
+    layer.open({
+        type: 2,
+        title: '编辑导航',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['400px', '300px'],
+        content: url, //iframe的url
+    });
+});
+
+$('.model_edit').click(function(){
+    var url = $(this).attr('data-url');
+    layer.open({
+        type: 2,
+        title: '管理模型',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['80%', '70%'],
+        content: url, //iframe的url
+    });
+});
+
+$('#add_ctl').click(function(){
+    var url = $(this).attr('data-url');
+    layer.open({
+        type: 2,
+        title: '添加控制模块',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['80%', '70%'],
+        content: url, //iframe的url
+    });
+});
+
+
+//回调函数
+function call_back(msg){
+	if(msg>0){
+		layer.alert('操作成功');
+		layer.closeAll('iframe');
+		window.location.reload();
+	}else{
+		layer.alert('操作失败');
+		layer.closeAll('iframe');
+	}
+}
+</script>
+
+</body>
+</html>

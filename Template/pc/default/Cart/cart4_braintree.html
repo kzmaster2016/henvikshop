@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://s22.cnzz.com/z_stat.php?id=1261971213&web_id=1261971213" language="JavaScript"></script>
+<title>Successful Order-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body>
+<script src="__PUBLIC__/js/jquery-1.8.2.min.js"></script>    
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/pc_common.js"></script>
+<script src="__PUBLIC__/js/layer/layer.js"></script><!-- 弹窗js 参考文档 http://layer.layui.com/-->
+<include file="Public/siteTopbar" />    
+    <div class="order-header">
+    	<div class="layout after">
+        	<div class="fl">
+            	<div class="logo pa-to-36 wi345">
+                	<a href="/"><img src="{$tpshop_config['shop_info_store_logo']}" alt=""></a>
+                </div>
+            </div>
+        	<div class="fr">
+            	<div class="progress-area">
+                	<div class="progress-area-wd">My Carts</div>
+                	<div class="progress-area-tx">Check Order</div>
+                	<div class="progress-area-cg on">Successful Order</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layout after-ta order-ha">
+    	<div class="erhuh">
+        	<i class="icon-succ"></i>
+            <h3>The order is submitted successfully. Please make payment as soon as possible!</h3>
+            <p class="succ-p">
+            Order number：&nbsp;&nbsp;{$order['order_sn']}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+            Amount to pay：$&nbsp;&nbsp;<b>{$order['order_amount']}</b>&nbsp;</p>
+            <div class="succ-tip">
+                Please complete the payment within <b>{$pay_date}</b>, otherwise the order will be cancelled automatically
+            </div>
+        </div>
+        <div class="ddxq-xiaq">
+        	<!-- <a href="{:U('Home/User/order_detail',array('id'=>$order['order_id']))}">
+            	Order details
+                <i></i>
+            </a> -->
+            <a href="###">Choose payment methods</a>
+        </div>
+        <!-- <form action="{:U('Home/Payment/getCode')}" method="post" name="cart4_form" id="cart4_form"> -->
+        <div class="orde-sjyy">
+        	<h3 class="titls">
+                <!-- Choose payment methods -->
+                By Palpal
+            </h3>
+            <div class="bsjy-g">
+                
+            <form id="checkout-form" action="/index.php?m=api&c=PayPal&a=pay_order" method="post">
+                <input type="hidden" name="order_id" value="{$order['order_id']}" />
+
+                <input type="hidden" name="order_sn" id="order_sn" value="{$order['order_sn']}"> <!-- 订单编号-->
+                <input type="hidden" id="payment_method_nonce" name="nonce">  <!--paypal 返回的一个只被使用一次的任意或非重复的随机数值-->
+                <input type="hidden" name="payment_type" id="payment_type" value="paypal">
+
+
+                <input type="hidden" name="email" id="email" placeholder="email" value="{$order['email']}">
+                <input type="hidden" name="first_name" id="first_name" placeholder="first name" value="{$order['consignee']}">
+                <input type="hidden" name="postcode" id="postcode" placeholder="postcode" value="{$order['zipcode']}">
+                <input type="hidden" name="address" id="address" placeholder="address" value="{$order['address']}">
+                <input type="hidden" name="mobile" id="mobile" placeholder="mobile" value="{$order['mobile']}">
+
+                <!-- <input type="hidden" name="last_name" id="last_name" placeholder="last_name" value="Doe"> -->
+                <input type="hidden" name="country" id="country" placeholder="country" value="{$order['country']}">
+                <input type="hidden" name="city" id="city" placeholder="city" value="{$order['city']}">
+                <input type="hidden" name="state" id="state" placeholder="state" value="{$order['province']}">
+
+
+                <!-- <input type="button" value="PayPal" id="checkout_paypal"> -->
+
+            </form>
+            <!-- 隐藏paypalbutton,通过上面的paypal button触发 -->
+            <form id="paypal_form" style=""></form>
+
+
+
+            	<!-- <dl>
+                    <dd>                                     
+                        <div class="order-payment-area">
+                            <div class="dsfzfpte">
+                                <b>Choose payment methods</b>                               
+                            </div>
+                            <div class="po-re dsfzf-ee">
+                                <ul>
+                                <foreach name="paymentList" item="v"  key="k">                                
+                                    <li>
+                                        <div class="payment-area">
+                                            <input type="radio" id="input-ALIPAY-1" value="pay_code={$v['code']}" class="radio vam" name="pay_radio" >
+                                            <label for="">
+                                                <img src="/plugins/{$v['type']}/{$v['code']}/{$v['icon']}" width="120" height="40" onClick="change_pay(this);" />
+                                            </label>
+                                        </div>
+                                    </li>
+                                </foreach>                                                                     
+                                </ul>
+                            </div>
+                        </div>                  
+                    第三方网银支付 start
+                      <foreach name="bankCodeList" item="v"  key="k">
+                        <div class="order-payment-area">
+                            <div class="dsfzfpte">
+                                    <b>{$paymentList[$k]['name']}</b>
+                                    <em>网银支付</em>
+                                </div>
+                            <div class="po-re dsfzf-ee">
+                                    <ul>
+                                      <foreach name="v" item="v2"  key="k2">
+                                        <li>
+                                            <div class="payment-area">
+                                                <input type="radio" name="pay_radio" class="radio vam" value="pay_code={$k}&bank_code={$v2}" id="input-ALIPAY-1">
+                                                <label for="">
+                                                <img src="__STATIC__/images/images-out/{$bank_img[$k2]}" width="120" height="40" onClick="change_pay(this);"/>
+                                                </label>
+                                            </div>
+                                        </li>                
+                                    </foreach>                                                           
+                                    </ul>
+                            </div> 
+                        </div>     
+                    </foreach>                   
+                    第三方网银支付 end
+                                                                 
+                    </dd>
+                </dl> -->
+
+               <!--  <div class="order-payment-action-area">                    
+                   <a class="button-style-5 button-confirm-payment" href="javascript:void(0);" onClick="$('#cart4_form').submit();" >Confirm to payment</a>
+               </div> -->
+
+
+            </div>
+        </div>
+        
+
+       <!-- </form> -->
+    </div>
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<script>
+    // We generated a client token for you so you can test out this code
+    // immediately. In a production-ready integration, you will need to
+    // generate a client token on your server (see section below).
+    $(function() {
+        var nonceJQ = $("#payment_method_nonce");
+        var form = document.querySelector('#checkout-form');
+        var initPaypal = function (clientToken) {
+            braintree.setup(clientToken, "paypal", {
+                container: "paypal_form",
+                singleUse: false,
+                onPaymentMethodReceived: function (obj) {
+                    console.log('hello in');
+                    console.log(obj);
+                    var detail = obj.details;
+                    var payType = obj.type;
+
+                
+                    var nonce = obj.nonce;            
+                    nonceJQ.val(nonce);
+
+                    var payerId = detail.payerId;
+                    if (payerId) {
+                        form.submit();
+                    }else{
+                        window.location.reload();
+                    }
+                }, 
+                onReady: function (obj) {
+
+                }
+                
+            });
+        };
+
+
+       var client_token = '';
+       var getTokenInitPayPal = function () {
+            $.ajax({
+                url: "/index.php?m=api&c=PayPal&a=generate_token",
+                type: "GET",
+                async: true,
+                data: {
+                },
+                // timeout: 5000,
+                dataType: 'json',
+                success:function(data){
+                    if(data.status == 0) {
+                        client_token = data.client_token;
+                        initPaypal(client_token);
+                    }else{
+                        alert(data.msg);
+                    }
+                },
+                error: function(xhr){
+                    console.log(xhr);
+                },
+                complete: function(){
+
+                }
+            });
+       };
+       getTokenInitPayPal(); //执行后获取client_token和初始化initPaypal()函数
+
+    })
+
+</script>
+
+<script>
+   /* $(document).ready(function(){
+	 $("input[name='pay_radio']").first().trigger('click');
+    });
+    // 切换支付方式
+    function change_pay(obj){
+	$(obj).parent().siblings('input[name="pay_radio"]').trigger('click');
+    }*/
+</script>    
+
+<!--------footer-开始-------------->
+<include file="Public/footer" />
+<!--------footer-结束-------------->
+</body>
+</html>

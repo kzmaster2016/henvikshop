@@ -1,0 +1,318 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>{$tpshop_config.shop_info_store_title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="format-detection" content="email=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-itunes-app" content="app-id=921839681">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/fresh.css" />
+	<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+	<script type="text/javascript" src="__STATIC__/js/TouchSlide.1.1.js"></script>
+    <script src="__PUBLIC__/js/global.js"></script>
+ 	</head>
+<body>
+<style>	
+.banner .hd{position: absolute;bottom:0;text-align: center;width: 100%;}
+.banner .hd li{display: inline-block;width: .4em;height: .4em;margin: 0 .4em;
+-webkit-border-radius: .8em;-moz-border-radius: .8em;
+-ms-border-radius: .8em;-o-border-radius: .8em; 
+border-radius: .8em;background: red;
+filter: alpha(Opacity=60);opacity: .6;
+box-shadow: 0 0 1px #ccc; text-indent:-100px; overflow:hidden; }
+.banner .hd li.on{ filter: alpha(Opacity=90);opacity: .9;background: #f8f8f8;box-shadow: 0 0 2px #ccc; } 	
+</style>
+<div style="background:#ffffff ">
+    <!-- 头部 -->
+    <div class="header J_header">
+        <span class="top_back J_topback" onClick="javascript:history.go(-1);"><i class="iconfont"></i>返回</span>
+        <h1 class="J_title">个护美妆</h1>
+    </div>
+    <div class="box">
+        <!-- 轮播图片(默认10张) -->
+		<div class="box banner" id="scrollimg">
+		    <div class="swipe J_sliderBanner bd" id="bannerSwiper" style="visibility:visible;">
+		        <div class="swipe-wrap swiper-wrapper">
+		                <div class="J_bannerpic swiper-slide" style="display:;"><a href="http://sale.feiniu.com/m-35782/h5/CS000016"><img class="J_lazy" data-src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604120915101460423710_kk-1.jpg" src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604120915101460423710_kk-1.jpg"></a></div>
+		                <div class="J_bannerpic swiper-slide" style="display:;"><a href="http://sale.feiniu.com/m-36422/h5/CS000016"><img class="J_lazy" data-src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604120917001460423820_kk-1.jpg" src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604120917001460423820_kk-1.jpg"></a></div>
+		                <div class="J_bannerpic swiper-slide" style="display:;"><a href="http://sale.feiniu.com/m-36436/h5/CS000016"><img class="J_lazy" data-src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604120917191460423839_kk-1.jpg" src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604120917191460423839_kk-1.jpg"></a></div>
+		                <div class="J_bannerpic swiper-slide" style="display:;"><a href="http://sale.feiniu.com/m-34988/h5/CS000016"><img class="J_lazy" data-src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604120918071460423887_kk-1.jpg" src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604120918071460423887_kk-1.jpg"></a></div>
+		                <div class="J_bannerpic swiper-slide" style="display:;"><a href="http://sale.feiniu.com/m-36117/h5/CS000016"><img class="J_lazy" data-src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604120918421460423922_kk-1.jpg" src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604120918421460423922_kk-1.jpg"></a></div>
+		                <div class="J_bannerpic swiper-slide" style="display:;"><a href="http://sale.feiniu.com/m-35054/h5/CS000016"><img class="J_lazy" data-src="http://img01.feiniu.com/C/web/layout/kk/20160405/201604050919351459819175_kk-1.jpg" src="http://img01.feiniu.com/C/web/layout/kk/20160405/201604050919351459819175_kk-1.jpg"></a></div>
+		                <div class="J_bannerpic swiper-slide" style="display:;"><a href="http://sale.feiniu.com/m-36320/h5/CS000016"><img class="J_lazy" data-src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604120922421460424162_kk-1.jpg" src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604120922421460424162_kk-1.jpg"></a></div>      
+		                <div class="J_bannerpic swiper-slide" style="display:;"><a href="http://sale.feiniu.com/m-35835/h5/CS000016"><img class="J_lazy" data-src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604121024281460427868_kk-1.jpg" src="http://img01.feiniu.com/C/web/layout/kk/20160412/201604121024281460427868_kk-1.jpg"></a></div>
+				</div>	
+		    </div>
+		    <div class="hd">
+				<ul></ul>
+			</div>
+		</div><!-- 标签，二级类目 -->
+		<script type="text/javascript">
+			TouchSlide({ 
+				slideCell:"#scrollimg",
+				titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+				mainCell:".bd .swiper-wrapper", 
+				effect:"leftLoop", 
+				autoPage:true,//自动分页
+				autoPlay:true //自动播放
+			});
+		</script> 
+		<div class="box clearfix">
+		    <div class="fresort">      
+		            <p><a href="http://m.feiniu.com/list/index?si_seq=C18756"><font style="
+		            color:#000000;">进口护肤</font></a></p>   
+		            <p><a href="http://m.feiniu.com/list/index?si_seq=C17431"><font style="
+		            color:#000000;">面膜</font></a></p>  
+		            <p><a href="http://m.feiniu.com/list/index?si_seq=C18751"><font style="
+		            color:#000000;">面部护肤</font></a></p>
+		            <p><a href="http://m.feiniu.com/list/index?si_seq=C17783"><font style="
+		            color:#000000;">身体乳</font></a></p>
+		    </div>
+		</div>
+		<!-- 标签，二级类目 -->
+		
+		<div class="box clearfix">
+		    <div class="fresort" style="padding-top: 0px;">     
+		            <p><a href="http://m.feiniu.com/list/index?si_seq=C18725"><font style="
+		            color:#000000;">男士护肤</font></a></p>
+		            <p><a href="http://m.feiniu.com/list/index?si_seq=C17746"><font style="
+		            color:#000000;">洗发水</font></a></p> 
+		            <p><a href="http://m.feiniu.com/list/index?si_seq=C18018"><font style="
+		            color:#000000;">牙膏</font></a></p>   
+		            <p><a href="http://m.feiniu.com/list/index?si_seq=C18735"><font style="
+		            color:#000000;">卫生巾</font></a></p>
+		    </div>
+		</div>
+		<div class="box clearfix"> 
+			<div class="boxone banner"> 
+				<div class="swipe J_sliderGoods" id="picScroll"> 
+					<div class="hd">
+						<ul></ul>
+					</div>
+					<div class="bd">  
+						<ul class="itemsone clearfix J_bannerpic" data-index="0">  
+						  <li>
+						  <a href="http://m.feiniu.com/item/201310CM290004064"> 
+						    <p class="i_img">
+						 		<img class="" src="http://img05.fn-mart.com/C/item/2013/1029/201310C290002912/_353137687_400x400.jpg" > 
+						 	</p>
+						 	<p class="i_name">海飞丝去屑洗发露海洋活力型750ml/瓶</p> 
+						 	<p class="i_price"> <span>¥48.8</span> </p></a>  
+						 </li>  
+						 <li>
+						 <a href="http://m.feiniu.com/item/201411CM140000103"><p class="i_img">
+						 	<img class="" src="http://img06.fn-mart.com/C/item/2014/1114/201411C140000072/_347921142_400x400.jpg"></p> 
+						 	<p class="i_name">沙宣 光感莹润润发乳750ml/瓶</p> 
+						 	<p class="i_price"> <span>¥99</span> </p>
+						 </a>  
+						 </li>   
+						  <li><a href="http://m.feiniu.com/item/201501CM160000122"> 
+						  	<p class="i_img">
+						  	<img class=""  src="http://img05.fn-mart.com/C/item/2015/0116/201501C160000063/_166284977_400x400.jpg" ></p>
+						   	<p class="i_name">巴黎欧莱雅 透明质酸水润洗护套装（洗700ml+护400ml)/套</p>
+						   	<p class="i_price"> <span>¥56.9</span> </p></a>  
+						   </li>  
+						</ul>
+						   
+						<ul class="itemsone clearfix J_bannerpic" data-index="1">  
+						  <li>
+						  <a href="http://m.feiniu.com/item/201310CM290004064"> 
+						    <p class="i_img">
+						 		<img class="" data-src="http://img05.fn-mart.com/C/item/2013/1029/201310C290002912/_353137687_400x400.jpg"  src="http://img05.fn-mart.com/C/item/2013/1029/201310C290002912/_353137687_400x400.jpg"> 
+						 	</p>
+						 	<p class="i_name">海飞丝去屑洗发露海洋活力型750ml/瓶</p> 
+						 	<p class="i_price"> <span>¥48.8</span> </p></a>  
+						 </li>  
+						 <li>
+						 <a href="http://m.feiniu.com/item/201411CM140000103"><p class="i_img">
+						 	<img class="" data-src="http://img06.fn-mart.com/C/item/2014/1114/201411C140000072/_347921142_400x400.jpg" src="http://img06.fn-mart.com/C/item/2014/1114/201411C140000072/_347921142_400x400.jpg"></p> 
+						 	<p class="i_name">沙宣 光感莹润润发乳750ml/瓶</p> 
+						 	<p class="i_price"> <span>¥99</span> </p>
+						 </a>  
+						 </li>   
+						  <li><a href="http://m.feiniu.com/item/201501CM160000122"> 
+						  	<p class="i_img">
+						  	<img class="" data-src="http://img05.fn-mart.com/C/item/2015/0116/201501C160000063/_166284977_400x400.jpg"  src="http://img05.fn-mart.com/C/item/2015/0116/201501C160000063/_166284977_400x400.jpg" ></p>
+						   	<p class="i_name">巴黎欧莱雅 透明质酸水润洗护套装（洗700ml+护400ml)/套</p>
+						   	<p class="i_price"> <span>¥56.9</span> </p></a>  
+						   </li>  
+						</ul>
+						
+						<ul class="itemsone clearfix J_bannerpic" data-index="1">  
+						  <li>
+						  <a href="http://m.feiniu.com/item/201310CM290004064"> 
+						    <p class="i_img">
+						 		<img class="" data-src="http://img05.fn-mart.com/C/item/2013/1029/201310C290002912/_353137687_400x400.jpg"  src="http://img05.fn-mart.com/C/item/2013/1029/201310C290002912/_353137687_400x400.jpg"> 
+						 	</p>
+						 	<p class="i_name">海飞丝去屑洗发露海洋活力型750ml/瓶</p> 
+						 	<p class="i_price"> <span>¥48.8</span> </p></a>  
+						 </li>  
+						 <li>
+						 <a href="http://m.feiniu.com/item/201411CM140000103"><p class="i_img">
+						 	<img class="" data-src="http://img06.fn-mart.com/C/item/2014/1114/201411C140000072/_347921142_400x400.jpg" src="http://img06.fn-mart.com/C/item/2014/1114/201411C140000072/_347921142_400x400.jpg"></p> 
+						 	<p class="i_name">沙宣 光感莹润润发乳750ml/瓶</p> 
+						 	<p class="i_price"> <span>¥99</span> </p>
+						 </a>  
+						 </li>   
+						  <li><a href="http://m.feiniu.com/item/201501CM160000122"> 
+						  	<p class="i_img">
+						  	<img class="" data-src="http://img05.fn-mart.com/C/item/2015/0116/201501C160000063/_166284977_400x400.jpg"  src="http://img05.fn-mart.com/C/item/2015/0116/201501C160000063/_166284977_400x400.jpg" ></p>
+						   	<p class="i_name">巴黎欧莱雅 透明质酸水润洗护套装（洗700ml+护400ml)/套</p>
+						   	<p class="i_price"> <span>¥56.9</span> </p></a>  
+						   </li>  
+						</ul>
+					</div>
+				</div>
+			<script type="text/javascript">
+				TouchSlide({ 
+					slideCell:"#picScroll",
+					titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+					autoPage:true, //自动分页
+					pnLoop:"false", // 前后按钮不循环
+					switchLoad:"data-src", //切换加载，真实图片路径为"_src"
+					autoPlay:true //自动播放
+				});
+			</script>
+			</div>
+		</div>
+
+		<div class="box clearfix">
+		    <div class="sortbox J_sortBox">
+		        <!-- 推荐分类 -->
+		        <div class="sort_tab">
+			        <ul class="J_slider">
+			              <li class="cur">洗护洗浴</li>
+			              <li>女性护理</li>
+			              <li>口腔护理</li>
+			              <li>面部护肤</li>
+			        </ul>
+		        </div>
+		        <div class="freshtj_content J_sliderContent">
+		            <ul class="itemsthree hot">                            
+		                <li onClick="location.href='http://m.feiniu.com/item/201412CM080000134'">
+		                    <p class="i_img"><img class="" data-src="http://img05.fn-mart.com/C/item/2014/1208/201412C080000087/_119784495_400x400.jpg" title="巴黎欧莱雅 透明质酸水润洗发露 200ml/瓶" alt="巴黎欧莱雅 透明质酸水润洗发露 200ml/瓶" src="http://img05.fn-mart.com/C/item/2014/1208/201412C080000087/_119784495_400x400.jpg" style="background: none;"></p>
+		                    <div class="i_box">
+		                        <p class="i_name">巴黎欧莱雅 透明质酸水润洗发露 200ml/瓶</p>
+		                        <p class="i_price"><span>¥21.00</span><del>¥ 25.00</del></p>
+		                    </div>
+		                </li>
+		                                    
+		                <li onClick="location.href='http://m.feiniu.com/item/201311CM130001522'">
+		                    <p class="i_img"><img class="" data-src="http://img05.fn-mart.com/C/item/2013/1113/201311C130000978/_331398053_400x400.jpg" title="清扬男士去屑洗发露多效水润养护型200ml/瓶" alt="清扬男士去屑洗发露多效水润养护型200ml/瓶" src="http://img05.fn-mart.com/C/item/2013/1113/201311C130000978/_331398053_400x400.jpg" style="background: none;"></p>
+		                    <div class="i_box">
+		                        <p class="i_name">清扬男士去屑洗发露多效水润养护型200ml/瓶</p>
+		                        <p class="i_price"><span>¥24.80</span><del style="display:none;">¥ 24.80</del></p>
+		                    </div>
+		                </li>
+		                                    
+		                <li onClick="location.href='http://m.feiniu.com/item/201310CM300002777'">
+		                    <p class="i_img"><img class="" data-src="http://img01.fn-mart.com/C/item/2013/1030/201310C300001564/_976948940_400x400.jpg" title="拉芳柔顺护理洗发露(垂坠顺滑)" alt="拉芳柔顺护理洗发露(垂坠顺滑)" src="http://img01.fn-mart.com/C/item/2013/1030/201310C300001564/_976948940_400x400.jpg" style="background: none;"></p>
+		                    <div class="i_box">
+		                        <p class="i_name">拉芳柔顺护理洗发露(垂坠顺滑)</p>
+		                        <p class="i_price"><span>¥26.70</span><del>¥ 27.00</del></p>
+		                    </div>
+		                </li>
+		                                    
+		                <li onClick="location.href='http://m.feiniu.com/item/201405CM190000530'">
+		                    <p class="i_img"><img class="" data-src="http://img06.fn-mart.com/C/item/2014/0519/201405C190000177/_535770054_400x400.jpg" title="巴黎欧莱雅 精油润养洗发水700ml+精油润养润发乳400ml" alt="巴黎欧莱雅 精油润养洗发水700ml+精油润养润发乳400ml" src="http://img06.fn-mart.com/C/item/2014/0519/201405C190000177/_535770054_400x400.jpg" style="background: none;"></p>
+		                    <div class="i_box">
+		                        <p class="i_name">巴黎欧莱雅 精油润养洗发水700ml+精油润养润发乳400ml</p>
+		                        <p class="i_price"><span>¥56.90</span><del>¥ 95.00</del></p>
+		                    </div>
+		                </li>
+		                                    
+		                <li onClick="location.href='http://m.feiniu.com/item/201505CM270001427'">
+		                    <p class="i_img"><img class="" data-src="http://img02.fn-mart.com/C/item/2015/0527/201505C270000543/_209947185_400x400.jpg" title="多芬 重焕熠采护洗发乳+重焕熠采发膜精华护发素 (180+180)ml" alt="多芬 重焕熠采护洗发乳+重焕熠采发膜精华护发素 (180+180)ml" src="http://img02.fn-mart.com/C/item/2015/0527/201505C270000543/_209947185_400x400.jpg" style="background: none;"></p>
+		                    <div class="i_box">
+		                        <p class="i_name">多芬 重焕熠采护洗发乳+重焕熠采发膜精华护发素 (180+180)ml</p>
+		                        <p class="i_price"><span>¥36.90</span><del>¥ 66.00</del></p>
+		                    </div>
+		                </li>
+		                                    
+		                <li onClick="location.href='http://m.feiniu.com/item/201511CM180002980'">
+		                    <p class="i_img"><img class="" data-src="http://img02.fn-mart.com/C/item/2015/1118/201511C180001763/_919868199_400x400.jpg" title="舒肤佳纯白清香沐浴露1升/瓶+芦荟水润呵护沐浴露350毫升/瓶" alt="舒肤佳纯白清香沐浴露1升/瓶+芦荟水润呵护沐浴露350毫升/瓶" src="http://img02.fn-mart.com/C/item/2015/1118/201511C180001763/_919868199_400x400.jpg" style="background: none;"></p>
+		                    <div class="i_box">
+		                        <p class="i_name">舒肤佳纯白清香沐浴露1升/瓶+芦荟水润呵护沐浴露350毫升/瓶</p>
+		                        <p class="i_price"><span>¥44.90</span><del>¥ 47.50</del></p>
+		                    </div>
+		                </li>
+		            </ul>
+		            <ul class="itemsthree  hide new">                               
+		                <li onClick="location.href='http://m.feiniu.com/item/201409CM100000951'">
+		                    <p class="i_img"><img class="" data-src="http://img04.fn-mart.com/C/item/2014/0910/201409C100000232/_012333883_400x400.jpg" title="大宝 SOD清爽保湿露 100亳升/瓶" alt="大宝 SOD清爽保湿露 100亳升/瓶" src="http://img04.fn-mart.com/C/item/2014/0910/201409C100000232/_012333883_400x400.jpg" style="background: none;"></p>
+		                    <div class="i_box">
+		                        <p class="i_name">大宝 SOD清爽保湿露 100亳升/瓶</p>
+		                        <p class="i_price"><span>¥9.90</span><del>¥ 14.90</del></p>
+		                    </div>
+		                </li>
+		                                    
+		                <li onClick="location.href='http://m.feiniu.com/item/201311CM040000664'">
+		                    <p class="i_img"><img class="" data-src="http://img03.fn-mart.com/C/item/2013/1104/201311C040000534/null_594057745_400x400.jpg" title="相宜本草光彩立现睡眠面膜(白茶) 135g/瓶" alt="相宜本草光彩立现睡眠面膜(白茶) 135g/瓶" src="http://img03.fn-mart.com/C/item/2013/1104/201311C040000534/null_594057745_400x400.jpg" style="background: none;"></p>
+		                    <div class="i_box">
+		                        <p class="i_name">相宜本草光彩立现睡眠面膜(白茶) 135g/瓶</p>
+		                        <p class="i_price"><span>¥18.80</span><del>¥ 39.90</del></p>
+		                    </div>
+		                </li>
+		                                    
+		                <li onClick="location.href='http://m.feiniu.com/item/201311CM010004202'">
+		                    <p class="i_img"><img class="" data-src="http://img06.fn-mart.com/C/item/2013/1101/201311C010003064/_514284580_400x400.jpg" title="玉兰油滋润霜30g/瓶" alt="玉兰油滋润霜30g/瓶" src="http://img06.fn-mart.com/C/item/2013/1101/201311C010003064/_514284580_400x400.jpg" style="background: none;"></p>
+		                    <div class="i_box">
+		                        <p class="i_name">玉兰油滋润霜30g/瓶</p>
+		                        <p class="i_price"><span>¥19.00</span><del>¥ 25.00</del></p>
+		                    </div>
+		                </li>
+		                                    
+		                <li onClick="location.href='http://m.feiniu.com/item/201511CM180000425'">
+		                    <p class="i_img"><img class="" data-src="http://img01.fn-mart.com/C/item/2015/1118/201511C180000120/null_706293407_400x400.jpg" title="我的美丽日志黑曜岩晶采保湿黑面膜 28ml*5片/盒" alt="我的美丽日志黑曜岩晶采保湿黑面膜 28ml*5片/盒" src="http://img01.fn-mart.com/C/item/2015/1118/201511C180000120/null_706293407_400x400.jpg" style="background: none;"></p>
+		                    <div class="i_box">
+		                        <p class="i_name">我的美丽日志黑曜岩晶采保湿黑面膜 28ml*5片/盒</p>
+		                        <p class="i_price"><span>¥37.80</span><del>¥ 79.00</del></p>
+		                    </div>
+		                </li>
+		                                    
+		                <li onClick="location.href='http://m.feiniu.com/item/201508CM170000400'">
+		                    <p class="i_img"><img class="" data-src="http://img04.fn-mart.com/C/item/2015/0817/201508C170000068/null_219976096_400x400.jpg" title="相宜本草花开莲花舒缓保湿面膜 25g*5片/盒" alt="相宜本草花开莲花舒缓保湿面膜 25g*5片/盒" src="http://img04.fn-mart.com/C/item/2015/0817/201508C170000068/null_219976096_400x400.jpg" style="background: none;"></p>
+		                    <div class="i_box">
+		                        <p class="i_name">相宜本草花开莲花舒缓保湿面膜 25g*5片/盒</p>
+		                        <p class="i_price"><span>¥36.90</span><del>¥ 69.00</del></p>
+		                    </div>
+		                </li>
+		                                    
+		                <li onClick="location.href='http://m.feiniu.com/item/201511CM060001969'">
+		                    <p class="i_img"><img class="" data-src="http://img02.fn-mart.com/C/item/2015/1106/201511C060000675/_206843685_400x400.jpg" title="安可皙（Ancolcy） 雪润无瑕气垫BB霜 15gX2/盒" alt="安可皙（Ancolcy） 雪润无瑕气垫BB霜 15gX2/盒" src="http://img02.fn-mart.com/C/item/2015/1106/201511C060000675/_206843685_400x400.jpg" style="background: none;"></p>
+		                    <div class="i_box">
+		                        <p class="i_name">安可皙（Ancolcy） 雪润无瑕气垫BB霜 15gX2/盒</p>
+		                        <p class="i_price"><span>¥76.80</span><del>¥ 128.00</del></p>
+		                    </div>
+		                </li>
+		             </ul>
+		          </div>
+		    </div>
+		</div>
+	    <div class="null_page J_nullPage hide" style="display: none;">
+	        <p>无商品，请试试其它分类吧！</p>
+	    </div>
+	</div>
+</div>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css"/>
+<ul class="fixedbtn">      
+  <li class="search  hide_it" id="J_newBtnSearch"></li>  
+  <li class="homepage hide_it" id="J_newBtnHomepage"></li>    
+  <li class="footprint hide_it" id="J_newBtnFootprint"></li>    
+  <li class="cart hide_it" id="J_newBtnCart"><b></b></li>   
+  <li class="top" id="J_newBtnTop"></li>   
+</ul>
+<a href="javascript:goTop();" class="gotop"><img src="/Template/mobile/new/Static/images/topup.png"></a>
+<include file="Public/footer_nav"/> 
+<script>
+function goTop(){
+	$('html,body').animate({'scrollTop':0},600);
+}
+</script> 
+</body>
+</html>

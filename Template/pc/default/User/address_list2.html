@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>收货地址-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+
+<body>
+<table width="980" border="1">
+    <tbody>
+    <volist name="lists" id="list">
+
+        <tr>
+            <th scope="col">收货人</th>
+            <th scope="col">{$list.consignee}</th>
+        </tr>
+        <tr>
+            <td>
+                <div align="center">地址</div>
+            </td>
+            <td>
+                <div align="center">
+                    {$region_list[$list['province']]['name']}，{$region_list[$list['city']]['name']}，
+                    {$region_list[$list['district']]['name']}，{$list.address}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div align="center">手机</div>
+            </td>
+            <td>
+                <div align="center">
+                    {$list.mobile}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div align="center">电子邮件</div>
+            </td>
+            <td>
+                <div align="center">
+                    {$list.email}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div align="center">邮政编码</div>
+            </td>
+            <td>
+                <div align="center">
+                    {$list.zipcode}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div align="center">操作</div>
+            </td>
+            <td>
+                <div align="center">
+                    <if condition="$list['is_default'] eq '0'">
+                        <a href="{:U('Home/User/set_default',array('id'=>$list['address_id']))}">设置默认</a>
+                    </if>
+                    <a href="{:U('Home/User/edit_address',array('id'=>$list['address_id']))}">编辑</a>
+                    <a href="{:U('Home/User/del_address',array('id'=>$list['address_id']))}">删除</a>
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+</body>
+</html>

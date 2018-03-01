@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>账户管理-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<!-- 头部-e -->  
+<link rel="stylesheet" href="__STATIC__/css/favorite.css">
+
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">资金管理</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+   <div class="col_main">
+    <div class="main balance"> 
+      <!-- themes star -->
+      <div class="themes_title">
+        <h3>账户余额</h3>        
+      </div>
+      <!-- themes end --> 
+      <!-- message star -->
+      <div class="message">
+        <ul class="clearfix">
+          <li class="mes_01"> <i class="icon_purse"></i>
+            <div>
+              <p class="txt">销售额</p>
+              <p class="num"><em class="rmb">￥</em>{$user.user_money}</p>
+            </div>
+          </li>
+          <li class="mes_02"> <i class="icon_lock"></i>
+            <div>
+              <p class="txt">我的奖励</p>
+              <p class="num"><em class="rmb"></em>{$user.pay_points}</p>
+            </div>
+          </li>
+          <li class="mes_03"> <i class="icon_question" id="question"></i> </li>
+          <li class="mes_04"> <span class="txt"></span> <span class="status"></span> </li>
+        </ul>
+        <div class="tip" id="question_tip"> 尚未提现完成的金额 </div>
+      </div>
+      <!-- message end -->
+      <div class="ui_tab">
+        <ul class="ui_tab_nav">
+          <li class="active"><a id="activeHref" class="activeHref" href=""  >账户变动记录</a></li>
+        </ul>
+        <div class="ui_tab_content">
+          <div class="ui_panel" id="noComment" style="display: block;"> 
+            <!-- Details List star -->
+            	<div class="Wallet">
+								<div class="ss_million">
+									<a class="dj_mill"><em class="Icon j_million"></em><dl class="b"><dt>{$tpshop_config['distribut_name']}</dt><dd><span class="million_num">1单（￥399）</span></dd></dl></a>
+							        <div class="show_million">
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>{$tpshop_config['distribut_first_name']}</dt><dd style="color:#aaaaaa;"><span>1单（￥399）</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>{$tpshop_config['distribut_second_name']}</dt><dd style="color:#aaaaaa;"><span>1单（￥399）</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>{$tpshop_config['distribut_third_name']}</dt><dd style="color:#aaaaaa;"><span>1单（￥399）</span></dd></dl></a>
+							        </div>
+							    </div>
+							    <div class="ss_million">
+									<a class="dj_mill"><em class="Icon j_million"></em><dl class="b"><dt>我的推广</dt><dd><span class="million_num">0单（￥0）</span></dd></dl></a>
+							        <div class="show_million">
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>下单未购买</dt><dd style="color:#aaaaaa;"><span>0单（￥0）</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>下单已购买</dt><dd style="color:#aaaaaa;"><span>0单（￥0）</span></dd></dl></a>
+							        </div>
+							    </div>
+							    <div class="ss_million">
+									<a class="dj_mill"><em class="Icon j_million"></em><dl class="b"><dt>我的财富</dt><dd><span class="million_num">￥0.00</span></dd></dl></a>
+							        <div class="show_million">
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>未付款订单财富</dt><dd style="color:#aaaaaa;"><span>0</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>已付款订单财富</dt><dd style="color:#aaaaaa;"><span>0</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>已收货订单财富</dt><dd style="color:#aaaaaa;"><span>0</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>已完成订单财富</dt><dd style="color:#aaaaaa;"><span>0</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>已提现财富</dt><dd style="color:#aaaaaa;"><span>0</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>可提现财富</dt><dd style="color:#aaaaaa;"><span>0</span></dd></dl></a>
+							        </div>
+							    </div>
+							    <div>
+									<a href=""><em class="Icon j_million"></em><dl class="b"><dt>申请提现</dt><dd>&nbsp;</dd></dl></a>
+							    </div>
+							</div>
+            <!-- Details List end --> 
+            <!-- page next star -->
+	            <!--<div class="operating fixed" id="bottom">
+                    <div class="fn_page clearfix">
+                            {$page} 
+                    </div>
+                </div>             -->
+            <!-- page next end --> 
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
+ 
+<div style="clear: both;"></div>
+<include file="User/footer" />
+</body>
+	<script type="text/javascript">
+		$(document).ready(function(){
+				$('.dj_mill').click(function(){
+						$(this).siblings('.show_million').toggle(300);
+				})
+		})
+	</script>
+</html>

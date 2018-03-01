@@ -1,0 +1,118 @@
+<include file="Public/header"/>
+<body>
+<header>
+  <div class="tab_nav">
+    <div class="header">
+      <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="back"></a></div>
+      <div class="h-mid">Points Management</div>
+      <div class="h-right">
+        <aside class="top_bar">
+          <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</header>
+<include file="Public/menu"/>
+<div id="tbh5v0">
+    <div class="pbox">
+        <!-- 积分标头 S -->
+        <ul class="il_title">
+            <li>
+                <p class="cf22" id="all_score">{$user.pay_points}</p>
+                <p>Points available</p>
+            </li>
+            <!--
+            <li>
+                <p class="cf22" id="expire_score">0</p>
+                <p>即将过期</p>
+            </li>
+            -->
+          <!--   <li>
+              <p class="cf22" id="wait_score">{$user.user_money}</p>
+              <p>可用余额</p>
+          </li> -->
+          <!--   <li>
+              <a style="padding: 0 10px;text-align: center;color: #fff;
+                          border: 1px solid #FE6D0B;display: inline-block;border-radius: 3px;
+                          box-shadow: 0 1px 2px #E7E7E7;background: #f60;" href="{:U('User/recharge')}">充值</a>
+              <a style="padding: 0 10px;text-align: center;color: #fff;
+                          border: 1px solid #FE6D0B;display: inline-block;border-radius: 3px;
+                          box-shadow: 0 1px 2px #E7E7E7;background: #f60;" href="{:U('User/withdrawals')}">提现</a>
+          </li> -->
+        </ul>
+        <!-- 积分标头 E -->
+
+        <!-- 积分导航 S -->
+     <!--    <div class="il_nav" id="J_il_nav">
+         <a href="{:U('User/points',array('type'=>'all'))}" <if condition="$type eq 'all'">class="active"</if> data-list="1">全部</a>
+         <a href="{:U('User/points',array('type'=>'recharge'))}" <if condition="$type eq 'recharge'">class="active"</if>  data-list="2">充值记录</a>
+         <a href="{:U('User/points',array('type'=>'points'))}" <if condition="$type eq 'points'">class="active"</if>  data-list="3">积分</a>
+     </div> -->
+        <!-- 积分导航 E -->
+        <!-- 列表展示 S  在li上存在2种情况样式(隐藏显示请使用.hide_it样式)
+                .list_add 表示增加积分  .list_remove 表示减少积分
+        -->
+            <!-- <ul class="il_list all_score" id="J_il_list_1">
+                <if condition="$type eq 'recharge'">
+                <foreach name="account_log" item="vo">
+                                <li class="list_add J_add">
+                                    <div class="td_l">
+                                        <p>充值金额: {$vo.account}</p>
+                                        <p>支付状态:<if condition="$vo[pay_status] eq 0">待支付&nbsp;&nbsp;<a href="{:U('User/recharge',array('order_id'=>$vo[order_id]))}" class="">详情</a><else/>已支付</if></p>
+                                    </div>
+                                    <div class="td_r">
+                                        <p class="il_money">{$vo.pay_name}</p>
+                                        <p class="time">{$vo.ctime|date='Y-m-d',###}</p>
+                                    </div>
+                                </li>
+                </foreach>
+                   <else/>
+               <foreach name="account_log" item="vo">
+                <li class="list_add J_add">
+                    <div class="td_l">
+                        <p>余额: {$vo.user_money}</p>
+                        <p>积分:{$vo.pay_points}</p>
+                    </div>
+                    <div class="td_r">
+                        <p class="il_money">{$vo.desc}</p>
+                        <p class="time">{$vo.change_time|date='Y-m-d',###}</p>
+                    </div>
+                </li>
+                </foreach>
+                </if>                  
+            </ul> -->
+			<notempty name="account_log">             
+	            <!-- 下滑加载无更多样式 S-->
+	            <div id="getmore" style="font-size:.24rem;text-align: center;color:#888;padding:.25rem .24rem .4rem; clear:both">
+	                    <a href="javascript:void(0)" onClick="ajax_sourch_submit()">click to more</a>
+	            </div>
+	            <!-- 下滑加载无更多样式 E-->
+			</notempty>          
+            </div>
+<script>
+var  page = 1;
+ /*** ajax 提交表单 查询订单列表结果*/  
+ function ajax_sourch_submit()
+ {	 	 	 
+        page += 1;
+		$.ajax({
+			type : "GET",
+			url:"/index.php?m=Mobile&c=User&a=points&is_ajax=1&type={$type}&p="+page,//+tab,						
+//			url:"{:U('Mobile/User/points',null,'')}/is_ajax/1/p/"+page,//+tab,
+//			data : $('#filter_form').serialize(),// 你的formid 搜索表单 序列化提交
+			success: function(data)
+			{
+				if($.trim(data) == '')
+					$('#getmore').hide();
+				else
+				    $("#J_il_list_1").append(data);
+			}
+		}); 
+ } 
+</script>            
+   <include file="Public/footer_nav"/>
+</div>
+</body>
+</html>
+

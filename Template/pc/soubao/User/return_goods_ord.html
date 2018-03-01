@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>退换货-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body> 
+<!-- 头部-s -->
+<style type="text/css">
+.return_area .return_goods li span.title_thired{ width:160px !important}
+.return_area .return_goods li span.title_second{ width:400px !important; overflow:hidden; text-overflow:ellipsis;white-space:nowrap;}
+</style>
+<include file="User/header" />
+<!-- 头部-e -->
+<link rel="stylesheet" href="__STATIC__/css/return.sprite.css">
+<link rel="stylesheet" href="__STATIC__/css/return.add.css">
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">退换货</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+<div class="col_main noHidden"> 
+    <!--下面内内容自己添加 -->
+    <div class="return_area">
+      <div class="user-head clearfix">
+        <h3>退换货</h3>
+        <!--<a class="" href="">
+                    查看退货规则
+                </a>--> 
+      </div>
+      <!-- tab -->
+      <div class="ui_tab">         
+        <div class="ui_tab_content J_order_list"> 
+          
+          <!--退货记录-->
+          <div class="wi940">
+    <form name="return_form" id="return_form" autocomplete="off" method="post">
+      <div class="mod-main mod-comm" id="air03">
+        
+        <div class="mc">
+          <table class="tb-void mb10">
+            <thead>
+              <tr>
+                <th>商品</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><ul class="list-proinfo" id="removeTheSingleGife">
+                    <li class="fore1"> 
+                    <a href="/index.php/Home/Goods/goodsInfo/id/103.html" target="_blank">
+                     <img height="50" width="50" title="珂兰钻石 18K金90分效果群镶钻石戒指 倾城 需定制" src="/Public/upload/goods/thumb/goods_thumb_103_50_50.jpeg" data-img="1" alt=""> 
+                     珂兰钻石 18K金90分效果群镶钻石戒指 倾城 需定制                     </a>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div name="productInfo_zp-info" style="display:none"></div>
+        </div>
+        <div class="form">
+          <div class="item kfarea" id="sellerPrompt">
+            <div class="ml20"> <span><em>*</em><span style="color: red; "> 温馨提示：</span></span>
+              <label>本次售后服务将由 <span id="sellerNamePrompt" style="color: red; ">tpshop</span> 为您提供 </label>
+            </div>
+            <div class="clr"></div>
+          </div>
+          <div class="repair-steps" id="repairSteps">
+            <div class="repair-step repair-step-curr pt10 mb10" id="firstRepairStep"> 
+              
+              <!-- 服务类型 -->
+              <div class="item"> <span class="label"> <em> * </em> 服务类型： </span>
+                <div class="fl">
+                  <ul class="list-type list-type-new">
+                    <li name="applyType" id="3" class="selected"> 
+                    	<a href="javascript:void(0);">退货<b></b> </a> 
+                        <input type="radio" name="type" value="0" checked="" style="display:none;">
+                    </li>
+                    <li name="applyType" id="1" class="">
+                    	<a href="javascript:void(0);">换货<b></b> </a> 
+                        <input type="radio" name="type" value="1" style="display:none;">
+                    </li>
+                  </ul>
+                </div>
+                <div class="clr"> </div>
+              </div>
+              <!-- 问题描述 外层div-->
+              <div id="miaoShuDiv" style=""> 
+                <!-- 大家电服务地址 --> 
+                
+ 
+                <!-- 问题描述 -->
+                <div class="item"> <span class="label"> <em> * </em> 问题描述： </span>
+                  <div class="fl">
+                    <textarea name="reason" id="reason" cols="" rows="" class="area"></textarea>
+                    <div class="ar ftx-03">10-500字</div>
+                    <div class="msg-text-01"> 请您如实填写申请原因及商品情况，字数在500字内。 </div>
+                  </div>
+                  <div class="clr"> </div>
+                </div>
+                
+                <!-- 图片信息 -->
+                <div class="item item01"> <span class="label">图片信息：</span>
+                  <div class="fl">
+                    <div class="i-btns" style="text-align: left;">
+                      <input type="button" value="上传照片" onclick="GetUploadify(5,'return_imgs','return_goods','return_imgs');">
+                      <input type="text" name="imgs" id="return_imgs" readonly="" style="border:none">                      
+                    </div>                    
+                    <span id="uploadImgLoading" class="fl"></span> <span id="img_des" class="fl">为了帮助我们更好的解决问题，请您上传图片</span>
+                    <div class="clr"></div>
+                    <span class="msg-text">最多可上传5张图片，每张图片大小不超过5M，支持bmp,gif,jpg,png,jpeg格式文件</span>
+                    <div class="clr"></div>
+                    <div name="mscolluploadImg-info" style="display:none"></div>
+                  </div>
+                  <div class="clr"></div>
+                </div>
+                <!-- 问题描述 外层div--> 
+              </div>
+            </div>
+            <div id="defaultQueRenDiv" style="" class="repair-step"> 
+              <!-- 确认信息 -->
+              <div class="mt-10"> <strong>寄回地址</strong></div>
+              
+              <!-- 取货地址 -->
+              <div class="item" id="pickWareAddress_defaultShow" style="display: block;"> <span class="label"><em>*</em>寄回地址：</span>
+                <div class="fl">南山区西丽镇留仙大道1001号</div>
+                <div class="clr"></div>
+              </div>
+              
+              <!-- 上班时间 -->
+              <div class="item" id="reserveDate_small_div_defaultShow" style="display: block;"> <span class="label"><em>*</em>上班时间：</span>
+                <div class="fl" id="reserveDate_small_div_defaultShow_fl"> (周一致周五) 08:00-19:00 (周六日) 休息</div>
+                <div class="clr"></div>
+              </div>
+              <!-- 客服电话 -->
+              <div class="item" id="reserveDate_small_div_defaultShow" style="display: block;"> <span class="label"><em>*</em>客服电话：</span>
+                <div class="fl" id="reserveDate_small_div_defaultShow_fl">15871376283</div>
+                <div class="clr"></div>
+              </div>
+                           
+              <!-- now --> 
+              <!-- 确认信息 外层div 结束 --> 
+            </div>
+            
+            <!-- 提交按钮 -->
+            <div class="item" id="submitDiv" style=""><span class="label">&nbsp;</span>
+              <div class="fl" name="divSubmit">
+                <div name="submitTips" style="display:none"></div>
+                <a href="javascript:void(0)" onclick="submit_form();" class="btn btn-7" name="btnSubmit"><s></s>提交</a> </div>
+              <div class="clr"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" name="order_id" value="189">
+      <input type="hidden" name="order_sn" value="201603301605406460">
+      <input type="hidden" name="goods_id" value="103">            
+    <input type="hidden" name="__hash__" value="0b77a6126f564af0039f3d1e8b1eceb9_c0e6873aec693cabd3b69654e14b223f"></form>
+  </div>
+        </div>
+      </div>
+      <!-- tab end--> 
+    </div>
+    
+    <!-- 以上为中间内容区域 注释自己2删除--> 
+  </div>   
+</div>
+ <script>
+ 	$(document).ready(function() {
+        $('.list-type li').click(
+			function(){
+					$(this).addClass('selected').siblings().removeClass('selected');
+				}
+		)
+    });
+ </script>
+<div style="clear: both;"></div>
+<include file="User/footer" />
+</body>
+</html>

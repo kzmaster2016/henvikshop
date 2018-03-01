@@ -1,0 +1,284 @@
+
+.fnmm-web-chat {
+    right: 10px;
+    bottom: 10px;
+    position: fixed;
+    min-width: 200px;
+    font-size: 12px;
+}
+
+.fnmm-web-chat .chat-hd {
+    min-width: 200px;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 12px;
+    background: #4D95C2;
+    color: #fff;
+    padding: 0 0 0 5px;
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+}
+
+.fnmm-web-chat .chat-hd i {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    border-color: transparent transparent transparent #fff;
+    border-style: dashed dashed dashed solid;
+    border-width: 5px;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.fnmm-web-chat .chat-hd > i.reverse {
+    top: 13px;
+    border-color: #fff transparent transparent transparent;
+    border-style: solid dashed dashed dashed;
+    border-width: 5px;
+}
+
+.fnmm-web-chat .chat-list {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-top-width: 0px;
+    max-height: 155px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.fnmm-web-chat .chat-list li {
+    list-style: none;
+    overflow: hidden;
+    width: 200px;
+    border-top: 1px solid #ccc;
+    background-color: #ffffff;
+}
+
+.fnmm-web-chat .chat-list li a {
+    display: block;
+    text-decoration: none;
+    color: #666;
+}
+
+.fnmm-web-chat .chat-list li a:hover {
+    background: #f7f7f7;
+    color: #4D95C2;
+}
+
+.fnmm-web-chat .chat-list li img {
+    height: 100%;
+    width: 100%;
+    display: block;
+    border: 0;
+}
+
+.fnmm-web-chat .chat-list li > a > i {
+    height: 26px;
+    width: 26px;
+    margin: 2px 0 2px 5px;
+    background: #CBE4F4;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    float: left;
+    overflow: hidden;
+    position: relative;
+}
+
+.fnmm-web-chat .chat-list li span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+    float: left;
+    width: 150px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 30px;
+}
+
+.fnmm-web-chat .chat-list li i > i {
+    border: 1px solid #FFFFFF;
+    display: block;
+    height: 8px;
+    position: absolute;
+    right: 1px;
+    top: 20px;
+    width: 8px;
+}
+
+.fnmm-web-chat .chat-list li > a.icon-online > i > i {
+    background: none repeat scroll 0 0 blue;
+}
+
+.fnmm-web-chat .chat-list li > a.icon-online > span {
+    color: blue;
+
+}
+
+.fnmm-web-chat .chat-list li > a.icon-offline > i > i {
+    background: none repeat scroll 0 0 gray;
+}
+
+.fnmm-web-chat .chat-list li > a.icon-offline > i > img {
+    opacity: 0.5;
+}
+
+.fnmm-web-chat .chat-ignore {
+    text-align: right;
+    border: 1px solid #ccc;
+    border-top-width: 0px;
+    background-color: #ffffff;
+}
+
+.fnmm-web-chat .chat-ignore a {
+    line-height: 30px;
+    color: #666;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.fnmm-chat-panel .special.chat-icon  {
+    position:relative;
+    width:71px;
+    height:21px;
+		vertical-align: bottom;
+}
+
+.fnmm-chat-panel .special.chat-icon a {
+    position: absolute;
+    bottom:1px;
+    height: 21px;
+    width: 71px;
+    background: #FFFFFF url("../images/niutou-move.gif") no-repeat;
+}
+
+.fn-fl.fnmm-chat-panel .special.chat-icon a {
+    bottom:0px;
+}
+
+.fnmm-chat-panel .chat-icon.special a.offline {
+    height: 19px;
+}
+
+.fnmm-chat-panel.list_title>a.shop_name{
+    vertical-align:bottom;
+    min-height:19px;
+    display:inline-block;
+}
+ 
+.fnmm-chat-panel .general.chat-icon a {
+    display: inline-block;
+    line-height: 24px;
+    background: url('../images/niutou.png') #FFE9B5 0 -3px no-repeat;
+    border: 1px solid #E9D7AB;
+    text-decoration: none;
+    color: #C65B2B;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+}
+
+.fnmm-chat-panel .chat-icon.general a.offline {
+    background: url('../images/niutou_offline.png') #eeeeee 0 -3px no-repeat;
+    border: 1px solid #cccccc;
+    color: #666666;
+}
+
+.fnmm-chat-panel .chat-icon.special a.offline {
+    background-image: url('../images/moumou_offline.png');
+}
+
+.fnmm-chat-panel .chat-icon.general a span {
+    padding: 0 5px 0 30px;
+}
+
+.fnmm-chat-panel .special.chat-icon a span {
+    padding: 0px;
+}
+
+.chat-service-group {
+    float: left;
+    width: 100%;
+    font: 12px 宋体, arial, sans-serif;
+}
+
+.chat-service-group > .service-group-panel {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.chat-service-group > .service-group-panel > .chat-icon {
+    border-radius: 2px;
+    float: left;
+    line-height: 24px;
+    height: 26px;
+    margin-top: 4px;
+    text-decoration: none;
+}
+
+.chat-service-group > .service-group-panel > .chat-icon > span {
+    float: left;
+    padding-left: 32px;
+    padding-right: 2px;
+    margin-right: 5px;
+    line-height: 24px;
+    cursor: pointer;
+    background: url("../images/niutou.png") no-repeat scroll 0 -3px #ffe9b5;
+    border: 1px solid #e9d7ab;
+    border-radius: 2px;
+    color: #c65b2b;
+}
+
+.chat-service-group > .service-group-panel > .chat-icon.offline > span {
+    background: url('../images/niutou_offline.png') #eeeeee 0 -3px no-repeat;
+    border: 1px solid #cccccc;
+    color: #666666;
+}
+
+.chat-service-group > .service-group-panel > .special.chat-icon > span {
+    float: left;
+    margin-right: 5px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background: url("../images/niutou-move.gif") no-repeat scroll 3px 3px;
+}
+
+.chat-service-group > .service-group-panel > .special.chat-icon.offline > span {
+    background: url("../images/niutou.png") no-repeat scroll -3px -3px;
+}
+
+.chat-service-group > .mbs-box-title {
+    clear: both;
+    float: left;
+    color: #666666;
+    padding: 3px 0px;
+    margin-top: 4px;
+}
+
+.chat-service-group > .mbs-box-body {
+    margin: 4px 0;
+    padding: 3px 0px;
+    float: left;
+    font-size: 12px;
+}
+
+.chat-service-group > .mbs-box-body p {
+    padding-bottom: 3px;
+}
+
+.chat-service-group > .mbs-box-body::after {
+    clear: both;
+}
+
+.chat-service-group > p {
+    padding: 7px 0;
+    margin: 0px 0px 0px 60px;
+}

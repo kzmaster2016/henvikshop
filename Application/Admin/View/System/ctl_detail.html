@@ -1,0 +1,119 @@
+<include file="Public/min-header" />
+<style>.orderby{width:50px;}</style>
+<body>
+<div class="wrapper">
+	<section class="content">
+	<div class="row">
+		<form action="{:U('System/ctlSave')}" method="post" id="ctlform" name="ctlform">
+			<table class="table table-bordered table-striped" id="toolbar">
+				<tr>
+					<th class="col-xs-2">模型标题:</th>
+					<th class="col-xs-2">控制器</th>
+					<th class="col-xs-2">Action</th>					
+					<th class="col-xs-2">父级菜单:</th>
+					<th class="col-xs-1">显示</th>
+					<th class="orderby">排序</th>
+					<th class="col-xs-2"><a href="javascript:void(0)" batch="add_new_line" onClick="add_new_line()">新增一行</a></th>
+				</tr>
+				<foreach name="modules" item="mod">
+					<tr id="mod-ctl-{$mod.mod_id}">
+						<td><input type="text" name="module[{$mod.mod_id}][title]" class="form-control" class="col-xs-3" value="{$mod.title}"></td>
+						<td><input type="text" name="module[{$mod.mod_id}][ctl]" class="form-control" value="{$mod.ctl}"></td>
+						<td><input type="text" name="module[{$mod.mod_id}][act]" class="form-control" value="{$mod.act}"></td>						
+						<td>
+							<select name="module[{$mod.mod_id}][parent_id]" class="form-control">
+								<foreach name="menu_tree" item="v">
+									<optgroup label="{$v.title}">
+										<foreach name="v.menu" item="vv">
+											<option value="{$vv.mod_id}"<if condition="$vv.mod_id eq $mod[parent_id]"> selected="selected"</if>>{$vv.title}</option>
+										</foreach>
+									</optgroup>
+								</foreach>
+							</select>
+						</td>
+						<td><input type="radio" name="module[{$mod.mod_id}][visible]" value="1" <if condition="$mod.visible eq 1">checked</if>>是
+							<input type="radio" name="module[{$mod.mod_id}][visible]" value="0" <if condition="$mod.visible eq 0">checked</if>>否</td>
+						<td><input type="text" name="module[{$mod.mod_id}][orderby]" class="form-control" value="{$mod.orderby}"></td>
+						<td><a href="javascript:void(0)"   onClick="ctldelete({$mod.mod_id})">删除</a></td>
+					</tr>
+				</foreach>
+			</table>
+		</form>
+	</div>
+	<div class="pull-right"><input type="button" class="btn btn-primary" onClick="ctlsubmit()" value="提 交 数 据" /></div>
+	</section>
+	<select style="display:none" id="mod_tree">
+		<foreach name="menu_tree" item="v"><optgroup label="{$v.title}">
+			<foreach name="v.menu" item="vv">
+				<option value="{$vv.mod_id}"<if condition="$pid==$vv[mod_id]">selected="selected"</if>>{$vv.title}</option>
+			</foreach></optgroup>
+		</foreach>	
+	</select>
+</div>
+<script>
+var kt = 0;
+
+$(function(){
+	//add_new_line();
+});
+
+function add_new_line(){
+	var tmpstr = '';
+	tmpstr += '<tr>';
+	tmpstr += '<td class="col-xs-2"><input type="text" name="data['+kt+'][title]"  value=""></td>';
+	tmpstr += '<td class="col-xs-2"><input type="text" name="data['+kt+'][ctl]"  value=""></td>';
+	tmpstr += '<td class="col-xs-2"><input type="text" name="data['+kt+'][act]" value=""></td>';
+	tmpstr += '<td class="col-xs-2">';
+	tmpstr += '<select name="data['+kt+'][parent_id]">'
+	tmpstr += $('#mod_tree').html();
+	tmpstr += '</select></td>';
+	tmpstr += '<td class="col-xs-1"><input type="radio" name="data['+kt+'][visible]" value="1">是<input type="radio" name="data['+kt+'][visible]" value="0">否</td>';
+	tmpstr += '<td class="orderby"><input type="text" name="data['+kt+'][orderby]" value="50"></td>';
+	tmpstr += '<td class="col-xs-2"><a href="###" batch="remove_item_line" onclick="remove_line(this)">取消</a></td>';
+	tmpstr += '</tr>';
+	$('#toolbar').append(tmpstr);
+	kt++;
+}
+
+function remove_line(obj){
+	$(obj).parent().parent().remove();
+	kt--;
+	return false;
+}
+
+function ctlsubmit(){
+	data = $('#ctlform').serializeArray();
+	$.ajax({
+		type:'post',
+		dataType:'json',
+		url:"{:U('System/ctlSave')}",
+		data:data,
+		success:function(res){
+			if(res.stat == 'ok'){
+				window.parent.call_back(1);	
+			}else{
+				window.parent.call_back(0);	
+			}
+		}
+	});
+}
+
+function ctldelete(val){
+	window.confirm("确定继续,取消停止"); //可以选择去掉
+	$.ajax({
+		type:'post',
+		dataType:'json',
+		url:"{:U('System/menuSave/')}",
+		data:{action:'del',mod_id:val},
+		success:function(res){
+			if(res.stat == 'ok'){
+				window.parent.call_back(1);	
+			}else{
+				window.parent.call_back(0);	
+			}
+		}
+	});
+}
+</script>
+</body>
+</html>

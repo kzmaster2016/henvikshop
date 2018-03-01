@@ -1,0 +1,113 @@
+<include file="Public/header"/>
+<script src="__STATIC__/js/common.js"></script>
+<body>      
+<header>
+      <div class="tab_nav">
+        <div class="header">
+          <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="back"></a></div>
+          <div class="h-mid">My comments</div>
+          <div class="h-right">
+            <aside class="top_bar">
+              <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+</header>
+<include file="Public/menu"/>
+<div id="tbh5v0">
+<div class="order">      
+      <div class="Evaluation">
+            <ul>
+              <li><a href="{:U('User/comment',array('status'=>-1))}" class="tab_head <if condition='$_GET[status] eq -1'>on</if>" id="goods_ka1" onClick="setGoodsTab('goods_ka',1,3)">All</a></li>
+              <li><a href="{:U('User/comment',array('status'=>0))}" class="tab_head  <if condition='$_GET[status] eq 0'>on</if>" id="goods_ka2" onClick="setGoodsTab('goods_ka',2,3)">Waiting to comment</a></li>
+              <li><a href="{:U('User/comment',array('status'=>1))}" class="tab_head  <if condition='$_GET[status] eq 1'>on</if>" id="goods_ka3" onClick="setGoodsTab('goods_ka',3,3)">Has commented </a></li>
+            </ul>
+      </div>
+	<div class="Emain" id="user_goods_ka_1" style="display:block;">
+    <foreach name="comment_list" item="vo" key="k"> 
+    <div class="pingjia">
+          <h2>Buying time：{$vo.add_time|date='Y-m-d H:i',###}</h2>
+          <dl>
+          <dt><img src="{$vo.goods_id|goods_thum_images=200,200}"></dt>
+          <dd><span>{$vo.goods_name}</span><strong>${$vo.goods_price}</strong></dd>
+          <dd>
+          	<if condition="$vo[is_comment] eq 0">
+          	<a class="remark" href="{:U('User/add_comment',array('rec_id'=>$vo[rec_id]))}">comment order</a>
+          	<else/>
+          	<a class="remark" href="{:U('User/order_detail',array('id'=>$vo[order_id]))}">concel order</a>
+          	</if>
+          </dd>
+          </dl>
+		  <if condition="$vo[is_comment] eq 1">
+		 	<div class="pj_main">
+		       <ul>
+
+		       		<li><em>Comment：</em><img src="__STATIC__/images/stars{$vo.goods_rank}.png"></li>                
+                    
+		       		<li class="pj_w">{$vo.content|htmlspecialchars_decode}</li>
+		       </ul>		
+				<!--晒单-->
+				<if condition="$v['img'] neq ''">
+			       <ul>
+			       		<li><em>The sun：{$vo.comment.title}</em></li>
+			       		<li class="pj_w">{$vo.comment.message}</li>
+			       </ul>
+			       <div class="sd_img">
+			        <dl id="gallery">
+					<foreach name="vo['img']"  key="key" item="v2">
+				       <dd><a href="{$v2}"><img src="{$v2}" width="100px" heigth="100px"></a></dd>
+					</foreach>
+			        </dl>
+			       </div>
+				</if>
+				<!--管理员回复-->			
+				<foreach name="replyList" item="val">
+				       <ul style="border-top:1px dashed #e5e5e5; padding-top:8px; margin-top:10px">
+				       <li><em style=" color:#F60">Manager{$val.user_name}reply：</em></li>
+				       <li class="pj_w" style=" color:#F60; font-size:12px;">{$val.content}</li>
+				       </ul>
+				</foreach> 
+		  	</div>
+		   </if>                
+    </div>
+  </foreach> 
+</div>      
+<notempty name="comment_list"> 
+   <div id="getmore" style="font-size:.24rem;text-align: center;color:#888;padding:.25rem .24rem .4rem; clear:both">
+  		<a href="javascript:void(0)" onClick="ajax_sourch_submit()">click to more</a>
+  </div>  
+</notempty> 
+</div>
+<script>
+var  page = 1;
+ /*** ajax 提交表单 查询订单列表结果*/  
+ function ajax_sourch_submit()
+ {	 	 	 
+        page += 1;
+		$.ajax({
+			type : "GET",			
+			url:"/index.php?m=Mobile&c=User&a=comment&status={$_GET['status']}&is_ajax=1&p="+page,//+tab,
+//			url:"{:U('Mobile/User/comment',array('status'=>$_GET['status']),'')}/is_ajax/1/p/"+page,//+tab,
+//			data : $('#filter_form').serialize(),// 你的formid 搜索表单 序列化提交
+			success: function(data)
+			{
+				if($.trim(data) == '')
+					$('#getmore').hide();
+				else
+				    $("#user_goods_ka_1").append(data);
+			}
+		}); 
+ } 
+</script>
+
+<script>
+function goTop(){
+	$('html,body').animate({'scrollTop':0},600);
+}
+</script>
+<a href="javascript:goTop();" class="gotop"><img src="__STATIC__/images/topup.png"></a>
+</div>
+<include file="Public/footer_nav"/>
+</body>
+</html>

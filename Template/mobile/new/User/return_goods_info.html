@@ -1,0 +1,60 @@
+<include file="Public/header"/>
+<body>
+<header>
+<div class="tab_nav">
+  <div class="header">
+    <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="back"></a></div>
+    <div class="h-mid">Application details</div>
+    <div class="h-right">
+      <aside class="top_bar">
+        <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</header>
+<include file="Public/menu"/>
+	<div class="main_sq">
+			<div class="touchweb-com_searchListBox" id="goods_list">
+		   		<li>
+						<a href="/Mobile/Goods/goodsInfo/id/115.html" class="item">
+							<div class="pic_box">
+								<img src="{$goods[goods_id]|goods_thum_images=400,400}">
+							</div>
+							<div class="title_box">{$goods['goods_name']}</div>
+						</a>
+			    </li>
+			</div>
+			<div class="shop_after_sq">
+				<div class="main_thh">
+						<table width="95%" border="1" cellspacing="0" cellpadding="0">
+							<tr>
+								<td>After sale information</td>
+								<td>
+                                <if condition="$return_goods[status] eq 0">In application</if>
+                                <if condition="$return_goods[status] eq 1">Service processing</if>
+                                <if condition="$return_goods[status] eq 2">Completed</if>                                                                
+                                </td>
+							</tr>
+							<tr>
+								<td>Problem description</td>
+								<td>{$return_goods['reason']}</td>
+							</tr>
+							<tr>
+								<td>Problem note</td>
+								<td>{$return_goods['remark']}</td>
+							</tr>
+						</table>
+				</div>
+				<div class="file_sq">
+            <span>Problem picture：</span><br />
+			<volist name="return_goods[imgs]" id="item">  
+	            <a href="{$item}" target="_blank"><div><img src="{$item}"/></div></a>&nbsp;&nbsp;&nbsp;
+            </volist>            
+        </div>
+			</div>
+	</div>
+	
+	
+</body>
+</html>

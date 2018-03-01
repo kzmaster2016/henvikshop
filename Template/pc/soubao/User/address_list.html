@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>收货地址-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<!-- 头部-e -->  
+<script src="__PUBLIC__/js/layer/layer.js"></script><!-- 弹窗js 参考文档 http://layer.layui.com/-->
+
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">地址管理</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+  <div class="col_main" id="J_address">
+    <div class="main address_management"> 
+      <!-- themes star -->
+      <div class="themes_title">
+        <h3>地址管理</h3>
+		<h2><a onclick="address_edit()" class="co-red"><span>+添加地址</span></a></h2>
+      </div>
+      <!-- themes end --> 
+      <div class="address-adc">
+        <div class="aa-title fixed">
+          <ul>
+            <li class="th-01">收货人</li>
+            <li class="th-02">收货地址</li>
+            <li class="th-03">联系电话</li>
+            <li class="th-04"></li>
+            <li class="th-05">操作</li>
+          </ul>
+        </div>
+        <!-- 地址列表go -->
+        <div id="aa-list" class="aa-list">
+         <volist name="lists" id="list">
+          <ul class="fixed list-on">
+            <li class="td-01" data-add="username">{$list.consignee}</li>
+            <li class="td-02"> 
+            	<span class="ini" style ="line-height: 25px;"> 
+                	<span data-add="mlsa01">
+                    {$region_list[$list['province']]['name']}，{$region_list[$list['city']]['name']}，{$region_list[$list['district']]['name']}，{$region_list[$list['twon']]['name']}{$list.address}
+                    </span> 
+                    <span data-add="useraddr">啊实打实大师的</span> 
+                </span> 
+            </li>
+            <li class="td-03">
+              <p><span data-add="usercell">{$list.mobile}</span></p>              
+            </li>
+            <li class="td-04"><a href="{:U('Home/User/set_default',array('id'=>$list['address_id']))}"  data-act="set" >设为默认收货地址</a></li>
+            <li class="td-05">
+            	<a href="javascript:address_edit({$list['address_id']})" data-act="edit" class="target_no" target="">修改</a> 
+            	<a href="{:U('Home/User/del_address',array('id'=>$list['address_id']))}" class="J_delete target_no" data-act="del" target="">删除</a> 
+            </li>
+          </ul>
+        </volist>  
+        </div>         
+      </div>
+      
+      <!-- Address Management end --> 
+    </div>
+  </div>
+</div>
+ 
+<div style="clear: both;"></div>
+<include file="User/footer" />
+</body>
+<script>
+ 
+    /**
+     * 新增修改收货地址
+     * id 为零 则为新增, 否则是修改
+     *  使用 公共的 layer 弹窗插件  参考官方手册 http://layer.layui.com/
+     */
+    function address_edit(id)
+    {
+        if(id > 0)
+            var url = "/index.php?m=Home&c=User&a=edit_address&scene=1&call_back=call_back_fun&id="+id; // 修改地址  '/index.php/Home/User/add_address/scene/1/call_back/call_back_fun/id/id' //iframe的url /index.php/Home/User/add_address
+        else
+            var url = "/index.php?m=Home&c=User&a=add_address&scene=1&call_back=call_back_fun";	// 新增地址
+        layer.open({
+            type: 2,
+            title: '添加收货地址',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['880px', '580px'],
+            content: url,
+        });
+    }
+    // 添加修改收货地址回调函数
+    function call_back_fun(v){
+        layer.closeAll(); // 关闭窗口
+        location.href = location.href;
+    }
+</script>
+</html>

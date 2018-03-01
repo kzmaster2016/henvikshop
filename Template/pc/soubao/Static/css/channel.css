@@ -1,0 +1,644 @@
+/*************************************************
+ *  name clothing  clothing-服装
+ *  Copyright htitlep://www.tp-shop.cn/
+ *  Designed and built by clothing  @yangyang.li
+ *  date 2015/09/08 | 2016-1-13
+ *  update
+ ************************************************/
+/* public */
+body {
+	background: #f8f8f8;
+	font: normal 12px/18px "microsoft yahei"; 
+}
+
+.m-g-pbw {
+	width: 1190px;
+	margin: 0 auto;
+}
+
+.mt40 {
+	margin-top: 40px;
+}
+
+.mt20 {
+	margin-top: 20px;
+}
+
+.mt60 {
+	margin-top: 60px;
+}
+
+.pt5 {
+	padding-bottom: 5px;
+}
+
+.ma {
+	margin: 0 auto;
+}
+
+.fl{
+	float: left;
+}
+
+a {
+	color: #666;
+}
+
+a:hover {
+	color: #da3a4c;
+	text-decoration: underline;
+}
+
+.fixed:after {
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+
+.fixed {
+    display: block;
+    min-height: 1%;
+}
+
+/* header */
+.banner {
+	margin-top: 10px;
+}
+
+.banner a {
+	line-height: 0;
+}
+
+.m-hd {
+	width: 100%;
+	height: 204px;
+	background: #999;
+	text-align: center;
+	font: normal 68px/204px "Candara";
+}
+
+.m-nv {
+	width: 100%;
+	height: 36px;
+	border-bottom: 2px solid #da3a4c;
+	color: #fff;
+}
+
+.m-nv .m-snv {
+	position: relative;
+	z-index: 9;
+	width: 190px;
+	height: 36px;
+	background: #da3a4c;
+}
+
+.m-nv .m-snv .m-t {
+	background: url(../../images/clo/nv-ic.png) no-repeat 0 12px;
+	height: 36px;
+	padding-left: 25px;
+	margin-left: 10px;
+	font: bold 14px/36px "microsoft yahei";
+}
+
+.m-nv .m-snv .g-isc {
+	position: absolute;
+	right: 10px;
+	top: 17px;
+	background: url(../../images/clo/nv-ic.png) no-repeat 0 -47px;
+	width: 10px;
+	height: 6px;
+	display: block;
+}
+
+.m-nv .m-mn {
+	width: 933px;
+	height: 36px;
+	padding-left: 17px;
+}
+
+.m-nv .m-mn a {
+	padding: 0 13px;
+	font: bold 14px/36px "microsoft yahei";
+	color: #333;
+	display: block;
+	float: left;
+}
+
+.m-nv .m-mn a:hover,
+.m-nv .m-mn a.s-select {
+	color: #da3a4c;
+}
+
+.m-lst {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 9;
+	width: 190px;
+	height: 416px;
+	background: #cc2954;
+	display: none;
+}
+
+.m-lst li {
+	position: relative;
+	padding-left:8px;
+}
+
+.m-lst li.s-select {
+	background: #fff;
+}
+
+.m-lst li .g-ln {
+	width: 100%;
+	border-bottom: 1px dotted #666;
+	font: normal 12px/31px "microsoft yahei";
+	height: 31px;
+	overflow: hidden;
+}
+
+.m-lst li:last-child .g-ln {
+	border-bottom: none;
+}
+
+.m-lst li .g-ln dt {
+	width: 60px;
+	font-size: 14px;
+	color: #fff;
+	font-weight: normal;
+	margin-right: 6px;
+	/*float: left;*/
+}
+
+.m-lst li .g-ln dt a {
+	color: #fff;
+}
+
+.m-lst li.s-select dt a {
+	color: #333;
+}
+
+.m-lst li .g-ln dt ,
+.m-lst li .g-ln dd {
+	display: inline-block;
+	height: 31px;
+	overflow: hidden;
+	*display: inline;
+	*zoom: 1;
+}
+
+.m-lst li .g-ln a {
+	display: inline-block;
+	color: #fff;
+	height: 31px;
+	overflow: hidden;
+}
+
+.m-lst li .g-ln dd a{
+	padding-left:4px;
+}
+
+.m-lst li .g-ln a:hover {
+	color: #da3a4c;
+	text-decoration: underline;
+}
+
+.m-lst li i {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	font-family: "simsun";
+	color: #fff;
+    font-style: normal;
+}
+
+.m-lst li.s-select dt,
+.m-lst li.s-select a {
+	color: #666;
+}
+
+.m-dtl {
+	position: absolute;
+	left: 189px;
+	top: -1px;
+}
+
+.g-snv {
+	display: none;
+	border: 1px solid #2f2f2f;
+	background: #fff;
+	color: #333;
+	width: 608px;
+	padding: 20px 12px;
+	padding-bottom: 2px;
+}
+
+.g-bk {
+	display: block;
+}
+
+.g-szt {
+	width: 100%;
+}
+
+.g-szt span {
+	display: block;
+	padding: 0 8px;
+	font: normal 12px/18px "microsoft yahei";
+	margin-bottom: 15px;
+	float: left;
+}
+
+.g-szt span a {
+	display: block;
+	width: 60px;
+	height: 18px;
+	overflow: hidden;
+}
+
+.g-szt span a.z-select {
+	color: #f42e02;
+}
+
+.g-brd {
+	width: 100%;
+	margin-top: 8px;
+	overflow: hidden;
+	*margin-top: 30px;
+	*margin-bottom: 20px;
+}
+
+.g-brd p {
+	width: 102%;
+}
+
+.g-brd a {
+	display: block;
+	width: 70px;
+	height: 30px;
+	margin: 0 18px 18px 0;
+	text-align: center;
+	float: left;
+}
+
+/* slider */
+.g-pst { 
+	position: relative;
+	z-index: 1;
+}
+
+.g-sld {
+	width: 100%;
+	height: 416px;
+}
+
+.g-sld .g-ubn {
+	width: 100%;
+	height: 100%;
+}
+
+.g-sld .g-ubn li {
+	width: 100%;
+	height: 100%;
+}
+
+.g-sld .g-ubn li a {
+	width: 1190px;
+	margin: 0 auto;
+	display: block;
+}
+
+.g-sld .g-ubn li a img {
+	margin-left: 190px;
+}
+
+.g-ico {
+	position: relative;
+	bottom: 25px;
+	left: 0;
+	width: 1190px;
+	margin: 0 auto;
+}
+
+.g-ico li {
+	width: 1000px;
+	margin-left: 190px;
+	text-align: center;
+}
+
+.g-ico li span {
+	background: url(../images/clo/g-icn.png) no-repeat;
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	color: #fff;
+	font: normal 12px/18px "microsoft yahei";
+}
+
+.g-ico li .z-select {
+	background-position: 0 -35px;
+}
+
+/* mum slide */
+.m-mum-slide {
+    width: 1000px;
+    height: 416px;
+    position: relative;
+}
+
+.u-ms-lst {
+    width: 1000px;
+    height: 416px;
+    position: relative;
+}
+
+.u-ms-lst .slider-main li {
+    float: left;
+    width: 1000px;
+    height: 416px;
+}
+
+.u-ms-lst .slider-main li a {
+    width: 1000px;
+    height: 416px;
+    display: inline-block;
+}
+
+.u-ms-lst .slider-main li img {
+    width: 1000px;
+    height: 416px;
+    display: inline-block;
+}
+
+.oh {
+    overflow: hidden;
+}
+
+.u-ms-ctr {
+    width: 1000px;
+    height: 18px;
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+}
+
+.u-ms-ctr ul {
+    display: none;
+}
+
+.u-ms-ctr ul li {
+    width: 30px;
+    height: 18px;
+    margin: 0 5px;
+    float: left;
+}
+
+.u-ms-ctr ul li div {
+    width: 30px;
+    height: 4px;
+    background-color: #cccccc;
+    margin-top: 12px;
+}
+
+.u-ms-ctr ul li span {
+    width: 10px;
+    height: 100%;
+    background-color: #f42e02;
+    display: block;
+}
+
+.u-ms-ctr ul .cur div {
+    cursor: default;
+    height: 4px;
+}
+
+.u-ms-ctr ul .cur span {
+    background-color: #f42e02;
+}
+
+.m-sld-clh {
+	width: 1190px;
+	height: 416px;
+}
+
+.m-sld-lst {
+	position: relative;
+	z-index: 9;
+	width: 190px;
+	height: 416px;
+}
+
+.u-slide-btn {
+    width: 36px;
+    height: 36px;
+    background-color: #000;
+    display: inline-block;
+    position: absolute;
+    top: 172px;
+    outline: none;
+    display: none;
+}
+
+.u-slide-btn i {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* new add */
+.m_b_right {
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 99;
+	width: 236px;
+	height: 416px;
+	overflow: hidden;
+}
+.m_b_right a ,
+.m_b_right img {
+	width: 236px;
+	height: 416px;
+}
+.m_b_right .slider-main li {
+	float: left;
+}
+.slide .s-ctr {
+	width: 100%;
+    height: 10px;
+    line-height: 10px;
+    left: 0;
+    bottom: 10px;
+    font-size: 0;
+    z-index: 3;
+}
+.slide .s-ctr, .slide .s-pg a {
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+}
+.slide .s-pg a {
+	display: block;
+    width: 28px;
+    height: 62px;
+    line-height: 62px;
+    background: #000;
+    opacity: .2;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    margin-top: -31px;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 400;
+    font-family: SimSun;
+    filter: alpha(opacity=20);
+    -webkit-transition: opacity .2s linear 0s;
+    transition: opacity .2s linear 0s;
+}
+.slide .s-ctr li {
+	display: inline-block;
+    width: 10px !important;
+    height: 10px !important;
+    background: #ccc;
+    margin-right: 5px;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    cursor: pointer;
+    border: none !important;
+}
+.slide .s-ctr li.z-select {
+	background: #da3a4c;
+}
+.u-ms-lst .s-ctr li {
+    width: 19px !important;
+    height: 19px !important;
+    line-height: 19px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    font-family: Tahoma;
+    margin-right: 10px;
+    background: url(../images/fn_index_1.png) 0 -141px no-repeat;
+}
+.u-ms-lst .s-ctr li.z-select {
+    background: url(../images/fn_index_1.png) -21px -141px no-repeat;
+}
+.u-ms-lst .s-ctr {
+	height: 20px;
+	line-height: 20px;
+}
+.u-ms-lst .s-pg a.s-prev {
+	margin-left: -467px;
+}
+.u-ms-lst .s-pg a.s-next {
+	margin-left: 202px;
+}
+.m_f_tab {
+	position: absolute;
+	right: 0;
+	top: -7px;
+	z-index: 9;
+	height: 34px;
+	border: 1px solid #e9e9e9;
+	border-bottom: 0 none;
+	background: #fff;
+}
+.m_f_tab li {
+	width: 122px;
+	height: 16px;
+	text-align: center;
+	font: normal 12px/16px "microsoft yahei";
+	border-left: 1px solid #e9e9e9;
+    margin: 9px 0;
+    cursor: pointer;
+	float: left;
+}
+.m_f_tab li:first-child {
+	border-left: 0 none;
+}
+.m_f_tab li.z_select {
+	position: relative;
+	top: -1px;
+    border: 1px solid #333;
+    border-bottom: 0 none;
+    margin: 0;
+    height: 36px;
+    line-height: 34px;
+    font-weight: bold;
+    color: #333;
+    background: #fff;
+}
+.m_f_sz {
+	width: 954px;
+	height: 480px;
+	overflow: hidden;
+}
+.m_f_sz .m_f_wd {
+	width: 956px;
+}
+.td_clo4 {
+	overflow: hidden;
+}
+.td_clo4 .slider-main li {
+	float: left;
+}
+.td_clo4 .slider-next {
+	margin-left: 155px;
+}
+.td_clo4 .slider-prev {
+	margin-left: -181px;
+}
+.g-ab .m_prd {
+	width: 160px;
+	height: 232px;
+	overflow: hidden;
+	padding: 6px 15px 0;
+	border-right: 1px solid #e9e9e9;
+	border-bottom: 1px solid #e9e9e9;
+	float: left;
+}
+.g-ab .m_prd img {
+	width: 160px;
+	height: 160px;
+    transition: transform .3s ease-out;
+    transform: translateX(0);
+    -ms-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -o-transform: translateX(0);
+}
+.g-ab .m_prd:hover img {
+	transform: translateX(-5px);
+    -ms-transform: translateX(-5px);
+    -moz-transform: translateX(-5px);
+    -webkit-transform: translateX(-5px);
+    -o-transform: translateX(-5px);
+}
+.m_prd .m_ln {
+	width: 100%;
+	height: 36px;
+	font: normal 12px/18px "microsoft yahei";
+	overflow: hidden;
+}
+.m_prd .m_pri {
+	font: normal 12px/18px "microsoft yahei";
+	color: #da3a4c;
+} 
+.m_prd a:hover {
+	text-decoration: none;
+}
+.g-ab .m_bors {
+	border-bottom: 1px solid #e9e9e9;
+	border-right: 1px solid #e9e9e9;
+	line-height: 0;
+}
+.J-hide {
+	display: none;
+}

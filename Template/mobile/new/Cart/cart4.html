@@ -1,0 +1,262 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta name="Generator" content="tpshop" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Shopping process-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<link rel="stylesheet" href="__STATIC__/css/public.css">
+<link rel="stylesheet" href="__STATIC__/css/flow.css">
+<link rel="stylesheet" href="__STATIC__/css/style_jm.css">
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+</head>
+<body style="background: rgb(235, 236, 237);position:relative;">
+<div class="tab_nav">
+    <div class="header">
+      <div class="h-left">
+        <a class="sb-back" href="javascript:history.back(-1)" title="返回"></a>
+      </div>
+      <div class="h-mid">Submit Order</div>
+    </div>
+</div>
+
+<div class="screen-wrap fullscreen login">
+<form action="{:U('Mobile/Payment/getCode')}" method="post" name="cart4_form" id="cart4_form">
+<div class="content_success " >
+    <div class="con-ct   fo-con">
+        <h4 class="successtijiao">The order has been submitted successfully!</h4>
+      <ul class="ct-list">
+        <li>Please complete the payment within <em>{$pay_date}</em> <br/> <span class="order-tip">otherwise the order will be cancelled.</span></li>
+
+        <li >Order number:&emsp;<em class="order-msg">{$order['order_sn']}</em></li>  
+        <li>Amount to pay:&emsp;<em class="order-msg">${$order['order_amount']}</em></li>         
+      </ul>
+    </div>
+    
+   <section class="order-info">
+      <div class="order-list">
+        <div class="content ptop0">
+          <div class="panel panel-default info-box">
+            <div class="panel-body" id="pay_div"  >
+              <div class="title" id="zhifutitle" style="border-bottom:1px solid #eeeeee;"> 
+                <span class="i-icon-arrow-down i-icon-arrow-up" id="zhifuip"></span> <span class="text">Pay With</span> 
+
+              <div class="method-con">
+                    <div class="hd">
+                        <input type="radio" name="pay-type" value="1">
+                        <span class="inblockm">Credit Card</span>
+                        
+                        <div class="card-type inblockm">
+                            <img src="__STATIC__/images/images-out/visa.webp" alt="">
+                            <img src="__STATIC__/images/images-out/mastercard.webp" alt="">
+                            <img src="__STATIC__/images/images-out/amex.webp" alt="">
+                        </div>
+                    </div>
+                    <div class="bd" style="overflow: hidden;">
+                        <div id="credit-button-container"></div>
+                    </div>
+                </div>
+
+                <div class="method-con">
+                    <div class="hd">
+                        <input type="radio" name="pay-type" value="2" checked="checked">
+                        <span class="inblockm">PayPal</span>               
+                        <div class="card-type inblockm">
+                            <img src="__STATIC__/images/images-out/paypal.webp" alt="" class="inblockm">
+                            <!-- <div class="tip inblockm">(Please enter your detailed payment information after you submit your order.)</div> -->
+                        </div>
+
+                    </div>
+                    <div class="bd">
+                       
+                        <div id="paypal-button-container"></div>
+                    </div>
+                </div>
+
+              <!-- <ul class="nav nav-list-sidenav" id="zhifu68" style="display:block; border-bottom:none;">
+              <foreach name="paymentList" item="v"  key="k"> 
+                <li class="clearfix" name="payment_name">
+                  <label>
+                      <input type="radio"   value="pay_code={$v['code']}" class="c_checkbox_t" name="pay_radio" />
+                      <div class="fl shipping_title">
+                        <img src="/plugins/{$v['type']}/{$v['code']}/{$v['icon']}" onClick="change_pay(this);" width="110" height="40" />
+                      </div>
+                  </label>
+                </li>
+               </foreach>  -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- <div class="pay-btn">
+	   <input type="hidden" name="order_id" value="{$order['order_id']}" />
+    <a href="javascript:void(0);" onClick="pay()" class="sub-btn btnRadius">to pay</a>
+  </div> -->
+</div>
+</form>
+<script>
+    // $(document).ready(function(){
+    //     $("input[name='pay_radio']").first().trigger('click');
+    // });
+    // // 切换支付方式
+    // function change_pay(obj)
+    // {
+    //     $(obj).parent().siblings('input[name="pay_radio"]').trigger('click');
+    // }
+
+    // function pay(){
+    //     $('#cart4_form').submit();
+    //     return;
+    //     //微信JS支付
+    // }
+$(function(){
+
+    function byPaypal(argument) {
+        paypal.Button.render({
+            env: 'production', // sandbox | production
+            // PayPal Client IDs - replace with your own
+            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+            style: {
+                label: 'paypal',
+                size:  'medium',    // small | medium | large | responsive
+                shape: 'rect',     // pill | rect
+                color: 'blue',     // gold | blue | silver | black
+                tagline: false    
+            },
+
+            client: {
+                // sandbox:    'henvik2015-facilitator@gmail.com',
+                production: 'AdK2Fo0fpkMOrsIfcevrqFeVVX0ks6Ba9xCluQ1hdYG5SK2_wjTR_9l7JHOuVqPVUEAHJhUPQstxQ_RV'
+            },
+
+            // Show the buyer a 'Pay Now' button in the checkout flow
+            commit: true,
+            // payment() is called when the button is clicked
+            payment: function(data, actions) {
+                // Make a call to the REST api to create the payment
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: { total: '{$order['order_amount']}', currency: 'USD' }
+                            }
+                        ]
+                    },
+                    experience: {
+                        input_fields: {
+                            no_shipping: 1
+                        }
+                    }
+                });
+            },
+
+            // onAuthorize() is called when the buyer approves the payment
+            onAuthorize: function(data, actions) {
+
+                // Make a call to the REST api to execute the payment
+                return actions.payment.execute().then(function() {
+                    window.alert('Payment Complete!');
+                });
+            }
+        },'#paypal-button-container');
+    }
+
+    function byCreditCard(){
+        paypal.Button.render({
+            env: 'production', // sandbox | production
+            // PayPal Client IDs - replace with your own
+            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+            style: {
+                layout: 'vertical',
+                size:  'medium',    // small | medium | large | responsive
+                shape: 'rect',     // pill | rect
+                color: 'blue',     // gold | blue | silver | black
+                tagline: false    
+            },
+            funding: {
+                allowed: [paypal.FUNDING.CARD]
+            },
+            client: {
+                // sandbox:    'henvik2015-facilitator@gmail.com',
+                production: 'AdK2Fo0fpkMOrsIfcevrqFeVVX0ks6Ba9xCluQ1hdYG5SK2_wjTR_9l7JHOuVqPVUEAHJhUPQstxQ_RV'
+            },
+
+            // Show the buyer a 'Pay Now' button in the checkout flow
+            commit: true,
+            // payment() is called when the button is clicked
+            payment: function(data, actions) {
+                // Make a call to the REST api to create the payment
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: { total: '{$order['order_amount']}', currency: 'USD' }
+                            }
+                        ]
+                    },
+                    experience: {
+                        input_fields: {
+                            no_shipping: 1
+                        }
+                    }
+                });
+            },
+
+            // onAuthorize() is called when the buyer approves the payment
+            onAuthorize: function(data, actions) {
+
+                // Make a call to the REST api to execute the payment
+                return actions.payment.execute().then(function() {
+                    window.alert('Payment Complete!');
+                    $.ajax({
+                        url: '/index.php?m=Home&c=Cart&a=payOrder',
+                        type: 'GET',
+                        data: {order_sn: {$order['order_sn']}},
+                        dataType: "json"
+                    })
+                    .done(function($data) {
+                        if ($data.status==1) {
+                            console.log("success");
+                            window.location.href="{:U('Home/User/order_list')}";
+                        }                       
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+                    
+                });
+            }
+        },'#credit-button-container');
+    }
+    byCreditCard();
+    byPaypal();
+
+    $('input[name="pay-type"]').on('change',  function(event) {
+        // alert($(this).val());
+        if ($(this).val()==1) {
+            $('#credit-button-container').css('display', 'block');
+            $('#paypal-button-container').css('display', 'none');
+        }else if($(this).val()==2){
+            $('#credit-button-container').css('display', 'none');
+            $('#paypal-button-container').css('display', 'block');
+        }
+    }).trigger('change');
+
+
+})
+</script> 
+<include file="Public/footer"/>
+</div>
+<include file="Public/footer_nav"/>
+</body>
+</html>

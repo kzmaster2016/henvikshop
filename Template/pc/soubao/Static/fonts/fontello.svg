@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2016 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="clock" unicode="&#xe805;" d="M0 350q0 95 37 182t100 149 150 100 182 37 182-37 149-100 100-149 37-182-37-182-100-150-149-100-182-37-182 37-150 100-100 150-37 182z m117 0q0-96 47-177t128-128 177-47q95 0 176 47t128 128 47 177q0 95-47 176t-128 128-176 47q-72 0-137-28t-112-75-75-112-28-136z m293 0v224q0 24 17 41t42 18 41-18 17-41v-200l142-141q17-17 17-42t-17-41-41-17q-25 0-42 17l-159 158q-1 2-4 5t-3 4q-1 2-2 4l-2 3t-1 4q-1 0-2 5-2 5-2 5-1 6-1 12z" horiz-adv-x="937.5" />
+
+<glyph glyph-name="doc" unicode="&#xe807;" d="M0-31v761q0 37 26 62t61 26h356q3 0 6 0h0q38-3 61-26l255-245q10-12 16-24 2-5 2-7 1-1 2-5t3-6q2-11 2-21v-515q0-36-25-62t-62-26h-616q-36 0-61 26t-26 62z m87 0h616v465h-133q-73 0-124 52t-52 124v120h-307v-761z m396 641q0-36 25-62t62-25h118l-205 194v-107z" horiz-adv-x="790.5" />
+
+<glyph glyph-name="star-empty" unicode="&#xe808;" d="M3 436q-12 31 16 50t91 18h242l74 222v1q14 45 33 68t40 23q20 0 39-23t33-68l1-1 73-222h242q63 0 91-18t16-50-64-68l-5-4-190-135 74-221 1-3q19-60 11-91t-40-32q-37 0-88 38l-2 2-3 1-189 136-192-137-3-2q-52-39-88-39-31 0-40 32t11 92l1 3 74 221-190 135-2 3-3 1q-51 37-64 68z m165-26l203-145-21-65-57-173 206 147 205-147-57 173-21 65 203 145h-251l-21 65-58 175-80-240h-251z" horiz-adv-x="997.6" />
+
+<glyph glyph-name="doc-1" unicode="&#xe80c;" d="M0 730l419 0 205-210 0-550-624 0 0 760z m90-90l0-580 444 0 0 430-161 0 0 150-283 0z m61-251l318 0 0-35-318 0 0 35z m0-100l318 0 0-35-318 0 0 35z m0-100l318 0 0-35-318 0 0 35z" horiz-adv-x="624" />
+
+<glyph glyph-name="doc-alt" unicode="&#xe80f;" d="M632 797l279-278 0-616-221 186-223-186-225 186-224-185 0 893 614 0z m168-667l0 223-336 0 0 335-334 0 0-558 114 89 223-184 223 185z m-224 335l224 0q-21 21-111 110t-113 113l0-223z" horiz-adv-x="928" />
+</font>
+</defs>
+</svg>

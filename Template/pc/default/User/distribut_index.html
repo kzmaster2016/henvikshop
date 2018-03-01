@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>账户资金-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+    <link rel="stylesheet" href="__STATIC__/css/page.css" type="text/css">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+    <script src="__STATIC__/js/slider.js"></script>
+</head>
+
+<body>
+<!--------头部开始-------------->
+<include file="Public/header" />
+<!--------头部结束-------------->
+
+<div class="layout ov-hi">
+    <div class="breadcrumb-area">    
+	    <foreach name="navigate_user" key="k" item="v">
+	        <if condition="$k neq '首页'"> > </if>  
+            <a href="{$v}">{$k}</a> 
+        </foreach>
+    </div>
+</div>
+<div class="layout pa-to-10 fo-fa-ar">
+    <!--菜单-->
+    <include file="User/menu" />
+    <!--菜单-->
+    <div class="fr wi940">
+        <div class="he50 wddd">
+            <div class="fl ddd-h2">
+                <h2><span>我的资金</span></h2>
+            </div>
+        </div>
+        <div class="myHuaban-info">
+            <div class="myHuaban-point">
+                <dl>
+                    <dt>销售额</dt>
+                    <dd>
+                        <span>{$user.user_money}</span>
+                        <em>元</em>
+                    </dd>
+                </dl>
+            </div>
+            <div class="myHuaban-redeem">
+                <dl>
+                    <dt>我的奖励</dt>
+                    <dd>
+                        <span>{$user.pay_points}</span>
+                        <em>积分</em>
+                    </dd>
+                </dl>
+            </div>
+            <div class="myHuaban-check">
+                <!--<p class="h-text">连续签到：<span><label id="singinKeepDay">0</label>&nbsp;天</span>&nbsp;&nbsp;&nbsp;总签到：<span><label id="singinTotalDay">0</label>&nbsp;天</span></p>-->
+            </div>
+        </div>
+        <div class="he50 wddd ma-to-50">
+            <div class="fl ddd-h2">
+                <h2><span>您是由[Amanda胡]推荐</span></h2>
+            </div>
+            <div class="fr">
+                <div class="po-re zjs">
+                    <ul>
+                        <li id="q-s" class="fl cullent"><a href="{:U('Home/User/account')}"><span>全部记录</span></a></li>
+                        <!--<li id="h-s" class="fl"><a href="{:U('Home/User/account',array('type'=>1))}"><span>收入记录</span></a></li>-->
+                        <!--<li id="j-s" class="fl"><a href="{:U('Home/User/account',array('type'=>2))}"><span>支出记录</span></a></li>-->
+                    </ul>
+                    <div class="ec-ta-x wi82" style="left:0"></div>
+                </div>
+            </div>
+        </div>
+        <div class="Wallet">
+								<div class="ss_million">
+									<a class="dj_mill"><em class="Icon j_million"></em><dl class="b"><dt>{$tpshop_config['distribut_name']}</dt><dd><span class="million_num">1单（￥399）</span></dd></dl></a>
+							        <div class="show_million">
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>{$tpshop_config['distribut_first_name']}</dt><dd style="color:#aaaaaa;"><span>1单（￥399）</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>{$tpshop_config['distribut_second_name']}</dt><dd style="color:#aaaaaa;"><span>1单（￥399）</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>{$tpshop_config['distribut_third_name']}</dt><dd style="color:#aaaaaa;"><span>1单（￥399）</span></dd></dl></a>
+							        </div>
+							    </div>
+							    <div class="ss_million">
+									<a class="dj_mill"><em class="Icon j_million"></em><dl class="b"><dt>我的推广</dt><dd><span class="million_num">0单（￥0）</span></dd></dl></a>
+							        <div class="show_million">
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>下单未购买</dt><dd style="color:#aaaaaa;"><span>0单（￥0）</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>下单已购买</dt><dd style="color:#aaaaaa;"><span>0单（￥0）</span></dd></dl></a>
+							        </div>
+							    </div>
+							    <div class="ss_million">
+									<a class="dj_mill"><em class="Icon j_million"></em><dl class="b"><dt>我的财富</dt><dd><span class="million_num">￥0.00</span></dd></dl></a>
+							        <div class="show_million">
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>未付款订单财富</dt><dd style="color:#aaaaaa;"><span>0</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>已付款订单财富</dt><dd style="color:#aaaaaa;"><span>0</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>已收货订单财富</dt><dd style="color:#aaaaaa;"><span>0</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>已完成订单财富</dt><dd style="color:#aaaaaa;"><span>0</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>已提现财富</dt><dd style="color:#aaaaaa;"><span>0</span></dd></dl></a>
+							            <a href=""><em class="Icon"></em><dl class="b"><dt>可提现财富</dt><dd style="color:#aaaaaa;"><span>0</span></dd></dl></a>
+							        </div>
+							    </div>
+							    <div>
+									<a href=""><em class="Icon j_million"></em><dl class="b"><dt>申请提现</dt><dd>&nbsp;</dd></dl></a>
+							    </div>
+		</div>
+    </div>
+</div>
+<div class="he80"></div>
+<!--------footer-开始-------------->
+<include file="Public/footer2" />
+<!--------footer-结束-------------->
+
+
+</body>
+<script>
+    /*$(function () {
+     $("#h-s").click(function () {
+     $('.ec-ta-x').css('left','124px');
+     $('.ec-ta-x').css('width','110px');
+     $(this).addClass("cullent");
+     $('#q-s').removeClass("cullent");
+     });
+     });
+     */
+</script>
+<script type="text/javascript">
+		$(document).ready(function(){
+				$('.dj_mill').click(function(){
+						$(this).siblings('.show_million').toggle(300);
+				})
+		})
+</script>
+<script>
+    $(function () {
+        $(function () {
+            $("#q-s").mouseover(function () {
+                $('.ec-ta-x').css('left','0px');
+                $(this).addClass("cullent");
+            });
+            $("#q-s").mouseout(function () {
+                $('.ec-ta-x').css('left','0px');
+            });
+        });
+        $("#h-s").mouseover(function () {
+            $('.ec-ta-x').css('left','82px');
+            $(this).addClass("cullent");
+        });
+        $("#h-s").mouseout(function () {
+            $('.ec-ta-x').css('left','0px');
+            $(this).removeClass("cullent");
+        });
+    });
+
+    $(function () {
+        $("#j-s").mouseover(function () {
+            $('.ec-ta-x').css('left','164px');
+            $(this).addClass("cullent");
+        });
+        $("#j-s").mouseout(function () {
+            $('.ec-ta-x').css('left','0px');
+            $(this).removeClass("cullent");
+        });
+    });
+</script>
+</html>

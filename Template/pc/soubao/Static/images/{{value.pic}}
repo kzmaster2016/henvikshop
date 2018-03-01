@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <base href="http://www.feiniu.com/"/>
+        <meta name="description" content="飞牛网-网购最佳选择。大润发官方网上购物商城,全国领先的综合型网上购物中心,在线销售百货、服装服饰、母婴、食品等数万种优质商品。正品行货、快速配送、特价商品、天天打折,飞牛网为您提供最专业的网购服务"/>
+        <meta name="keywords" content="网上购物超市,网络商城,在线网购图书,百货,家居,家纺,厨具,化妆品,美妆,个人护理,数码,电脑,笔记本,手机,数码相机,家电,服装服饰,玩具,进口食品,美容护理,母婴玩具,厨房清洁用品,饰品,箱包,汽车用品等,大润发官方网上购物商城-飞牛网"/>
+        <meta http-equiv="content-language" content="zh-cn"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>飞牛网－值得信赖的网上商城，大润发直营、正品保证、低价保障、货到付款、放心购物－进口商品、食品、母婴、服装、数码家电、家居百货，feiniu.com</title>
+        <link rel="shortcut icon" href="http://www.feiniu.com/lib/sh_zh-cn/images/feiniu_favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="http://www.feiniu.com/lib/sh_zh-cn/css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="http://www.feiniu.com/lib/sh_zh-cn/css/error.css"/>
+
+        <!--[if lt IE 9]>
+        <script src="http://www.feiniu.com/lib/sh_zh-cn/js/html5.js"></script>
+        <script src="http://www.feiniu.com/lib/sh_zh-cn/js/IE9.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://www.feiniu.com/lib/sh_zh-cn/css/ie.css"/>
+        <![endif]-->
+    </head>
+
+    <body>
+<!-- top bar -->
+<script>
+    window.location.href = '/404.html';
+    var www_url = 'http://www.feiniu.com/sh/';
+    var www_lib = 'http://www.feiniu.com/lib/sh_zh-cn/';
+    var www_public_lib = 'http://www.feiniu.com/';
+    var img_inside_url = 'http://img.feiniu.com';
+    var website_title = '飞牛网';
+    var currency_symbol = '¥';
+    var bc_code = 'C';
+    var www_domain_sub = '.feiniu.com';
+    var SHOP_DOMAIN = 'shop.feiniu.com/sh';
+    var MEMBER_VIEW_DOMAIN = 'member.feiniu.com/sh';
+    var HTTPS_PREFIX = 'http://';
+    var DEFAULT_KEYWORD = '请输入您要搜索的关键词';
+    var DEFAULT_KEYURL = '';
+    var JUMP_KEY = '[{"keyword":"\u8df3\u8df3\u864e","url":"http:\/\/www.feiniu.com\/sh\/item\/201403CM190000001"},{"keyword":"\u7c3d\u540d\u978b","url":"http:\/\/www.feiniu.com\/sh\/item\/201403CM190000001"},{"keyword":"\u65e0\u7ebf\u9f20\u6807","url":"http:\/\/www.feiniu.com\/sh\/item\/201403CM210000011"},{"keyword":"\u661f\u5df4\u514b","url":"http:\/\/www.feiniu.com\/sh\/item\/201403CM210000010"},{"keyword":"\u8df3\u8df3\u7cd6","url":null},{"keyword":"\u591a\u984f\u8272\u591a\u5c3a\u5bf8\u5546\u54c1B","url":"http:\/\/pmadmin.feiniu.com\/sh\/hot_keyword\/hot_keyword_list\/jumpkey\/?type=4"},{"keyword":"\u5de7\u9054\u8d77\u53f8","url":"www.feiniu.com\/sh\/item\/201401CM230000004"},{"keyword":"test","url":"http:\/\/search.feiniu.com\/sh\/search\/?q=test"},{"keyword":"aaaa","url":"http:\/\/www.feiniu.com\/sh\/item\/201403CM210000010"},{"keyword":"\u591a\u984f\u8272\u591a\u984f\u8272\u5c3a\u5bf8A","url":"http:\/\/www.feiniu.com\/sh\/item\/201403CM190000001"},{"keyword":"\u591a\u984f\u8272\u591a\u5c3a\u5bf8A","url":"http:\/\/pmadmin.feiniu.com\/sh\/hot_keyword\/hot_keyword_list\/jumpkey\/?type=4"},{"keyword":"\u8d77\u53f8\u86cb\u7cd5","url":"http:\/\/www.feiniu.com\/sh\/item\/201403CM100000002"}]';
+</script>
+<div id="global-topbar">
+    <div class="wrapper clearfix">
+        <ul class="topbar-left">
+            <li class="dropdown my-location icon-location"><span class="current-place">上海</span>[更换]
+                <ul>
+                                                            <li id="dist_btn_1" str="1">上海</li>
+                                                            <li id="dist_btn_2" str="2">江苏</li>
+                                                            <li id="dist_btn_3" str="3">浙江</li>
+                                                            <li id="dist_btn_4" str="4">安徽</li>
+                                                        </ul>
+            </li>
+        </ul>
+        <ul class="topbar-right">
+            <li>您好，欢迎来到飞牛网！</li>
+            <li><a href="http://shop.feiniu.com/sh/member/login" target="_blank">登录</a>
+                <!-- <ul class="login-box">
+                    <li>
+                        <dl class="login-field">
+                            <dd><input type="text" id="login-email" placeholder="您的邮箱" value="您的邮箱"></dd>
+                            <dd><input type="password" id="login-password" placeholder="您的登录密码" value="您的登录密码"></dd>
+                        </dl>
+                    </li>
+                    <li></li>
+                    <li><button class="btn-login">登录</button></li>
+                </ul> -->
+            </li>
+            <li><a href="http://shop.feiniu.com/sh/member/signup" target="_blank">免费注册</a></li>
+            <li><a href="http://www.feiniu.com/sh/help_center/" target="_blank">帮助中心</a></li>
+            <li class="hd-sns"><a href="http://weibo.com/feiniu618com" target="_blank" class="icon-weibo" title="飞牛网微博"></a></li>
+            <li class="hd-sns"><a href="" target="_blank" class="icon-wechat" title="飞牛网微信"></a></li>
+        </ul>
+    </div>
+</div>
+<!-- global header -->
+<header id="global-header" class="wrapper clearfix">
+    <div id="hd-banner" class="wrapper"></div>
+<!--    <h1 id="hd-logo" class="icon-feiniu">
+        <a href="http://www.feiniu.com/sh/" target="_blank" title="回飞牛网首页">飞牛网</a>
+    </h1> -->
+    <a href="http://www.feiniu.com/sh/" target="_blank" title="回飞牛网首页"><h1 id="hd-logo" class="icon-feiniu"><span>飞牛网</span></h1></a>
+    <div id="hd-my-cart" class="dropdown">
+        <p class="icon-cart-hd">我的购物车</p>
+        <span class="quantity">0</span>
+        <ul class="inside-cart cart-item">
+            <li class="cart-title">最新加入的商品</li>
+            <li class="cart-promote-message"><span class="sale-plan">满300减80</span>已购满<span class="already-buy">299</span>元，<a href="" target="_blank" class="buy-more">马上凑单</a>吧</li>
+            <li id="scroll" class="cart-item-list">
+                <dl>
+                    <dd class="clearfix">
+                        <a href="" target="_blank"><img src="http://placehold.it/50x50" width="50" height="50" alt=""></a>
+                        <span class="prod-name"><a href="" target="_blank">人止疲疼子有未不地看部纔把受啡</a></span>
+                        <span class="price">¥8888.88</span>
+                        <span class="quantity">
+                            <button class="decrease">-</button>
+                            <input type="text" value="1">
+                            <button class="increase">+</button>
+                        </span>
+                        <button class="btn-delete">删除</button>
+                    </dd>
+                    <dd class="clearfix">
+                        <a href="" target="_blank"><img src="http://placehold.it/50x50" width="50" height="50" alt=""></a>
+                        <span class="prod-name"><a href="" target="_blank">那子甲分也一現在龍上如再倒</a></span>
+                        <span class="price">¥8888.88</span>
+                        <span class="quantity">
+                            <button class="decrease">-</button>
+                            <input type="text" value="1">
+                            <button class="increase">+</button>
+                        </span>
+                        <span class="discount">买立减折扣</span>
+                        <span class="discount-price">-¥8888.88</span>
+                        <button class="btn-delete">删除</button>
+                    </dd>
+                    <dd class="clearfix">
+                        <a href="" target="_blank"><img src="http://placehold.it/50x50" width="50" height="50" alt=""></a>
+                        <span class="prod-name"><a href="" target="_blank"><span class="large-volumn">大件</span>前著著有詰戶在人去合了再</a></span>
+                        <span class="price">¥8888.88</span>
+                        <span class="quantity">
+                            <button class="decrease">-</button>
+                            <input type="text" value="1">
+                            <button class="increase">+</button>
+                        </span>
+                        <button class="btn-delete">删除</button>
+                    </dd>
+                    <dd class="clearfix">
+                        <a href="" target="_blank"><img src="http://placehold.it/50x50" width="50" height="50" alt=""></a>
+                        <span class="prod-name">
+                            <a href="" target="_blank">組合商品+贈品*2+ 配件</a>
+                            <dl>
+                                <dt>包含以下商品：</dt>
+                                <dd><a href="" target="_blank">配件 - 不了無此圓.碰金稍和到咖痛</a></dd>
+                                <dd><a href="" target="_blank">…下甘的哀怪心這一容有要</a></dd>
+                            </dl>
+                        </span>
+                        <span class="price">¥8888.88</span>
+                        <span class="quantity">
+                            <button class="decrease">-</button>
+                            <input type="text" value="1">
+                            <button class="increase">+</button>
+                        </span>
+                        <span class="gift clearfix">
+                            <span class="prod-name"><a href="" target="_blank">贈品 - 有花短奮的那你的有子樣不過鬧</a></span>
+                            <span class="price">¥0</span>
+                            <span class="quantity">1</span>
+                        </span>
+                        <span class="gift clearfix">
+                            <span class="prod-name"><a href="" target="_blank">贈品 - 派進顆添的們歲還紅聚忽年這憑勵很鍛</a></span>
+                            <span class="price">¥0</span>
+                            <span class="quantity">1</span>
+                        </span>
+                        <button class="btn-delete">删除</button>
+                    </dd>
+                </dl>
+            </li>
+            <li class="cart-subtotal clearfix">
+                <span class="item-quantity">共<span class="quantity">2</span>件商品</span>
+                <span class="item-total">共计<span class="price"><b>¥</b>29.90</span></span>
+            </li>
+            <li class="cart-go-checkout"><button class="btn-go-checkout">去购物车结算</button></li>
+        </ul>
+    </div>
+    <div id="hd-search">
+        <div class="search-form">
+            <form name="search" action="http://search.feiniu.com/sh/search/" method="GET">
+            <label id="text_label" for="keyword" style="display:none">请输入您要搜索的关键词</label>
+            <input type="text" name="q" class="search-keyword" x-webkit-speech speech x-webkit-grammar="bUIltin:search" value="">
+            <button class="btn-search">搜索</button>
+            <button class="btn-clear icon-clear"></button>
+            </form>
+        </div>
+        <div class="hd-hot-keywords">
+            <ul id="hotsearch"><li><a href="http://search.feiniu.com/sh/search/?q=USB3.5">USB3.5</a></li><li><a href="http://search.feiniu.com/sh/search/?q=%E9%A3%9E%E5%88%A9%E6%B5%A6">飞利浦</a></li><li><a href="http://www.feiniu.com/sh/item/201403CM270000009">巴拉娜</a></li><li><a href="http://www.feiniu.com/sh/item/201403CM210000015">吸塵器</a></li><li><a href="http://www.feiniu.com/sh/item/201403CM210000013/">剑龙游戏鼠标</a></li><li><a href="http://search.feiniu.com/sh/search/?q=%E9%BC%A0%E6%A0%87">鼠标</a></li><li><a href="http://www.feiniu.com/sh/item/201403CM210000010">星巴克瓶装咖啡</a></li><li><a href="http://www.feiniu.com/sh/item/201403CM210000003/">盛香珍袋装鸡蛋布丁</a></li><li><a href="http://www.feiniu.com/sh/item/201403CM210000002">小熊果冻桶优酪果园</a></li></ul>
+        </div>
+    </div>
+</header>
+
+<nav id="global-nav" class="clearfix">
+    <div class="wrapper">
+        <span class="catagories-title"><a href="http://www.feiniu.com/sitemap" style="color:#fff;text-decoration:none;">全部商品分类</a></span>
+
+
+
+        <ul class="horizontal-nav">
+            <li><a href="/" target="_blank">首页</a></li>
+            <li><a href="" target="_blank">美食馆</a></li>
+            <li><a href="" target="_blank">进口馆</a></li>
+            <li><a href="" target="_blank">手机数码</a></li>
+            <li><a href="" target="_blank">美容馆</a></li>
+            <li><a href="" target="_blank">服装馆</a></li>
+            <li><a href="" target="_blank">家庭馆</a></li>
+            <li><a href="" target="_blank">母婴馆</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="lightbox lightbox-location" style="display:none;">
+    <div class="block">
+        <div class="lightbox-title">欢迎来到飞牛网！</div>
+        <p>目前我們提供4個地區的配送服務，請根據您的收貨地址選擇站點。您的商品將會送貨至：</p>
+        <dl class="locations">
+                        <dd id="lighbox_dist_btn_1" str="1">上海</dd>
+                        <dd id="lighbox_dist_btn_2" str="2">江苏</dd>
+                        <dd id="lighbox_dist_btn_3" str="3">浙江</dd>
+                        <dd id="lighbox_dist_btn_4" str="4">安徽</dd>
+                    </dl>
+        <button class="btn-go-shopping btn-close-lightbox">开启购物体验</button>
+    </div>
+</div>
+<!-- header end-->
+        <div id="warpper" class="clearfix">
+    <div class="error404">
+        <!-- 404頁面開始-->
+        <!-- <p class="txt404">404</p> -->
+        <div class="txtexp">此页不存在或无相关资料</div>
+        <!-- 404頁面結束-->
+        <div class="err_txt"><a href="http://www.feiniu.com/sh/home" class="backto">回到飞牛网继续购物</a></div>
+    </div>
+</div>
+        <div id="footerStoreno">
+
+            Copyright©&nbsp;2013-2014 飞牛网, All Rights Reserved.沪ICP备13025776号 营业执照</br>地址：上海市闸北区彭江路602号E座3楼339室&nbsp;&nbsp;&nbsp;电话：021-36699888
+
+        </div><!-- footer end-->
+    </div><!-- warpper end-->
+    <script>
+        var www_url = 'http://www.feiniu.com/';
+        var www_lib = 'http://www.feiniu.com/lib/sh_zh-cn/';
+    </script>
+    <script type="text/javascript" src="http://www.feiniu.com/js/jQuery-menu-aim-master/jquery.menu-aim.js?20140113001"></script>
+    <script type="text/javascript" src="http://www.feiniu.com/lib/sh_zh-cn/js/website.js?20140113001"></script>
+    <script type="text/javascript" src="http://www.feiniu.com/js/standard.js?20140113001"></script>
+</body>
+</html>

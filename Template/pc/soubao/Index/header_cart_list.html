@@ -1,0 +1,56 @@
+<if condition="count($cartList) eq 0">
+    <div id="content_test">
+      <div id="minicart" class="ui_poptip minicart minicartContent">
+        <div class="ui_poptip_container">
+          <div class="ui_poptip_arrow poptip_up"></div>
+          <div class="ui_poptip_content">
+            <span class="nop emptycart">购物车中没有商品哟！</span>
+          </div>
+        </div>
+      </div>
+    </div>
+<else />
+    <div id="content_test">
+      <div class="ui_poptip minicart minicartContent" id="minicart">
+        <div class="ui_poptip_container">
+          <div class="ui_poptip_arrow poptip_up"></div>
+          <div class="ui_poptip_content">
+            <div class="mini_product">
+              <p class="mini_tit">最新加入商品</p>
+              <div class="cart_con js_cart_top">
+                <foreach name="cartList" item="v"  key="k">
+                  <div class="one_active js_camp_list">
+                    <ul class="ul_product   js_cart_pro_list" cart_id="798325">
+                      <li><a class="pdetail" href=""><img src="{$v.goods_id|goods_thum_images=60,60}">
+                        <p>
+                          <span class="name">{$v[goods_name]}</span>
+                          <span class="price"><em class="symbol">¥</em>{$v[goods_price]}</span>
+                        </p>
+                        </a>
+                        <div class="mini_op">
+                         <a class="delete js_delete" onclick="header_cart_del({$v.id});" href="javascript:void(0);">删除</a>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </foreach>
+              </div>
+              <div class="mini_total clearfix">
+                <p class="cart_num">共<span class="num" id="total_qty">{$cart_total_price[anum]}</span>件商品</p>
+                <p class="cart_total">
+                  <span class="tit">共计</span>
+                  <span class="price"><em class="symbol">¥</em>
+                  <span id="total_pay">{$cart_total_price[total_fee]}</span>
+                  </span>
+                </p>
+              </div>
+              <p class="cart_bot"><a class="cart_buy" href="{:U('Home/Cart/cart')}">去购物车结算</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</if>
+<script>
+   $(".cart_quantity").text('{$cart_total_price[anum]}'); // 购物车的总数量
+</script>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>账号资金-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+    <link rel="stylesheet" href="__STATIC__/css/page.css" type="text/css">
+    <link rel="stylesheet" href="__STATIC__/css/outhu.css" type="text/css">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+    <script src="__STATIC__/js/slider.js"></script>
+</head>
+
+<body>
+<!--------头部开始-------------->
+<include file="Public/header" />
+<!--------头部结束-------------->
+
+<div class="layout ov-hi">
+    <div class="breadcrumb-area">    
+	    <foreach name="navigate_user" key="k" item="v">
+	        <if condition="$k neq '首页'"> > </if>  
+            <a href="{$v}">{$k}</a> 
+        </foreach>
+    </div>
+</div>
+<div class="layout pa-to-10 fo-fa-ar">
+    <!--菜单-->
+    <include file="User/menu" />
+    <!--菜单-->
+    <div class="fr wi940">
+        <form name="applyAfsForm" autocomplete="off">
+		<div class="mod-main mod-comm" id="air03">
+			<div class="mt">
+				<h3>申请售后</h3>
+                <input id="orderIdDetail" value="12299273325" type="hidden">
+                <input id="venderIdDetail" value="1000003238" type="hidden">
+                <input type="hidden" value="1226629" id="wareIdNew">
+		
+                                    <div class="extra-r">
+                        <a id="customerServicePolicy" href="http://help.jd.com/help/question-171.html" target="_blank" class="repair-btn-red mr10">售后政策</a>
+                        <a class="im2013" href="#" onclick="openImChatList(12299273325,0,1)" title="联系tpshop">联系tpshop</a>
+                    </div>
+                			</div>
+			<div class="mc">
+				<table class="tb-void mb10">
+	<thead>
+	<tr>
+			<th width="260">商品名称</th>
+			<th width="280">包装清单</th>
+			<th width="170">赠送清单</th>
+			<th width="105">购买数量</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			<ul class="list-proinfo" id="removeTheSingleGife">
+				<li class="fore1">
+					<a href="http://item.jd.com/1226629.html" target="_blank">
+						<img height="50" width="50" title="ESK iphone6s Plus钢化膜 苹果6 Plus高透膜 高清玻璃保护贴膜" src="http://img14.360buyimg.com/n5/jfs/t2410/261/1011242049/345313/dba970a4/56396fd5N9d5facaa.jpg" data-img="1" alt="">
+					</a><div class="p-info"><a href="http://item.jd.com/1226629.html" target="_blank">ESK iphone6s Plus钢化膜 苹果6 Plus高透膜 高清玻璃保护贴膜</a></div>
+				</li>
+							</ul>
+		</td>
+		<td>
+			<div class="col2">ESK 苹果iphone6 plus 5.5寸屏 高透钢化玻璃膜×1</div>
+		</td>
+		<td>
+							-
+					</td>
+		<td>1</td>
+	</tr>
+	</tbody>
+</table>
+<div name="productInfo_zp-info" style="display:none"></div>
+	<input type="hidden" value="93636" id="afsCategoryId">
+				<!-- LOC订单展示消费吗 -->
+			</div>
+			<div class="form">
+				<div class="item kfarea" id="sellerPrompt">
+                    <div class="ml20">
+					<span><em>*</em><span style="color: red; "> 温馨提示：</span></span>
+					<label>本次售后服务将由
+					 					     <span id="sellerNamePrompt" style="color: red; ">tpshop</span> 为您提供
+					 						
+					</label>
+                    </div>
+					<div class="clr"></div>
+				</div>
+				
+			<div class="repair-steps" id="repairSteps">
+			<div class="repair-step repair-step-curr pt10 mb10" id="firstRepairStep">
+
+            
+				<!-- 服务类型 -->
+				<div class="item">
+					<span class="label"> <em> * </em> 服务类型： </span>
+					<div class="fl">
+						<ul class="list-type list-type-new">
+															<li name="applyType" id="3" class="selected">
+									<a href="javascript:void(0);">换货
+										<b></b>
+									</a>
+								</li>
+															<li name="applyType" id="1" class="">
+									<a href="javascript:void(0);">维修
+										<b></b>
+									</a>
+								</li>
+																				</ul>
+						<div class="msg-error-01" id="gifeMessage" style="display: none;">
+							退货需将赠品一并退回，已为您选择了赠品。
+						</div>
+						<div class="msg-text" id="flashbuyMessage" style="display: none;">
+							闪购商品支持7天无理由退货
+						</div>
+                        <div class="msg-text" id="repairType" style="display: none;">
+                                                                                                            </div>
+                        <input type="hidden" value="0" id="repairTypeFlag">
+					</div>
+					<div class="clr">
+					</div>
+				</div>
+				<!-- 问题描述 外层div-->
+				<div id="miaoShuDiv" style="">
+				<!-- 大家电服务地址 -->
+				
+                    <!-- 提交数量 -->
+				<div class="item">
+					<span class="label"><em>*</em>提交数量：</span>
+					<div class="fl">
+						<div class="quantity-form">
+							<a name="applyNum_operate_minus" class="decrement" href="javascript:applyNumOperate(1);">-</a>
+							<input type="text" name="applyNum" value="1" class="text text01">
+							<a name="applyNum_operate_add" class="increment" href="javascript:applyNumOperate(2);">+</a>
+						</div>
+						<div class="clr"></div>
+						<div name="applyNum-info" style="display:none"></div>
+					</div>
+					<div class="clr"></div>
+				</div>
+
+				<!-- 问题描述 -->
+				<div class="item">
+					<span class="label"> <em> * </em> 问题描述： </span>
+					<div class="fl">
+						<textarea name="apply_wareQuestionDesc_Content" cols="" rows="" class="area"></textarea>
+						<div class="ar ftx-03">10-500字</div>
+						<div class="msg-text-01">
+							请您如实填写申请原因及商品情况，字数在500字内。
+						</div>
+					</div>
+					<div class="clr">
+					</div>
+				</div>
+
+				<!-- 图片信息 -->
+				<div class="item item01">
+					<span class="label">图片信息：</span>
+					<div class="fl">
+						<div class="i-btns" style="text-align: left;">
+							<input type="file" />
+							<input type="hidden" id="btnCancel">
+						</div>
+						<div class="mscoll" name="mscolluploadImg" style="display:none;text-align: right;">
+							<div class="mleft" id="scollUp">上一个</div>
+							<div class="mright" id="scollDown">下一个</div>
+							<div class="mslist">
+								<ul class="img-list" name="mscolluploadImg-list" style="width: 0px; overflow: hidden;">
+								</ul>
+							</div>
+						</div>
+						<span id="uploadImgLoading" class="fl"></span>
+						<span id="img_des" class="fl">为了帮助我们更好的解决问题，请您上传图片</span>
+						<div class="clr"></div>
+						<span class="msg-text">最多可上传5张图片，每张图片大小不超过5M，支持bmp,gif,jpg,png,jpeg格式文件</span>
+						<div class="clr"></div>
+						<div name="mscolluploadImg-info" style="display:none"></div>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<!-- 问题描述 外层div-->
+				</div>
+
+				</div>
+
+				
+				<div id="defaultQueRenDiv" style="" class="repair-step">
+					<!-- 确认信息 -->
+					<div class="mt-10">
+						<strong>确认信息</strong>
+						<a href="javascript:closeYjshPage();" class="ftx-05 ml5 edit-repair-step">[修改]</a>
+					</div>
+
+
+					<!-- 返还赠品 -->
+					
+					<!-- 申请凭据  现在只有发票可以显示在一键售后默认页面-->
+										<div class="item" id="applyProof_defaultShow">
+						<span class="label">申请凭据：</span>
+						<div class="fl">
+								<label for="applyProof_fp">有发票</label>
+						</div>
+						<div class="clr"></div>
+					</div>
+					
+					<!-- 温馨提示 -->
+					<div class="item" id="giftTipDiv_defaultShow" style="display: none;">
+						<span class="label"><em>*</em>温馨提示：</span><label>礼品订单退货，请将商品及发票共同返回tpshop，否则将会影响您的退款金额。</label>
+						<div class="clr"></div>
+					</div>
+
+
+					<!-- 商品返回方式 -->
+					<div class="item" id="pickType_defaultShow"><span class="label"><em>*</em>返回方式：</span>
+						<div class="fl">
+							<ul class="list-return">
+								<li id="pickWareType_1_defaultShow" style="display: list-item;">
+									<div class="l-col">
+										<label>上门取件</label>
+									</div>
+									<div class="msg-text">tpshop将在1-3天内为您上门取回商品</div>
+								</li>
+								<li id="pickWareType_2_defaultShow" style="display: none">
+									<div class="l-col">
+										<label>送货至自提点</label>
+									</div>
+									<div class="msg-text" style="width: 450px">仅城市自提点、移动自提车、校园营业厅接收返修退换货商品，其他类型自提点暂不支持&nbsp;&nbsp;<a href="http://help.jd.com/help/question-64.html" target="_blank">查询周边自提点</a></div>
+								</li>
+								<li id="pickWareType_3_defaultShow" style="display: none">
+									<div class="l-col">
+										<label id="kdz_defaultShow">快递至tpshop</label>
+									</div>
+									<div class="msg-text" id="kdzdiv_defaultShow" style="width: 450px">商品返回地址将在服务单审核通过后以短信形式告知，或在“查看返修/退换货记录”中查询。tpshop不收取快递附加费用。</div>
+								</li>
+							</ul>
+						</div>
+						<div class="clr"></div>
+					</div>
+
+					<!-- 取货地址 -->
+					<div class="item" id="pickWareAddress_defaultShow" style="display: block;">
+						<span class="label"><em>*</em>取货地址：</span>
+						<div class="fl">
+							广东深圳市福田区益田路6003号荣超商务中心B座13楼
+						</div>
+						<div class="clr"></div>
+					</div>
+
+					<!-- 预约取件时间 -->
+					<div class="item" id="reserveDate_small_div_defaultShow" style="display: block;">
+						<span class="label"><em>*</em>取件时间：</span>
+						<div class="fl" id="reserveDate_small_div_defaultShow_fl">2016-03-16 (周三) 15:00-19:00</div>
+						<div class="clr"></div>
+					</div>
+
+					<!-- 取件时间 -->
+					<div class="item" id="reserveDate_div_defaultShow" style="display:none">
+						<span class="label"><em>*</em>取件时间：</span>
+						<div class="fl" id="reserveDate_div_defaultShow_fl"></div>
+						<div class="clr"></div>
+					</div>
+
+					<!-- 收货地址 -->
+					<div class="item" id="receiptWareAddress_defaultShow">
+						<span class="label"><em>*</em>收货地址：</span>
+						<div class="fl">
+							广东深圳市福田区益田路6003号荣超商务中心B座13楼
+						</div>
+						<div class="clr"></div>
+					</div>
+
+					<!-- 联系人姓名信息 -->
+					<div class="item" id="lxr_defaultShow"><span class="label"><em>*</em>顾客姓名：</span>
+						<div class="fl">
+							苏有妹
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="item" id="sjhm_defaultShow"><span class="label"><em>*</em>手机号码：</span>
+						<div class="fl">
+							137****6637
+						</div>
+						<div class="clr"></div>
+					</div>
+
+					<!-- now -->
+					<!-- 确认信息 外层div 结束 -->
+				</div>
+
+
+
+
+				<!-- 提交按钮 -->
+				<div class="item" id="submitDiv" style=""><span class="label">&nbsp;</span>
+					<div class="fl" name="divSubmit">
+						<div name="submitTips" style="display:none"></div>
+						<a href="javascript:void(0)" class="btn btn-7" name="btnSubmit"><s></s>提交</a>
+					</div>
+					<div class="clr"></div>
+				</div>
+			</div>
+
+			</div>
+		</div>
+	</form>
+    </div>
+</div>
+<div class="he80"></div>
+<!--------footer-开始-------------->
+<include file="Public/footer2" />
+<!--------footer-结束-------------->
+
+
+</body>
+<script>
+    /*$(function () {
+     $("#h-s").click(function () {
+     $('.ec-ta-x').css('left','124px');
+     $('.ec-ta-x').css('width','110px');
+     $(this).addClass("cullent");
+     $('#q-s').removeClass("cullent");
+     });
+     });
+     */
+</script>
+
+<script>
+   $(document).ready(function(){
+	  $("ul.list-type-new li").click(function(){
+		$(this).addClass('selected').siblings().removeClass('selected');
+	  });
+	});
+</script>
+</html>

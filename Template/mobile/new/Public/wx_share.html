@@ -1,0 +1,99 @@
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+
+<if condition="ACTION_NAME eq 'goodsInfo'">
+   var ShareLink = "http://{$_SERVER[HTTP_HOST]}/index.php?m=Mobile&c=Goods&a=goodsInfo&id={$goods[goods_id]}"; //默认分享链接
+   var ShareImgUrl = "http://{$_SERVER[HTTP_HOST]}{$goods[goods_id]|goods_thum_images=400,400}"; // 分享图标
+<else />
+   var ShareLink = "http://{$_SERVER[HTTP_HOST]}/index.php?m=Mobile&c=Index&a=index"; //默认分享链接
+   var ShareImgUrl = "http://{$_SERVER[HTTP_HOST]}{$tpshop_config['shop_info_store_logo']}"; // 分享图标
+</if>
+
+var is_distribut = getCookie('is_distribut'); // 是否分销代理
+var user_id = getCookie('user_id'); // 当前用户id
+//alert(is_distribut+'=='+user_id);
+
+// 如果已经登录了, 并且是分销商
+if(parseInt(is_distribut) == 1 && parseInt(user_id) > 0)
+{									
+	ShareLink = ShareLink + "&first_leader="+user_id;									
+}										
+
+
+// 微信配置
+wx.config({
+    debug: false, 
+    appId: "{$signPackage['appId']}", 
+    timestamp: '{$signPackage["timestamp"]}', 
+    nonceStr: '{$signPackage["nonceStr"]}', 
+    signature: '{$signPackage["signature"]}',
+    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage','onMenuShareQQ','onMenuShareQZone','hideOptionMenu'] // 功能列表，我们要使用JS-SDK的什么功能
+});
+
+// config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在 页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready 函数中。
+wx.ready(function(){
+    // 获取"分享到朋友圈"按钮点击状态及自定义分享内容接口
+    wx.onMenuShareTimeline({
+        title: "{$tpshop_config['shop_info_store_title']}", // 分享标题
+        link:ShareLink,
+        imgUrl:ShareImgUrl // 分享图标
+    });
+
+    // 获取"分享给朋友"按钮点击状态及自定义分享内容接口
+    wx.onMenuShareAppMessage({
+        title: "{$tpshop_config['shop_info_store_title']}", // 分享标题
+        desc: "{$tpshop_config['shop_info_store_desc']}", // 分享描述
+        link:ShareLink,
+        imgUrl:ShareImgUrl // 分享图标
+    });
+	// 分享到QQ
+	wx.onMenuShareQQ({
+        title: "{$tpshop_config['shop_info_store_title']}", // 分享标题
+        desc: "{$tpshop_config['shop_info_store_desc']}", // 分享描述
+        link:ShareLink,
+        imgUrl:ShareImgUrl // 分享图标
+	});	
+	// 分享到QQ空间
+	wx.onMenuShareQZone({
+        title: "{$tpshop_config['shop_info_store_title']}", // 分享标题
+        desc: "{$tpshop_config['shop_info_store_desc']}", // 分享描述
+        link:ShareLink,
+        imgUrl:ShareImgUrl // 分享图标
+	});
+
+   <if condition="CONTROLLER_NAME eq 'User'"> 
+	wx.hideOptionMenu();  // 用户中心 隐藏微信菜单
+   </if>
+	
+});
+</script>
+
+
+<!--微信关注提醒 start-->
+<if condition="$Think.session.subscribe eq 0">
+<button class="guide" onclick="follow_wx()">关注公众号</button>
+<style type="text/css">
+.guide{width:20px;height:100px;text-align: center;border-radius: 8px ;font-size:12px;padding:8px 0;border:1px solid #adadab;color:#000000;background-color: #fff;position: fixed;right: 6px;bottom: 200px;}
+#cover{display:none;position:absolute;left:0;top:0;z-index:18888;background-color:#000000;opacity:0.7;}
+#guide{display:none;position:absolute;top:5px;z-index:19999;}
+#guide img{width: 70%;height: auto;display: block;margin: 0 auto;margin-top: 10px;}
+</style>
+<script type="text/javascript" src="__STATIC__/js/layer.js" ></script>
+<script type="text/javascript">
+
+  // 关注微信公众号二维码	 
+function follow_wx()
+{
+	layer.open({
+		type : 1,  
+		title: '关注公众号',
+		content: '<img src="{$wechat_config['qr']}" width="200">',
+		style: ''
+	});
+}
+ 
+</script> 
+</if>
+<!--微信关注提醒  end-->

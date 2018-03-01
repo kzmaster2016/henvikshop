@@ -1,0 +1,146 @@
+<include file="Public/header"/>
+<body>
+ <header>
+      <div class="tab_nav">
+        <div class="header">
+          <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="back"></a></div>
+          <div class="h-mid">My message</div>
+          <div class="h-right">
+            <aside class="top_bar">
+              <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+</header>
+<include file="Public/menu"/>
+<div id="tbh5v0">
+<div class="liuyan">
+    <div class="liuyan_list">
+      <empty name="message">
+      <div id="list_0_0" class="font12">You have no any message left yet!</div>
+      <else/>
+      <foreach name="message" item="vo">
+	      <dl>
+	        <dt><span class="title">{$msg_type[$vo[msg_type]]}</span>{$vo.msg_title}</dt>
+	        <dd></dd>
+	        <dd><span>{$vo.msg_content}</span><font></font></dd>
+	        <span class="liuyan_time">{$vo.msg_time|date='Y-m-d H:i:s',###}</span>  
+	      </dl>   
+	  </foreach> 
+	  <!--     
+	      <section class="list-pagination">
+		    <div style="" class="pagenav-wrapper" id="J_PageNavWrap">
+		      <div class="pagenav-content">
+		        <div class="pagenav" id="J_PageNav">
+		          <div class="p-prev p-gray" > <a href="">上一页</a> </div>
+		          <div class="pagenav-cur" style="vertical-align:bottom">
+		            <div class="pagenav-text" ><span>1/1</span> <i></i> </div>
+				        <select class="pagenav-select"  onchange="location.href=this.options[this.selectedIndex].value;">
+				  			<option selected="selected" value="user.php?act=message_list&page=1">第1页</option>
+				  		</select>
+		          </div>
+		       	<div class="p-next" > <a href="">下一页</a> </div>
+				</div>
+		      </div>
+		    </div>
+		  </section>
+	  -->
+      </empty>
+    </div>
+    
+    <div class="liuyandom"> 
+      <section class="innercontent1">
+        <form action="" method="post" enctype="multipart/form-data" name="formMsg" onSubmit="return submitMsg()">
+          <div>
+            <div class="form_search"><span>Message type：</span>
+            <div class="anniu">
+	            <ul>
+	              <li class="on">
+	              	<label for="msg_type0"><input type="radio" name="msg_type" value="0" checked="checked" class="radio" id="msg_type0"> Message/label>
+	              </li>
+	              <li>
+	              	<label for="msg_type1"><input type="radio" name="msg_type" value="1" class="radio" id="msg_type1">Complaint</label>
+	              </li>
+	              <li>
+	              	<label for="msg_type2"> <input type="radio" name="msg_type" value="2" class="radio" id="msg_type2">Inquiry</label>
+	              </li>
+	              <li>
+	              	<label for="msg_type3"><input type="radio" name="msg_type" value="3" class="radio" id="msg_type3">After sales</label>
+	              </li>
+	              <li>
+	              	<label for="msg_type4"> <input type="radio" name="msg_type" value="4" class="radio" id="msg_type4">Want to buy</label>
+	              </li>
+	             </ul>
+             </div>
+            </div>
+          </div>
+          <label for="msg_title">
+          <div class="field_else">
+          <span>Message topic:</span>
+              <input type="text" name="msg_title" id="msg_title" placeholder="*topic"/>
+          </div>
+          </label>
+          <div class="field_else">
+              <label for="msg_content"> 
+              <span>Content：</span>
+               <textarea name="msg_content" id="msg_content" style="height:100px;"></textarea>
+              </label>
+          </div>
+          <div class="field_else">
+          <span>Verification Code：</span>
+          <img class="po-ab to0" id="verify_code_img" width="120" height="40" src="{:U('Home/User/verify',array('type'=>'message'))}"  onclick="verify(this)" />
+          <input style="margin-top:20px" type="text" name="verify_code" id="verify_code" placeholder="Verification Code"/>
+                            
+          </div>          
+          <div style=" padding-bottom:10px;">
+            <input type="submit" value="Submit" class="btn_big1"/>
+          </div>
+        </form>
+      </section>
+    </div>
+</div>
+
+<script>
+
+function verify(){
+   $('#verify_code_img').attr('src','/index.php?m=Mobile&c=User&a=verify&type=message&r='+Math.random());
+}
+	
+$('.anniu ul li').click(function(){
+	$(this).find("input").attr("checked","checked");
+	$('.anniu ul li').removeClass("on");
+	$(this).addClass("on");
+})
+
+function submitMsg() {
+	var frm = document.forms['formMsg'];
+	var msg_title = frm.elements['msg_title'].value;
+	var msg_content = frm.elements['msg_content'].value;
+	var msg = '';
+	if (msg_title.length == 0) {
+		alert('The message title cannot be empty');
+		return false
+	}
+	if (msg_content.length == 0) {
+		alert('Content header cannot be empty');
+		return false
+	}
+	if (msg_title.length > 100) {
+		alert('Title must not exceed 100 characters');
+		return false
+	}
+	if ($.trim($('#verify_code').val()).length == 0) {
+		alert('The verification code cannot be empty');
+		return false
+	}
+	
+	
+	return true;
+}
+</script>
+<include file="Public/footer"/>
+</div>
+<include file="Public/footer_nav"/>
+</body>
+</html>

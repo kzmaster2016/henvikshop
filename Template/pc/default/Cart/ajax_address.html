@@ -1,0 +1,51 @@
+<foreach name="address_list" item="v"  key="k">
+        <if condition="$v[is_default] eq 1"> <!--默认选中的地址-->
+          <div class="order-address-list address_current">                   
+              <ul class="cart-address-info">
+                <li class="item clearfix"><span class="item-hd">Consignee:</span><div class="item-bd">{$v[consignee]}</div></li>
+                <li class="item clearfix"><span class="item-hd">Country:</span><div class="item-bd">{$regionList[$v[country]]}</div></li>
+                <li class="item clearfix"><span class="item-hd">City:</span><div class="item-bd">{$regionList[$v[city]]}</div></li>
+                <li class="item clearfix"><span class="item-hd">Detail:</span><div class="item-bd">{$v[address]}</div></li>
+                <li class="item clearfix"><span class="item-hd">Postal Code/ZIP:</span><div class="item-bd">{$v[zipcode]}</div></li>
+                <li class="item clearfix"><span class="item-hd">E-mail Address:</span><div class="item-bd">{$v[email]}</div></li>
+                <li class="item clearfix"><span class="item-hd">Phone Number:</span><div class="item-bd">{$v[mobile]}</div></li>
+              </ul>                               
+              <dl class="cart-select-address">
+                <dd>              
+                  <p>
+                    <input type="radio" data-country-id="{$v[country]}" data-city-id="{$v[city]}" data-district-id="{$v[district]}" onclick="swidth_address(this);" name="address_id" value="{$v[address_id]}"  checked="checked"/>Use this Address&emsp;(Defeult Address)
+                  </p>
+                </dd>
+                <dd>                
+                  
+                </dd>
+              </dl>   
+              <div class="cart-address-act">
+                <a class="edit-btn" onclick="add_edit_address({$v[address_id]});">edit</a>
+                <a onclick="del_address({$v[address_id]});" class="delet-btn">delete</a>
+              </div>                
+          </div>
+        <else />
+          <div class="order-address-list">                             
+              <ul class="cart-address-info">
+                <li class="item clearfix"><span class="item-hd">Consignee:</span><div class="item-bd">{$v[consignee]}</div></li>
+                <li class="item clearfix"><span class="item-hd">Country:</span><div class="item-bd">{$regionList[$v[country]]}</div></li>
+                <li class="item clearfix"><span class="item-hd">City:</span><div class="item-bd">{$regionList[$v[city]]}</div></li>
+                <li class="item clearfix"><span class="item-hd">Detail:</span><div class="item-bd">{$v[address]}</div></li>
+                <li class="item clearfix"><span class="item-hd">Postal Code/ZIP:</span><div class="item-bd">{$v[zipcode]}</div></li>
+                <li class="item clearfix"><span class="item-hd">E-mail Address:</span><div class="item-bd">{$v[email]}</div></li>
+                <li class="item clearfix"><span class="item-hd">Phone Number:</span><div class="item-bd">{$v[mobile]}</div></li>               
+              </ul>                                
+              <dl class="cart-select-address">                
+                <dd>                
+                  <a href="javascript:void(0);"><input type="radio" name="address_id" onClick="swidth_address(this);"/>Use this Address</a>
+                </dd>
+              </dl>  
+              <div class="cart-address-act">
+                 <!-- <span>Default Address</span> -->
+                   <a class="edit-btn" onclick="add_edit_address({$v[address_id]});">edit</a>
+                   <a onclick="del_address({$v[address_id]});" class="delet-btn">delete</a>
+              </div>   
+          </div>    
+        </if>      
+</foreach>

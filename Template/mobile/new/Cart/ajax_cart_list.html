@@ -1,0 +1,163 @@
+<style type="text/css">
+	.page-shopping .bottom-panel{display: flex;}
+	.page-shopping .bottom-panel .info{margin-top: 4px;width: 50%;}
+	.page-shopping .bottom-panel .right{margin-top: 10px;}
+  .page-shopping .item-list .attr span{overflow: hidden;display: -webkit-box; font-weight: normal; white-space: nowrap;}
+</style>
+ <foreach name="cartList" item="v" key="k" >
+    <div  class="block" style="margin-top:0px;">
+      <div class="shop_title" >
+        <div class="fl"><a class="shopLink eclipse" href="javascript:void(0);">supplier：{$tpshop_config['shop_info_store_name']}</a>
+        <input type="hidden" name="supplierid" id="supplierid" value="7"></div>
+      </div>   
+      <div class="item-list">
+       <div class="item">
+         <div class="inner">
+           <div style="width:60%; float:left; height:98px;">
+             <div class="check-wrapper">
+              <span  class="cart-checkbox  <if condition="$v[selected] eq 1" >checked</if>">
+                 <input type="checkbox" autocomplete="off" name="cart_select[{$v.id}]" <if condition="$v[selected] eq 1" >checked="checked"</if>  style="display:none;" value="1" onclick="ajax_cart_list();">
+              </span>
+             </div>
+             <div  class="pic">
+                 <a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$v[goods_id]))}"><img src="{$v.goods_id|goods_thum_images=200,200}"></a>
+             </div>
+             
+             <div class="name">
+               <span>  {$v.goods_name} </span>
+             </div>
+             <div class="attr">
+                 <span>{$v.spec_key_name}</span>
+             </div>
+             <div class="num">
+                 <div class="xm-input-number">
+                   <div class="act_wrap">
+                        <a href="javascript:;" onclick="switch_num(-1,{$v.id},{$v.store_count});" id="jiannum6" class="input-sub active"></a>
+                     	<input id="goods_num[{$v.id}]" type="text" onKeyDown='if(event.keyCode == 13) event.returnValue = false' name="goods_num[{$v.id}]"  value="{$v.goods_num}"  class="input-num"  onblur="ajax_cart_list()"/>
+                     	<a href="javascript:;" onclick="switch_num(1,{$v.id},{$v.store_count});"  class="input-add active"></a>
+                     </div>
+                  </div>                 
+             </div>
+           </div>
+           <div style=" position:absolute; right:0px; top:20px; width:100px; height:98px;">
+             <div class="price">
+               <span class="mar_price">${$v.market_price}</span>
+               <br>
+               <span>${$v.member_goods_price}</span>
+              </div>
+             <div class="delete">
+               <a href="javascript:void(0);" onclick="del_cart_goods({$v.id})">
+                 <div class="icon-shanchu"></div>
+               </a>
+             </div>
+           </div>
+           <div style="height:0px; line-height:0px; clear:both;"></div>
+         </div>
+         <div class="append"></div>
+       </div>
+     </div>
+    </div>
+</foreach>
+<if condition="empty($cartList)">         
+<div class="screen-wrap fullscreen login">
+<section id="cart-content">
+      <div class="qb_tac" style="padding:50px 0">
+        <img src="__STATIC__/images/flow/empty_cart.png" width="100" height="95">
+        <br>Cart is still empty</div>
+      <div class="qb_gap" style="width:60%; margin:0 auto;">
+        <a href="{:U('Index/index')}" class="mod_btn btn_strong">Continue Shopping！</a>
+      </div>
+</section>
+<div style="height:72px;"></div>
+<section class="f_mask" style="display: none;"></section>
+<section class="f_block" id="choose" style="height:0px;"></section> 
+</div>
+ <else/>
+	 <div class="bottom-panel">
+	    <div class="quanxuan">
+	     <div class="check-wrapper">
+	        <span class="cart-checkbox" onclick="chkAll_onclick()"></span><span class="cart-checktext">All select</span>
+	     </div>
+	   </div>
+	   <div class="info">
+	     <span class="hot" id="cart_amount_desc"><em>All：</em>${$total_price.total_fee}</span>
+	     <br>
+	     <span class="hot_text">Excluding freight</span>
+	   </div>
+	   <div class="right">
+	     <input type="button" href="javascript:void();"  onclick="return selcart_submit();" class="xm-button " value="to Checkout"></div>
+	</div>
+</if> 
+<script type="text/javascript">
+$(".check-wrapper .cart-checkbox").click(function(){
+	if($(this).hasClass('checked')){
+		$(this).removeClass('checked');
+		$(this).find('input').attr('checked',false);
+	}else{
+		$(this).addClass('checked');
+		$(this).find('input').attr('checked',true);
+	}
+	ajax_cart_list();
+})
+
+var is_checked = true;
+$('.inner .cart-checkbox').each(function(){
+	  if(!$(this).hasClass('checked'))
+	  {
+	       is_checked = false;
+	       return false;
+	  }
+});
+if(is_checked){
+  	$('.quanxuan .cart-checkbox').addClass('checked'); 
+}else
+{
+  	$('.quanxuan .cart-checkbox').removeClass('checked'); 
+} 
+	
+function chkAll_onclick() 
+{
+  if($('.quanxuan .cart-checkbox').hasClass('checked')){	  
+    $('.quanxuan .cart-checkbox').removeClass('checked');
+    $('.inner .cart-checkbox').removeClass('checked');
+    $("input[name^='cart_select']").prop('checked',false);
+    is_checked = false;
+  }   
+  else{
+    $('.quanxuan .cart-checkbox').addClass('checked');
+    $('.inner .cart-checkbox').addClass('checked');
+    $("input[name^='cart_select']").prop('checked',true);
+    is_checked = true;
+  }
+  ajax_cart_list();
+}
+
+function del_cart_goods(goods_id)
+{
+    if(!confirm('Are you sure to delete?'))
+        return false;
+    var chk_value = [];
+    chk_value.push(goods_id);
+    // ajax调用删除
+    if(chk_value.length > 0)
+        ajax_del_cart(chk_value.join(','));
+}
+
+
+function selcart_submit()
+{
+     var j=0;
+	 $('input[name^="cart_select"]:checked').each(function(){
+	       j++;
+	 });
+     if (j>0)
+     {
+		  window.location.href="{:U('Mobile/Cart/cart2')}"
+     }
+     else
+     {   
+	     alert('Please select the goods to be settled!');
+	     return false;
+    }
+}
+</script>

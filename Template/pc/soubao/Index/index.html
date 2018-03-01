@@ -1,0 +1,574 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta content="zh-cn" http-equiv="content-language">
+<meta name="renderer" content="webkit|ie-comp|ie-stand" />
+<meta http-equiv="Cache-control" content="public" max-age="no-cache" />
+<title>首页-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body>
+<include file="Public/header"/>
+<div id="pageContent">
+  <div class="fn-mall">
+	<style>
+	.s-pg a {
+	    display: block; width: 24px; height: 62px;line-height: 62px;
+	    background: #000;opacity: .2; z-index: 1;left: 50%; top: 50%;
+	    margin-top: -31px;padding-left:10px;color: #fff;position: absolute;
+	    font-size: 30px;font-weight: 400; font-family: SimSun;filter: alpha(opacity=20);
+	    -webkit-transition: opacity .2s linear 0s;transition: opacity .2s linear 0s;
+	}
+	.s-pg a.s-prev {margin-left: -395px;}
+	.s-pg a.s-next {margin-left: 357px;}
+	</style>    
+    <div class="module">
+      <div class="main-slider" style ="overflow:unset">
+        <div class="container rel">
+          <div fnp="main-slide" class="ui-switchable eidtModule" moduleId="bannerBig">
+            <ul data-role="content" class="ui-switchable-content">
+              <adv  limit="6" item="v" pid="10">
+              <li style="background:{$v.bgcolor}" class="panel slider-panel"><a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if> >
+              	<img class="img100 prod"  src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}"/></a>
+              </li>
+              </adv>
+            </ul>
+            <div class="ctrl-wrapper">
+              <ul class="ui-switchable-nav" data-role="nav">
+             	<adv pid = "10" limit="6" item="v" key="k">
+              	  <li class="ui-switchable-trigger slider-item"><span>{$k}</span></li>
+              	</adv>
+              </ul>
+            </div>
+            <div class="s-pg J_page_box" style="display:block;">
+	            <a href="javascript:;" class="s-prev slider-prev">&lt;</a>
+	            <a href="javascript:;" class="s-next slider-next">&gt;</a>
+            </div>
+          </div>
+          <div class="popup imgbox eidtModule" moduleId="bannerright">
+          	    <adv pid="15" limit="2" item="v" key="k">
+	          	   <a class="item item-02" href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+	          	   	  <img class="img100 prod" src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}">
+	          	   </a>
+	          	</adv>
+		  </div>
+          <div fnp="nav-list" class="nav-list eidtModule" moduleId="nav">
+            <ul class="nav-list-warpper">
+              <foreach name="goods_category_tree" item="vo" key="k">
+	              <li data-role="nav-item" class="nav-item" index="{$vo.id}">
+	                <span class="nav-menu-item"><i class="iconfont icon"></i>
+	                <span class="title"><a href="{:U('Home/Channel/index',array('id'=>$vo[id]))}" target="_blank">{$vo.name}</a></span>
+	                </span>
+	              </li>
+              </foreach>
+            </ul>
+           <foreach name="goods_category_tree" item="vo" key="k">
+	        <div data-role="menu-sub" class="menu-sub" index ="{$k}">
+		        <div class="sub-columns">
+		        	<foreach name="vo.tmenu" item="v2" key="k2">
+		        	<if condition="$k2%3 eq 0">
+		                <div class="fn-clear column-item">
+		                  <div class="tlt">
+		                    <span class="name"><a href="{:U('Home/Goods/goodsList',array('id'=>$v2[id]))}" target="_blank">{$v2.name}</a></span>
+		                  </div>
+		                  <div class="words">
+		                  	<foreach name="v2.sub_menu" item="v3">
+		                  		<a href="{:U('Home/Goods/goodsList',array('id'=>$v3[id]))}" <if condition="$v3[is_hot] eq 1">class="lh"</if> target="_blank">{$v3.name}</a>
+		                  	</foreach>
+		                  </div>
+		                </div>
+	                </if>
+	                </foreach>
+	            </div>	            
+	            <div class="sub-columns">
+		        	<foreach name="vo.tmenu" item="v2" key="k2">
+		        	<if condition="$k2%3 eq 1">
+		                <div class="fn-clear column-item">
+		                  <div class="tlt">
+		                    <span class="name"><a href="{:U('Home/Goods/goodsList',array('id'=>$v2[id]))}" target="_blank">{$v2.name}</a></span>
+		                  </div>
+		                 <div class="words">
+		                  	<foreach name="v2.sub_menu" item="v3">
+		                  		<a href="{:U('Home/Goods/goodsList',array('id'=>$v3[id]))}" <if condition="$v3[is_hot] eq 1">class="lh"</if> target="_blank">{$v3.name}</a>
+		                  	</foreach>
+		                  </div>
+		                </div>
+	                </if>
+	                </foreach>
+	            </div>
+	            
+		        <div class="sub-columns">
+		        	<foreach name="vo.tmenu" item="v2" key="k2">
+		        	<if condition="$k2%3 eq 2">
+		                <div class="fn-clear column-item">
+		                  <div class="tlt">
+		                    <span class="name"><a href="{:U('Home/Goods/goodsList',array('id'=>$v2[id]))}" target="_blank">{$v2.name}</a></span>
+		                  </div>
+		                  <div class="words">
+		                  	<foreach name="v2.sub_menu" item="v3">
+		                  		<a href="{:U('Home/Goods/goodsList',array('id'=>$v3[id]))}" <if condition="$v3[is_hot] eq 1">class="lh"</if> target="_blank">{$v3.name}</a>
+		                  	</foreach>
+		                  </div>
+		                </div>
+	                </if>
+	                </foreach>
+	            </div>
+	            <div class="right-wrap">
+                <ul class="li-item">
+	              <volist name="brand_list" id="v2" mod="2" >
+	                 <if condition="($v2[parent_cat_id] eq $vo[id]) AND ($v2[is_hot] eq 1)">	
+	                  <li class="item <eq name="mod" value="1">even</eq>">
+	                  	<a href="{:U('Goods/goodsList',array('brand_id'=>$v2[id]))}" target="_blank">
+	                  	<img class="nav-prod" src="__STATIC__/images/loading.gif" alt="" data-images="{$v2.logo}"></a>
+	                  </li>
+	                 </if>
+	              </volist>
+                </ul>
+                <adv pid="80+$k" limit="1" item="vv">
+	          	   <a href="{$vv.ad_link}" <if condition="$vv['target'] eq 1">target="_blank"</if>>
+	          	   	  <img title="{$vv[title]}" style="{$vv[style]}" data-images="{$vv[ad_code]}" class="right-img nav-prod" src="__STATIC__/images/loading.gif">
+	          	   </a>
+	          	</adv>              
+                </div>
+	        </div>
+            </foreach>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="J_side_nav_trigger"></div>
+    <div class="module eidtModule" moduleId="1081037_main" parentModuleId ="1081037" moduleCode="cms-index-cchannel">
+      <div class="layout container mt30">
+        <div class="layout-hd">
+          <div class="layout-title fl">精品推荐</div>
+        </div>
+        <div class="feture-cates">
+          <ul class="cates-left">
+          <adv pid="50" limit="1" item="v">
+            <li class="item">
+               <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+            	   <img title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" class="img100 prod" src="{$v[ad_code]}">
+               </a>
+            </li>
+		  </adv>          
+          <adv pid="51" limit="1" item="v">
+            <li class="item">
+               <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+            	   <img title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" class="img100 prod" src="{$v[ad_code]}">
+               </a>
+            </li>
+		  </adv>              
+          <adv pid="52" limit="1" item="v">
+            <li class="item">
+               <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+            	   <img title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" class="img100 prod" src="{$v[ad_code]}">
+               </a>
+            </li>
+		  </adv>    
+          <adv pid="53" limit="1" item="v">
+            <li class="item">
+               <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+            	   <img title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" class="img100 prod" src="{$v[ad_code]}">
+               </a>
+            </li>
+		  </adv>    
+          <adv pid="54" limit="1" item="v">
+            <li class="item">
+               <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+            	   <img title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" class="img100 prod" src="{$v[ad_code]}">
+               </a>
+            </li>
+		  </adv>    
+          <adv pid="55" limit="1" item="v">
+            <li class="item">
+               <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+            	   <img title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" class="img100 prod" src="{$v[ad_code]}">
+               </a>
+            </li>
+		  </adv>                                        
+          
+          </ul>
+          <div class="cates-center" fnp="slide">
+            <ul class="ui-switchable-content" data-role="content">
+              <li class="panel panel-action">
+	              <adv pid="56" limit="1" item="v">
+                    <div class="item">
+                       <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+                           <img title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" class="img100 prod" src="{$v[ad_code]}" />
+                       </a>
+                    </div>
+                  </adv>  
+	              <adv pid="57" limit="1" item="v">
+                    <div class="item">
+                       <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+                           <img title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" class="img100 prod" src="{$v[ad_code]}" />
+                       </a>
+                    </div>
+                  </adv>  
+              </li>
+              <li class="panel">
+	              <adv pid="58" limit="1" item="v">
+                    <div class="item">
+                       <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+                           <img title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" class="img100 prod" src="{$v[ad_code]}" />
+                       </a>
+                    </div>
+                  </adv>  
+	              <adv pid="59" limit="1" item="v">
+                    <div class="item">
+                       <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+                           <img title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" class="img100 prod" src="{$v[ad_code]}" />
+                       </a>
+                    </div>
+                  </adv>                
+              </li>
+              
+            </ul>
+			<ul class="slide-nav ui-switchable-nav" data-role="nav">
+				<li class="ui-switchable-trigger ui-switchable-active"><span>1</span></li>
+				<li class="ui-switchable-trigger"><span>2</span></li> 
+			</ul>
+            <a href="javascript:void(0);" class="ctrl ctrl-prev" data-role="prev"></a>
+            <a href="javascript:void(0);" class="ctrl ctrl-next" data-role="next"></a>
+          </div>
+          <ul class="cates-right">
+	              <adv pid="60" limit="1" item="v">
+                    <div class="item">
+                       <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+                           <img title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" class="img100 prod" src="{$v[ad_code]}" />
+                       </a>
+                    </div>
+                  </adv>
+	              <adv pid="61" limit="1" item="v">
+                    <div class="item">
+                       <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+                           <img title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" class="img100 prod" src="{$v[ad_code]}" />
+                       </a>
+                    </div>
+                  </adv>                  
+          </ul>
+        </div>
+      </div>
+    </div> 
+    <adv pid="99" limit="1" item="v">
+	    <div class="module eidtModule" parentModuleId="" moduleId="" style="min-height: 25px;">
+	      <div class="container mt30"><a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if> class="banner-img-single">
+	      	<img width="1188" height="80" class="prod" src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" alt=""/></a>
+	      </div>
+	    </div>
+    </adv>    
+  
+    
+    <foreach name="cateList" item="vo" key="k">
+    <div class="module" moduleId="" parentModuleId="">
+      <div class="layout floor floor-0{$k+1} container mt30" data-floor="{$k+1}">
+        <div class="floor-wrapper">
+          <div class="floor-left">
+            <div class="menu-box">
+              <div class="menu-box-hd eidtModule" moduleId="1081777_main"><em>{$k+1}F</em>
+                <p><a>{$vo.mobile_name}</a></p>
+              </div>
+              <div class="menu-box-bd eidtModule" style="overflow:hidden" moduleId="1081777_leftTopClassify">
+                <ul class="item-list">
+                  <foreach name="vo.tmenu" item="v2" key="k2">
+                  	<if condition="$k2 lt 6">
+                  	<li class="item"><a href="{:U('Home/Goods/goodsList',array('id'=>$v2[id]))}" target="_blank">{$v2.name}</a></li>
+                  	</if>
+                  </foreach>
+                </ul>
+                <ul class="item-list">
+                  <foreach name="vo.tmenu" item="v2" key="k2">
+                  	<if condition="$k2 gt 5">
+                  	<li class="item"><a href="{:U('Home/Goods/goodsList',array('id'=>$v2[id]))}" target="_blank">{$v2.name}</a></li>
+                  	</if>
+                  </foreach>
+                </ul>
+              </div>
+            </div>
+            <div class="slide eidtModule" moduleId="1081777_leftBottomSlide" fnp="slide">
+              <div class="slide-container">
+                <ul data-role="content">
+                <adv pid="70+$k" limit="4" item="v">
+                   <li class="panel">                   
+                   <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+                    <img class="img100 prod" title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" src="{$v[ad_code]}">
+                   </a>
+                   </li>
+                </adv>
+                </ul>
+              </div>
+              <ul class="slide-nav ui-switchable-nav" data-role="nav">
+	              <li class="ui-switchable-trigger"><span>1</span></li>
+	              <li class="ui-switchable-trigger"><span>2</span></li>
+	              <li class="ui-switchable-trigger"><span>3</span></li>
+	              <li class="ui-switchable-trigger ui-switchable-active"><span>4</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="floor-right" fnp="tab-switch">
+            <div class="layout-hd switch_tab">
+              <ul class="tab-nav fl" data-role="tabs">
+                <li class="item item-active" rel="goods-list"><a href="javascript:void(0);">热卖商品</a></li>
+                <li class="item" rel="pics"><a href="javascript:void(0)">精选活动</a></li>
+              </ul>
+              <div class="cates-list eidtModule" moduleId="">
+               	  <volist name="vo.hot_cate" id="ht" mod="2" key="kk">
+               	  	<if condition="$kk lt 10">
+	                 	<a href="{:U('Home/Goods/search',array('q'=>urlencode($ht[name])))}" class="cates" target="_blank" style="color: <eq name="mod" value="1">#da3a4c;</eq>">{$ht.name}</a>
+	              	</if>
+	              </volist>    
+	              <a class="cates" href="{:U('Home/Channel/index',array('id'=>$vo[id]))}" target="_blank">进入频道&gt;&gt;</a>
+              </div>
+            </div>
+            <div class="layout-bd eidtModule" style="overflow:hidden" data-role="panels">
+              <div class="pics pics-01 dn eidtModule" moduleId="1081777_selectedAd">
+	              <a class="item item-big" href="javascript:;"><img data-original="http://img17.fn-mart.com/pic/319c133a5e76dc07f7a2/Kn8Tnn7zvTCdhduMp2/5xeamROatRMR3i/CsmRq1bLsg-AQT1BAANNbU3JN2U018.png" src="" class="img100 prod"></a>
+	              <a class="item" href="javascript:;"><img data-original="http://img17.fn-mart.com/pic/a9fa133a5e011966d801/h26n22sT_2tMKludLn/1xmyeaWalaBYKR/CsmRsFbCg72AQexlAABPAlWh5uI114.jpg" src="" class="img100 img-effect prod"></a>
+	              <a class="item" href="javascript:;"><img data-original="http://img17.fn-mart.com/pic/6aec133a5e7cdca9ea81/kn62zz1zDTflhdZd3z/5iSymGZyZRnyOx/CsmRsVbLuB6ASOw2AABS7FLqBVc029.jpg" src="" class="img100 img-effect prod"></a>
+	              <a class="item nbdr" href="javascript:;"><img data-original="http://img17.fn-mart.com/pic/88b9133a5e78dc37a826/Kz6Tnn72FztdBlulUz/1ioRmyjaKat9cG/CsmRrVbLs8qALa3hAABZDDdC9rM099.jpg" src="" class="img100 img-effect prod"></a>
+	              <a class="item" href="javascript:;"><img data-original="http://img16.fn-mart.com/pic/342a133a5e79dc3e840d/K28z2212_ntdKdUluz/1YSGmyWGcGKxuY/CsmRrlbLs_6ARqJ3AAA4llKiEas704.jpg" src="" class="img100 img-effect prod"></a>
+	              <a class="item" href="javascript:;"><img data-original="http://img16.fn-mart.com/pic/e253133a5e7ddc3f6b3a/h2Hn22szD2CgKMZMtn/7imyeapanyCGu9/CsmRsFbLtB6AAcmUAABZdH4kFx8888.jpg" src="" class="img100 img-effect prod"></a>
+	              <a class="item nbdr" href="javascript:;"><img data-original="http://img16.fn-mart.com/pic/1d35133a5e861bd0cf3d/kn62zz1zDTflhdZd3z/5xoGoRUyVaWiV9/CsmRsVbNJfSACasaAAA6Ur4gNrM166.jpg" src="" class="img100 img-effect prod"></a>
+	          </div>
+              <div class="goods-list eidtModule" style="overflow:hidden" moduleId="1081777_hotCommodity" >
+              	<foreach name="vo.hot_goods" item="vg">
+	                <dl class="item" href="" target ="_blank">
+	                  <dt class="pic"><a href="{:U('Home/Goods/goodsInfo',array('id'=>$vg[goods_id]))}" target ="_blank"><img data-original="{$vg.goods_id|goods_thum_images=400,400}" src="" class="hide-prod prod"></a></dt>
+	                  <dd class="title"><a href="{:U('Home/Goods/goodsInfo',array('id'=>$vg[goods_id]))}" target ="_blank" class="break-word">{$vg.goods_name}</a></dd>
+	                  <dd class="price">
+	                    <span class="curr">¥<font class="p_price" id="100826791_-1081777">{$vg.shop_price}</font></span>
+	                    <del class="prev">¥<font>{$vg.market_price}</font></del></dd>
+	                </dl>
+                </foreach>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="banner-img-list eidtModule" moduleId="">
+        	<assign name="br" value="0" />
+        	<foreach name="brand_list" item="vv" key="k2">
+        		<if condition="($vv[parent_cat_id] eq $vo[id]) AND ($br++ lt 9)">
+	        		<a href="{:U('Goods/goodsList',array('brand_id'=>$vv[id]))}" target ="_blank" class="<if condition="$br lt 9"> item </if> item0{$k2}">
+	        		<img data-original="{$vv.logo}" src="" style="width:131px;height=:80px" class="img100 prod"/></a>
+	        	</if>
+	        </foreach>
+	    </div>
+      </div>
+    </div>
+    <adv pid="100+$k" limit="1" item="v">
+	    <div class="module eidtModule" parentModuleId="" moduleId="" style="min-height: 25px;">
+	      <div class="container mt30"><a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if> class="banner-img-single">
+	      	<img width="1188" height="80" class="prod" src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}" data-original="{$v[ad_code]}" alt=""/></a>
+	      </div>
+	    </div>
+    </adv>
+    </foreach>
+    <div class="module eidtModule" moduleId="" parentModuleId ="" moduleCode="cms-index-selection">
+      <div class="layout boutique container mt30">
+        <div class="layout-hd">
+          <div class="layout-title fl">新品推荐</div>
+        </div>
+        <div class="layout-bd">
+          <div class="boutique-left">
+          	<tpshop sql="select * from __PREFIX__goods where is_new=1 order by sort limit 7" item="v" key="k"> 
+	            <div class="item <if condition="$k eq 0">item-big<else/>item-small</if> ">
+	              <div class="pic"><a href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" target="_blank"><img class="img100 prod" src="" data-original="{$v.goods_id|goods_thum_images=400,400}"></a></div>
+	              <a class="title" href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">{$v.goods_name}</a>
+	              <p class="num" >¥<font class="p_price" id="100395552_-1081039">{$v.shop_price}</font></p>
+	            </div>
+             </tpshop>
+          </div>
+          <div class="boutique-right">
+            <div class="comment-list" fnp="comments">
+              <ul data-role="content">
+                <li class="comment">
+                  <div class="pic"><a href="javascript:;"><img data-original="http://img17.fn-mart.com/pic/2963133a5e812610dc90/B28nnn7z_2CMBgulVz/59eaSG0ahRoGkx/CsmRrlbNYtWAVtlKAAGi4lg8kLE019_400x400.jpg" class="prod selection-prod" src=""></a></div>
+                  <div class="info">
+                    <p class="author"><img data-original="" class="prod selection-prod" src="__STATIC__/images/80_80.gif">
+                      <span>匿名用户</span>
+                    </p>
+                    <div class="detail break-word"><a href="javascript:;" target="_blank">正品的，货真价实，包装精美。</a></div>
+                  </div>
+                </li>
+                <li class="comment">
+                  <div class="pic"><a href="javascript:;"><img data-original="http://img16.fn-mart.com/group1/M00/75/A7/CsnBPlXvnC2AZoSMAAFWVkDM1Po652_400x400.jpg" class="prod selection-prod" src=""></a></div>
+                  <div class="info">
+                    <p class="author"><img data-original="" class="prod selection-prod" src="__STATIC__/images/80_80.gif">
+                      <span>匿名用户</span>
+                    </p>
+                    <div class="detail break-word"><a href="javascript:;">物流特别给力，商品还算不错</a></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="module eidtModule" parentModuleId="" moduleId="" style="min-height: 25px;">
+      <div class="m-fn-plink container mt30">
+        <ul class="oh clearfix">
+          <tpshop sql="select * from __PREFIX__goods_category where is_show=1 and image !='' order by sort_order desc limit 9" item="v" key="k"> 
+	          <li>
+	            <p class="n">{$v.name}</p>
+	            <a href="{:U('Goods/goodsList',array('id'=>$v[id]))}" target="_blank" class="p"><img src="{$v.image}" alt="" title="" width="100" height="100"></a>
+	          </li>
+          </tpshop>
+        </ul>
+      </div>
+    </div>
+    <!--  
+	<div class="J_side_nav mall-side-nav mall-side-nav-show" style="display: block; opacity: 0.95;">
+		<div class="side-wrapper">
+		<a class="item item-tigger" href="javascript:;"><i class="sep"></i><span class="level">1F</span><span class="text text-twoline">服饰<br>内衣</span></a>
+		<a class="item item-tigger" href="javascript:;"><i class="sep"></i><span class="level">2F</span><span class="text text-twoline">鞋靴<br>箱包</span></a>
+		<a class="item item-tigger" href="javascript:;"><i class="sep"></i><span class="level">3F</span><span class="text text-twoline">个护<br>清洁</span></a>
+		<a class="item item-tigger" href="javascript:;"><i class="sep"></i><span class="level">4F</span><span class="text text-twoline">运动<br>户外</span></a>
+		<a class="item item-tigger" href="javascript:;"><i class="sep"></i><span class="level">5F</span><span class="text text-twoline">家电<br>汽配</span></a>
+		<a class="item item-tigger" href="javascript:;"><i class="sep"></i><span class="level">6F</span><span class="text text-twoline">生活<br>居家</span></a>
+		<a class="item item-tigger item-active" href="javascript:;"><i class="sep"></i><span class="level">7F</span><span class="text text-twoline">母婴<br>馆</span></a>
+		<a class="item item-tigger" href="javascript:;"><i class="sep"></i><span class="level">8F</span><span class="text text-twoline">美食<br>城</span></a>
+		<a class="item item-tigger" href="javascript:;"><i class="sep"></i><span class="level">9F</span><span class="text text-twoline">图书<br>城</span></a>
+		<a class="item item-tigger" href="javascript:;"><i class="sep"></i><span class="level">10F</span><span class="text text-twoline">精选<br>大牌</span></a>
+		</div>
+	</div>-->
+  </div>
+</div>
+<include file="Public/footer" />
+<script type="text/javascript">
+$(document).ready(function(){	
+  $(".m-top-sidebar").hide();
+  //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+  $(window).scroll(function() {
+      if ($(window).scrollTop() > 100) {
+          $(".m-top-sidebar").fadeIn(1500);
+      } else {
+          $(".m-top-sidebar").fadeOut(1500);
+      }
+  });
+  //当点击跳转链接后，回到页面顶部位置
+  $(".i-ico-gotop").click(function() {
+      $('body,html').animate({
+          scrollTop: 0
+      },100);
+      return false;
+  });
+  
+  $('.switch_tab>.tab-nav>.item').click(function(){
+	  $(this).addClass('item-active');
+	  $(this).siblings().removeClass('item-active');
+	  var showdiv = $(this).attr('rel');
+	  var hotlist = $(this).parent().parent().siblings('.eidtModule').children('.goods-list');
+	  if(showdiv =='goods-list'){
+		  $(this).parent().parent().siblings('.eidtModule').children('.pics').hide();
+		  hotlist.show();
+	  }else{
+		  $(this).parent().parent().siblings('.eidtModule').children('.pics').show();
+		  hotlist.hide();
+	  }
+	  $('.pics-01').find('img').each(function(i,o){
+		  if($(o).hasClass('prod')){
+			  $(o).attr('src',$(o).attr('data-original'));
+			  $(o).removeClass('prod');
+			  $(o).removeAttr('data-original');
+		  }
+	  });
+  });
+});
+
+  $(document).ready(function() { 
+	  var length, 
+	  currentIndex = 0, interval, 
+	  hasStarted = false, //是否已经开始轮播 
+	  t = 3000; //轮播时间间隔 
+	  length = $('.slider-panel').length; 
+	  //将除了第一张图片隐藏 
+	  $('.slider-panel:not(:first)').hide(); 
+	  //将第一个slider-item设为激活状态 
+	  $('.slider-item:first').addClass('ui-switchable-active'); 
+	  //隐藏向前、向后翻按钮 
+	  $('.s-pg').hide(); 
+	  //鼠标上悬时显示向前、向后翻按钮,停止滑动，鼠标离开时隐藏向前、向后翻按钮，开始滑动 
+	  $('.slider-panel, .slider-prev, .slider-next').hover(function() { 
+	   		stop(); 
+	   		$('.s-pg').show(); 
+	  }, function() { 
+	     	$('.s-pg').hide(); 
+	   	 	start(); 
+	  }); 
+	  $('.slider-item').hover(function(e) { 
+	   	stop(); 
+	   	var preIndex = $(".slider-item").filter(".ui-switchable-active").index(); 
+	   	currentIndex = $(this).index(); 
+	   	play(preIndex, currentIndex); 
+	  }, function() { 
+	    start(); 
+	  }); 
+	  
+	  $('.slider-prev').unbind('click'); 
+	  $('.slider-prev').bind('click', function() { 
+	    	prev(); 
+	  }); 
+	  $('.slider-next').unbind('click'); 
+	  $('.slider-next').bind('click', function() { 
+	    	next(); 
+	  }); 
+	  /** 
+	   * 向前翻页 
+	   */
+	  function prev() { 
+	   	var preIndex = currentIndex; 
+	   	currentIndex = (--currentIndex + length) % length; 
+	   	play(preIndex, currentIndex); 
+	  } 
+	  /** 
+	   * 向后翻页 
+	   */
+	  function next() { 
+	   	var preIndex = currentIndex; 
+	   	currentIndex = ++currentIndex % length; 
+	   	play(preIndex, currentIndex); 
+	  } 
+	  /** 
+	   * 从preIndex页翻到currentIndex页 
+	   * preIndex 整数，翻页的起始页 
+	   * currentIndex 整数，翻到的那页 
+	   */
+	  function play(preIndex, currentIndex) { 
+	   	$('.slider-panel').eq(preIndex).fadeOut(500).removeClass('zoom-out');
+	   	$('.slider-panel').eq(currentIndex).fadeIn(500).addClass('zoom-out');
+	   	$('.slider-item').removeClass('ui-switchable-active'); 
+	   	$('.slider-item').eq(currentIndex).addClass('ui-switchable-active'); 
+	  } 
+	  /** 
+	   * 开始轮播 
+	   */
+	  function start() { 
+	   	if(!hasStarted) { 
+	    hasStarted = true; 
+	    interval = setInterval(next, t); 
+	   } 
+	  } 
+	  /** 
+	   * 停止轮播 
+	   */
+	  function stop() { 
+		   clearInterval(interval); 
+		   hasStarted = false; 
+	  } 
+	  //开始轮播 
+	  start(); 
+	});
+</script>
+<script src="__PUBLIC__/js/jqueryUrlGet.js"></script><!--获取get参数插件-->
+<script> 
+set_first_leader(); //设置推荐人 
+// 如果是手机浏览器跳到手机
+if(isMobileBrowser())
+   location.href="{:U('Mobile/Index/index')}";
+</script>
+</body>
+</html>

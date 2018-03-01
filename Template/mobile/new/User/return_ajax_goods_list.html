@@ -1,0 +1,35 @@
+<volist name="list" id="item">     
+		<table width="95%" border="1" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>Repair/Return number</td>
+				<td>{$item.id}</td>
+			</tr>
+			<tr>
+				<td>Order number</td>
+				<td><a target="_blank" href="{:U('User/order_detail',array('id'=>$item['order_id']))}">{$item.order_sn}</a></td>
+			</tr>
+			<tr>
+				<td>Goods name</td>
+				<td><a href="{:U('Goods/goodsInfo',array('id'=>$item[goods_id]))}" target="_blank">{$goodsList[$item[goods_id]]}</a></td>
+			</tr>
+			<tr>
+				<td>Reply time</td>
+				<td>{$item.addtime|date="Y-m-d",###}</td>
+			</tr>
+			<tr>
+				<td>Status</td>
+				<td>
+                    <if condition="$item['status'] eq 0">to Be process</if>
+                    <if condition="$item['status'] eq 1">Service processing</if>
+                    <if condition="$item['status'] eq 2">Completed</if>                
+                </td>
+			</tr>
+			<tr>
+				<td class="check_but_thh" colspan="2">
+					<div>
+						<a href="{:U('User/return_goods_info',array('id'=>$item[id]))}">View</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+</volist>

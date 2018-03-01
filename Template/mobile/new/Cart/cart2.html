@@ -1,0 +1,322 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta name="Generator" content="tpshop" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Shopping process-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<link rel="stylesheet" href="__STATIC__/css/public.css">
+<link rel="stylesheet" href="__STATIC__/css/flow.css">
+<link rel="stylesheet" href="__STATIC__/css/style_jm.css">
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/mobile_common.js"></script>
+<script src="__STATIC__/js/common.js"></script>
+</head>
+<body style="background: rgb(235, 236, 237);position:relative;">
+<div class="tab_nav">
+  <div class="header">
+    <div class="h-left"> <a class="sb-back" href="javascript:history.back(-1)" title="返回"></a> </div>
+    <div class="h-mid">Confirm order</div>
+  </div>
+</div>
+<div class="screen-wrap fullscreen login"> 
+<form name="cart2_form" id="cart2_form" method="post">
+    <section class="content" style="min-height: 294px;">
+    <div class="wrap">
+    <div class="active" style="min-height: 294px;">
+    <div class="content-buy">
+    <div class="wrap order-buy">
+    
+    <section class="order " id="order4">
+      <div  class="order-info" style="margin-top:0;">
+      <!--
+        	<h4 class="seller-name" > <img src="__STATIC__/images/flow/dingdan.png" width="28"> 
+        		订单详情 <a class="modify" href="{:U('Cart/cart')}">修改</a></h4>
+      -->          
+      </div>
+      <section class="order-info" style=" margin-top:0px;">
+        <div class="order-list">
+          <div class="goods-list-title">Website self-management</div>
+          <ul class="order-list-info">
+           <foreach name="cartList" item="v"  key="k">
+            <if condition="$v[selected] eq '1'">           
+            <li class="item" >
+              <div class="itemPay list-price-nums" id="itemPay17">
+                <p class="price">${$v.member_goods_price}</p>
+                <p class="nums">x{$v.goods_num}</p>
+              </div>
+              <div class="itemInfo list-info" id="itemInfo12">
+                <div class="list-img"> <a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$v[goods_id]))}"> <img src="{$v.goods_id|goods_thum_images=200,200}"></a> </div>
+                <div class="list-cont">
+                  <h5 class="goods-title">{$v.goods_name} </h5>
+                  <p class="godds-specification">{$v.spec_key_name}</p>
+                </div>
+              </div>
+            </li>
+            </if>
+            </foreach>
+            <li class="flow_youhui_no">If you are a vip member, you can enjoy a membership discount</li>
+            <li class="flow_youhui_no">
+              <div class="checkout_other">
+                <div class="jmbag" href="javascript:void(0);" onClick="showCheckoutOther(this);"><span class="right_arrow_flow"></span>Use coupon</div>
+
+                <table class="subbox_other sub_bonus" width="100%">
+                  <tr>
+                    <td>
+                      <input type="radio" class="radio vam ma-ri-10" name="couponTypeSelect" checked value="1"  onClick="ajax_order_price();" />
+                      <select id="coupon_id" name="coupon_id" class="vam ou-no" onChange="ajax_order_price();">                                                     
+                         <option value="0">Select coupons</option>
+                          <foreach name="couponList" item="v"  key="k">                                                     
+                            <option value="{$v['id']}">{$v['name']}</option>
+                          </foreach>   
+                      </select>                    
+                    </td>                 
+                  </tr>
+                  <tr>
+                     <td>
+                      <input type="radio" class="radio vam ma-ri-10" name="couponTypeSelect"  value="2"  onClick="ajax_order_price();javascript:document.getElementById('Bonus_span_0').style.display='block';" />
+                      <a href="javascript:void(0);"  class="a_other1_h" id="Bonus_a_0">Enter coupon number directly</a>
+
+                      <label id="Bonus_span_0" style="display:none;">
+                        <input name="couponCode" id="bonus_sn_0" type="text"   value="" placeholder="Enter coupon"  class="txt1" style="width:100px;"/>
+                        <input name="validate_bonus" type="button" value="use" onClick="ajax_order_price();" class="BonusButton" />
+                      </label>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </li>
+            <!-- <li class="flow_youhui_no">
+                           <label id="Bonus_span_0">
+                            使用余额：
+                   <input id="user_money" name="user_money"  type="text"   placeholder="输入余额" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" class="txt1" style="width:100px;"/>
+                   <input name="validate_bonus" type="button" value="使用" onClick="ajax_order_price();" class="BonusButton" />
+                   您的可用余额<em>{$user['user_money']}</em>
+                 </label>
+            </li> -->
+            
+            <li class="flow_youhui_no">
+       			<label id="Bonus_span_0">
+       			   Use points：
+               <input id="pay_points" name="pay_points" type="text"   placeholder="input points"  onpaste="this.value=this.value.replace(/[^\d]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d]/g,'')" class="txt1" style="width:100px;"/>
+               <input name="validate_bonus" type="button" value="Use" onClick="ajax_order_price();" class="BonusButton" />
+             	<div class="order-tip" style="color: #888;font-size: 12px;">Your usable points<em>{$user['pay_points']}</em></div>
+             </label>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </section>
+    <a href="{:U('User/address_list',array('source'=>'cart2'))}">
+      <section class="address">
+        <div class="address-info" >Consignee:
+          <p class="address-name">{$address.consignee}</p>
+          <p class="address-phone">{$address.mobile}</p>
+        </div>
+        <div class="address-details">address：{$address.address}</div>
+          <input type="hidden" value="{$address.address_id}" name="address_id" />
+      </section>
+    </a>
+      <section class="order-info">
+          <div class="order-list">
+            <div class="content ptop0">
+              <div class="panel panel-default info-box">
+                <div class="panel-body" id="pay_div"  >
+                  <div class="title" id="zhifutitle" style="border-bottom:1px solid #eeeeee;"> 
+                    <span class="i-icon-arrow-down i-icon-arrow-up" id="zhifuip"></span>
+                     <span class="text">Select Shipping </span>  
+                     <!-- <em class="qxz" id="emzhifu">请选择配送方式</em>  -->
+                  </div>
+                  <php>  
+                    $free_last = $total_price['total_fee'] - $tpshop_config['shopping_freight_free'];
+                  </php>
+                  <ul class="nav nav-list-sidenav shipping-list" id="zhifu68" style="display:block; border-bottom:none;">
+                     
+                      <li class="item" name="payment_name">
+                        <label class="clearfix">
+                        <input type="radio" id="shipping_standard" name="shipping_code" value="1" checked="checked" class="c_checkbox_t" onclick="ajax_order_price()"/>
+                        <div class="fl shipping_title">Standard Delivery <br/><em>(about 30days after order shipped)</em></div>
+                        <span class="cost_num">
+                          <if condition="$free_last egt 0">free<else/>$5</if>
+                        </span>
+                        </label>
+                      </li>
+                      <li class="item" name="payment_name">
+                        <label class="clearfix">
+                        <input type="radio" id="shipping_express" name="shipping_code" value="2" class="c_checkbox_t" onclick="ajax_order_price()"/>
+                        <div class="fl shipping_title">Express Delivery <br/><em>(5-7 days after order shipped)</em></div>
+                        <span class="cost_num">
+                          <if condition="$free_last egt 0">$7<else/>$15</if>
+                        </span>
+                        </label>
+                      </li>
+                      
+                  </ul>
+
+                   <!-- <ul class="nav nav-list-sidenav" id="zhifu68" style="display:block; border-bottom:none;">
+                     <foreach name="shippingList" item="v"  key="k">
+                      <li class="clearfix" name="payment_name">
+                        <label>
+                        <input type="radio" id="{$v.code}" name="shipping_code" id="{$v.code}" value="{$v.code}"  <if condition="$k eq 0"> checked="checked" </if> onclick="ajax_order_price()" class="c_checkbox_t"/>
+                        <div class="fl shipping_title"> {$v.name} <em>({$v.desc})</em></div>
+                        </label>
+                      </li>
+                      </foreach>
+                  </ul> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    <!-- <section class="order-info">
+    <div class="order-list">
+      <div class="content ptop0">
+        <div class="panel panel-default info-box">
+          <div class="orderInfo " >
+            <h4 class="seller-name"> <img src="__STATIC__/images/flow/dingdan.png" width="28"> Other options </h4>
+          </div>
+          <table border=0 cellpadding=0 cellspacing=0 width="100%" class="checkgoods">
+            <tr>
+              <td colspan=4 class="tdother2" style="border-top:none;"><div class="checkout_other" >
+                  <div class="jmbag" href="javascript:void(0);" onClick="showCheckoutOther(this);"><span class="right_arrow_flow"></span>Invoicing and out of stock handling</div>
+                  <div class="subbox_other" width="100%">
+                    <table id='normal_invoice_tbody' width="100%">
+                      <tr>
+                        <td align=right style="vertical-align:top" width="84">Invoice header：</td>
+                        <td colspan="2">
+                          <input class="txt1" style='vertical-align:middle' type="text" name="invoice_title" placeholder="XXXCompany Or XXperson" />
+                        </td>
+                      </tr>                      
+                    </table>                     
+                  </div>
+                </div>
+                </td>
+            </tr>                                   
+          </table>
+        	<div style="height:10px; line-height:10px; clear:both;"></div>
+        </div>
+      </div>
+    </div>
+    </section> -->
+
+        <section class="order-info">
+        <div class="order-list">
+          <div class="content ptop0">
+            <div class="panel panel-default info-box">
+              <div class="con-ct fo-con">
+                <ul class="ct-list order_total_ul" id="ECS_ORDERTOTAL" >
+                  <li class="order_total_li" > 
+                  		*Upon completion of this order, you will receive<span class="price">Corresponding</span> points<br/>
+                  </li>
+                  <li>
+                   <div class="subtotal">
+                      <span class="total-text">Goods Total Amount：</span><em class="price">${$total_price.total_fee}</em><br/>
+                      <span class="total-text">Shipping：</span>$<em class="price" id="postFee">{$total_price.shipping_price}</em><br/>
+                      <span class="total-text">Via Coupons：</span>-&nbsp;¥&nbsp;<em class="price" id="couponFee">0</em><br/>
+                      <span class="total-text">Via Points：</span>-&nbsp;¥&nbsp;<em class="price" id="pointsFee">0</em><br/>
+                      <!-- <span class="total-text">使用余额：</span>-&nbsp;¥&nbsp;<em class="price" id="balance">0</em><br/> -->
+                      <span class="total-text">Promotions Activities：</span>-&nbsp;¥&nbsp;<em class="price" id="order_prom_amount">0</em><br/>                      
+                      <span class="total-text">Last Amount：</span>$<strong class="price_total" id="payables">0</strong>
+                      <span class="total-text" style=""></span> 
+                   </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="panel panel-default info-box">
+                <div class="pay-btn">
+                  <input onClick="submit_order();" type="button" class="sub-btn btnRadius" value="Submit Order"/>
+                </div>
+              </div>
+            </div>
+            </div>
+            </div>
+         </section>
+         </div>
+        </div>
+      </div>
+    </div>
+ 	</section>
+  </form>
+  </div>
+<section class="f_mask" style="display: none;"></section>
+<include file="Public/footer"/>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        ajax_order_price(); // 计算订单价钱
+    });
+
+// 获取订单价格
+function ajax_order_price()
+{
+    $.ajax({
+        type : "POST",
+        url:'/index.php?m=Mobile&c=Cart&a=cart3&act=order_price&t='+Math.random(),
+        data : $('#cart2_form').serialize(),
+        dataType: "json",
+        success: function(data){
+
+            if(data.status != 1)
+            {
+                alert(data.msg);
+                // 登录超时
+                if(data.status == -100)
+                    location.href ="{:U('Mobile/User/login')}";
+
+                return false;
+            }
+            // console.log(data);
+            $("#postFee").text(data.result.postFee); // 物流费
+            $("#couponFee").text(data.result.couponFee);// 优惠券
+            $("#balance").text(data.result.balance);// 余额
+            $("#pointsFee").text(data.result.pointsFee);// 积分支付
+            $("#payables").text(data.result.payables);// 应付
+			     $("#order_prom_amount").text(data.result.order_prom_amount);// 订单 优惠活动 									
+        }
+    });
+}
+
+// 提交订单
+ajax_return_status = 1; // 标识ajax 请求是否已经回来 可以进行下一次请求
+function submit_order()
+{
+	if(ajax_return_status == 0)
+	    return false;
+		
+	ajax_return_status = 0;	
+	
+    $.ajax({
+        type : "POST",
+        url:"{:U('Mobile/Cart/cart3')}",//+tab,
+        data : $('#cart2_form').serialize()+"&act=submit_order",// 你的formid
+        dataType: "json",
+        success: function(data){
+
+            if(data.status != '1')
+            {
+                alert(data.msg); //执行有误
+                // 登录超时
+                if(data.status == -100)
+                  location.href ="{:U('Mobile/User/login')}";			
+				          ajax_return_status = 1; // 上一次ajax 已经返回, 可以进行下一次 ajax请求							
+                  return false;
+            }
+            // console.log(data);
+            $("#postFee").text(data.result.postFee); // 物流费
+            $("#couponFee").text(data.result.couponFee);// 优惠券
+            $("#balance").text(data.result.balance);// 余额
+            $("#pointsFee").text(data.result.pointsFee);// 积分支付
+            $("#payables").text(data.result.payables);// 应付
+			      $("#order_prom_amount").text(data.result.order_prom_amount);// 订单 优惠活动 									
+            alert('Submit the order successfully, jump the payment page!');
+            location.href = "/index.php?m=Mobile&c=Cart&a=cart4&order_id="+data.result;
+        }
+    });
+}
+</script>
+</body>
+</html>

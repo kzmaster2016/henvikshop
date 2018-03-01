@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>system tip-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="stylesheet" href="__STATIC__/css/base.css" type="text/css">
+<link href="__STATIC__/css/tsinformation.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<!--------头部开始-------------->
+<include file="Public/header" />
+ 
+ 
+<!--中间内容-->
+<div id="warpper" class="clearfix">
+    <?php if(isset($message)) {?>
+   <!-- 处理成功 -->
+   <div class="box-ts">
+    	<i><img src="__STATIC__/images/success_ts.png"></i>         
+        <ul>
+        	<li><h3> <?php echo($message); ?><h3></li>
+                <li><a href="javascript:void(0);">Page <a id="href" href="<?php echo($jumpUrl); ?>">Jump</a> Waitting Seconds： <b id="wait"><?php echo($waitSecond); ?></b></a></li>
+                <li>
+                    <a href="/">Home</a> <a href="/index.php?m=Home&c=Cart&a=cart">Carts</a>
+                    <a href="/index.php?m=Home&c=User&a=index">User Center</a>
+                </li>
+        </ul>        
+    </div>
+    <?php }else{?>        
+     <!-- 处理失败 -->
+     <div class="box-ts">
+    	<i><img src="__STATIC__/images/error_ts.png"></i>
+        <ul>
+            <li><h3><?php echo($error); ?></h3></li>
+            <li><a href="javascript:void(0);">Page <a id="href" href="<?php echo($jumpUrl); ?>">Jump</a> Waitting Seconds： <b id="wait"><?php echo($waitSecond); ?></b></a></li>
+            <li>
+                <a href="/">Home</a> <a href="/index.php?m=Home&c=Cart&a=cart">Carts</a>
+                <a href="/index.php?m=Home&c=User&a=index">User Center</a>
+            </li>
+        </ul>
+    </div>   
+    <?php }?>            
+</div>
+<!--中间内容 end-->
+ 
+<!--footer-开始-->
+<include file="Public/footer" />
+<!--footer-结束-->
+<script type="text/javascript">
+ 
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+ 
+</script>
+</div>
+</body>
+</html>

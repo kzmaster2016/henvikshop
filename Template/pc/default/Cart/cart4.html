@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>Successful Order-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="icon" href="/ico.png" type="image/x-icon" />
+
+<link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+<script src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+</head>
+<body>
+
+<!-- <include file="Public/siteTopbar" />     -->
+<div class="header2">
+    <div class="layout head-con">
+        <div class="inblockm"><img src="{$tpshop_config['shop_info_store_logo']}" alt=""></div>
+        <div class="slogon inblockm">DAILY DEALS FOR YOUNGER</div>
+    </div>
+</div>
+<div class="paypage-con">
+    <div class="layout after-ta order-ha">
+    	<div class="erhuh">
+        	<i class="icon-succ"></i>
+            <h3>The order is submitted successfully. Please make payment as soon as possible!</h3>
+            <p class="succ-p">
+            Order number:&nbsp;&nbsp;{$order['order_sn']}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+            Amount to pay:<b>${$order['order_amount']}</b>&nbsp;</p>
+            <div class="succ-tip">
+                Please complete the payment within <b>{$pay_date}</b>, otherwise the order will be cancelled.
+            </div>
+
+            <!-- <a href="{:U('Home/User/order_detail',array('id'=>$order['order_id']))}">
+                Order details
+                <i></i>
+            </a> -->
+        </div>
+        <!-- <form action="{:U('Home/Payment/getCode')}" method="post" name="cart4_form" id="cart4_form"> -->
+
+        <form id="checkout-form" action="/index.php?m=api&c=PayPal&a=pay_order" method="post">
+            <input type="hidden" name="order_id" value="{$order['order_id']}" />
+
+            <input type="hidden" name="order_sn" id="order_sn" value="{$order['order_sn']}"> <!-- 订单编号-->
+            <input type="hidden" id="payment_method_nonce" name="nonce">  <!--paypal 返回的一个只被使用一次的任意或非重复的随机数值-->
+            <input type="hidden" name="payment_type" id="payment_type" value="paypal">
+
+
+            <input type="hidden" name="email" id="email" placeholder="email" value="{$order['email']}">
+            <input type="hidden" name="first_name" id="first_name" placeholder="first name" value="{$order['consignee']}">
+            <input type="hidden" name="postcode" id="postcode" placeholder="postcode" value="{$order['zipcode']}">
+            <input type="hidden" name="address" id="address" placeholder="address" value="{$order['address']}">
+            <input type="hidden" name="mobile" id="mobile" placeholder="mobile" value="{$order['mobile']}">
+
+            <!-- <input type="hidden" name="last_name" id="last_name" placeholder="last_name" value="Doe"> -->
+            <input type="hidden" name="country" id="country" placeholder="country" value="{$order['country']}">
+            <input type="hidden" name="city" id="city" placeholder="city" value="{$order['city']}">
+            <input type="hidden" name="state" id="state" placeholder="state" value="{$order['province']}">
+
+            <!-- <input type="button" value="PayPal" id="checkout_paypal"> -->
+        </form>
+
+        <div class="orde-sjyy">
+        	<h3 class="title">
+                Pay With
+            </h3>
+            <div class="bsjy-g">  
+                <div class="method-con">
+                    <div class="hd">
+                        <input type="radio" name="pay-type" value="1">
+                        <span class="inblockm">Credit Card</span>
+                        
+                        <div class="card-type inblockm">
+                            <img src="__STATIC__/images/images-out/visa.webp" alt="">
+                            <img src="__STATIC__/images/images-out/mastercard.webp" alt="">
+                            <img src="__STATIC__/images/images-out/amex.webp" alt="">
+                        </div>
+                    </div>
+                    <div class="bd" style="overflow: hidden;">
+                        <div id="credit-button-container"></div>
+                        <!-- <div class="credit-form" style="display: none;">
+                            <ul class="form-list">
+                                <li class="form-group">
+                                    <div class="name">Credit Card Number</div>
+                                    <div class="group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </li>
+                                <li class="form-group">
+                                    <div class="name">Expiration Date</div>
+                                    <div class="group">
+                                        <select name="month" id="" class="form-control select">
+                                            <option value="0">Month</option>
+                                             <option value="1">01</option>
+                                             <option value="2">02</option>
+                                             <option value="3">03</option>
+                                             <option value="4">04</option>
+                                             <option value="5">05</option>
+                                             <option value="6">06</option>
+                                             <option value="7">07</option>
+                                             <option value="8">08</option>
+                                             <option value="9">09</option>
+                                             <option value="10">10</option>
+                                             <option value="11">11</option>
+                                             <option value="12">12</option>
+                                        </select>
+                                        <select name="year" id="" class="form-control select">
+                                             <option value="0">Year</option>
+                                             <option value=""></option>
+                                             <option value=""></option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class="form-group">
+                                    <div class="name">CVV</div>
+                                    <div class="group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="method-con">
+                    <div class="hd">
+                        <input type="radio" name="pay-type" value="2" checked="checked">
+                        <span class="inblockm">PayPal</span>               
+                        <div class="card-type inblockm">
+                            <img src="__STATIC__/images/images-out/paypal.webp" alt="" class="inblockm">
+                            <!-- <div class="tip inblockm">(Please enter your detailed payment information after you submit your order.)</div> -->
+                        </div>
+
+                    </div>
+                    <div class="bd">
+                       
+                        <div id="paypal-button-container"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<script type="text/javascript">
+$(function(){
+
+    function byPaypal(argument) {
+        paypal.Button.render({
+            env: 'production', // sandbox | production
+            // PayPal Client IDs - replace with your own
+            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+            style: {
+                label: 'paypal',
+                size:  'medium',    // small | medium | large | responsive
+                shape: 'rect',     // pill | rect
+                color: 'blue',     // gold | blue | silver | black
+                tagline: false    
+            },
+
+            client: {
+                // sandbox:    'henvik2015-facilitator@gmail.com',
+                production: 'AdK2Fo0fpkMOrsIfcevrqFeVVX0ks6Ba9xCluQ1hdYG5SK2_wjTR_9l7JHOuVqPVUEAHJhUPQstxQ_RV'
+            },
+
+            // Show the buyer a 'Pay Now' button in the checkout flow
+            commit: true,
+            // payment() is called when the button is clicked
+            payment: function(data, actions) {
+                // Make a call to the REST api to create the payment
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: { total: '{$order['order_amount']}', currency: 'USD' }
+                            }
+                        ]
+                    },
+                    experience: {
+                        input_fields: {
+                            no_shipping: 1
+                        }
+                    }
+                });
+            },
+
+            // onAuthorize() is called when the buyer approves the payment
+            onAuthorize: function(data, actions) {
+
+                // Make a call to the REST api to execute the payment
+                return actions.payment.execute().then(function() {
+                    window.alert('Payment Complete!');
+                });
+            }
+        },'#paypal-button-container');
+    }
+
+    function byCreditCard(){
+        paypal.Button.render({
+            env: 'production', // sandbox | production
+            // PayPal Client IDs - replace with your own
+            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+            style: {
+                layout: 'vertical',
+                size:  'medium',    // small | medium | large | responsive
+                shape: 'rect',     // pill | rect
+                color: 'blue',     // gold | blue | silver | black
+                tagline: false    
+            },
+            funding: {
+                allowed: [paypal.FUNDING.CARD]
+            },
+            client: {
+                // sandbox:    'henvik2015-facilitator@gmail.com',
+                production: 'AdK2Fo0fpkMOrsIfcevrqFeVVX0ks6Ba9xCluQ1hdYG5SK2_wjTR_9l7JHOuVqPVUEAHJhUPQstxQ_RV'
+            },
+
+            // Show the buyer a 'Pay Now' button in the checkout flow
+            commit: true,
+            // payment() is called when the button is clicked
+            payment: function(data, actions) {
+                // Make a call to the REST api to create the payment
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: { total: '{$order['order_amount']}', currency: 'USD' }
+                            }
+                        ]
+                    },
+                    experience: {
+                        input_fields: {
+                            no_shipping: 1
+                        }
+                    }
+                });
+            },
+
+            // onAuthorize() is called when the buyer approves the payment
+            onAuthorize: function(data, actions) {
+
+                // Make a call to the REST api to execute the payment
+                return actions.payment.execute().then(function() {
+                    window.alert('Payment Complete!');
+                    $.ajax({
+                        url: '/index.php?m=Home&c=Cart&a=payOrder',
+                        type: 'GET',
+                        data: {order_sn: {$order['order_sn']}},
+                        dataType: "json"
+                    })
+                    .done(function($data) {
+                        if ($data.status==1) {
+                            console.log("success");
+                            window.location.href="{:U('Home/User/order_list')}";
+                        }                       
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+                    
+                });
+            }
+        },'#credit-button-container');
+    }
+    byCreditCard();
+    byPaypal();
+
+    $('input[name="pay-type"]').on('change',  function(event) {
+        // alert($(this).val());
+        if ($(this).val()==1) {
+            $('#credit-button-container').css('display', 'block');
+            $('#paypal-button-container').css('display', 'none');
+        }else if($(this).val()==2){
+            $('#credit-button-container').css('display', 'none');
+            $('#paypal-button-container').css('display', 'block');
+        }
+    }).trigger('change');
+
+
+})
+</script>
+
+<!--footer-开始-->
+
+<!--footer-结束-->
+<script src="https://s22.cnzz.com/z_stat.php?id=1261971213&web_id=1261971213" language="JavaScript"></script>
+</body>
+</html>

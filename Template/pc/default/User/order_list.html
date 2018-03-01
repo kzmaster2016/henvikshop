@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>order list-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+    <link rel="stylesheet" href="__STATIC__/css/page.css" type="text/css">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+    <script src="__STATIC__/js/slider.js"></script>
+
+</head>
+
+<body>
+<!--------头部开始-------------->
+<include file="Public/header" />
+<!--------头部结束-------------->
+
+<div class="layout ov-hi">
+    <div class="breadcrumb-area">    
+	    <foreach name="navigate_user" key="k" item="v">
+	        <if condition="$k neq 'Home'"> > </if>  
+            <a href="{$v}">{$k}</a> 
+        </foreach>
+    </div>
+</div>
+<div class="layout pa-to-10 fo-fa-ar">
+    <!--菜单-->
+    <include file="User/menu" />
+    <!--菜单-->
+    <div class="fr wi940">
+        <div class="he50 wddd">
+            <div class="fl ddd-h2">
+                <h2><span>My Orders</span></h2>
+            </div>
+        </div>
+        <div class="wddd-li">
+            <ul>
+                <li class="wddd-red" id="ALL"><a href="{:U('Home/User/order_list')}">All</a></li>
+                <li id="WAITPAY"><a href="{:U('Home/User/order_list',array('type'=>'WAITPAY'))}">Waiting to Pay<em></em></a></li>
+                <li id="WAITSEND"><a href="{:U('Home/User/order_list',array('type'=>'WAITSEND'))}">to Be Shipped<em></em></a></li>
+                <li id="WAITRECEIVE"><a href="{:U('Home/User/order_list',array('type'=>'WAITRECEIVE'))}">to Be Received<em></em></a></li>
+                <li id="WAITCCOMMENT"><a href="{:U('Home/User/order_list',array('type'=>'WAITCCOMMENT'))}">to Comments<em></em></a></li>
+            </ul>
+        </div>
+        <div class="wddd-js ov-in">
+            <!--<div class="merge">-->
+                <!--<label class="ma-ri-20 di-in-bl cu-po" for="checkallbox"><input class="ma-ri-10  ve-al-mi" id="checkallbox" type="checkbox"><span class="ve-al-mi fo-si-14 fo-fa-ta">全选</span></label>-->
+                <!--<a class=" di-in-bl hb-merge" href="">合并支付</a>-->
+            <!--</div>-->
+            <div class="list-group-title">
+                <table class="merge-tab" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                    	<th class="col-pro-img wi120 borsdjk"></th>
+                        <th class="col-pro">Goods</th>
+                        <th class="col-price">Unit Price</th>
+                        <th class="col-price">Discount Price</th>                        
+                        <th class="col-quty">Qty</th>
+                        <th class="col-pay wi139">Paid</th>
+                        <th class="col-operate">Order Status</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            
+ <if condition="empty($lists)"><!--没查询到数据-->
+     <p style="text-align:center"><img src="__STATIC__/images/null_data.jpg" width="400"  /></p>     
+ </if>             
+            <div class="merge-list">
+                <!--订单列表-->
+                <volist name="lists" id="list">
+                    <div class="ma-0--1">
+                        <div class="o-info o-inff">
+                            <div class="fl">
+                                <input class="o-ch ve-al-mi" type="checkbox" />
+                                <span class=" ma-ri-15 co-888 fo-si-14">{$list.add_time|date='Y-m-d H:i:s',###}</span>
+                                <span class="ma-ri-15 co-888 fo-si-14">Order No.：<a class="co-36c" href="">{$list.order_sn}</a></span>
+                            </div>
+                            <div class="fr te-al co-888 fo-si-14">{$list['order_status_desc']}</div>
+                        </div>
+                        <div class="o-pro">
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                <volist name="list.goods_list" id="good">
+                                    <tr>
+                                        <td class="col-pro-img">
+                                            <p>
+                                                <a title="{$good.goods_name}" href="{:U('Home/Goods/goodsInfo',array('id'=>$good['goods_id']))}" target="_blank">
+                                                    <img alt="{$good.goods_name}" src="{$good.goods_id|goods_thum_images=78,78}">
+                                                </a>
+                                            </p>
+                                        </td>
+                                        <td class="col-pro-info te-al-le" ><p class="p-name"><a title="" target="_blank" href="{:U('Home/Goods/goodsInfo',array('id'=>$good['goods_id']))}">{$good.goods_name}</a></p></td>
+                                        <td class="col-price"><em>$</em><span>{$good.goods_price}</span></td>
+                                        <td class="col-price"><em>$</em><span>{$good.member_goods_price}</span></td>                                        
+                                        <td class="col-quty">{$good.goods_num}</td>
+                                        <td rowspan="1" class="col-pay"><p><em>$</em><span>{$good['goods_num'] * $good['member_goods_price']}</span></p></td>
+                                        <td rowspan="1" class="col-pay">
+                                            <if condition="($list[return_btn] eq 1) and ($good[is_send] eq 1)">
+						                          <p class="p-link">
+                                                    <a style="color:#999;" href="{:U('Home/User/return_goods',array('order_id'=>$list['order_id'],'order_sn'=>$list['order_sn'],'goods_id'=>$good['goods_id'],'spec_key'=>$good['spec_key']))}">Apply for Refund</a>
+                                                </p>    
+                                            </if>
+					                        <if condition="($list[comment_btn] eq 1) and ($good[is_comment] eq 0)">
+                                            	<p class="p-link"><a href="{:U('Home/User/comment')}" target="_blank"><span>Comments</span></a></p>
+                                            </if>
+                                        </td>                                        
+                                        <!--<td rowspan="1" class="col-operate">-->
+                                        <!--<p class="p-button"> <a class="button-operate-pay di-in-bl hb-merge" href="" target="_blank"><span>立即支付</span></a></p>-->
+                                        <!--&lt;!&ndash;<p class="p-link"><a href="">修改订单</a></p>&ndash;&gt;-->
+                                        <!--<p class="p-link"><a href="" >取消订单</a></p>-->
+                                        <!--<p class="p-link"><a href="">订单详情</a></p>-->
+                                        <!--</td>-->
+                                    </tr>
+                                </volist>
+                                <tr>
+                                    <td colspan="6" class="te-al-le litz-pa">
+                                        <p>Product Total:<span class="co-red">{$list.goods_price}</span></p>  
+										<p>Postage Fee:<span class="co-red">{$list.shipping_price}</span></p>  
+										<p>Coupons:<span class="co-red">{$list.coupon_price}</span></p>  
+										<p>Points :<span class="co-red">{$list.integral_money}</span></p>  
+                                        <p>Promotion:<span class="co-red">{$list.order_prom_amount}</span></p>  
+										<p>Balance :<span class="co-red">{$list.user_money}</span></p>
+                                        <p>Order Total (Including Delivery):<span class="co-red fo-si-18">{$list['order_amount']}</span></p>
+                                    </td>
+                                    <td rowspan="1" class="col-operate">
+										<if condition="$list.cancel_btn eq 1">
+                                            <p class="p-link"><a onClick="cancel_order({$list.order_id})" >Cancel Order</a></p>
+                                        </if>																		
+                                        <if condition="$list.pay_btn eq 1"><p class="p-button"><a class="button-operate-pay di-in-bl hb-merge" href="{:U('/Home/Cart/cart4',array('order_id'=>$list[order_id]))}" target="_blank"><span>to Pay</span></a></p></if>
+                                        <if condition="$list.receive_btn eq 1"><p class="p-button"><a class="button-operate-pay di-in-bl hb-merge" onClick=" if(confirm('Confirm Received the Goods ?')) location.href='{:U('Home/User/order_confirm',array('id'=>$list['order_id']))}'" target="_blank"><span>Confirm Receipt</span></a></p></if>
+										<p class="p-link"><a href="{:U('Home/User/order_detail',array('id'=>$list['order_id']))}">Order Details</a></p>
+                                        <if condition="($list.order_status eq 3) or ($list.order_status eq 5)">
+                                            <p class="p-link"><a href="{:U('Admin/order/delete_order',array('order_id'=>$list['order_id']))}"  data-toggle="tooltip" class="btn btn-danger" title="delete"><i class="fa fa-trash-o">Delete Order</i></a></p>
+                                        </if>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </volist>
+                <!--订单列表结束-->
+            </div>
+            <div class="merge">
+                <!--<label class="ma-ri-20 di-in-bl cu-po"  name="bottomCheckBoxDiv"><input name="bottomCheckBoxDiv" class="ma-ri-10  ve-al-mi" id="checkallbox" type="checkbox"><span class="ve-al-mi fo-si-14 fo-fa-ta">全选</span></label>-->
+                <!--<a class=" di-in-bl hb-merge" href="">合并支付</a>-->
+                {$page}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="he80"></div>
+<!--footer-开始-->
+<include file="Public/footer2" />
+<!--footer-结束-->
+
+
+</body>
+
+<script>
+    $(function () {
+        //高亮显示
+        var active = '{$active_status}';
+        if(!active)
+            active = 'ALL';
+        $('.wddd-li li').removeClass('wddd-red');
+        $('#'+active).addClass('wddd-red');
+
+        $("#h-s").mouseover(function () {
+            $('.ec-ta-x').css('left','124px');
+            $('.ec-ta-x').css('width','110px');
+            $(this).addClass("cullent");
+        });
+        $("#h-s").mouseout(function () {
+            $('.ec-ta-x').css('left','0px');
+            $('.ec-ta-x').css('width','124px');
+            $(this).removeClass("cullent");
+        });
+    });
+    $(function () {
+        $("#q-s").mouseover(function () {
+            $('.ec-ta-x').css('left','0px');
+            $(this).addClass("cullent");
+        });
+        $("#q-s").mouseout(function () {
+            $('.ec-ta-x').css('left','0px');
+        });
+    });
+    //取消订单
+    function cancel_order(id){
+        if(!confirm("Confirm Cancel the Order?"))
+        return false;
+        location.href = "/index.php?m=Home&c=User&a=cancel_order&id="+id;
+    }
+</script>
+</html>

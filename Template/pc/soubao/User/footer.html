@@ -1,0 +1,29 @@
+<footer>
+  <div id="ft-service-infr"  class="move-down">
+    <div class="wrapper">
+      <dl class="contact-infr">
+        <dd class="phone-num icon-phone"><i class="icon-tel"></i>客服电话</dd>
+        <!--dd>CEO邮箱：<a href="mailto:ceo@feiyu.com" target="_blank">CEO@feiyu.com</a></dd-->
+        <dd><a href="javascript:void(0);">{$tpshop_config['shop_info_phone']}</a></dd>
+      </dl>
+     <tpshop sql="select * from `__PREFIX__article_cat` where cat_id in(1,2,3,4,7)" key="k" item='v'>      
+      <dl class="nav-service">
+        <dt>{$v[cat_name]}</dt>
+        <tpshop sql="select * from `__PREFIX__article` where cat_id = $v[cat_id]" key="k2" item='v2'>
+	        <dd><a href="{:U('Home/Article/detail',array('article_id'=>$v2[article_id]))}">{$v2[title]}</a></dd>
+        </tpshop>
+      </dl>
+    </tpshop>
+    </div>
+  </div>
+  <div class="wrapper" id="global-footer" style="width: 100%;">
+    <p class="copyright">Copyright © 2016-2025 {$tpshop_config['shop_info_store_name']}  版权所有 保留一切权利 备案号:{$tpshop_config['shop_info_record_no']}</p>
+    <dl class="authentic">
+      <a target="_blank" href="" taregt="_blank"><dd class="sgs"></dd></a>
+      <a target="_blank" href="" taregt="_blank"><dd class="zx110"></dd></a>
+      <a target="_blank" href="" taregt="_blank"><img src="__STATIC__/images/time_cnnic.jpg"></a>
+      <a target="_blank" href="" taregt="_blank" class="aqlm"><img src="__STATIC__/images/aqlm.jpg"></a>
+    </dl>
+  </div>
+  <!-- /#global-footer --> 
+</footer>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>My Carts-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="icon" href="/ico.png" type="image/x-icon" />
+<style type="text/css">
+	.navigation{display: none;}
+	.cart-main{border-top: 1px solid #eee;background: no-repeat;}
+</style>
+</head>
+<body>
+<include file="Public/header"/>
+<script src="__PUBLIC__/js/pc_common.js"></script>
+<script src="__PUBLIC__/js/layer/layer.js"></script><!--弹窗js 参考文档 http://layer.layui.com/-->
+<if condition="empty($cartList)">
+<style type="text/css">
+.sc-list{float: none;width: 100%;}
+.empty-cart-con{text-align: center;}
+.cart-icon{margin: 40px 0;}
+.cart-icon img{display: inline-block;}
+.cart-tip{text-align: center;margin-bottom: 30px;color: #aaa;font-size: 18px;}
+.act-con .shopping-btn{border: 1px solid #00a6ff;display: inline-block;width: 260px;height: 50px;line-height: 50px; border-radius: 5px;margin: 0 auto;color: #00a6ff;font-size: 18px;}
+.sc-acti-list,.sc-pro-list,.sc-total-list{display: none;}
+</style>  
+</if> 
+
+<div class="cart-main">
+	<div class="layout after">
+    	<div class="order-header">	
+	    	<div class="progress-area">
+	        	<div class="progress-area-wd on">My Carts</div>
+	        	<div class="progress-area-tx">Check Order</div>
+	        	<div class="progress-area-cg">Successful Order</div>
+	        </div>
+        </div>     
+        <div class="sc-list fl">        
+        	<form name="cart_form" id="cart_form" action="{:U('Home/Cart/ajaxCartList')}">
+	         	<div id="ajax_return"><!--  ajax renturn -->
+					
+				<if condition="empty($cartList)">    
+				    <div class="empty-cart-con">
+				        <div class="cart-icon">
+				            <img src="__STATIC__/images/tips/empty_cart.webp" alt="" class="icon">
+				        </div>
+				        <p class="cart-tip">Your Cart is Empty</p>
+				        <div class="act-con">
+				            <a href="/" class="shopping-btn">go shopping now!</a>
+				        </div>
+				    </div>
+				</if> 
+					<div class="sc-pro-list">
+					    <table width="100%" border="0" cellspacing="0" cellpadding="1">
+					        <tr class="ba-co-danhui">
+					            <th align="center" valign="middle" style="width: 50px;">&nbsp;&nbsp;</th>
+					            <th align="center" valign="middle" colspan="2">Goods</th>
+					            <th align="center" valign="middle" style="width: 80px;">Original</th>                        
+					            <th align="center" valign="middle" style="width: 80px;">Unit</th>
+					            <if condition="($user[discount] neq 1) and ($user[discount] neq null)">
+					    	        <th align="center" valign="middle">Discount Price</th>        
+					            </if>
+					            <th align="center" valign="middle" style="width: 120px;">Qty</th>
+					            <th align="center" valign="middle" style="width: 80px;">Subtotal</th>
+					            <th align="center" valign="middle" style="width: 50px;">Act</th>
+					        </tr>            
+					    <foreach name="cartList" item="v" key="k" >
+					        <tr>
+					        <td style="border-right:0" align="center" valign="middle">    
+					            <input type="checkbox"  name="cart_select[{$v.id}]" <if condition="$v[selected] eq 1" >checked="checked"</if> value="1" onclick="ajax_cart_list();" />
+					        </td>
+					        <td style="border-left:0px;border-right:0px;width: 70px;font-size: 0;" align="left" valign="top">
+					            <a class="gwc-wp-list" href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">
+					                <img class="goods-cover" src="{$v.goods_id|goods_thum_images=78,78}">
+					            </a>
+					        </td>
+					        <td style="border-left:0px; border-right:0px"  class="" align="left"  valign="top">
+					            <p class="gwc-ys-pp">
+					            	<a href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" style="vertical-align:middle">{$v.goods_name}</a>
+					                <!--团购-->
+					                <if condition="$v[activity_type] eq 2"><img  width="80" height="60" src="/Public/images/groupby2.jpg" style="vertical-align:middle"></if>
+					                <!--抢购-->
+					                <if condition="$v[activity_type] eq 1"><img  width="40" height="40" src="/Public/images/qianggou2.jpg" style="vertical-align:middle"></if>                
+					            </p>
+					            <p class="ggwc-ys-hs">{$v.spec_key_name}</p>
+					        </td>
+					        <td align="center" valign="middle"><span><del>${$v.market_price}</del></span></td>                        
+					        <td align="center" valign="middle"><span>${$v.goods_price}</span></td>
+
+					        <if condition="($user[discount] neq 1) and ($user[discount] neq null)">
+					        <td align="center" valign="middle"><span>${$v.member_goods_price}</span></td>        
+					        </if>  
+
+					        <td align="center" valign="middle">
+					            <div class="sc-stock-area">
+					                <div class="stock-area">                            
+					                    <a onClick="switch_num(-1,{$v.id},{$v.store_count});" title="reduce" class="inblockm">-</a>
+					                    <input class="inblockm" type="text" value="{$v.goods_num}" name="goods_num[{$v.id}]" id="goods_num[{$v.id}]" readonly="" />
+					                    <a onClick="switch_num(1,{$v.id},{$v.store_count});" title="plus" class="inblockm">+</a>  
+					                </div>
+					            </div>
+					        </td>
+					        <td align="center" valign="middle">${$v.goods_fee}</td>
+					        <td align="center" valign="middle"><a  class="gwc-gb" href="javascript:void(0);" onclick="if(confirm('Confirm to delete?')) ajax_del_cart({$v.id});"></a></td>
+					      </tr>
+					    </foreach>      
+					    </table>
+					</div>
+					<div class="sc-total-list">
+					    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+					      <tr>
+					        <td class="gwx-xm-dwz" align="center" valign="middle" style="width: 50px;">
+					            <input type="checkbox" name="select_all" id="select_all" <if condition="$select_all eq 1" >checked="checked"</if> onchange="check_all();" value="1"/>        
+					        </td>
+					        <td width="220" align="left">
+					            <label for="select_all">Selecte All</label>
+					            <a href="javascript:void(0);" class="remove-all" onclick="del_cart_more();">Remove Selected</a>
+					        </td>
+					        <td id="bo-to-dedede" align="right">
+					            <div class="order-total">
+					                Order Total (Exclude Shipping):&emsp;<em>${$total_price.total_fee }</em>
+					            </div>       
+					        </td>
+					      </tr>
+					    </table>
+					</div>
+	         	</div>
+         	</form>                     
+        </div>
+        <div class="sc-acti-list cart-act fr">
+        	<a class="gwc-jxgw" href="/">Continue Shopping</a>
+            <a class="gwc-qjs cart-qjs" href="{:U('Home/Cart/cart2')}" >To Checkout</a>
+        </div>
+    </div>
+</div> 
+<!--footer-开始-->
+<include file="Public/footer" />
+<!--footer-结束-->
+<script>
+
+$(document).ready(function(){			
+	// ajax_cart_list(); // ajax请求获取购物车列表 首次先不用
+});
+
+// ajax 提交购物车
+var before_request = 1; // 上一次请求是否已经有返回来, 有才可以进行下一次请求
+function ajax_cart_list(){	
+
+	if(before_request == 0) // 上一次请求没回来 不进行下一次请求
+	    return false;
+	before_request = 0;		
+	$.ajax({
+		type : "POST",
+		url:"{:U('Home/Cart/ajaxCartList')}",//+tab,
+		data : $('#cart_form').serialize(),// 你的formid
+		success: function(data){
+			$("#ajax_return").html('');
+			$("#ajax_return").append(data);
+			before_request = 1;
+		}
+	});
+}
+
+/**
+* 购买商品数量加加减减
+* 购买数量 , 购物车id , 库存数量
+*/
+function switch_num(num,cart_id,store_count)
+{
+	var num2 = parseInt($("input[name='goods_num["+cart_id+"]']").val());
+	num2 += num;
+	if(num2 < 1) num2 = 1; // 保证购买数量不能少于 1
+	if(num2 > store_count) 
+	{   
+	    error = "Only "+store_count+" pieces in stock, You can only buy "+store_count+" pieces";
+	    layer.alert(error, {icon: 2});	
+		num2 = store_count; // 保证购买数量不能多余库存数量		
+	}
+
+	$("input[name='goods_num["+cart_id+"]']").val(num2);
+
+	ajax_cart_list(); // ajax 更新商品价格 和数量
+}
+
+
+/**  全选 反选 **/				
+function check_all()
+{	   
+	var vt = $("#select_all").is(':checked');
+	$("input[name^='cart_select']").prop('checked',vt);
+	// var checked = !$('#select_all').attr('checked');
+	// $("input[name^='cart_select']").attr("checked",!checked); 		 	
+	 ajax_cart_list(); // ajax 更新商品价格 和数量		
+}
+ 
+ 
+// ajax 删除购物车的商品
+function ajax_del_cart(ids)
+{
+	$.ajax({
+		type : "POST",
+		url:"{:U('Home/Cart/ajaxDelCart')}",//+tab,
+		data:{ids:ids}, // 
+	    dataType:'json',		
+		success: function(data){
+		  	// alert(data.msg);
+		   if(data.status == 1){			
+				ajax_cart_list(); // ajax 请求获取购物车列表
+			}		   			   
+		}
+	});
+}
+
+// 批量删除购物车的商品
+function del_cart_more()
+{
+	if(!confirm('Are you sure to delete?')) 
+	  return false;
+
+	// 循环获取复选框选中的值  
+	var chk_value = [];
+	$('input[name^="cart_select"]:checked').each(function(){
+		var s_name = $(this).attr('name');
+		var id = s_name.replace('cart_select[','').replace(']','');		
+		chk_value.push(id);
+	}); 
+	// ajax  调用删除
+	if(chk_value.length > 0){
+		ajax_del_cart(chk_value.join(','));
+	}
+}
+</script>
+<script src="https://s22.cnzz.com/z_stat.php?id=1261971213&web_id=1261971213" language="JavaScript"></script>
+</body>
+</html>

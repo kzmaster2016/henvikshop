@@ -1,0 +1,48 @@
+<div class="footer">
+    <div class="layout quality layer">
+        <ul class="footer_quality">
+            <li class="f1"><i></i>High Quality Assurance</li>
+            <li class="f2"><i></i>100% Secured Payments</li>
+            <li class="f3"><i></i>Free Shipping Over ${$tpshop_config.shopping_freight_free}</li>
+            <li class="f4"><i></i>Support Wholesale</li>
+        </ul>
+    </div>
+    <div class="helpful layout clearfix">
+        <dl>
+            <dt>Cantact Us</dt>
+            <dd>
+                <ol>
+                    <li><a href="###">Call:0086-13725102210</a></li>
+                    <li><a href="###">E-mail:13260634356@163.com</a></li>
+                </ol>
+            </dd>
+        </dl>
+
+        <tpshop sql="select * from `__PREFIX__article_cat` where cat_id in(1,3,4,7) order by field(cat_id,3,1,4,7)" key="k" item='v'>    
+        <dl>
+       <!--  <if condition="$k neq 0">class="jszc"</if> -->
+            <dt>{$v[cat_name]}</dt>
+            <dd>
+                <ol>
+                    <tpshop sql="select * from `__PREFIX__article` where cat_id = $v[cat_id] and is_open=1" key="k2" item='v2'>
+                    <li><a href="{:U('Home/Article/detail',array('article_id'=>$v2[article_id]))}" target="_blank">{$v2[title]}</a></li>
+                    </tpshop>                        
+                </ol>
+            </dd>
+        </dl>
+      </tpshop>
+    </div>
+    <div class="socialplat layout">
+        <span class="heading">Follow us:</span>
+        <ul class="social-list">
+            <li><a href="https://www.facebook.com/henvik2016" target="_blank"><img src="__PUBLIC__/upload/Public/Facebook_03.png" alt=""></a></li>
+            <li><a href="https://twitter.com/henvik21016" target="_blank"><img src="__PUBLIC__/upload/Public/twitter_03.png" alt=""></a></li>
+            <li><a href="https://www.linkedin.com/in/双飞-徐-917198123" target="_blank"><img src="__PUBLIC__/upload/Public/show-linkedin.png" alt=""></a></li>
+        </ul>   
+    </div>
+    <div class="keep-on-record">
+        <p>
+        Copyright © 2016-2025 {$tpshop_config['shop_info_store_name']}  All Rights Reserved. Website Record Number:{$tpshop_config['shop_info_record_no']}
+        </p>
+    </div>
+</div>

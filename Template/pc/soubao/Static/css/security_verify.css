@@ -1,0 +1,43 @@
+﻿section.security_verify .pub-step{width:918px;margin:45px auto 0}
+section.security_verify .pub-step .steps-nav{margin-left:7px;margin-bottom:8px}
+section.security_verify .pub-step .steps-nav>p{position:relative;float:left;width:302.67px;height:33px;line-height:33px;margin-right:8px;margin-left:-8px;text-indent:9px;color:#6c6c6c;font-size:14px;font-weight:700;text-align:center;background:#eee}
+section.security_verify .pub-step .steps-nav>p i{position:absolute;z-index:1;top:0;right:-17px;width:27px;height:33px;background:url(../images/pw-step.png) no-repeat}
+section.security_verify .pub-step .steps-nav>p.go{color:#ff8401;background:#fff4d8}
+section.security_verify .pub-step .steps-nav>p.go i{background-position:0 -33px}
+section.security_verify .pub-step .steps-nav.w4 p{width:227px}
+section.security_verify .pub-step .steps-nav.w4 .step-nav-1{z-index:1000}
+section.security_verify .pub-step .steps-nav.w4 .step-nav-2{z-index:100}
+section.security_verify .pub-step .steps-nav.w4 .step-nav-3{z-index:10;text-indent:11px}
+section.security_verify .pub-step .steps-nav.w4 .step-nav-4{z-index:1;padding-right:8px;margin-right:0;text-indent:14px}
+section.security_verify .pub-step .steps-nav .step-nav-1{z-index:1}
+section.security_verify .pub-step .steps-nav .step-nav-2{z-index:1}
+section.security_verify .pub-step .steps-nav .step-nav-3{z-index:10;padding-right:10px;margin-right:0}
+section.security_verify .pub-step .steps-nav .step-nav-4{z-index:1}
+section.security_verify .pub-step .steps-con{border:1px solid #ddd;height:274px;position:relative}
+section.security_verify .pub-step .steps-con .step-col{color:#6c6c6c;margin:43px 0 0 111px}
+section.security_verify .pub-step .steps-con .step-col ul{float:left}
+section.security_verify .pub-step .steps-con .step-col ul li{position:relative;padding-left:94px;height:32px;margin-bottom:16px;line-height:32px;display:table}
+section.security_verify .pub-step .steps-con .step-col ul li .title{position:absolute;left:0;text-align:right;width:88px}
+section.security_verify .pub-step .steps-con .step-col ul li .con .c-01{color:#3c3c3c}
+section.security_verify .pub-step .steps-con .step-col ul li .con .get-msg-code{height:26px;width:115px;border:1px solid #ddd;line-height:23px;margin:0 3px 0 13px;border-radius:1px;background:none repeat scroll 0 0 #eee;color:#000}
+section.security_verify .pub-step .steps-con .step-col ul li .con .get-msg-code:hover{cursor:pointer;background:#fff4d8}
+section.security_verify .pub-step .steps-con .step-col ul li .con .get-msg-code[disabled]:hover{cursor:default;background:#eee}
+section.security_verify .pub-step .steps-con .step-col ul li .con .it-01{width:233px}
+section.security_verify .pub-step .steps-con .step-col ul li .con .msg-code{width:74px;height:14px;background:0 0}
+section.security_verify .pub-step .steps-con .step-col ul li .con img{margin-left:6px;height:32px}
+section.security_verify .pub-step .steps-con .step-col ul li .con i:before{margin:-3px -1px 0 0}
+section.security_verify .pub-step .steps-con .step-col ul li .btn{width:100px;padding:5px 12px;margin-top:17px;border-radius:0}
+section.security_verify .pub-step .steps-con .set-hint{padding:67px 0 0 3px}
+section.security_verify .pub-step .steps-con .set-hint p{margin-left:61px}
+section.security_verify .pub-step .steps-con .set-hint .check-email{color:#3c3c3c;font:100 14px/14px "microsoft yahei";margin-bottom:25px}
+section.security_verify .pub-step .steps-con .set-success{margin:0 0 0 325px;position:relative}
+section.security_verify .pub-step .steps-con .set-success i{position:absolute;left:-24px;top:-18px}
+section.security_verify .pub-step .steps-con .set-success .p-c1{color:#3c3c3c;font:400 18px/18px "microsoft yahei";margin-bottom:12px}
+section.security_verify .pub-step .steps-con .set-success p{margin:8px 0 0 41px;font-size:12px;text-align:left}
+section.security_verify .pub-step .block-02 .step-col ul li{margin-bottom:32px}
+section.security_verify .pub-step .block-02 .step-col ul li.li-02{margin-bottom:16px}
+section.security_verify .pub-step .block-02 .step-col ul li.li-02 span.a0066cc{width:48px;margin-left:6px;line-height:17px}
+section.security_verify .pub-step .block-02 .step-col ul li .con .msg-code{height:18px}
+section.security_verify .pub-step .block-03 .step-col{margin:123px 0 0 290px}
+section.security_verify .pub-step .block-03 .set-success{margin:126px 0 0 48px}
+footer{margin-top:100px}

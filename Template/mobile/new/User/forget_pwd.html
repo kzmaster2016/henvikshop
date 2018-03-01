@@ -1,0 +1,75 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta name="Generator" content="TPshop1.2" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Security Center-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/login.css"/>  
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/mobile_common.js"></script>
+<script type="text/javascript" src="__STATIC__/js/layer.js" ></script>
+</head>
+<body>
+<header id="header" class='header'>
+    <div class="h-left"><a href="javascript:history.back(-1)"></a></div>
+	<div class="h-mid">Retrieve password</div>
+</header>
+<div id="tbh5v0">
+	<div class="find">        
+	<section class="innercontent">
+	<form action="{:U('User/forget_pwd')}" method="post" id="fpForm" name="fpForm" class="c-form login-form">
+		<div class="yonghu">
+			<input type="text" id="username" name="username" placeholder="Please enter your Email/Phone Number" value="" />
+		</div>  
+	    <div class="yanzheng" style=" margin-top:10px;">
+			<div class="codeTxt">
+				<input type="text" id="captcha" name="verify_code" placeholder="Verification Code" />
+			</div>
+			<div class="codePhoto">
+				<img class="check-code-img" src="/index.php?m=Mobile&c=User&a=verify&type=forget" alt="Verification Code" id="verify_code_img" onClick="verify()" height="35"/>
+			</div>
+		</div>                                    
+		<div class="submit-btn">
+			<input type="button" id="btn_submit" class="btn_big1" value="next step" />
+		</div>
+	</form>
+   </section>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#btn_submit").click(function(){
+		var username = $('#username').val();
+		if(username == ''){
+			layer.open({content:'User name cannot be empty',time:2});
+			return false;
+		}
+		if($('#captcha').val() == ''){
+			layer.open({content:'The verification code cannot be empty',time:2});
+			return false;
+		}	
+		if(!checkMobile(username) && !checkEmail(username)){
+			layer.open({content:'Account format does not match!',time:2});
+			return false;
+		}				
+		$("#fpForm").submit();
+	});
+});
+
+//验证码切换
+    
+function verify(){
+    $('#verify_code_img').attr('src','/index.php?m=Mobile&c=User&a=verify&type=forget&r='+Math.random());
+}
+</script>
+<include file="Public/footer"/>
+</div>
+</div>
+<include file="Public/footer_nav"/>
+</body>
+</html>

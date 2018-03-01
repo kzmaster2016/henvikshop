@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>评论-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/pc_common.js"></script>
+<script src="__PUBLIC__/js/layer/layer.js"></script><!-- 弹窗js 参考文档 http://layer.layui.com/-->  
+<!-- 头部-e -->
+<link rel="stylesheet" href="__STATIC__/css/favorite.css">
+
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">我的评价</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+   <div class="col_main">
+    <div class="main evaluation"> 
+      <!-- themes star -->
+      <div class="themes_title">
+        <h3>我的评价</h3>
+      </div>
+      <!-- themes end -->
+      <div class="ui_tab">
+        <ul class="ui_tab_nav">
+            <li class="<if condition="$_GET['status'] neq '0' AND $_GET['status'] neq '1'">active</if>"><a href="{:U('/Home/User/comment')}" class="target_no">全部</a></li>
+          <li class="<if condition="$_GET['status'] eq '0'">active</if>"><a href="{:U('/Home/User/comment',array('status'=>0))}" class="target_no">待评论</a></li>
+          <li class="last <if condition="$_GET['status'] eq '1'">active</if>"><a href="{:U('/Home/User/comment',array('status'=>1))}" class="target_no">已评论</a></li>
+        </ul>
+        <div class="ui_tab_content">
+          <div style="display:block;" id="noComment" class="ui_panel">             
+            <div class="evaluation_cont">
+              <div class="order_list J_order_list">
+              <volist name="comment_list" id="list">
+                  <table width="100%" class="">
+                    <tbody>
+                      <tr class="list_top">
+                        <td colspan="3">
+                        <div class="f_left order_info"> 
+                        	<span class="time num">{$list.add_time|date='Y-m-d H:i:s',###}</span> 
+                            <span class="order_No"> 订单号：<small class="num">{$list.order_sn}</small></span>
+                        </div>                         
+                        </td>
+                      </tr>
+                      <tr class="list_cont ">
+                        <td class="td_01">
+                          <div class="list_main clearfix"> 
+                          	<a target="_blank"  class="J_hover" href="{:U('Home/Goods/goodsInfo',array('id'=>$list['goods_id']))}"> 
+                            	<img alt="{$list.goods_name}" src="{$list.goods_id|goods_thum_images=80,80}">
+                            </a>
+                            <a href="{:U('Home/Goods/goodsInfo',array('id'=>$list['goods_id']))}" class="J_hover jj_hov" target="_blank">{$list.goods_name}</a>  
+                          </div>
+                        </td>
+                        <td class="td_02"><p><if condition="$list['is_comment'] eq 1">已评价<else/>未评价</if></p></td>
+                        <td class="td_03">
+                            <if condition="$list['is_comment'] eq 0">
+                                <p><a  class="btn-02" onClick="comment({$list.order_id},{$list.goods_id})">立即评价</a></p>
+                            </if>
+                            <if condition="$list['is_comment'] eq 1">
+                                <p><a  class="btn-02" href="{:U('Home/Goods/goodsInfo',array('id'=>$list['goods_id']))}">查看评价</a></p>
+                            </if>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                <!--判断是否已经评论过-->
+                <if condition="$list['is_comment'] eq 0">
+                    <!--添加评论区域-->
+                    <div class="eval-pj pa-to-20 ov-hi" id="div_{$list.order_id}_{$list.goods_id}" style="display:none">
+                        <form action="{:U('Home/User/add_comment')}" data-test="formtest" method="post">
+                            <input type="hidden" name="order_id" value="{$list.order_id}">
+                            <input type="hidden" name="goods_id" value="{$list.goods_id}">
+                            <div class="fwypj"><p>评价与晒图</p></div>
+                            <div class="fl">
+                                <div class="bd-fuwo pa-to-10">
+                                    <!--<textarea style="display:" class="input" id="saytext2" name="content"></textarea>-->
+                                    <textarea placeholder="可输入1-200字符" name="content" id="content" cols="70" rows="12"></textarea>
+                                    <!--<div onMouseOut="settext()" name="saytext" id="saytext" contenteditable="true" style="width: 509px;height: 257px;border: solid 1px #f2f4ff; background-color: #f5f5f5;color: #888;"></div>-->
+                                </div>
+                                <div class="eval-img ov-hi wi457 he130" id="img_container">
+                                    <div class="ev-img po-re fl" id="add_img">
+                                        <img src="" border="0" alt="" onClick="uploadimg('#div_{$list.order_id}_{$list.goods_id}')">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="fl pa-le-30">
+                                <div class="pro-user-score cu-po">
+                                    <span class="sf">商品与描述相符：</span>
+                            <span>
+                                <span class="starRating-area">
+                                    <img onMouseMove="c(this,event)" src="__STATIC__/images/start/stars0.gif" alt="">
+                                    <input type="hidden" id="goods_rank" name="goods_rank" value="0">
+                                </span>
+                            </span>
+                                </div>
+                                <div class="pro-user-score cu-po">
+                                    <span class="sf">客服服务质量：</span>
+                            <span>
+                                <span class="starRating-area">
+                                    <img onMouseMove="c(this,event)" src="__STATIC__/images/start/stars0.gif" alt="">
+                                    <input type="hidden" id="service_rank" name="service_rank" value="0">
+                                </span>
+                            </span>
+                                </div>
+                                <div class="pro-user-score cu-po">
+                                    <span class="sf">物流服务质量：</span>
+                            <span>
+                                <span class="starRating-area">
+                                   <img onMouseMove="c(this,event)" src="__STATIC__/images/start/stars0.gif" alt="">
+                                    <input type="hidden" id="deliver_rank" name="deliver_rank" value="0">
+                                </span>
+                            </span>
+                                </div>
+                                <div class="merge ma-to-80 ma-le-7">
+                                    <a class=" di-in-bl hb-merge" onClick="comment_submit(this)">提交</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--添加评论区域结束-->
+                </if>
+                <!--判断是否已经评论过结束-->
+                <!--已经评论过-->
+                <!--已经评论过结束-->                    
+                  </volist>                                      
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+	<div class="operating fixed" id="bottom">
+   		<div class="fn_page clearfix">
+    			{$page} 
+    	</div>
+    </div>      
+      
+      <div class="explanation">
+        <h5 class="explanation_tips">评论说明</h5>
+        <div class="explanation_cont">
+          <p>1.成功评价商品后您可以获得TPshop积分</p>
+          <p>2.评论是用户对商品的质量、使用情况、用后心得体验，服务质量所发表的感受和意见；</p>
+          <p>3.请您填写商品评论星级、评论标签及商品使用体验描述，您的宝贵建议是我们不断改进服务的动力；</p>
+          <p>4.您只能评论购买过的商品，对同一商品一次只能发表一条评论；</p>
+          <p>5.为了让我们即时收到您的宝贵反馈，请您收到商品后的3个月之内发表评论。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="clear: both;"></div>
+<include file="User/footer" />
+<!--评论JS-->
+<script>
+    function c(obj,event){
+        //var obj = $(obj);
+        var objTop = getOffsetTop(obj);//对象x位置
+        var objLeft = getOffsetLeft(obj);//对象y位置
+
+        var mouseX = event.clientX+document.body.scrollLeft;//鼠标x位置
+        var mouseY = event.clientY+document.body.scrollTop;//鼠标y位置
+        //计算点击的相对位置
+        var objX = mouseX-objLeft;
+        var objY = mouseY-objTop;
+        clickObjPosition = objX + "," + objY;
+        if(objX < 13 && objX > 0){
+            $(obj).attr('src','__STATIC__/images/start/stars1.gif');
+            $(obj).next().val(1);
+        }
+        if(objX < 28 && objX > 13){
+            $(obj).attr('src','__STATIC__/images/start/stars2.gif');
+            $(obj).next().val(2);
+        }
+        if(objX < 43 && objX > 28){
+            $(obj).attr('src','__STATIC__/images/start/stars3.gif');
+            $(obj).next().val(3);
+        }
+        if(objX < 58 && objX > 43){
+            $(obj).attr('src','__STATIC__/images/start/stars4.gif');
+            $(obj).next().val(4);
+        }
+        if(objX < 74 && objX > 58){
+            $(obj).attr('src','__STATIC__/images/start/stars5.gif');
+            $(obj).next().val(5);
+        }
+        //alert(clickObjPosition);
+    }
+
+    function getOffsetTop(obj){
+        var tmp = obj.offsetTop;
+        var val = obj.offsetParent;
+        while(val != null){
+            tmp += val.offsetTop;
+            val = val.offsetParent;
+        }
+        return tmp;
+    }
+
+    function getOffsetLeft(obj){
+        var tmp = obj.offsetLeft;
+        var val = obj.offsetParent;
+        while(val != null){
+            tmp += val.offsetLeft;
+            val = val.offsetParent;
+        }
+        return tmp;
+    }
+</script>
+<!--评论JS结束-->
+
+<!--上传图片JS-->
+<script>
+    var now_access;
+    function uploadimg(div){
+        now_access = $(div);
+        //检查是否超过限制数量
+        GetUploadify2(5,'','comment','add_img')
+    }
+    function delimg(file,t){
+        $.get(
+                "/index.php?m=Admin&c=Uploadify&a=delupload",{action:"del", filename:file},function(){}
+        );
+        $(t).remove();
+        $('#img_container').find('#add_img').show();
+    }
+    function add_img(str){
+        var tpl_list = String(str).split(',');
+        for(var i=0;i<tpl_list.length;i++){
+            //判断是否超过五个图片
+            var obj = $(now_access).find('.comment_img');
+            if(obj.length >= 5)
+                return false;
+            var tpl = '<div class="ev-img po-re fl comment_img" onclick="delimg(\'$IMG\',this)"><input type="hidden" name="comment_img[]" value="$IMG"><img src="$IMG" border="0" alt=""></div>';
+            //var tpl = '<input type="hidden" name="comment_img[]" value="$IMG"><img width="150" height="150" src="$IMG" alt=""><button onclick="delimg(\'$IMG\',this)">删除</button>';
+            var str_do = tpl.replace(/\$IMG/g,tpl_list[i]);
+            $(now_access).find('#img_container').find('#add_img').before(str_do);
+        }
+//        $('#img_container').append(str);
+    }
+</script>
+<!--上传图片JS结束-->
+
+<!--评论提交-->
+<script>
+    function comment(order_id,goods_id){
+        var div = "#div_"+order_id+"_"+goods_id;
+        $(div).toggle();
+    }
+
+    function comment_submit(t){
+        //表单对象
+        var form = $(t).parent().parent().parent();
+
+        var service_rank = parseInt($(form).find('#service_rank').val());
+        var deliver_rank = parseInt($(form).find('#deliver_rank').val());
+        var goods_rank = parseInt($(form).find('#goods_rank').val());
+
+        if(!service_rank> 0){
+            //alert('请为商家服务评分');
+			layer.msg('请为商家服务评分', { icon: 1, time: 2000 });   //2秒关闭（如果不配置，默认是3秒）
+            return false;
+        }
+        if(!deliver_rank> 0){
+            //alert('请为物流评分');
+		    layer.msg('请为物流评分', { icon: 1, time: 2000 });   //2秒关闭（如果不配置，默认是3秒）
+            return false;
+        }
+        if(!goods_rank> 0){
+            //alert('请为商品评分');
+		    layer.msg('请为商品评分', { icon: 1, time: 2000 });   //2秒关闭（如果不配置，默认是3秒）			
+            return false;
+        }         
+        var data = $(form).serialize();
+        $.ajax({
+            type : "POST",
+            url:"{:U('Home/User/add_comment')}",
+            data :data,// 你的formid 搜索表单 序列化提交
+            success: function(data){
+                data = jQuery.parseJSON(data);
+                //console.log(data);
+                if(data.status == 1){
+                    //评论成功
+                    //alert('评论成功');
+					layer.msg('评论成功', {
+					  icon: 1,
+					  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+					}, function(){
+		                   location.reload();
+					});   					
+                    //$(form).parent().remove();
+                }else{
+                    $(form).parent().remove();                    
+					layer.alert(data.msg, {icon: 2}); //alert(data.msg);
+                }
+            }
+        });
+    }
+</script>
+<!--评论提交结束--> 
+<script>
+    $(function () {
+        $("#h-s").mouseover(function () {
+            $('.ec-ta-x').css('left','94px');
+            $('.ec-ta-x').css('width','82px');
+            $(this).addClass("cullent");
+        });
+        $("#h-s").mouseout(function () {
+            $('.ec-ta-x').css('left','0px');
+            $('.ec-ta-x').css('width','82px');
+            $(this).removeClass("cullent");
+        });
+    });
+    $(function () {
+        $("#q-s").mouseover(function () {
+            $('.ec-ta-x').css('left','0px');
+            $(this).addClass("cullent");
+        });
+        $("#q-s").mouseout(function () {
+            $('.ec-ta-x').css('left','0px');
+        });
+    });
+    function settext(){
+        //var text = $("#saytext").html();	
+        //$('#saytext2').html(text);
+    }
+
+</script>
+</body>
+</html>

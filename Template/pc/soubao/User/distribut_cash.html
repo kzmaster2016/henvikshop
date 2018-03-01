@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>账户管理-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<!-- 头部-e -->  
+<link rel="stylesheet" href="__STATIC__/css/favorite.css">
+
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">资金管理</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+   <div class="col_main">
+    <div class="main balance"> 
+      <!-- themes star -->
+      <div class="themes_title">
+        <h3>账户余额</h3>        
+      </div>
+      <!-- themes end --> 
+      <!-- message star -->
+      <div class="message">
+        <ul class="clearfix">
+          <li class="mes_01"> <i class="icon_purse"></i>
+            <div>
+              <p class="txt">可用余额</p>
+              <p class="num"><em class="rmb">￥</em>{$user.user_money}</p>
+            </div>
+          </li>
+          <li class="mes_02"> <i class="icon_lock"></i>
+            <div>
+              <p class="txt">可用积分</p>
+              <p class="num"><em class="rmb"></em>{$user.pay_points}</p>
+            </div>
+          </li>
+          <li class="mes_03"> <i class="icon_question" id="question"></i> </li>
+          <li class="mes_04"> <span class="txt"></span> <span class="status"></span> </li>
+        </ul>
+        <div class="tip" id="question_tip"> 尚未提现完成的金额 </div>
+      </div>
+      <!-- message end -->
+      <div class="ui_tab">
+        <ul class="ui_tab_nav">
+          <li class="active"><a id="activeHref" class="activeHref" href=""  >提现信息</a></li>
+        </ul>
+        <div class="ui_tab_content">
+          <div class="ui_panel" id="noComment" style="display: block;"> 
+            <!-- Details List star -->
+            	<div class="Wallet">
+								<div class="cash_num bb1">
+									<p class="tx_cash"><span>提现金额：</span><input class="w100" type="text" id="" value="" /></p>
+									<p class="tx_cash"><span>账户名：</span><input type="text" id="" value="" /></p>
+									<p class="tx_cash"><span>银行：</span><input type="text" id="" value="" /></p>
+									<p class="tx_cash"><span>验证码：</span><input type="text" id="" value="" placeholder="请输入下面的验证码" /><img class="ss_yzm_code" width="100" height="30" src="" alt="验证码" /></p>
+									<p><a id="cash_submit" href="">确定提交</a></p>
+								</div>
+								<div class="cash_num">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<th>编号</th>
+											<th>金额</th>
+											<th>状态</th>
+										</tr>
+										<tr>
+											<td>1</td>
+											<td>100</td>
+											<td>提交成功</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>199</td>
+											<td>提交成功</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>199</td>
+											<td>提交成功</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+            <!-- Details List end --> 
+            <!-- page next star -->
+	            <div class="operating fixed" id="bottom">
+                    <div class="fn_page clearfix">
+                            {$page} 
+                    </div>
+                </div>             
+            <!-- page next end --> 
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
+ 
+<div style="clear: both;"></div>
+<include file="User/footer" />
+</body>
+</html>

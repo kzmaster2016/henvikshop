@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>User Center-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <link rel="stylesheet" href="__STATIC__/css/security_set.css">
+    <link rel="stylesheet" href="__STATIC__/css/btn.css">
+</head>
+<body>
+<include file="Public/header" />
+<style type="text/css">
+.bread_crumbs {
+    height: 40px;line-height: 40px;
+    padding-left: 25px;clear: both;
+    background-color: #fafafa;
+	width:1200px;margin:auto;
+}
+.bread_crumbs .crumbs_font {margin: 0 5px;color: #3c3c3c;}
+.bread_crumbs .color { color: #f22e00;}
+.bread_crumbs span { margin: 0 5px;}
+</style>
+<div class="wrap">
+<div class="bread_crumbs"> 
+  <a href="{:U('Home/User/index')}" class="crumbs_font">User Center</a>&gt;<span class="color">Reset Your Password</span>
+</div>
+<div class="col_main" style="float: none; width: auto;">
+			<div class="main security_passwd">
+				<!-- themes star -->
+				<!-- <div class="themes_title">
+					<h3>safety set</h3>
+				</div> -->
+				<!-- themes end -->
+				<section class="security_passwd">
+					<div class="wrapper-3">
+						<div class="pub-step" id="step">
+							<div class="steps-nav fixed w4">
+								<p class="step-nav step-nav-1">
+									1.Email Address<i></i>
+								</p>
+								<p class="step-nav step-nav-2">
+									2.Verify Identity<i></i>
+								</p>
+								<p class="step-nav step-nav-3">
+									3.Set a New One<i></i>
+								</p>
+								<p class="step-nav step-nav-4 go">4.Complete</p>
+							</div>
+							
+							<form action="" id="vi_form" method="post">
+								<input type="hidden" value="d8667de9-75ac-46df-b43e-660a019a670f" name="CSRF_TOKEN">
+								
+								<div class="steps-con block-03">
+									<div class="step-col">
+										<div class="set-success ie-03 verify-group">
+											<i class="icon-big-success"></i> 
+											<p>The new password has been set up successfully!</p><p>Congratulations! Please keep it!</p>
+											<p>
+												<a href="{:U('User/login')}" style="color: green" target="_self">return to signin</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</section>
+			</div>
+	</div>
+</div>
+<div style="clear: both;"></div>
+<include file="Public/footer" />
+<script>
+</script>
+</body>
+</html>	

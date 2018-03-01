@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>flash sale-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="icon" href="/ico.png" type="image/x-icon" />
+
+<link rel="stylesheet" href="__STATIC__/css/promoteList.css" type="text/css">
+<script src="__PUBLIC__/js/pc_common.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<include file="Public/header" />
+ 
+<!--促销列表-->
+
+<div class="dircontent">
+    <div class="sort container">
+    <div class="flash-salse-top">
+      <h1 class="font-black">
+          <span>Flash Sale</span>
+          <em></em>
+      </h1>
+      <div class="flash-banner">
+        <!-- <img src="__PUBLIC__/images/brand/banner5.jpg" alt=""> -->
+      </div>
+    </div>
+    <script>
+        // 倒计时
+        function GetRTime2(){  
+          
+          <foreach name="list" item="v" key="k">      
+            var text{$v[goods_id]} = GetRTime('{$v.end_time|date="Y/m/d H:i:s",###}');            
+            $("#surplus_text{$v[goods_id]}").text(text{$v[goods_id]});
+          </foreach>
+        }
+
+        GetRTime2();
+
+        setInterval(GetRTime2,1000);
+    </script>
+      <div class="berserk clearfix">
+		
+      <foreach name="list" item="v" key="k" >
+        <div class="berserk-item scale" id="zxmp_32268" data-fixsite="1" data-activityid="32268" isstarted="true" data-starttime="1456365600000" data-endtime="1456797599000" data-couponid="321844" data-total-count="1" data-total-page="4" data-current-page="1">
+          <div class="berserk-pic"> 
+              <a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" target="_blank"> 
+	              <img  src="{$v.goods_id|goods_thum_images=250,250}"  class="scale-img"> 
+              </a>
+            <div class="time">
+              <div class="time-bg"> <i class="icon sprite"></i> </div>
+              <div class="time-txt">&nbsp;&nbsp;End in：<i class="sprite" id="surplus_text{$v[goods_id]}"> </i></div>
+            </div>
+          </div>
+          <div class="berserk-info info">
+            <div class="info-txt">
+              <h4 class="discountstr"><strong>${$v[price]}</strong> flash price</h4>
+              <p class="saleNum">{$v[virtual_num] + $v[buy_num]} has bought</p>
+            </div>
+            <div class="info-logo"> 
+              <a href="javascript:void(0);" target="_blank">
+              <p class="title">{$v[title]|getSubstr=0,30}</p>
+              <p class="info">origin price{$v[goods_price]} </p>
+              </a> </div>
+          </div>
+        </div>
+        </foreach>            
+      </div>
+    </div>
+    <div class="fn-page-css-1 pagintion fix" style="display: block;">
+      <div class="pagenavi text12">{$page}</div>
+    </div>
+</div>
+
+
+<!--底部广告-开始-->
+	<div class="layout layer">
+  	<div class="cen-banne">
+      <!-- <adv pid = "5" limit="1" item="v">            
+        <a href="{$v['ad_link']}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+  	        <img src="{$v['ad_code']}" width="1200" height="160"  title="{$v[title]}" style="{$v[style]}"/>
+        </a>    
+      </adv>   -->          
+      </div>
+  </div>
+
+<!--footer-开始-->
+<include file="Public/footer" />
+<!--footer-结束-->
+<!-- 页面访问统计 -->
+<script src="https://s22.cnzz.com/z_stat.php?id=1261971213&web_id=1261971213" language="JavaScript"></script> 
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<form id="checkout-form" action="http://localhost:4000/index.php?m=api&c=BraintreePay&a=pay_order" method="post">
+    <div id="error-message"></div>
+
+    <label for="card-number">Card Number</label>
+    <div class="hosted-field" id="card-number"></div>
+
+    <label for="cvv">CVV</label>
+    <div class="hosted-field" id="cvv"></div>
+
+    <label for="expiration-date">Expiration Date</label>
+    <div class="hosted-field" id="expiration-date"></div>
+
+    <input type="hidden" name="order_sn" id="order_sn" value="201601231454088299">
+    <input type="hidden" id="payment_method_nonce" name="nonce">
+    <input type="hidden" name="payment_type" id="payment_type" value="paypal">
+    <input type="text" name="email" id="email" placeholder="email">
+    <input type="text" name="first_name" id="first_name" placeholder="first name">
+    <input type="text" name="last_name" id="last_name" placeholder="last_name">
+    <input type="text" name="country" id="country" placeholder="country">
+    <input type="text" name="city" id="city" placeholder="city">
+    <input type="text" name="state" id="state" placeholder="state">
+    <input type="text" name="postcode" id="postcode" placeholder="postcode">
+    <input type="text" name="address" id="address" placeholder="address">
+    <input type="text" name="mobile" id="mobile" placeholder="mobile">
+    <input type="button" value="PayPal" id="checkout_paypal">
+    <input type="submit" value="卡" disabled>
+</form>
+
+<!-- 隐藏paypalbutton,通过上面的paypal button触发 -->
+<form id="paypal_form" style="display: none">
+</form>
+
+<script src="./jquery.min.js"></script>
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<!-- Load the Client component. -->
+<script src="https://js.braintreegateway.com/web/3.15.0/js/client.min.js"></script>
+
+<!-- Load the Hosted Fields component. -->
+<script src="https://js.braintreegateway.com/web/3.15.0/js/hosted-fields.min.js"></script>
+
+<script>
+    // We generated a client token for you so you can test out this code
+    // immediately. In a production-ready integration, you will need to
+    // generate a client token on your server (see section below).
+    $(function() {
+        var nonceJQ = $("#payment_method_nonce");
+        var emailJQ = $("#email");
+        var firstNameJQ = $("#first_name");
+        var lastNameJQ = $("#last_name");
+        var countryJQ = $("#country");
+        var cityJQ = $("#city");
+        var stateJQ = $("#state");
+        var postcodeJQ = $("#postcode");
+        var addressJQ = $("#address");
+        var mobileJQ = $("#mobile");
+        var paymentTypeJQ = $("#payment_type");
+        var orderSnJQ = $("#order_sn");
+        var form = document.querySelector('#checkout-form');
+        var submit = document.querySelector('input[type="submit"]');
+        var authorization = 'eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJjYmE5ZjA1NDc4ZDA4NmRjZjMzMTliMTliYWI3MWRjNDBhZDE2MzkyNTBhM2NjZGY2MzE3ZDkwMDZkMGIzZGUzfGNyZWF0ZWRfYXQ9MjAxNy0wNS0yM1QwODo0MzozMi4xMDYyMTg4MjMrMDAwMFx1MDAyNm1lcmNoYW50X2lkPWdocHMyYzVidzI1aGc5N25cdTAwMjZwdWJsaWNfa2V5PWJqY3ZqdmYyMnFkcmtycjYiLCJjb25maWdVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvZ2hwczJjNWJ3MjVoZzk3bi9jbGllbnRfYXBpL3YxL2NvbmZpZ3VyYXRpb24iLCJjaGFsbGVuZ2VzIjpbXSwiZW52aXJvbm1lbnQiOiJzYW5kYm94IiwiY2xpZW50QXBpVXJsIjoiaHR0cHM6Ly9hcGkuc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbTo0NDMvbWVyY2hhbnRzL2docHMyYzVidzI1aGc5N24vY2xpZW50X2FwaSIsImFzc2V0c1VybCI6Imh0dHBzOi8vYXNzZXRzLmJyYWludHJlZWdhdGV3YXkuY29tIiwiYXV0aFVybCI6Imh0dHBzOi8vYXV0aC52ZW5tby5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIiwiYW5hbHl0aWNzIjp7InVybCI6Imh0dHBzOi8vY2xpZW50LWFuYWx5dGljcy5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tL2docHMyYzVidzI1aGc5N24ifSwidGhyZWVEU2VjdXJlRW5hYmxlZCI6dHJ1ZSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImRpc3BsYXlOYW1lIjoicGhvZW5peHR2IiwiY2xpZW50SWQiOm51bGwsInByaXZhY3lVcmwiOiJodHRwOi8vZXhhbXBsZS5jb20vcHAiLCJ1c2VyQWdyZWVtZW50VXJsIjoiaHR0cDovL2V4YW1wbGUuY29tL3RvcyIsImJhc2VVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbSIsImFzc2V0c1VybCI6Imh0dHBzOi8vY2hlY2tvdXQucGF5cGFsLmNvbSIsImRpcmVjdEJhc2VVcmwiOm51bGwsImFsbG93SHR0cCI6dHJ1ZSwiZW52aXJvbm1lbnROb05ldHdvcmsiOnRydWUsImVudmlyb25tZW50Ijoib2ZmbGluZSIsInVudmV0dGVkTWVyY2hhbnQiOmZhbHNlLCJicmFpbnRyZWVDbGllbnRJZCI6Im1hc3RlcmNsaWVudDMiLCJiaWxsaW5nQWdyZWVtZW50c0VuYWJsZWQiOnRydWUsIm1lcmNoYW50QWNjb3VudElkIjoicGhvZW5peHR2IiwiY3VycmVuY3lJc29Db2RlIjoiVVNEIn0sImNvaW5iYXNlRW5hYmxlZCI6ZmFsc2UsIm1lcmNoYW50SWQiOiJnaHBzMmM1YncyNWhnOTduIiwidmVubW8iOiJvZmYifQ==';
+
+        braintree.client.create({
+            authorization: authorization
+        }, function (clientErr, clientInstance) {
+            if (clientErr) {
+                // Handle error in client creation
+                return;
+            }
+
+            braintree.hostedFields.create({
+                client: clientInstance,
+                styles: {
+                    'input': {
+                        'font-size': '14pt'
+                    },
+                    'input.invalid': {
+                        'color': 'red'
+                    },
+                    'input.valid': {
+                        'color': 'green'
+                    }
+                },
+                fields: {
+                    number: {
+                        selector: '#card-number',
+                        placeholder: '4111 1111 1111 1111'
+                    },
+                    cvv: {
+                        selector: '#cvv',
+                        placeholder: '123'
+                    },
+                    expirationDate: {
+                        selector: '#expiration-date',
+                        placeholder: '10/2019'
+                    }
+                }
+            }, function (hostedFieldsErr, hostedFieldsInstance) {
+                if (hostedFieldsErr) {
+                    // Handle error in Hosted Fields creation
+                    return;
+                }
+
+                submit.removeAttribute('disabled');
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    console.log("hello");
+                    hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+                        if (tokenizeErr) {
+                            // Handle error in Hosted Fields tokenization
+                            console.log(tokenizeErr);
+                            return;
+                        }
+
+                        // Put `payload.nonce` into the `payment_method_nonce` input, and then
+                        // submit the form. Alternatively, you could send the nonce to your server
+                        // with AJAX.
+                        console.log(payload);
+                        nonceJQ.val(payload.nonce);
+                        paymentTypeJQ.val('card');   //这里改成card支付
+                        form.submit();
+                    });
+                }, false);
+            });
+        });
+
+        var checkpaypal_btn = false;
+        //checkout with paypal
+        $("#checkout_paypal").click(function () {
+            $("input[name='payment_type']").val('PayPal');
+            checkpaypal_btn = true;
+            document.getElementById("braintree-paypal-button").click();
+        });
+        var initPaypal = function (clientToken) {
+            braintree.setup(clientToken, "paypal", {
+                container: "paypal_form",
+                singleUse: false,
+                onPaymentMethodReceived: function (obj) {
+                    //console.dir(obj);
+                    var detail = obj.details;
+                    var nonce = document.getElementsByName("payment_method_nonce")[0];
+                    nonce = nonce.value;
+                    var email = detail.email;
+                    nonceJQ.val(nonce);
+                    emailJQ.val(email);
+                    var order_form = document.getElementById("order_form");
+                    console.log(checkpaypal_btn);
+                    if(checkpaypal_btn){
+                        console.dir(detail);
+                        var shipping_address = detail.shippingAddress;
+                        console.dir(shipping_address);
+                        var fullname = shipping_address.recipientName;
+                        var split_location = fullname.indexOf(' ');
+                        var first_name = fullname.substring(0,split_location+1);
+                        var last_name = fullname.substring(split_location+1);
+                        if(firstNameJQ.val() == '') {
+                            firstNameJQ.val(first_name);
+                        }
+                        if(lastNameJQ.val() == '') {
+                            lastNameJQ.val(last_name);;
+                        }
+                        if(countryJQ.val() == '') {
+                            countryJQ.val(detail.countryCode);;
+                        }
+                        if(addressJQ.val() == '') {
+                            var extend_addr = "";
+                            if(shipping_address.hasOwnProperty('extendedAddress')){
+                                extend_addr = shipping_address.extendedAddress;
+                            }
+                            addressJQ.val(shipping_address.streetAddress + " " + extend_addr);
+                        }
+                        if(cityJQ.val() == '') {
+                            cityJQ.val(shipping_address.locality);
+                        }
+                        if(postcodeJQ.val() == '') {
+                            postcodeJQ.val(shipping_address.postalCode);
+                        }
+                        var region = "";
+                        if(shipping_address.hasOwnProperty('region') && stateJQ.val() == ''){
+                            stateJQ.val(shipping_address.region);
+                        }
+                        checkpaypal_btn = false;
+                        form.submit();
+                    }
+                    else{
+                        //window.location.reload();
+                    }
+                }, onReady: function (obj) {
+                    //$("#braintree-paypal-loggedout").attr("style","width:100%");
+                    //$("#braintree-paypal-button img").attr("src","/assets/img/payple.png");
+                    //$("#braintree-paypal-button").attr("style","display:block;overflow: hidden;");
+                    //layer.close(index);
+                    //document.getElementById("braintree-paypal-button").click();
+                }
+            });
+        };
+
+        initPaypal(authorization);
+
+    /*var client_token = '';
+    var getTokenInitPayPal = function () {
+        $.ajax({
+            url: "http://localhost:4000/index.php?m=api&c=BraintreePay&a=generate_token",
+            type: "GET",
+            async: true,
+            data: {
+            },
+            timeout: 5000,
+            dataType: 'json',
+            success:function(data){
+                if(data.status == 0) {
+                    client_token = data.client_token;
+                    initPaypal(client_token);
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function(xhr){
+                console.log(xhr);
+            },
+            complete: function(){
+
+            }
+        });
+    };
+    getTokenInitPayPal();*/
+    })
+
+</script>
+</html>

@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Profile-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+    <script src="__STATIC__/js/slider.js"></script>    
+
+</head>
+
+<body>
+<!--------头部开始-------------->
+<include file="Public/header" />
+<!--------头部结束-------------->
+
+<div class="layout ov-hi">
+    <div class="breadcrumb-area">    
+	    <foreach name="navigate_user" key="k" item="v">
+	        <if condition="$k neq 'Home'"> > </if>  
+            <a href="{$v}">{$k}</a> 
+        </foreach>
+    </div>
+</div>
+<div class="layout pa-to-10 fo-fa-ar">
+    <!--菜单-->
+    <include file="User/menu" />
+    <!--菜单-->
+    <div class="fr wi940">
+        <div class="xgzl-w">
+            <form action="" method="post">
+                <dl>
+                    <dd class="te-al po-re wi230 fl">
+                        <img class="headpic" src="{$user.head_pic|default='__STATIC__/images/headPic.jpg'}" />
+                        <input type="hidden" name="head_pic" id="head_pic" value="{$user.head_pic}">
+                        <div class="upload" onClick="GetUploadify2(1,'head_pic','head_pic','add_img')">Upload image</div>
+                    </dd>
+                    <dd class="fl ta-tldf">
+                        <table style="width:700px;">
+                            <tbody>
+                            <tr>
+                                <td class="cl_left">nickname：</td>
+                                <td>
+                                    <div class="dv_cell_left">
+                                        <input type="text" name="nickname" class="imput_text vam" id="nickname" maxlength="20" autocomplete="off" value="{$user.nickname}" />
+                                    </div>
+                                </td>
+                            </tr>
+
+                           <!--  <tr>
+                                <td class="cl_left">QQ：</td>
+                                <td>
+                                    <div class="dv_cell_left">
+                                        <input type="text" name="qq" class="imput_text vam" id="userInfo_nickName" maxlength="20" autocomplete="off" value="{$user.qq}" onpaste="this.value=this.value.replace(/[^\d]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d]/g,'')" />
+                                        <span id="msg_nickName"></span>
+                                    </div>
+                                </td>
+                            </tr> -->
+                            <tr>
+                                <td class="cl_left">E-mail：</td>
+                                <td>
+                                    <div class="dv_cell_left">
+                                        <span class="check"> {$user.email}</span>
+                                        <if condition="$user['email_validated'] eq 0">
+                                            <a href="{:U('Home/User/email_validate',array('step'=>1))}">
+                                            <!-- 未验证(点击验证) -->
+                                            </a>
+                                            <else/>
+                                            <!-- <a href="{:U('Home/User/email_validate',array('step'=>1))}">
+                                            已验证(点击修改)
+                                            </a> -->
+                                        </if>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cl_left">Phone Number：</td>
+                                <td>
+                                    <div class="dv_cell_left">
+                                        <span class="check">{$user.mobile}</span>
+                                        <if condition="$user['mobile_validated'] eq 0">
+                                            <a href="{:U('Home/User/mobile_validate',array('step'=>1))}">
+                                            <!-- 未验证(点击验证) -->
+                                            </a>
+                                            <else/>
+                                            <a href="{:U('Home/User/mobile_validate',array('step'=>1))}">
+                                            <!-- 已验证(点击修改) -->
+                                            </a>
+                                        </if>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cl_left">Password：</td>
+                                <td>
+                                    <div class="dv_cell_left">
+                                        <a href="{:U('Home/User/password')}">Change</a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="cl_left">Sex：</td>
+                                <td>
+                                    <input type="radio" name="sex" checked="checked" id="gd_secret" <if condition="$user['sex'] eq '0'">checked</if> value="0"> <label for="gd_secret">Secret</label>
+                                    <input type="radio" name="sex" id="gd_mile" style="margin-left:10px;" <if condition="$user['sex'] eq '1'">checked</if> value="1"> <label for="gd_mile">Male</label>
+                                    <input type="radio" name="sex" id="gd_femile" style="margin-left:10px;" <if condition="$user['sex'] eq '2'">checked</if> value="2"> <label for="gd_femile">Female</label>
+                                </td>
+                            </tr>
+                            <!--
+                            <tr>
+                                <td class="cl_left">生日：</td>
+                                <td>
+                                    <input type="text" class="imput_text vam" id="birthday" name="birthday" value="{$user.birthday}">
+                                </td>
+                            </tr>
+							-->
+                            <tr>
+                                <td class="cl_left">region：</td>
+                                <td>
+
+                                    <select  class="selec" name="province" id="province" onChange="get_city(this)" >
+                                        <option value="0">Choose Country</option>
+                                        <volist name="province" id="p">
+                                            <option <if condition="$user['province'] eq $p['id']">selected</if> value="{$p.id}">{$p.name}</option>
+                                        </volist>
+                                    </select>
+                                    <select  class="selec" name="city" id="city" onChange="get_area(this)">
+                                        <option value="0">Province or City</option>
+                                        <volist name="city" id="p">
+                                            <option <if condition="$user['city'] eq $p['id']">selected</if> value="{$p.id}">{$p.name}</option>
+                                        </volist>
+                                    </select>
+                                    <select  class="selec" name="district" id="district">
+                                        <option value="0">more region</option>
+                                        <volist name="area" id="p">
+                                            <option <if condition="$user['district'] eq $p['id']">selected</if> value="{$p.id}">{$p.name}</option>
+                                        </volist>
+                                    </select>
+                                    <!--<select class="selec" id="sltProvince"><option value="-1">省份</option><option value="11">北京</option><option value="12">天津</option><option value="13">河北</option></select>-->
+                                    <!--<select class="selec" id="sltCity"><option value="-1">城市</option></select>-->
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" align="left">
+                                    <input type="submit" value="Save" class="btn_midefy" id="btn_midefy">
+                                    <input type="button" value="Cancel" class="btn_midefy" style="margin-left:20px;" id="btn_reload" onClick="">
+                                </td>
+                            </tr>
+                            </tbody></table>
+
+                    </dd>
+                </dl>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div class="he80"></div>
+
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/pc_common.js"></script>
+ 
+<script>
+  
+    function delimg(file,t){
+        $.get(
+                "/index.php?m=Admin&c=Uploadify&a=delupload",{action:"del", filename:file},function(){}
+        );
+        $('#head_pic').val('');
+        $('#preview').attr('src','');
+        $(t).remove();
+    }
+    function add_img(str){
+        var head_pic = $('#head_pic').val();
+        $('#head_pic').val(str);
+        $('#preview').attr('src',str);
+        $('img[class="headpic"]').attr('src',str);
+//        if(!$('#delimg')){
+//            $('#img_box').append('<button id="delimg" type="button" onclick="delimg('+"'"+str+"'"+',this)">删除图片</button>');
+//        }else{
+//            $('#delimg').attr('onclick','delimg('+"'"+str+"'"+',this)');
+//        }
+        if(!head_pic){
+            $('#img_box').append('<button id="delimg" type="button" onclick="delimg('+"'"+str+"'"+',this)">删除图片</button>');
+        }else{
+            $('#delimg').attr('onclick','delimg('+"'"+str+"'"+',this)');
+        }
+
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var icon_wh=$(".icon_wh");
+        icon_wh.each(function(){
+            var thisObj=$(this);
+            thisObj.bind("mouseout",function(){
+                $(this).next().css("display","none");
+            });
+            thisObj.bind("mouseover",function(){
+                $(this).next().css("display","block");
+            });
+        });
+    });
+</script>
+<!--------footer-开始-------------->
+<include file="Public/footer2" />
+<!--------footer-结束-------------->
+</body>
+<script>
+    /*$(function () {
+     $("#h-s").click(function () {
+     $('.ec-ta-x').css('left','124px');
+     $('.ec-ta-x').css('width','110px');
+     $(this).addClass("cullent");
+     $('#q-s').removeClass("cullent");
+     });
+     });
+     */
+</script>
+
+<script>
+    $(function () {
+        $("#h-s").mouseover(function () {
+            $('.ec-ta-x').css('left','124px');
+            $('.ec-ta-x').css('width','110px');
+            $(this).addClass("cullent");
+        });
+        $("#h-s").mouseout(function () {
+            $('.ec-ta-x').css('left','0px');
+            $('.ec-ta-x').css('width','124px');
+            $(this).removeClass("cullent");
+        });
+    });
+    $(function () {
+        $("#q-s").mouseover(function () {
+            $('.ec-ta-x').css('left','0px');
+            $(this).addClass("cullent");
+        });
+        $("#q-s").mouseout(function () {
+            $('.ec-ta-x').css('left','0px');
+        });
+    });
+
+</script>
+</html>

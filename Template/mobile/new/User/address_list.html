@@ -1,0 +1,77 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta name="Generator" content="tpshop" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Address list-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<link rel="stylesheet" href="__STATIC__/css/public.css">
+<link rel="stylesheet" href="__STATIC__/css/user.css">
+
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/mobile_common.js"></script>
+</head>
+<body>
+      <header>
+      <div class="tab_nav">
+        <div class="header">
+          <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="back"></a></div>
+          <div class="h-mid">Address management</div>
+          <div class="h-right">
+            <aside class="top_bar">
+              <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+      </header>
+<include file="Public/menu"/>
+									
+<div id="tbh5v0">    
+  <volist name="lists" id="list">  
+	 
+        <div class="address_add   <if condition="$list[is_default] eq 1"> Default</if>">
+                
+             <if condition="$_GET['source'] eq 'cart2'">         
+                    <a href="{:U('/Mobile/Cart/cart2',array('address_id'=>$list['address_id']))}">
+                        <if condition="$list[is_default] eq 1"><h2><img src="__STATIC__/images/right.png"></h2></if>
+                        <dl>
+                            <dt><span>{$list.consignee}</span><em>Phone number:{$list.mobile}</em></dt>
+                            <dd>{$region_list[$list['country']]['name']},{$region_list[$list['city']]['name']},{$region_list[$list['district']]['name']},{$list.address}</dd>
+                            <dd>Zip code: <em>{$list['zipcode']}</em></dd>
+                        </dl>
+                    </a>         
+             <else/>
+                    <if condition="$list[is_default] eq 1"><h2><img src="__STATIC__/images/right.png"></h2></if>
+                    <dl>
+                        <dt><span>{$list.consignee}</span><em>Phone number:{$list.mobile}</em></dt>
+                        <dd>{$region_list[$list['country']]['name']},{$region_list[$list['city']]['name']},{$region_list[$list['district']]['name']},{$list.address}</dd>
+                     </dl>         
+             </if>                 
+                       
+             <a href="{:U('/Mobile/User/edit_address',array('id'=>$list[address_id],'source'=>$_GET['source']))}"><img id="amend" src="__STATIC__/images/amend.png"/></a>
+        </div>        
+       		 
+   </volist> 
+</div>
+
+<div style=" width:100%; height:50px;"></div>
+<div class="list_footer">
+	<a href="{:U('/Mobile/User/add_address',array('source'=>$_GET['source']))}">Add new address</a>
+</div>
+
+<script>
+function goTop(){
+	$('html,body').animate({'scrollTop':0},600);
+}
+</script>
+<a href="javascript:goTop();" class="gotop"><img src="__STATIC__/images/topup.png"></a>		
+</div>
+
+ 
+</body>
+</html>

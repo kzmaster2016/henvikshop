@@ -1,0 +1,284 @@
+﻿.icon-draw-success {
+  margin: -3px 5px 0;
+  *margin-top: 0;
+  font-style: normal;
+  content: "";
+  width: 48px;
+  height: 39px;
+  background: url('../images/feiniu-draw-icon.png') no-repeat 0 0;
+  display: inline-block;
+  *display: inline;
+  vertical-align: middle;
+  overflow: hidden;
+  position: relative;
+  zoom: 1;
+}
+.icon-draw-alert {
+  margin: -3px 5px 0;
+  *margin-top: 0;
+  font-style: normal;
+  content: "";
+  width: 49px;
+  height: 42px;
+  background: url('../images/feiniu-draw-icon.png') no-repeat -51px 0;
+  display: inline-block;
+  *display: inline;
+  vertical-align: middle;
+  overflow: hidden;
+  position: relative;
+  zoom: 1;
+}
+.icon-draw-correct {
+  margin: -3px 5px 0;
+  *margin-top: 0;
+  font-style: normal;
+  content: "";
+  width: 49px;
+  height: 42px;
+  background: url('../images/feiniu-draw-icon.png') no-repeat -101px 0;
+  display: inline-block;
+  *display: inline;
+  vertical-align: middle;
+  overflow: hidden;
+  position: relative;
+  zoom: 1;
+}
+
+.security_payment_code {
+  /*.steps-con*/
+  /*.steps-con*/
+}
+.security_payment_code .steps-con {
+  /*.step-col 的宽度*/
+  border: 1px solid #ddd;
+  width: 100%;
+  height: 340px;
+  margin: 0 auto 40px;
+  position: relative;
+  /*step-col*/
+  /*step-col*/
+  /*.pub-ul*/
+  /*.pub-ul*/
+}
+.security_payment_code .steps-con .step-col {
+  vertical-align: middle;
+  /*height: @s-h;
+      width: @s-w;*/
+  color: #6c6c6c;
+}
+.security_payment_code .steps-con .step-col .set-success {
+  position: relative;
+}
+.security_payment_code .steps-con .step-col .set-success i {
+  position: absolute;
+  left: -24px;
+  top: -18px;
+}
+.security_payment_code .steps-con .step-col .set-success .p-c1 {
+  color: #3c3c3c;
+  font: normal 18px/18px "microsoft yahei";
+  margin-bottom: 12px;
+}
+.security_payment_code .steps-con .step-col .set-success p {
+  margin: 8px 0 0 41px;
+  font-size: 12px;
+  text-align: left;
+}
+.security_payment_code .steps-con .pub-ul {
+  display: inline-block;
+  *float: left;
+}
+.security_payment_code .steps-con .pub-ul li {
+  position: relative;
+  padding-left: 95px;
+  height: 32px;
+  margin-bottom: 16px;
+  line-height: 32px;
+  display: table;
+}
+.security_payment_code .steps-con .pub-ul .title {
+  position: absolute;
+  left: 0;
+  text-align: right;
+  width: 88px;
+}
+.security_payment_code .steps-con .pub-ul .con .c-01 {
+  color: #3c3c3c;
+}
+.security_payment_code .steps-con .pub-ul .con .get-msg-code {
+  height: 26px;
+  width: 115px;
+  border: 1px solid #ddd;
+  line-height: 23px;
+  margin: 0 3px 0 13px;
+  border-radius: 1px;
+  background: none repeat scroll 0 0 #eee;
+  color: #000;
+}
+.security_payment_code .steps-con .pub-ul .con .get-msg-code:hover {
+  cursor: pointer;
+  background: #fff4d8;
+}
+.security_payment_code .steps-con .pub-ul .con .get-msg-code[disabled]:hover {
+  cursor: default;
+  background: #eee;
+}
+.security_payment_code .steps-con .pub-ul .con .it-01 {
+  width: 233px;
+}
+.security_payment_code .steps-con .pub-ul .con .msg-code {
+  width: 74px;
+  height: 14px;
+  /*margin: -4px 0 0 1px;*/
+  background: transparent;
+}
+.security_payment_code .steps-con .pub-ul .con img {
+  margin-left: 6px;
+  height: 32px;
+}
+.security_payment_code .steps-con .pub-ul .con i:before {
+  margin: -3px -1px 0 0px;
+}
+.security_payment_code .steps-con .pub-ul .btn {
+  width: 100px;
+  padding: 4px 12px;
+  margin-top: 5px;
+  border-radius: 0px;
+}
+.security_payment_code .block-01 .steps-con .step-col {
+  margin-top: 39px;
+  margin-left: 100px;
+}
+.security_payment_code .block-01 .steps-con .step-col .pub-ul li {
+  padding-left: 208px;
+  margin-bottom: 28px;
+}
+.security_payment_code .block-01 .steps-con .step-col .pub-ul li input {
+  width: 234px;
+}
+.security_payment_code .block-01 .steps-con .step-col .pub-ul .title {
+  width: 200px;
+}
+.security_payment_code .block-02 .steps-con .step-col {
+  width: 100%;
+  height: 100%;
+  margin-top: 120px;
+  text-align: center;
+  vertical-align: middle;
+}
+.security_payment_code .block-02 .steps-con .step-col .set-success {
+  display: inline-block;
+  padding-left: 40px;
+  line-height: 24px;
+}
+.security_payment_code .block-02 .steps-con .step-col .set-success h3 {
+  font-family: 'microsoft yahei';
+  font-size: 18px;
+  font-weight: 100;
+  color: #3c3c3c;
+}
+.security_payment_code .block-02 .steps-con .step-col .set-success p {
+  margin: 10px 0;
+  color: #6c6c6c;
+}
+.security_payment_code .block-03 .steps-con {
+  position: relative;
+}
+.security_payment_code .block-03 .steps-con .step-col {
+  text-align: center;
+}
+.security_payment_code .block-03 .steps-con .step-col h2 {
+  margin-top: 34px;
+  font-family: 'microsoft yahei';
+  font-size: 18px;
+  font-weight: 100;
+  color: #3c3c3c;
+}
+.security_payment_code .block-03 .steps-con .step-col .yard {
+  display: inline-block;
+  color: #3c3c3c;
+  line-height: 32px;
+  height: 32px;
+  margin-top: 27px;
+}
+.security_payment_code .block-03 .steps-con .step-col .yard label {
+  float: left;
+}
+.security_payment_code .block-03 .steps-con .step-col .yard input {
+  float: left;
+  margin-left: 10px;
+  width: 74px;
+}
+.security_payment_code .block-03 .steps-con .step-col .yard img {
+  float: left;
+  height: 32px;
+  margin: 0 10px;
+}
+.security_payment_code .block-03 .steps-con .step-col .yard a {
+  float: left;
+  line-height: 18px;
+  text-align: left;
+}
+.security_payment_code .block-03 .steps-con .step-col .btn {
+  width: 100px;
+  height: 30px;
+  line-height: 19px;
+  margin-top: 30px;
+  margin-left: -40px;
+}
+.security_payment_code .block-03 .steps-con .step-col small {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #9c9c9c;
+}
+.security_payment_code .block-04 .steps-con .step-col {
+  width: 100%;
+  height: 100%;
+  margin-top: 120px;
+  text-align: center;
+  vertical-align: middle;
+}
+.security_payment_code .block-04 .steps-con .step-col .set-success {
+  display: inline-block;
+  padding-left: 40px;
+  line-height: 24px;
+}
+.security_payment_code .block-04 .steps-con .step-col .set-success h3 {
+  font-family: 'microsoft yahei';
+  font-size: 18px;
+  font-weight: 100;
+  color: #3c3c3c;
+}
+.security_payment_code .block-04 .steps-con .step-col .set-success p {
+  margin: 10px 0;
+  color: #6c6c6c;
+}
+.security_payment_code .block-05 .steps-con .step-col {
+  margin-top: 39px;
+  margin-left: 100px;
+}
+.security_payment_code .block-05 .steps-con .step-col .pub-ul li {
+  padding-left: 208px;
+  margin-bottom: 28px;
+}
+.security_payment_code .block-05 .steps-con .step-col .pub-ul li input {
+  width: 234px;
+}
+.security_payment_code .block-05 .steps-con .step-col .pub-ul .title {
+  width: 200px;
+}
+.security_payment_code .block-05 .steps-con .step-col .pub-ul .btn {
+  width: 150px;
+}
+.security_payment_code .steps-con .zmh {
+  position: absolute;
+  left: 425px;
+  *left: 422px;
+  top: 120px;
+  display: none;
+  width: 200px;
+  text-align: left;
+}  

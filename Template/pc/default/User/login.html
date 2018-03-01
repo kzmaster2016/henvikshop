@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">    
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <link rel="icon" href="/ico.png" type="image/x-icon" />
+    <title>login-{$tpshop_config['shop_info_store_title']}</title>
+</head>
+
+<body class="regs">
+<!--头部开始-->
+<include file="Public/header" />
+<!--头部结束-->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1647868638847563',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+    FB.AppEvents.logPageView();   
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+    function statusChangeCallback(response){
+       
+        FB.login(function(response) {
+          // handle the response
+           console.log(response);
+            if (response.status === 'connected') {
+
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+                FB.api('/me', function(msg) {
+                    console.log(JSON.stringify(msg));
+                    if (msg.name) {
+                        $.ajax({
+                            type: "GET",
+                            url:"/index.php?m=Home&c=User&a=facebookLogin", 
+                            data: {name:msg.name,oauth:'facebook',faceid:msg.id},
+                            success: function(data){                                 
+                                console.log("success_in");
+                                console.log(data);
+                                window.location.href=data['url'];  
+                            }
+                        })
+                        .done(function(data) {
+                            console.log("success");
+                            console.log(data);                            
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        })
+                        .always(function() {
+                            console.log("complete");    
+                        });
+                        
+                    }
+                });
+            } else if (response.status === 'not_authorized') {
+                 
+            } else {
+                alert("sorry,you can't access facebook!");
+            }
+        }, {scope: 'public_profile,email'});
+    }
+     
+    function checkLoginState() {
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+      });
+    }
+     
+</script>
+
+
+<div class="setout clearfix login-con">
+ 
+    <div class="login-left">
+        <!-- <div class="login-banner">
+            <img class="inblockm" src="__STATIC__/images/banner/login_bg1.jpg" />
+        </div> -->
+        <div class="login-detail">
+            <h3>The Best Value Online</h3>
+            <p>
+            Enjoy unbeatable prices and free shipping  <br/>
+            on almost all products!</p>
+        </div>
+    </div>
+    <div class="login-area">
+        <div class="wel-log">
+            <h3><span>Welcome Henvik</span></h3>
+        </div>
+        <form action="{:U('Home/User/do_login')}" method="post">
+            <input type="hidden" name="referurl" id="referurl" value="{$referurl}">
+            <div class="login-x">
+                <div class="">
+                    <table class="pa-10-0" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    	<!-- <tr>
+                            <td><span class="co_ye">测试账号:13800138006&nbsp;&nbsp;测试密码:123456</span></td>
+                        </tr> -->
+                        <tr>
+                            <td><p>Email:</p><input class="zc-text" type="text" id="username" name="username" placeholder="Email"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Password: <a style="color: #888;float: right;" href="{:U('User/forget_pwd')}" >Forgot Password?</a></p>
+                                <input class="zc-text" name="password" id="password" type="password" placeholder="Password（8-32 Words）"/>
+                                 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Verification Code:</p>
+                                <input class="zc-text wi96" type="text" name="verify_code" id="verify_code" placeholder=""/>
+                                <img class="inblockm" style="cursor: pointer;" id="verify_code_img" width="120" height="35" src="{:U('Home/User/verify')}" style="margin-right: 8px;"  onclick="verify(this)" />
+                                <a href="javascript:;" class="inblockm"><img class="inblockm" src="__STATIC__/images/chg_image.png" id="verify_code_img2"  onclick="verify(this)" /></a>
+                                <div style="margin-bottom: 20px;"></div> 
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><input type="button" class="login" onClick="checkSubmit()" value="Sign In">
+                                <p style="text-align: center;line-height: 30px;">OR</p> 
+                                 
+                                <div scope="public_profile,email" class="fb_login_btn" onclick="checkLoginState();"><img src="__STATIC__/images/facebook-register.png" alt="">Sign In with Facebook</div>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </form>
+        <!-- <span class="co666">使用合作账号登录：</span>
+        <span><a class="hezuoz" href="{:U('LoginApi/login',array('oauth'=>'alipay'))}"><i class="zhi-y-f"></i></a></span>
+        <span><a class="hezuoz" href="{:U('LoginApi/login',array('oauth'=>'qq'))}"><i class="ba-po-185"></i></a></span> -->
+        <p class="nu-miaf">No Account?&nbsp;&nbsp;<a href="{:U('Home/User/reg')}">Join Us</a></p>
+        <!-- <p class="nu-miaf nu-miah"><label for="">继续登录表明您已充分理解并同意以上内容。</label></p> -->
+    </div>
+</div>
+<div class="hr-60"></div>
+<div class="cust-footer">
+    <div class="setout po-re">
+        <div class="warrant-area">
+           
+	        <p>Copyright © 2016-2025 {$tpshop_config['shop_info_store_name']}  All Rights Reserved Record number:{$tpshop_config['shop_info_record_no']}</p>
+        </div>
+    </div>
+</div>
+<script>
+    function verify(){
+       $('#verify_code_img').attr('src','/index.php?m=Home&c=User&a=verify&r='+Math.random());
+    }
+    
+	function checkSubmit()
+	{
+		var username = $.trim($('#username').val());
+		var password = $.trim($('#password').val());
+		var referurl = $('#referurl').val();
+		var verify_code = $.trim($('#verify_code').val());
+		if(username == ''){
+			showErrorMsg('Account may not be empty!');
+			return false;
+		}
+		if(!checkMobile(username) && !checkEmail(username)){
+			showErrorMsg('Account format does not match!');
+			return false;
+		}
+		if(password == ''){
+			showErrorMsg('Password may not be empty!');
+			return false;
+		}
+		if(verify_code == ''){
+			showErrorMsg('Verify code may not be empty!');
+			return false;
+		}
+		
+		$.ajax({
+			type : 'post',
+			url : '/index.php?m=Home&c=User&a=do_login&t='+Math.random(),
+			data : {username:username,password:password,referurl:referurl,verify_code:verify_code},
+			dataType : 'json' ,
+			success : function(res){
+                // alert('kllkllll');
+				if(res.status == 1){
+					window.location.href = res.url;
+				}else{
+					showErrorMsg(res.msg);
+					verify();  //刷新验证码
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				showErrorMsg('The network failed. Please refresh the page and try again!');
+			}
+		})
+		
+	}
+	
+    function checkMobile(tel) {
+        var reg = /(^1[3|4|5|7|8][0-9]{9}$)/;
+        if (reg.test(tel)) {
+            return true;
+        }else{
+            return false;
+        };
+    }
+    
+    function checkEmail(str){
+        var reg = /^[a-z0-9]([a-z0-9\\.]*[-_]{0,4}?[a-z0-9-_\\.]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+([\.][\w_-]+){1,5}$/i;
+        if(reg.test(str)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    function showErrorMsg(msg){
+    	alert(msg);
+    }
+</script>
+<!-- 页面访问统计 -->
+<script src="https://s22.cnzz.com/z_stat.php?id=1261971213&web_id=1261971213" language="JavaScript"></script> 
+</body>
+</html>

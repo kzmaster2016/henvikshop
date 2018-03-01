@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>new arrival-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="icon" href="/ico.png" type="image/x-icon" />
+
+</head>
+
+<body>
+<!--头部开始-->
+<include file="Public/header" />
+<!--头部结束--> 
+<link rel="stylesheet" href="__STATIC__/css/page.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/css/category.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/css/common.min.css" type="text/css">
+
+<script type="text/javascript" src="__STATIC__/js/jquery.jqzoom.js"></script> 
+<script src="__PUBLIC__/js/pc_common.js"></script>
+<script src="__PUBLIC__/js/layer/layer.js"></script><!--弹窗js 参考文档 http://layer.layui.com/-->
+	 
+<!--中间内容  面包屑-->
+<div id="warpper" class="clearfix">
+  <div class="newarr-wrap">
+   
+    <h1 class="newarr-con1">
+        <span>New Arrivals</span>
+        <em></em>
+    </h1>
+     
+
+    <div class="cata_shop_right" id="tracker_category"> 
+      <!-- 館頁屬性 -->
+      <div class="attribute_content">   
+        <!-- searchbox -->
+        <div class="searchbox">
+          <div class="list clearfix">
+            <ul class="left text12" id="order_ul">
+              <li> <a class="col7ac  <if condition="$_GET[sort] eq ''">main</if>" href="<?php echo urldecode(U("/Home/Activity/new_arrival",$filter_param,''));?>" style="cursor:pointer;"> Default </a> </li>
+              <li> <a class="col7ac  <if condition="$_GET[sort] eq 'sales_sum'">main</if>" href="<?php echo urldecode(U("/Home/Activity/new_arrival",array_merge($filter_param,array('sort'=>'sales_sum')),''));?>" style="cursor:pointer;"> Orders </a> </li>
+                      
+              <if condition="$_GET['sort_asc'] eq 'desc'">
+                <li><a class="col7ac  <if condition="$_GET[sort] eq 'shop_price'">main p-asc</if>" href="<?php echo urldecode(U("/Home/Activity/new_arrival",array_merge($filter_param,array('sort'=>'shop_price','sort_asc'=>'asc')),''));?>" style="cursor:pointer;">Price<span class="icon_s "></span></a></li>
+              <elseif condition="$_GET['sort_asc'] eq 'asc'" />
+                <li><a class="col7ac  <if condition="$_GET[sort] eq 'shop_price'">main p-desc</if>" href="<?php echo urldecode(U("/Home/Activity/new_arrival",array_merge($filter_param,array('sort'=>'shop_price','sort_asc'=>'desc')),''));?>" style="cursor:pointer;">Price<span class="icon_s "></span></a></li> 
+              <else />    
+                <li><a class="col7ac  <if condition="$_GET[sort] eq 'shop_price'">main</if>" href="<?php echo urldecode(U("/Home/Activity/new_arrival",array_merge($filter_param,array('sort'=>'shop_price','sort_asc'=>'desc')),''));?>" style="cursor:pointer;">Price<span class="icon_s "></span></a></li>        
+              </if> 
+
+            </ul>
+            <!-- Page -->
+            <div class="right text12" id="pagenavi">
+              <div class="all-number">
+                <span>All {$page->totalRows} pieces goods</span>
+              </div>
+              <p class="pageArea" data-countPage="1"> 
+                <!--<a class="bg_img1"></a>-->
+                <span class="colf22e01 fontT">{$page->nowPage}</span>
+                /
+                <span class="page_count fontT">{$page->totalPages}</span>
+              </p>
+            </div>
+            <!-- Page End--> 
+          </div>      
+        </div>
+
+        <!-- 商品列表 -->
+        <ul id="cata_choose_product" class="cart_containt clearfix listContainer">
+          <foreach name="goods_list" item="v" key="k">
+          <li>
+        <!-- <div class="nosinglemore"></div> -->
+        <div class="listbox clearfix"> 
+          <!-- 圖片 -->
+          <div class="listPic"> 
+              <a rel="nofollow" target="_blank" href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">
+                  <img src="{$v.goods_id|goods_thum_images=200,200}" class="fn_img_lazy"> 
+                </a>             
+          </div>
+          <!-- <div class="list-scroll J_scrollBox clearfix"> <a href="javascript:void(0);" class="list-scroll-left cbtn"></a>
+            <div class="list-scroll-warp J_hideBox">
+              <dl class="J_mBox clearfix">            
+              <foreach name="goods_images" item="v2" key="k2">
+                  <if condition="$v2[goods_id] eq $v[goods_id]">
+                    <dd> 
+                      <a href="javascript:void(0);">
+                        <img width="30"  height="30" data-img="{$v2[image_url]}" src="{$v2[image_url]}" style="display: block;">
+                      </a>                 
+                    </dd>  
+                  </if>
+              </foreach>
+              </dl>
+            </div>
+            <a href="javascript:void(0);" class="list-scroll-right cbtn"></a> 
+          </div> -->
+         
+          <!-- 品名 -->
+          <div class="listDescript"> <a target="_blank" href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" class="text13">{$v[goods_name]}</a></div>
+          <!-- 品名 end-->
+          <!-- 价格 -->
+          <div class="discountPrice">
+            <div class="price-cash">
+              <span class="colf22e01">${$v['goods_promotion']['price']?$v['goods_promotion']['price']:$v[shop_price]}</span>
+              <span class=""><del>${$v[origin_price]}</del></span>           
+            </div>
+            <div class="orders">
+              <span class="num">orders({$v[sales_sum]})</span>
+            </div>
+          </div>
+          
+          <!-- 价格 end-->        
+          <div class="itemPrice" >
+            <div class="cart_wrapper" > <a style="cursor:pointer;" class="cartlimit" href="javascript:void(0);" onclick="javascript:AjaxAddCart({$v[goods_id]},1,0);" >Add to Cart</a></div>
+          </div> 
+        </div>
+      </li>
+          </foreach>
+        </ul>
+      
+        <!-- Page -->
+        <div class="fn-page-css-1 pagintion fix" style="display: block;">
+      	  <div class="pagenavi text12">{$page->show()}</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--中间内容end-->   
+ 
+
+<!--footer-开始-->
+<include file="Public/footer" />
+<!--footer-结束-->
+
+<script type="text/javascript">
+  //产品图片切换   
+  $('.list-scroll-warp').each(function(){
+  	var _this = this;
+  		
+  	$(_this).children().children().each(function(i,o){
+  		$(o).mouseover(function(){
+  			$(o).siblings().removeClass('cur');
+  			$(o).addClass('cur');			
+  			var img_src = $(o).children().children().attr('data-img');
+  			$(_this).parent().siblings('.listPic').find('a').children().attr('src',img_src);
+  		})
+  	})
+  })
+</script>
+<!-- 页面访问统计 -->
+<script src="https://s22.cnzz.com/z_stat.php?id=1261971213&web_id=1261971213" language="JavaScript"></script> 
+</body>
+</html>

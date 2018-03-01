@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>订单详情-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body>
+<!-- 头部-s -->
+<include file="User/header" />
+<!-- 头部-e -->
+<div class="wrap"> 
+  <!-- bread crumbs star --> 
+  <div class="bread_crumbs"> <a class="target_no" href="{:U('Home/User/index')}"  class="crumbs_font">我的TPshop</a>&gt;<a href="{:U('/Home/User/order_list')}" class="crumbs_font target_no">我的订单</a></div>
+  <!-- bread crumbs end -->  
+  <!-- order details star -->
+  <div class="main order_details">
+    <div class="themes_title">
+      <h3>订单详情</h3>
+    </div>
+    
+    <!-- order base info start -->
+    <div class="order_tip">
+      <div class="order_tip_tit clearfix">
+        <h3> 订单号：
+          <span class="num">{$order_info.order_sn}</span>
+        </h3>
+         
+      </div>
+      <div class="order_tip_info">
+        <div class="info_box">
+          <div class="info_L"> 订单状态： </div>
+          <div class="info_R">
+            <span class="df">{$order_info.order_status_desc}</span>
+          </div>
+        </div>
+        <div class="info_box">
+          <div class="info_L"> 应付金额： </div>
+          <div class="info_R">
+            <span class="num">￥{$order_info.order_amount}</span>
+            <span class="way_tips" style="display:inline-block;">{$order_info.pay_name}</span>            
+          </div>
+        </div>
+		<div class="info_box">
+          <div class="info_L"> 积&nbsp;&nbsp;&nbsp;&nbsp;分： </div>
+          <div class="info_R">
+            <span class="num">￥{$order_info.integral_money}</span>
+          </div>
+        </div>
+		<div class="info_box">
+          <div class="info_L"> 余&nbsp;&nbsp;&nbsp;&nbsp;额： </div>
+          <div class="info_R">
+            <span class="num">￥{$order_info.user_money}</span>
+          </div>
+        </div>   
+	<div class="info_box">
+          <div class="info_L"> 优&nbsp;惠&nbsp;券： </div>
+          <div class="info_R">
+            <span class="num">￥{$order_info.coupon_price}</span>
+          </div>
+        </div>                      
+	<div class="info_box">
+          <div class="info_L"> 优惠活动： </div>
+          <div class="info_R">
+            <span class="num">￥{$order_info.order_prom_amount}</span>
+          </div>
+        </div>          
+        <div class="info_box">
+          <div class="info_L"> 收货地址： </div>
+          <div class="info_R">{$order_info.consignee} {$order_info.mobile} {$region_list[$order_info['province']]['name']}，{$region_list[$order_info['city']]['name']}，
+                                {$region_list[$order_info['district']]['name']}，{$order_info.address} </div>
+        </div> 
+        <div class="info_box">
+          <div class="info_L">发票信息：{$order_info.invoice_title}</div>
+          <div class="info_R" id="invoiceDetail" ogNo="201603CP09721849" ogSeq="201603CO09721849" invkind="5" > </div>
+          <div class="ui_poptip money_info m_ord_lnk J-zdsw">
+            <div class="ui_poptip_container"> <i class="icon_order_up"></i>
+              <div id="urlDetail" class="ui_poptip_content"> </div>
+            </div>
+          </div>
+          <div id="invoiceMsg" class="info_L"> </div>
+        </div>
+      </div>
+    </div>
+    <div class="order_info">
+      <div class="ui_tab">
+        <ul class="ui_tab_nav">
+          <li class =" active">
+          <a href="javascript:void(0);" class="detail_packNo">订单</a>
+          </li>
+          <li class="opeating" id="opeating_1" style="display:block;">          
+            <if condition="$order_info.cancel_btn eq 1"><button class="btn_pay" onClick="cancel_order({$order_info.order_id})">取消订单</button></if>
+            <if condition="$order_info.pay_btn eq 1"><button class="btn_pay"  onclick="location.href='{:U('/Home/Cart/cart4',array('order_id'=>$order_info[order_id]))}'">立即支付</button></if>                
+            <if condition="$order_info.receive_btn eq 1"><button class="btn_pay"  onClick=" if(confirm('你确定收到货了吗?')) location.href='{:U('Home/User/order_confirm',array('id'=>$order_info['order_id']))}'">收货确认</button></if>    
+          </li>
+        </ul>
+        <div class="ui_tab_content">
+          <div class="ui_panel" id="ui_panel_1" style = "display: block;">
+            <h3>订单信息
+              <span class="package" id="package_bag_1"> </span>
+            </h3>
+            <div class="package_info clearfix J-tab">
+              <div class="package_L">                 
+                <div class="info_box">
+                  <div class="info_L"> 运费：</div>
+                  <div class="info_R">
+                    <span class="num">￥{$order_info.shipping_price}</span>
+                  </div>
+                </div>
+                <div class="info_box">
+                  <div class="info_L"> 配送方式：</div>
+                  <div class="info_R">
+                    <span class="over">{$order_info.shipping_name}</span>
+                  </div>
+                </div>
+                <div class="info_box">
+                  <div class="delivery_time">本商品由TPshop网自营提供</div>
+                </div>
+                <div class="info_box">
+                  <div class="info_L"> 运 单 号：{$order_info.invoice_no} <a href="http://www.kuaidi100.com/" target="_blank">(点击查询)</a>  </div>
+                  <div class="info_R">
+                    <ul class="packages J-tab-menu" id= "spv_name_1">
+                    </ul>
+                  </div>
+                </div>
+                <div class="info_box again"> <a  href='/' class="btn_again" alt="再次购买" title="再次购买">再次购买</a> </div>
+              </div>
+              <div class="package_R">
+                <ul class="ui_step ui_step_4 clearfix">
+                  <li class="step_start">
+                    <div class="ui_step_title">下单</div>
+                    <div class="ui_step_bg">
+                      <div class="step_bg">1</div>
+                      <div class="step_line"></div>
+                    </div>
+                    <div class="ui_step_time">{$order_info.add_time|date='Y-m-d H:i:s',###}</div>
+                  </li>
+                  <li class="<if condition="$order_info[pay_time] gt 0">step_start</if>">
+                    <div class="ui_step_title">付款成功</div>
+                    <div class="ui_step_bg">
+                      <div class="step_bg">2</div>
+                      <div class="step_line"></div>
+                    </div>
+                    <div class="ui_step_time" ><if condition="$order_info[pay_time] gt 0">{$order_info.pay_time|date='Y-m-d H:i:s',###}</if></div>
+                  </li>
+                  <li class="<if condition="$order_info[shipping_time] gt 0">step_start</if>">
+                    <div class="ui_step_title">卖家发货</div>
+                    <div class="ui_step_bg">
+                      <div class="step_bg">3</div>
+                      <div class="step_line"></div>
+                    </div>
+                    <div class="ui_step_time" ><if condition="$order_info[shipping_time] gt 0">{$order_info.shipping_time|date='Y-m-d H:i:s',###}</if></div>
+                  </li>
+                  <li  class="step_end <if condition="$order_info[confirm_time] gt 0">step_start</if>">
+                    <div class="ui_step_title"> 完成 </div>
+                    <div class="ui_step_bg">
+                      <div class="step_bg">4</div>
+                      <div class="step_line"></div>
+                    </div>
+                    <div class="ui_step_time" ><if condition="$order_info[confirm_time] gt 0">{$order_info.confirm_time|date='Y-m-d H:i:s',###}</if></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <notempty name="express.data">
+            <h3>物流信息</h3>
+            <div class="order-track">
+              <div class="track-list">
+                <ul>
+                  <foreach name="express.data" item="vo" key="k">
+	                  <if condition="$k eq 0">
+	                  <li class="first"><i class="node-icon"></i><span class="time">{$vo.time}</span><span class="txt">{$vo.context}</span></li>
+	                  <else/>
+	                  <li><i class="node-icon"></i><span class="time">{$vo.time}</span><span class="txt">{$vo.context}</span></li>
+	                  </if>
+                  </foreach>
+                </ul>
+              </div>
+            </div>
+            </notempty>
+            <h3>商品信息</h3>
+            <div class="details_list">
+              <div class="details_list_tit clearfix">
+                <ul>
+                  <li class="col_w40">商品名称</li>
+                  <li class="col_w15">规格</li>
+                  <li class="col_w15">价格 / 数量</li>
+                  <li class="col_w15">合计（元）</li>
+                  <li class="tit_05 col_w15">订单状态及操作</li>
+                </ul>
+              </div>
+              <div class="details_list_cont">
+              
+              <volist name="order_info.goods_list" id="good">
+                <div class="item_details">
+                  <ol class="clearfix">
+                    <li class="col_w40">
+                      <div class="item_container clearfix">
+                          <a href="{:U('Home/Goods/goodsInfo',array('id'=>$good['goods_id']))}" class="item_img">
+	                          <img src="{$good.goods_id|goods_thum_images=78,78}"/>
+                          </a>
+                        <div class="item_meta">  
+                          <a href="{:U('Home/Goods/goodsInfo',array('id'=>$good['goods_id']))}" class="order_name">{$good.goods_name}</a> </div>
+                      </div>
+                    </li>
+                    <li class="col_w15">{$good.spec_key_name}</li>
+                    <li class="col_w15 num">￥{$good.member_goods_price}&nbsp;&nbsp; *&nbsp;&nbsp; {$good.goods_num}</li>
+                    <li class="col_w15 num">￥{$good['member_goods_price'] * $good['goods_num']}</li>
+                    <li class="cont_05 col_w15 num">                        
+                        <if condition="($order_info[return_btn] eq 1) and ($good[is_send] eq 1)">    
+                            <p class="p-link"><a style="color:#999;" href="{:U('Home/User/return_goods',array('order_id'=>$order_info['order_id'],'order_sn'=>$order_info['order_sn'],'goods_id'=>$good['goods_id'],'spec_key'=>$good['spec_key']))}">申请退款</a></p>    
+                        </if>
+                        <if condition="($order_info.comment_btn eq 1) and ($good['is_comment'] eq 0)">
+                            <p class="p-link"><a href="{:U('Home/User/comment')}"><span>评价</span></a></p>
+                        </if>                    
+                    </li>
+                  </ol>
+                </div>
+               </volist>				                                 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ui tab end --> 
+    </div>
+  </div>
+  <!-- order details end --> 
+  
+</div>
+<div style="clear: both;"></div>
+<include file="User/footer" />
+<script>
+    //取消订单
+    function cancel_order(id){
+        if(!confirm("确定取消订单?"))
+            return false;
+        location.href = "/index.php?m=Home&c=User&a=cancel_order&id="+id;
+    }
+</script>
+</body>
+</html>

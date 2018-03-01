@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$goods.goods_name}-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$goods.keywords}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <link rel="icon" href="/ico.png" type="image/x-icon" />
+</head>
+
+<body>
+<!--头部开始-->
+<include file="Public/header" />
+<!--头部结束-->
+<link rel="stylesheet" href="__STATIC__/css/page.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/css/detail.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/css/jqzoom.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/css/location.css" type="text/css"><!-- 收货地址，物流运费 -->
+<script src="__PUBLIC__/js/pc_common.js"></script>
+<script src="__STATIC__/js/jquery.jqzoom.js"></script>
+<script src="__PUBLIC__/js/layer/layer.js"></script>
+<div class="layout">
+    <div class="breadcrumb-area">
+        <a href="/">Home</a> >>
+        <foreach name="navigate_goods" key="k" item="v">
+            <a  href="{:U('/Home/Goods/goodsList',array('id'=>$k))}">{$v}</a> >>
+        </foreach>
+        <span>{$goods.goods_name}</span>
+    </div>
+    <div class="layout">
+        <!--商品图片轮播-->
+        <div class="left-area">
+            <div class="left-area-tb">
+                <div class="pro-gallery-img clearfix">
+                    <div class="jqzoom resimg-con"><img id="zoomimg" src="{$goods.goods_id|goods_thum_images=400,400}" jqimg="{$goods.goods_id|goods_thum_images=800,800}" alt=""/> </div>
+                </div>
+                <!-- 修改的部分-start -->
+                <div class="pro-gallery-area">
+                    <div class="pro-gallery-nav">
+                        <a href="javascript:;" class="pro-gallery-back next-left disabled"></a>
+                        <div class="pro-gallery-thumbs">
+                            <ul class="small-pic" id="pro-gallerys" style="left: 0px;">
+                                <foreach name="goods_images_list" item="v" key="k" >
+                                    <li class="small-pic-li <if condition="$k eq 0">current</if>">
+                                    <a href="javascript:void(0);">
+                                        <img src="{$v|get_sub_images=$v[goods_id],60,60}" data-img="{$v|get_sub_images=$v[goods_id],400,400}" data-big="{$v|get_sub_images=$v[goods_id],800,800}">
+                                    </a>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                        <a href="javascript:;" class="pro-gallery-forward next-right"></a>
+                    </div>
+                </div>
+                <!-- 修改的部分-end -->
+            </div>
+        </div>
+        <!--商品图片轮播 end-->
+
+        <div class="right-area-num good-detail-tabcon">
+            <div class="right-area">
+                <div class="right-area-le30">
+                    <h1>{$goods.goods_name}</h1>
+                    
+                </div>
+            </div>
+            <div class="right-area">
+
+                <!--商品促销 start-->
+                <if condition="$goods['prom_type'] eq 1">
+                    <div class="bef_fo2" style="font-size:14px;position: relative; background-color:#F60; color:#FFFFFF; line-height:30px; width:100%">
+                        <p style="background-color:#f72862;height: 32px;">
+                            <span style="font-size:20px; padding:0px 16px 0px 26px; vertical-align:middle; ">flash price ${$goods['goods_promotion']['price']}</span>
+                            <img class="clock_w" src="__STATIC__/images/lz.png"/><span id="surplus_text"></span> will over
+                        </p>
+                    </div>
+                    <script>
+                        // 倒计时
+                        function GetRTime2(){
+                            //var text = GetRTime('2016/02/27 17:34:00');
+                            var text = GetRTime('{$goods['goods_promotion']['end_time']|date="Y/m/d H:i:s",###}');
+                            $("#surplus_text").text(text);
+                        }
+                        setInterval(GetRTime2,1000);
+                    </script>
+                </if>
+                <!--商品促销 end-->
+                <div class="right-area-le30" >
+
+                    <div class="pro-promotions-area">
+                        <table class="promotions-tab" width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr style="background-color: #f1f1f1;padding: 10px 0;">
+                                <td width="100px" align="right" valign="top">Price:</td>
+                                <td>
+                                    <p class="co-red fo-si-24 ma-le-6 origin_price"  >                                       
+                                        $<span class="co-red fo-si-24" id="origin_price">{$goods.origin_price}</span>
+                                    </p>
+                                    <p class="co-red fo-si-24 ma-le-6 goods_price"  >
+                                        $<span class="co-red fo-si-24" id="goods_price">{$goods.shop_price}</span>
+                                        <span class="scale inblockm"></span>
+                                        <!-- <span class="scale inblockm"></span> -->
+                                    </p>
+                                </td>
+                            </tr>
+                          
+                            <if condition="($goods['shop_price'] egt ($goods['exchange_integral']/$point_rate)) AND $goods['exchange_integral'] gt 0">
+                                <tr>
+                                    <td width="100px" align="right">Promotion:</td>
+                                    <td>
+                                        <p class="co-red fo-si-24 ma-le-6">
+                                            $<span class="co-red fo-si-24">{$goods['shop_price']-$goods['exchange_integral']/$point_rate}+{$goods['exchange_integral']}points</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </if>
+ 
+                            <tr>
+                               <td align="right">Goods Score:</td>
+                               <td>
+                                   <p class="ma-le-6">
+                                       <span class="pf-comment"><i class="score"></i></span>
+                                       &nbsp;
+                                       <!-- <a href=""><span>(All&nbsp;{$goods.comment_count}&nbsp;pieces of comments)</span> -->
+                                       </a>
+                                    </p>
+                               </td>
+                           </tr>
+
+                            <!-- <tr>
+                                <td width="100px" align="right">Shipping Tips:</td>
+                                <td><p class="ma-le-6">Free delivery over $ {$freight_free}</p></td>
+                            </tr> -->
+                           
+
+                             <!-- 收货地址，物流运费 -start-->
+                            <tr>
+                                <td align="right" style="">Shipping To:</td>
+                                <td>
+                                    <div class="ma-le-6">Worldwide Delivery (You can choose Standard delievery or Express!)</div>
+                                                                                              
+                                </td>
+                            </tr>
+                             <tr>
+                                <td width="100px" align="right">Status:</td>
+                                <td><p class="ma-le-6"><strong>In stock</strong></p></td>                            
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><a onClick="collect_goods({$goods.goods_id});" class="ma-le-6" style="color:#0097e0;cursor: pointer;" >Add to collection</a></td>
+                            </tr>
+                            <!-- 收货地址，物流运费 -end-->
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <form name="buy_goods_form" method="post" id="buy_goods_form" >
+                <div class="right-area" style="">
+                    <div class="right-area-le30">
+                        <div class="pro-promotions-area">
+                            <table class="promotions-tab he40-tr-td" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <foreach name="filter_spec" item="v" key="k" >
+                                    <tr>
+                                        <td width="60px" align="right">{$k}：</td>
+                                        <td>
+                                            <ul class="choice-colol ma-le-6 clearfix">
+                                                <foreach name="v" item="v2" key="k2" >
+                                                    <li>
+                                                        <div class="sku <if condition="$k2 eq 0 ">sku-bo-blo</if>">
+                                                            <a onClick="switch_spec(this,'{$v2[src]}');" class="choice-size">{$v2[item]}</a>
+                                                            <input type="radio"  style="display:none;" name="goods_spec[{$k}]" value="{$v2[item_id]}" <if condition="$k2 eq 0 ">checked="checked"</if> />
+                                                            <s></s>
+
+                                                        </div>
+                                                    </li>
+                                                    
+                                                    <!-- <if condition="$v2[src] neq ''">
+                                                       <li>
+                                                           <div class="color-sku-fant">
+                                                               <div class="sku <if condition="$k2 eq 0 ">sku-bo-blo</if>">
+                                                                    <a onClick="switch_spec(this,'{$v2[src]}')">
+                                                                        <img src="{$v2[src]}" />
+                                                                    </a>
+                                                                   <input type="radio" style="display:none;" name="goods_spec[{$k}]" value="{$v2[item_id]}"  <if condition="$k2 eq 0 ">checked="checked"</if>/>
+                                                                   <s></s>
+                                                               </div>
+                                                               <p>{$v2[item]}</p>
+                                                           </div>
+                                                       </li>
+                                                   <else />
+                                                       <li>
+                                                           <div class="sku <if condition="$k2 eq 0 ">sku-bo-blo</if>">
+                                                               <a onClick="switch_spec(this);" class="choice-size">{$v2[item]}</a>
+                                                               <input type="radio"  style="display:none;" name="goods_spec[{$k}]" value="{$v2[item_id]}" <if condition="$k2 eq 0 ">checked="checked"</if> />
+                                                               <s></s>
+                                                           </div>
+                                                       </li>
+                                                    </if> -->
+
+                                                 </foreach>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </foreach>
+                                <tr>
+                                    <td width="60px" align="right">Qty：</td>
+                                    <td>
+                                        <ul class="choice-colol ma-le-6">
+                                            <li>
+                                                <a onClick="switch_num(-1);" class="choice-number fl"  style="width:24px">-</a>
+                                                <input class="wi43 fl" type="text" value="1" name="goods_num" id="goods_num" readonly/>
+                                                <a onClick="switch_num(1);" class="choice-number fl"  style="width:24px">+</a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                           <!--  <if condition="empty($filter_spec)">
+                                <tr>
+                                    <td align="right" style="vertical-align:top">送&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;货：</td>
+                                    <td>由TPshop商城从 全国最近点 发货，并提供售后服务。如有问题咨询在线客服~!<br/>上午08:30前完成下单下午送达,下午下单隔日第二天送达.</td>
+                                </tr>
+                            </if> -->
+                            </table>
+                        </div>
+                        <div class="join-a-shopping-cart" id="join_cart_now"><!-- location.href='{:U('Home/Cart/cart')}-->
+                            <a class="jrgwc-shopping-img jrgwc-shopping-img2" onClick="javascript:AjaxAddCart({$goods.goods_id},1,1);">
+                                <span>Buy Now</span>
+                            </a>
+                            <a class="jrgwc-shopping-img2" onClick="javascript:AjaxAddCart({$goods.goods_id},1,0);">
+                                <span>Add to Cart</span>
+                            </a>
+                        </div>
+                        <div class="join-a-shopping-cart" id="no_join_cart_now" style="display: none"> 
+                            <a class="jrgwc-shopping-img jrgwc-shopping-img2" onClick="" style="">
+                                <span>Buy Now</span>
+                            </a>
+                        </div>
+                        <div class="join-a-shopping-cart" id="no_join_cart" style="display: none">
+                            <a class="jrgwc-shopping-img2" onClick=""  style="">
+                                <span>Add to Cart</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <input type="hidden" name="goods_id" value="{$goods.goods_id}" />
+            </form>
+        </div>
+    </div>
+</div>
+ 
+<div class="layout ma-to-20 ov-hi">
+    <div class="wi240 ov-hi fl">
+        <div class="product-history-area">
+            <div class="hi47 co-grey">
+                <h3 class="fl browse-his">Recommend</h3>
+            </div>
+            <div class="history-bott">
+                <ul class="history-comm">
+                    <tpshop sql="select * from `__PREFIX__goods` where is_recommend = 1 order by goods_id desc limit 8" item="v" key="k" >
+                        <?php 
+                            if($v[prom_type]>0){
+                                $v['goods_promotion'] = get_goods_promotion($v['goods_id']);
+                            }
+                        ?>
+                        <li>
+                            <div>
+                                <p class="p-img-comm fl">
+                                    <a href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}"><img class="img-comm" src="{$v.goods_id|goods_thum_images=60,60}" alt=""></a>
+                                </p>
+                                <p class="p-name-comm">
+                                    <a href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">{$v.goods_name}</a>
+                                </p>
+                                <p class="p-price-comm">
+                                    <!-- <b>${$v.shop_price}</b> -->
+                                    <b>${$v['goods_promotion']['price']?$v['goods_promotion']['price']:$v[shop_price]}</b>
+                                </p>
+                            </div>
+                        </li>
+                    </tpshop>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="wi940 ov-hi fr">
+        <div class="comm-param detail-con1">
+            <div class="parame-title">
+                <div class="par-titles co-grey">
+                    <ul class="commodity-xq tab_li">
+                        <li class="current cliks" onClick="switch_tab(this,'tab1')">
+                            <a>Product Details</a>
+                        </li>
+                        <li class="cliks" onClick="switch_tab(this,'tab3')">
+                            <a>Item specifics</a>
+                        </li>                                     
+                        <li class="cliks" onClick="switch_tab(this,'tab4')">
+                            <a>After-sale service</a>
+                        </li>
+                        <li class="cliks" onClick="switch_tab(this,'tab2')">
+                            <a>Feedback （{$commentStatistics['c0']}）</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--商品详情-->
+            <div class="parame-bott cliks-bn" style="display:" id="tab1">
+                <div class="commodity-num pro-feature-area">
+                    <div class="pro-disclaimer-area ma-to-20">
+                        {$goods.goods_content|htmlspecialchars_decode}
+                    </div>
+                </div>
+            </div>
+            <!--规格参数-->
+            <div class="parame-bott cliks-bn" style="display:none"  id="tab3">
+                <div class="commodity-num pro-feature-area wi850">
+                    <table class="modity-zhut" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th colspan="2"><h3>The Goods Property </h3></th>
+                        </tr>
+                        <foreach name="goods_attr_list" item="v" key="k" >
+                            <tr>
+                                <td class="wi143">{$goods_attribute[$v[attr_id]]}</td>
+                                <td class="pa-5-0">{$v[attr_value]}</td>
+                            </tr>
+                        </foreach>
+                    </table>
+                </div>
+            </div>
+            <!--售后服务-->
+            <div class="parame-bott cliks-bn" style="display:none"  id="tab4">
+                <div class="commodity-num pro-feature-area service-con wi850 padding36-0-36-0">
+                    <ul class="service-list">
+                        <li>
+                            <h4>Return Policy</h4>
+                            <div>
+                                <p>If the product you receive is not as described or low quality, the seller promises that you may return it before order completion (when you click ‘Confirm Order Received’ or exceed confirmation timeframe) and receive a full refund. The return shipping fee will be paid by you. Or, you can choose to keep the product and agree the refund amount directly with the seller</p>
+                            </div>
+                        </li>
+                        <li>
+                            <h4>On-time Delivery</h4>
+                            <div>
+                                <p>If you do not receive your purchase within 23 days, you can ask for a full refund before order completion (when you click ‘Confirm Order Received’ or exceed confirmation timeframe).</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--用户评价-->
+            <div class="parame-bott ov-hi" style="display:none"  id="tab2">
+                <div class="evaluation-top fo-fa di-in-bl">
+                    <div class="eval-le1 fl wi146 te-al">
+                        <span><b>{$commentStatistics['rate1']}</b>%</span>
+                        <em>Praise Rate</em>
+                    </div>
+                    <div class="eval-le2 fl wi123 pa-to-7">
+                        <dl>
+                            <dt>Good<em>({$commentStatistics['rate1']}%)</em></dt>
+                            <dd><s style=" width:94%"></s></dd>
+                        </dl>
+                        <dl>
+                            <dt>Medium<em>({$commentStatistics['rate2']}%)</em></dt>
+                            <dd><s style=" width:2%"></s></dd>
+                        </dl>
+                        <dl>
+                            <dt>Bad<em>({$commentStatistics['rate3']}%)</em></dt>
+                            <dd><s style=" width:4%"></s></dd>
+                        </dl>
+                    </div>
+                    <div class="eval-le3 fl wi516">
+                        <dl>
+                            <dt>After the purchase,whether You feel satisfied or dissatisfied,you could comment here if you,The comments here are all based on real comments.</dt>
+                        </dl>
+                    </div>
+                    <div class="eval-le4 fl wi150 pa-to-43 te-al">
+                        <a href="{:U('Home/User/comment')}">to Comment</a>
+                    </div>
+                </div>
+                <div class="evaluation-cen fo-fa">
+                    <div class="eval-cen-le fl pa-le-12">
+                        <ul>
+                            <li class="curres cliks">
+                                <a href="javascript:void(0);" data-t='1'>
+                                    <span>
+                                        All Feedback
+                                        <em>({$commentStatistics['c0']})</em>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="cliks">
+                                <a href="javascript:void(0);" data-t='2'>
+                                    <span>
+                                        Good
+                                        <em>({$commentStatistics['c1']})</em>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="cliks">
+                                <a href="javascript:void(0);" data-t='3'>
+                                    <span>
+                                        Media
+                                        <em>({$commentStatistics['c2']})</em>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="cliks">
+                                <a href="javascript:void(0);" data-t='4'>
+                                    <span>
+                                        Bad
+                                        <em>({$commentStatistics['c3']})</em>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--用户评价-start-->
+                <!--<link rel="stylesheet" href="/Public/bootstrap/css/bootstrap.min.css" type="text/css">
+                <div class="evaluation-bott pa-to-25 cliks-bn" style="display:block" id="ajax_comment_return">-->
+                    <!--ajax 然后分页数据-->
+                </div>
+                <script>
+                    $(document).ready(function(){
+                        commentType = 1; // 评论类型
+                        ajaxComment(1,1);// ajax 加载评价列表
+                    });
+
+                    // 好评差评 切换
+                    $(".eval-cen-le a").click(function(){
+                        $(".eval-cen-le li").removeClass('curres');
+                        $(this).parent().addClass('curres');
+                        commentType = $(this).data('t');// 评价类型   好评 中评  差评
+                        ajaxComment(commentType,1);
+                    });
+
+                    // 用ajax分页显示评论
+                    function ajaxComment(commentType,page){
+                        $.ajax({
+                            type : "GET",
+                            url:"/index.php?m=Home&c=Goods&a=ajaxComment&goods_id={$goods['goods_id']}&commentType="+commentType+"&p="+page,//+tab,
+                            success: function(data){
+                                $("#ajax_comment_return").html('');
+                                $("#ajax_comment_return").append(data);
+                            }
+                        });
+                    }
+                </script>
+                <!--用户评价-end-->
+            </div>
+        </div>
+
+        
+        <div class="comm-param">
+            <!--咨询列表-->
+           
+            <!--咨询列表-end-->
+
+            <!--发表咨询-->
+             
+            <!--发表咨询 end-->
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function(){
+        //优惠比例
+        calScale();
+
+        // 更新商品价格
+        get_goods_price();
+        $(".jqzoom").jqueryzoom({
+            xzoom: 480,
+            yzoom: 480,
+            offset: 20,
+            position: "right",
+            preload: 1,
+            lens: 1
+        });
+
+
+    });
+
+    /*
+    *计算比例
+    */
+    function calScale(){
+        var _rate= calPriceScale({$goods.origin_price},{$goods.market_price},{$goods.shop_price},{$goods['goods_promotion']['price']});
+        var scale='-'+ _rate +'%';
+        $('.good-detail-tabcon .promotions-tab .scale').text(scale);
+    }
+
+    /**
+     * 切换规格
+     */
+    function switch_spec(spec,imgsrc)
+    {
+        $(spec).siblings('input').trigger('click');	 // 让隐藏的 单选按钮选中
+        $(spec).parent().parent().parent().parent().find("div.sku").removeClass('sku-bo-blo'); //   清空勾选图标
+        $(spec).parent().addClass('sku-bo-blo'); // 当前 加上勾选图标
+
+        if (imgsrc!='') {
+            $('#zoomimg').prop('src',imgsrc);
+            $('#zoomimg').attr('jqimg',imgsrc);
+        }   
+         
+        // 更新商品价格
+        get_goods_price();
+    }
+
+    /**
+     * 购买商品数量加加减减
+     */
+    function switch_num(num)
+    {
+        var num2 = parseInt($("#goods_num").val());
+        num2 += num;
+        if(num2 < 1) num2 = 1; // 保证购买数量不能少于 1
+        $("#goods_num").val(num2); // 修改商品购买数量
+        // 更新商品价格
+        //get_goods_price();
+    }
+    // 用作 sort 排序用
+    function sortNumber(a,b)
+    {
+        return a - b;
+    }
+    /*** 查询商品价格*/
+    function get_goods_price()
+    {
+
+        var goods_price = {$goods.shop_price}; // 商品起始价
+        var store_count = {$goods.store_count}; // 商品起始库存
+
+        var spec_goods_price = {$spec_goods_price};  // 规格 对应 价格 库存表   //alert(spec_goods_price['28_100']['price']);
+        // 如果有属性选择项
+        if(spec_goods_price != null)
+        {
+            goods_spec_arr = new Array();
+            $("input[name^='goods_spec']:checked").each(function(){
+                goods_spec_arr.push($(this).val());
+            });
+            var spec_key = goods_spec_arr.sort(sortNumber).join('_');  //排序后组合成 key
+            goods_price = spec_goods_price[spec_key]['price']; // 找到对应规格的价格
+            store_count = spec_goods_price[spec_key]['store_count']; // 找到对应规格的库存
+        }
+
+        var goods_num = parseInt($("#goods_num").val());
+        // 库存不足的情况
+        if(goods_num > store_count)
+        {
+            goods_num = store_count;
+            layer.msg('just last'+store_count+' pics', {icon: 2}); //alert('库存仅剩 '+store_count+' 件');
+            //$("#goods_num").val(goods_num);
+        }
+
+        var flash_sale_price = parseFloat("{$goods['goods_promotion']['price']}");
+        (flash_sale_price > 0) && (goods_price = flash_sale_price);
+
+        $("#goods_price").html(goods_price); // 变动价格显示
+    }
+
+    /**
+     * 切换 商品详情  用户评价  规格参数  包装清单  售后服务
+     */
+    function switch_tab(cur,tab)
+    {
+        $("#tab1,#tab2,#tab3,#tab4").hide(); // 先全部隐藏
+        $("#"+tab).show();	// 再显示其中一个
+        $("ul.tab_li li").removeClass("current"); // 先全部样式去除
+        $(cur).addClass("current"); //  单独的给当前点击这个加上
+    }
+
+    // 验证码切换
+    function verify(){
+        $('#verify_code').attr('src','/index.php?m=Home&c=Index&a=verify&type=consult&fontSize=20&length=4&r='+Math.random());
+    }
+
+    //缩略图切换
+    $('.small-pic-li').each(function(i,o){
+        var lilength = $('.small-pic-li').length;
+        $(o).hover(function(){
+            $(o).siblings().removeClass('current');
+            $(o).addClass('current');
+            $('#zoomimg').attr('src',$(o).find('img').attr('data-img'));
+            $('#zoomimg').attr('jqimg',$(o).find('img').attr('data-big'));
+            if(i==0){
+                $('.next-left').addClass('disabled');
+            }
+            if(i+1==lilength){
+                $('.next-right').addClass('disabled');
+            }
+        });
+    })
+
+    //前一张缩略图
+    $('.next-left').click(function(){
+        var newselect = $('.small-pic>.current').prev();
+        console.log(newselect);
+        if (newselect.length) {
+            $('.small-pic-li').removeClass('current');
+            $(newselect).addClass('current');
+            $('#zoomimg').attr('src',$(newselect).find('img').attr('data-img'));
+            $('#zoomimg').attr('jqimg',$(newselect).find('img').attr('data-big'));
+            $('.next-right').removeClass('disabled');
+            $('#pro-gallerys').css('left', '+=76px');
+        }else{
+            $('.next-left').addClass('disabled');
+        }
+        
+    })
+
+    //后前一张缩略图
+    $('.next-right').click(function(){
+        var newselect = $('.small-pic>.current').next();
+        if (newselect.length) {
+            $('.small-pic-li').removeClass('current');
+            $(newselect).addClass('current');
+            $('#zoomimg').attr('src',$(newselect).find('img').attr('data-img'));
+            $('#zoomimg').attr('jqimg',$(newselect).find('img').attr('data-big'));
+            $('.next-left').removeClass('disabled');
+            $('#pro-gallerys').css('left', '-=76px');
+        }else{
+            $('.next-right').addClass('disabled');
+        }
+         
+        
+    })
+</script>
+
+<script src="__PUBLIC__/js/jqueryUrlGet.js"></script>
+<!--获取get参数插件-->
+
+<script> 
+set_first_leader(); //设置推荐人
+</script>
+
+<!--footer开始-->
+<include file="Public/footer" />
+<script src="https://s22.cnzz.com/z_stat.php?id=1261971213&web_id=1261971213" language="JavaScript"></script>
+<!--footer结束-->
+</body>
+</html>

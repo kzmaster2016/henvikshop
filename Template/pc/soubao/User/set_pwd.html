@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>密码-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="stylesheet" href="__STATIC__/css/security_set.css">
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<div class="wrap">
+<div class="bread_crumbs"> 
+  <a href="{:U('Home/User/index')}" class="crumbs_font">用户中心</a>&gt;<span class="color">找回密码</span>
+</div>
+<div class="col_main" style="float: none; width: auto;">
+		<div class="main security_passwd">
+			<!-- themes star -->
+			<div class="themes_title">
+				<h3>安全设置</h3>
+			</div>
+			<!-- themes end -->
+			<section class="security_passwd">
+				<div class="wrapper-3">
+					<div class="pub-step" id="step">
+						<div class="steps-nav fixed w4">
+							<p class="step-nav step-nav-1">
+								1.填写用户名<i></i>
+							</p>
+							<p class="step-nav step-nav-2">
+								2.验证身份<i></i>
+							</p>
+							<p class="step-nav step-nav-3 go">
+								3.设置新密码<i></i>
+							</p>
+							<p class="step-nav step-nav-4">4.完成</p>
+						</div>
+						
+						<form action="" id="vi_form" method="post">
+							<input type="hidden" value="" name="">
+							<div class="steps-con block-02">
+								<div class="step-col fn-form" data-fn-verify="">
+								
+									<ul class="pub-ul not-f">
+										<li class=" verify-group">
+											<span class="title">新登录密码：</span>
+											<div class="con">
+												<input type="password" class="form-control verify-ctrl" onblur="checkpwd()" placeholder="6-16字符，可使用字母、数字或符号的组合" name="password" id="password">
+												<span class="v-tips verify-tips" data-tips-for="password"><i class="icon"></i><span class="txt"></span></span>
+											</div>
+										</li>
+										<li class="li-02 verify-group">
+											<span class="title">确认新密码：</span>
+											<div class="con">
+												<input type="password" class="form-control verify-ctrl" onblur="checkpwd()" placeholder="请再次输入密码" name="password2" id="password_repeat">
+												<span class="v-tips verify-tips" data-tips-for="password_repeat"><i class="icon"></i><span class="txt"></span></span>
+											</div>
+										</li>											
+										<li>
+											<button id="submit_fm" type="button" class="btn_120 verify-ctrl" onclick="dosubmit()">
+							                   	 下一步
+											</button>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<div style="clear: both;"></div>
+<include file="User/footer" />
+<script>
+var flag1 = flag2 = false;
+function checkpwd(){
+	var password = $('#password').val();
+	var password_repeat = $('#password_repeat').val();
+
+	if(password == ''){
+		show_error('password','密码不能为空');
+		return false;
+	}else if(password.length<6 || password.length>16){
+		show_error('password','密码长度不正确');
+		return false;
+	}else{
+		$('span[data-tips-for="password"]').css('display','inline');
+		$('span[data-tips-for="password"]').find('i').removeClass('icon-warn');
+		$('span[data-tips-for="password"]').find('i').addClass('icon-loss');
+		$('span[data-tips-for="password"]').find('.txt').empty();
+		flag1 = true;
+	}
+	
+	if(password_repeat == ''){
+		show_error('password_repeat','重复密码不能为空');
+		return false;
+	}else if(password!=password_repeat){
+		show_error('password_repeat','两次密码不一样');
+		return false;
+	}else{
+		$('span[data-tips-for="password_repeat"]').css('display','inline');
+		$('span[data-tips-for="password_repeat"]').find('i').removeClass('icon-warn');
+		$('span[data-tips-for="password_repeat"]').find('i').addClass('icon-loss');
+		$('span[data-tips-for="password_repeat"]').find('.txt').empty();
+		flag2 = true;
+	}
+	return (flag1 && flag2);
+}
+
+function show_error(type,msg){
+	$('span[data-tips-for="'+type+'"]').css('display','inline');
+	$('span[data-tips-for="'+type+'"]').find('i').removeClass('icon');
+	$('span[data-tips-for="'+type+'"]').find('i').removeClass('icon-loss');
+	$('span[data-tips-for="'+type+'"]').find('i').addClass('icon-warn');
+	$('span[data-tips-for="'+type+'"]').find('.txt').empty().html(msg);
+}
+
+function dosubmit(){
+	if(checkpwd()){
+		$('#vi_form').submit();
+	}
+}
+</script>
+</body>
+</html>	

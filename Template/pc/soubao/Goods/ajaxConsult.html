@@ -1,0 +1,42 @@
+    <div class="spxqer-top">
+        <span class="colo-ora">温馨提示：</span>
+        因产线可能更改商品包装、产地、附配件等未及时通知，且每位咨询者购买、提问时间等不同。为此，客服给到的回复仅对提问者3天内有效，其他网友仅供参考！给您带来的不便还请谅解，谢谢！
+    </div>
+    <div class="spxqer-cen">
+    <volist name="consultList" id="v">
+        <div class="qerst-wy">
+            <div class="wy1">
+                <span>网友：</span><span>{$v['username']}</span>
+                <s><i></i></s>
+                <em>{$v['add_time']|date="Y-m-d",###}</em>
+            </div>
+            <div class="wy2">
+                <span>咨询内容：</span><span>{$v['content']}</span>
+            </div>
+            <foreach name="replyList" item="v3" >
+                <if condition="$v3['parent_id']  eq $v['id']">            
+                    <div class="wy3">
+                        <span>回复：</span><span>{$v3['content']}</span>
+                        <em>{$v3['add_time']|date="Y-m-d",###}</em>
+                    </div>
+                </if>    
+            </foreach>
+            
+        </div>
+    </volist>          
+    </div>
+    <div class="spxqer-bot">
+        <div class="spxqer-bo-le">共<em>{$consultCount}</em>条</div>
+        <div class="spxqer-bo-ri fr di-in-bl ov-hi">
+            <!--------分页开始-------------->
+                       {$page}
+            <!--------分页结束-------------->
+        </div>
+    </div>
+<script>
+    // 点击分页触发的事件
+    $("#ajax_consult_return .pagination  a").click(function(){
+        cur_page = $(this).data('p');
+         ajaxConsult(consult_type,cur_page);
+    });
+</script>

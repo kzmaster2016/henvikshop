@@ -1,0 +1,68 @@
+<volist name="commentlist" id="v">
+    <div class="pro-comment-item po-re pa-bo-20 di-ta">
+        <div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+            <p class="procomment-img">
+                <img alt="" src="{$v['head_pic']|default='__STATIC__/images/defaultface_user_small.png'}" />
+            </p>
+            <p class="procomment-name">{$v['username']}</p>
+            <s class="procomment-tag">
+              <!--  <i></i>-->
+            </s>
+        </div>
+        <div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+            <div class="pro-user-comment">
+                <div class="comm-t1 ov-hi">
+                    <div class="pro-user-score fl">
+                        <em>发货速度</em>  
+                        <span class="starRating-area">
+                          <s style="width:<?php echo ($v['deliver_rank'] / 5 * 100); ?>%"></s>
+                        </span>
+                        <em>客服态度</em>  
+                        <span class="starRating-area">
+                          <s style="width:<?php echo ($v['service_rank'] / 5 * 100); ?>%"></s>
+                        </span>
+                        <em>商品质量</em>  
+                        <span class="starRating-area">
+                          <s style="width:<?php echo ($v['goods_rank'] / 5 * 100); ?>%"></s>
+                        </span>      
+                    </div>                
+                    <div class="pro-user-impre fl ov-hi">
+                    <!--
+                        <ul>
+                            <li>不错</li>
+                            <li>大屏幕</li>
+                            <li>流畅</li>
+                        </ul>
+                      -->  
+                    </div>
+                    <div class="pro-user-time wh-sp">{$v['add_time']|date="Y-m-d",###}</div>
+                </div>
+                <div class="comm-t2">
+	                {$v['content']|htmlspecialchars_decode} 
+                    <!--htmlspecialchars_decode   html_entity_decode-->
+                    <br/>            
+                    <!--晒单-->
+                    <foreach name="v['img']" item="v2" >
+	                    <a href="{$v2}" target="_blank"><img alt="" src="{$v2}" width="120" height="120" /></a>&nbsp;&nbsp;
+                    </foreach>
+                    <!--商家回复-->                    
+                    <foreach name="replyList" item="v3" >                    
+                       <if condition="$v3['parent_id']  eq $v['comment_id']">
+	                    <p class="salesperson"><span>商家回复：</span>{$v3['content']}</p>
+                       </if> 
+                    </foreach>
+                </div>
+            </div>
+            <div class="arrow"></div>
+        </div>
+    </div>
+</volist>
+
+<div class="eval-cen-ri fr pa-to-17 pa-ri-25 te-al-ri di-bl">{$page}</div>
+<script>
+    // 点击分页触发的事件
+    $("#ajax_comment_return .pagination  a").click(function(){
+        cur_page = $(this).data('p');
+        ajaxComment(commentType,cur_page);
+    });
+</script>

@@ -1,0 +1,428 @@
+﻿.personal {
+  /*图像*/
+  /*昵称、真实姓名*/
+  /*性别*/
+  /*出生年月日*/
+  /*绑定部分*/
+  /*确认保存*/
+  /*个人信息列出*/
+}
+.personal .personal_info {
+  margin-bottom: 40px;
+  float: left;
+}
+.personal .personal_info_header {
+  width: 970px;
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #eeeeee;
+  margin-bottom: 20px;
+}
+.personal .personal_info_header h3 {
+  width: 100px;
+  font-size: 14px;
+  color: #3c3c3c;
+}
+.personal .personal_info_content {
+  width: 968px;
+  height: auto;
+  border: 1px solid #ddd;
+  float: left;
+}
+.personal .personal_info_content .name {
+  width: 153px;
+  line-height: 26px;
+  text-align: right;
+  float: left;
+}
+.personal .personal_info_content .name span {
+  font: 12px/1.5 "宋体";
+  color: #6c6c6c;
+}
+.personal .personal_info_content .detail {
+  width: 803px;
+  line-height: 26px;
+  float: left;
+}
+.personal .personal_info_image {
+  width: 100%;
+  height: 102px;
+  padding: 30px 0 15px;
+  float: left;
+}
+.personal .personal_info_image .name {
+  padding-top: 10px;
+}
+.personal .personal_info_image .detail {
+  position: relative;
+  width: auto;
+  border: 1px solid #ddd;
+}
+.personal .personal_info_image .detail:hover {
+  border: 1px solid #aaa;
+}
+.personal .personal_info_image .detail img {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+}
+.personal .personal_info_image .detail .edit {
+  display: none;
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: url(../images/mask.png) repeat;
+  line-height: 30px;
+  text-align: center;
+}
+.personal .personal_info_image .detail .edit a {
+  text-decoration: none;
+  color: #fff;
+}
+.personal .personal_info_nickname,
+.personal .personal_info_truename {
+  width: 100%;
+  height: 26px;
+  padding: 0 0 15px;
+  float: left;
+}
+.personal .personal_info_nickname .name,
+.personal .personal_info_truename .name {
+  padding-right: 2px;
+}
+.personal .personal_info_nickname .detail,
+.personal .personal_info_truename .detail {
+
+}
+.personal .personal_info_nickname .detail input,
+.personal .personal_info_truename .detail input {
+  width: 172px;
+  height: 20px;
+  display: inline-block;
+  line-height: 20px;
+  padding: 2px;
+  border: 1px solid #ddd;
+}
+.personal .personal_info_sex {
+  width: 100%;
+  height: 26px;
+  padding: 0 0 0px;
+  float: left;
+}
+.personal .personal_info_sex .name {
+  padding-right: 2px;
+}
+.personal .personal_info_sex .detail {
+
+}
+.personal .personal_info_sex .detail li {
+  width: 70px;
+  height: 26px;
+  line-height: 26px;
+  float: left;
+  text-align: left;
+  margin: 0 10px 0 0 !important;
+}
+.personal .personal_info_sex .detail li input {
+  margin: 0 10px 2px 0;
+  vertical-align: middle;
+  top:0px;
+  position: relative;
+}
+.personal .personal_info_sex .detail li label {
+  font: 12px/1.5 "宋体";
+  color: #3c3c3c;
+}
+.personal .zSelect {
+  float: left;
+  height: 26px;
+  line-height: 26px;
+  width: 35px;
+  margin-bottom: 0;
+  padding: 0 20px 0 10px;
+}
+.personal .zSelect li {
+  width: 60px;
+}
+.personal .personal_info_birth {
+  width: 100%;
+  padding-bottom: 24px;
+  float: left;
+  margin-top: 4px;
+}
+.personal .personal_info_birth .name {
+  padding-right: 2px;
+  margin-top:3px;
+}
+.personal .personal_info_birth .detail .tips {
+  width: 100%;
+  float: left;
+  line-height: 18px;
+  margin-top: -18px;
+}
+.personal .personal_info_birth .detail .tips span {
+  display: block;
+  line-height: 18px;
+  font-size: 12px;
+  color: #f22e00;
+  margin-left: 0px;
+  text-align: left;
+}
+.personal .personal_info_birth .detail .date {
+  float: left;
+  display: block;
+  width: 15px;
+  padding: 7px 9px 7px 6px;
+  font: 12px/1 "宋体";
+  color: #3c3c3c;
+}
+.personal .personal_info_birth .detail select {
+  float: left;
+  /*height: 26px;*/
+  height: 19px;
+  vertical-align: top;
+  margin-top: 4px;
+  width: 65px;
+  padding-left: 3px;
+}
+.personal .personal_info_birth .detail option {
+  height: 16px;
+  line-height: 16px;
+}
+.personal .personal_info_bind {
+  width: 800px;
+  height: 48px;
+  padding: 0 0 15px 158px;
+  padding: 0 0 21px 158px !important;
+  float: left;
+}
+.personal .personal_info_bind .bind {
+  width: 100%;
+  font: 12px/1.5 "宋体";
+  color: #6c6c6c;
+  float: left;
+}
+.personal .personal_info_bind .bind li {
+  float: left;
+  display: inline-block;
+  padding-right:12px;
+}
+.personal .personal_info_bind .bind span {
+  height: 15px;
+  line-height: 15px;
+  display: inline-block;
+  padding-right: 10px;
+}
+.personal .personal_info_bind .bind .jf {
+  padding-right: 0px;
+  color: #9c9c9c;
+}
+.personal .personal_info_bind .bind i {
+  margin-right: 5px;
+}
+.personal .personal_info_bind .bind .mobile a {
+  color: #4d8b10;
+  text-decoration: none;
+}
+.personal .personal_info_bind .bind .mobile a:hover {
+  text-decoration: underline;
+}
+.personal .personal_info_bind .bind .mobile .nbound {
+  color: #f22e00;
+}
+.personal .personal_info_bind .bind .mail a {
+  color: #f22e00;
+  text-decoration: none;
+}
+.personal .personal_info_bind .bind .mail a:hover {
+  text-decoration: underline;
+}
+.personal .personal_info_bind .tips {
+  width: 100%;
+  float: left;
+  color: #9c9c9c;
+  margin: 7px 0 0 0px;
+}
+.personal .personal_info_bind .tips a {
+  text-decoration: none;
+  color: #0066cc;
+  padding-left: 8px;
+}
+.personal .personal_info_bind .tips a:hover {
+  text-decoration: underline;
+}
+.personal .personal_info_btn {
+  width: 800px;
+  padding: 0 0 40px 158px;
+  float: left;
+}
+.personal .personal_info_btn .btn_pay {
+  color: #fff;
+}
+.personal .personal_info_btn .btn_rel {
+  color: #3c3c3c;
+}
+.personal .personal_info_list {
+  width: 100%;
+  padding-bottom: 10px;
+  float: left;
+}
+.personal .personal_info_list .name {
+  padding-right: 5px;
+}
+.personal .personal_info_change input {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+}
+
+/**兴趣爱好 @japin.pan 20151019 start**/
+.personal .personal_info_birth {
+  padding-bottom: 24px;
+}
+.personal .interestFavour {
+  height: auto;
+  padding-bottom: 7px;
+  margin-top:7px;
+}
+.personal .personal_info_content .favDetail {
+  width: 666px;
+}
+.personal .personal_info_content .favDetail .tips {
+  width: 100%;
+  float: left;
+  line-height: 18px;
+  margin-top: -18px;
+}
+.personal .personal_info_content .favDetail .tips span {
+  display: block;
+  line-height: 18px;
+  font-size: 12px;
+  color: #f22e00;
+  text-align: left;
+}
+.personal .personal_info_content .favDetail .tips i {
+  margin: 0 2px;
+}
+.personal .personal_info_content .detail span.num {
+  width: 100%;
+  display: inline-block;
+}
+.personal .personal_info_content .detail span.cor {
+  line-height: 24px;
+  color: #666;
+  margin-bottom: 5px;
+  float: left;
+}
+.personal .personal_info_content .detail ul {
+  width: 100%;
+  display: inline-block;
+  float: left;
+}
+.personal .personal_info_content .detail li {
+  float: left;
+  margin: 5px 10px 5px 0;
+  position: relative;
+}
+.personal .personal_info_content .detail li a {
+  padding: 0 10px;
+  color: #666;
+  height: 34px;
+  line-height: 34px;
+  font-size: 12px;
+  border: 1px solid #ddd;
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-block;
+}
+.personal .personal_info_content .detail li i {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  background: url(../images/sprite_icon.png) -90px -220px no-repeat;
+  display: none;
+}
+.personal .personal_info_content .detail li.cur a {
+  border: 2px solid #da3a4c;
+  height: 32px;
+  line-height: 32px;
+}
+.personal .personal_info_content .detail li.cur i {
+  display: inline-block;
+}
+.subSuc {
+  text-align: center;
+  height: 28px;
+}
+.subSuc i {
+  width: 24px;
+  height: 28px;
+  background: url(../images/sprite_icon.png) -106px -215px no-repeat;
+  vertical-align: middle;
+  display: inline-block;
+}
+.subSuc span {
+  height: 28px;
+  line-height: 28px;
+  font-size: 14px;
+  color: #3c3c3c;
+  margin-left: 10px;
+  font-weight: 700;
+  display: inline-block;
+}
+.subFal i {
+  width: 24px;
+  height: 28px;
+  background: url(../images/sprite_icon.png) -130px -215px no-repeat;
+  vertical-align: middle;
+  display: inline-block;
+}
+.subFal span {
+  height: 28px;
+  line-height: 28px;
+  font-size: 14px;
+  color: #3c3c3c;
+  margin-left: 10px;
+  font-weight: 700;
+  display: inline-block;
+}
+.subPoint i {
+  width: 24px;
+  height: 24px;
+  margin-top: 15px;
+  *margin-top: 9px;
+  background: url(../images/sprite_icon.png) -106px -215px no-repeat;
+  vertical-align: top;
+  display: inline-block;
+}
+.subPoint span {
+  height: 42px;
+  margin-left: 10px;
+  display: inline-block;
+}
+.subPoint span em {
+  width: 120px;
+  height: 14px;
+  line-height: 14px;
+  font-size: 12px;
+  color: #3c3c3c;
+  font-style: normal;
+  display: inline-block;
+}
+.subPoint span a {
+  width: 120px;
+  height: 14px;
+  line-height: 14px;
+  font-size: 12px;
+  color: #06c;
+  text-decoration: none;
+  display: inline-block;
+}
+.subPoint span a:hover {
+  text-decoration: underline;
+}
+/**兴趣爱好 @japin.pan 20151019 end**/

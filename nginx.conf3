@@ -1,0 +1,55 @@
+server
+    {
+        listen 80;
+        #listen [::]:80;
+        server_name www.tp-shop.cn;
+        index index.html index.htm index.php default.html default.htm default.php;
+        root  /home/wwwroot/www.tp-shop.cn;
+
+        location / {
+            index  index.html index.htm index.php;
+            #autoindex  on;
+        }
+        location ~ \.php(.*)$ {
+            fastcgi_pass  unix:/tmp/php-cgi.sock;
+            fastcgi_index  index.php;
+            fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            fastcgi_param  PATH_INFO  $fastcgi_path_info;
+            fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;
+            include        fastcgi_params;
+        }
+# 需要开启 php.ini cgi.fix_pathinfo=1
+		
+	location ~.*\.(jpg|png|jpeg)$
+      	{
+	    root  /home/wwwroot/www.tp-shop.cn;
+       	    #expires 30d;
+        }
+
+     # js css缓存一小时
+       location ~.*\.(js|css)$ {
+           root  /home/wwwroot/www.tp-shop.cn;
+           #expires 1h;
+       }
+        include other.conf;
+        #error_page   404   /404.html;
+        include enable-php.conf;
+
+        location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+        {
+            expires      30d;
+        }
+
+        location ~ .*\.(js|css)?$
+        {
+            expires      12h;
+        }
+
+        location ~ /\.
+        {
+            deny all;
+        }
+	error_log  /home/wwwlogs/www.tp-shop.cn.err;
+        access_log  /home/wwwlogs/www.tp-shop.cn.log;
+    }

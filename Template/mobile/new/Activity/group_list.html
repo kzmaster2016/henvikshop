@@ -1,0 +1,136 @@
+<html>
+<head>
+<meta name="Generator" content="tpshop" />
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="minimal-ui=yes,width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>Group list-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="icon" href="/ico.png" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/group_buy.css"/>
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script type="text/javascript" src="__STATIC__/js/layer.js" ></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/mobile_common.js"></script>
+<script >
+var Tday = new Array();
+var daysms = 24 * 60 * 60 * 1000
+var hoursms = 60 * 60 * 1000
+var Secondms = 60 * 1000
+var microsecond = 1000
+var DifferHour = -1
+var DifferMinute = -1
+var DifferSecond = -1
+
+function clock11(key)
+{
+   var time = new Date()
+   var hour = time.getHours()
+   var minute = time.getMinutes()
+   var second = time.getSeconds()
+   var timevalue = ""+((hour > 12) ? hour-12:hour)
+   timevalue +=((minute < 10) ? ":0":":")+minute
+   timevalue +=((second < 10) ? ":0":":")+second
+   timevalue +=((hour >12 ) ? " PM":" AM")
+   var convertHour = DifferHour
+   var convertMinute = DifferMinute
+   var convertSecond = DifferSecond
+   var Diffms = Tday[key].getTime() - time.getTime()
+   DifferHour = Math.floor(Diffms / daysms)
+   Diffms -= DifferHour * daysms
+   DifferMinute = Math.floor(Diffms / hoursms)
+   Diffms -= DifferMinute * hoursms
+   DifferSecond = Math.floor(Diffms / Secondms)
+   Diffms -= DifferSecond * Secondms
+   var dSecs = Math.floor(Diffms / microsecond)
+  
+	if(convertHour != DifferHour) e="<span class=hour>"+DifferHour+"</span>d";
+   if(convertMinute != DifferMinute) f="<span class=min>"+DifferMinute+"</span>h";
+   if(convertSecond != DifferSecond) g="<span class=sec>"+DifferSecond+"</span>m";
+     h="<span class=msec>"+dSecs+"</span>s";
+     if (DifferHour>0) {e=e}
+     else {e=''}
+     document.getElementById("jstimerBox"+key).innerHTML = e + f + g + h; 
+}
+
+</script>
+</head>
+<body style="background:#FFF;">
+<div class="tab_nav">
+  <div class="header">
+    <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="返回"></a></div>
+    <div class="h-mid">Group purchase</div>
+    <div class="h-right">
+      <aside class="top_bar">
+        <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<include file="Public/menu"/>
+<!-- 
+<div class="u-brand">
+  <div class="p-relative"> <a href="affiche.php?ad_id=37&uri=" class="u-brand-pic J_item-list"> <img src="data/afficheimg/1442790291652215474.jpg" class="BrandMer_star"> </a>
+  <div class="u-brand-pms">刷出“唇”在感！</div>  </div>
+  <div class="u-brand-msg e-border-b clearfix">
+    <p class="u-brand-name f-left"><span class="u-brand-discount"><span class="salebg2">4.9折</span></span>菲丽菲拉（PERIPERA）炫彩染色唇彩</p>
+    <div class="u-brand-time f-right">剩85天</div>
+  </div>
+</div>
+ -->
+<h3 class="sg_box_tit">Group purchase</h3>
+
+<ul class="product_list" id="good_list"> 
+<foreach name="list" item="v" key="k" >
+ <li> 
+	 <a class="url" href="{:U('Activity/group',array('id'=>$v[goods_id]))}"> 
+	 <img src="{$v.goods_id|goods_thum_images=200,200}">   </a>
+	 <a href="{:U('Activity/group',array('id'=>$v[goods_id]))}"  class="info_wrap">
+		 <div class="fn good">{$v.goods_name}</div>
+		 <div class="price_wrap"> 
+		 	<i class="discount"  style="display:;">{$v[rebate]}</i> <span class="price" style="display:;">${$v[price]}</span> <del class="old_price"  style="display:;">${$v[goods_price]}</del> 
+		 </div> 
+		 <div class="bottom_info">
+		 	<span class="remain_num" style="display:;">sold{$v[buy_num] + $v[virtual_num]}pieces</span>
+		    <span class="sg_g_time last_g_time" id="jstimerBox{$v[goods_id]}"></span>
+		 </div> 
+	 </a>
+</li>
+
+<script>
+Tday['{$v[goods_id]}'] = new Date('{$v.end_time|date="Y/m/d H:i:s",###}');  
+window.setInterval(function()    
+{clock11('{$v[goods_id]}');}, 1000);  
+</script> 
+</foreach>
+</ul>
+<!--  
+<section class="list-pagination">
+    <div style="" class="pagenav-wrapper" id="J_PageNavWrap">
+      <div class="pagenav-content">
+        <div class="pagenav" id="J_PageNav">
+          <div class="p-prev p-gray" > <a href="">上一页</a> </div>
+          <div class="pagenav-cur" style="vertical-align:bottom">
+            <div class="pagenav-text" > <span>      1/1</span> <i></i> </div>
+		      <select class="pagenav-select"  onchange="location.href=this.options[this.selectedIndex].value;">
+		  		<option selected="selected" value="pro_search.php?keywords=&category=0&brand=0&sort=goods_id&order=DESC&min_price=0&max_price=0&action=&intro=promotion&goods_type=0&sc_ds=0&outstock=0&page=1">第1页</option>
+		  	  </select>
+          </div>
+       	<div class="p-next" > <a href="">下一页</a> </div>
+		</div>
+      </div>
+    </div>
+</section>
+-->
+<script>
+function goTop(){
+	$('html,body').animate({'scrollTop':0},600);
+}
+</script>
+<a href="javascript:goTop();" class="gotop"><img src="__STATIC__/images/topup.png"></a> 
+<include file="Public/footer"/>
+<include file="Public/footer_nav"/>
+</body>
+</html>

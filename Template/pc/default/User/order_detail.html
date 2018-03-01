@@ -1,0 +1,366 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>订单详情-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+    <script src="__STATIC__/js/slider.js"></script>
+</head>
+<body>
+<!--------头部开始-------------->
+<include file="Public/header" />
+<!--------头部结束-------------->
+
+<div class="layout ov-hi">
+    <div class="breadcrumb-area">    
+	    <foreach name="navigate_user" key="k" item="v">
+	        <if condition="$k neq 'Home'"> > </if>  
+            <a href="{$v}">{$k}</a> 
+        </foreach>
+    </div>
+</div>
+<div class="layout pa-to-10 fo-fa-ar">
+    <!--菜单-->
+    <include file="User/menu" />
+    <!--菜单-->
+    <div class="fr wi940">
+        <div class="he50 wddd">
+            <div class="fl ddd-h2">
+                <h2><span>My Order</span></h2>
+            </div>
+        </div>
+        <div class="cancel-order-detail-state">
+            <!-- 20141223-订单进度-start -->
+
+            <div class="order-state-progress">
+            	<ol style="margin-left:0;">
+                        <li class="first completed">
+                            <s></s>
+                            <dl>
+                                <dt>Submit Order</dt>                                
+                                <dd>
+                                    <p>{$order_info.add_time|date='Y-m-d',###}</p>
+                                    <p>{$order_info.add_time|date='H:i:s',###}</p>
+                                </dd>                                                              
+                            </dl>
+                        </li>
+                        <li class="<if condition="$order_info[pay_time] gt 0">current</if>">
+                            <s></s>
+                            <dl>
+                                <dt>Payment Successful</dt>
+                                <if condition="$order_info[pay_time] gt 0">
+                                <dd>
+                                    <p>{$order_info.pay_time|date='Y-m-d',###}</p>
+                                    <p>{$order_info.pay_time|date='H:i:s',###}</p>
+                                </dd>
+                                </if>
+                                
+                            </dl>
+                        </li>
+                        <li class="<if condition="$order_info[shipping_time] gt 0">current</if>">
+                            <s></s>
+                            <dl>
+                                <dt>Delivery</dt>
+                                <if condition="$order_info[shipping_time] gt 0">
+                                <dd>
+                                    <p>{$order_info.shipping_time|date='Y-m-d',###}</p>
+                                    <p>{$order_info.shipping_time|date='H:i:s',###}</p>
+                                </dd>
+                                </if>
+                            </dl>
+                        </li>
+                        <li class="<if condition="$order_info[shipping_time] gt 0">current</if>">
+                            <s></s>
+                            <dl>
+                                <dt>Waitting Received</dt>
+                                <if condition="$order_info[shipping_time] gt 0">
+                                <dd>
+                                    <p>{$order_info.shipping_time|date='Y-m-d',###}</p>
+                                    <p>{$order_info.shipping_time|date='H:i:s',###}</p>
+                                </dd>
+	                            </if>
+                            </dl>
+                        </li>
+                        <li class="<if condition="$order_info[confirm_time] gt 0">current</if>">
+                            <s></s>
+                            <dl>
+                                <dt>Completed</dt>
+                                <if condition="$order_info[confirm_time] gt 0">                         
+                                <dd>
+                                    <p>{$order_info.confirm_time|date='Y-m-d',###}</p>
+                                    <p>{$order_info.confirm_time|date='H:i:s',###}</p>
+                                </dd>
+                                </if>
+                            </dl>
+                        </li>
+                    </ol>
+            </div>
+            <!-- 20141223-订单进度-end -->
+        </div>
+        <!-- 订单处理信息-start -->
+        <div class="o-info o-inff">
+            <div class="fl">
+                <span class=" ma-ri-15 fo-si-16">Order Handle Information</span>
+            </div>
+        </div>
+        <div class="wddd-js ov-in">
+            <div class="list-group-title">
+                <table class="merge-tab" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th class=" wi169" style="border-left:0">Time</th>
+                        <th class="">Information</th>
+                        <!-- <th class=" wi178" style="border-right:0">操作人</th> -->
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="merge-list">
+                <div class="ma-0--1">
+                    <div class="o-pro">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tbody>
+                            <volist id="action" name="order_action">
+                                <tr>
+                                    <td class="col-pro-info  bo-les te-al wi169 sdesd co-red">{$action.log_time|date='Y-m-d H:i',###}</td>
+                                    <td class="te-al-le bo-les co-red te-al">{$action.action_note}</td>
+                                    <!-- <td rowspan="1" class="wi178 bo-les">{$action.action_user}</td>-->
+                                </tr>
+                            </volist>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 订单处理信息-end-->
+        <!-- 物流信息-s -->
+        <notempty name="express.data">
+        <div class="o-info o-inff">
+            <div class="fl">
+                <span class=" ma-ri-15 fo-si-16">Shipping Information</span>
+            </div>
+        </div>
+        <div class="order-track">
+              <div class="track-list">
+                <ul>
+                  <foreach name="express.data" item="vo" key="k">
+	                  <if condition="$k eq 0">
+	                  <li class="first"><i class="node-icon"></i><span class="time">{$vo.time}</span><span class="txt">{$vo.context}</span></li>
+	                  <else/>
+	                  <li><i class="node-icon"></i><span class="time">{$vo.time}</span><span class="txt">{$vo.context}</span></li>
+	                  </if>
+                  </foreach>
+                </ul>
+              </div>
+        </div>
+        </notempty>
+        <!-- 物流信息-e -->
+        <!-- 收货信息-start -->
+        <div class="order-detail-receive">
+            <div class="o-info o-inff">
+                <div class="fl">
+                    <span class=" ma-ri-15 fo-si-16">Receiving Information</span>
+                </div>
+            </div>
+            <div class="b">
+                <div class="form-info-panels">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <th>Name：</th>
+                            <td>{$order_info.consignee}</td>
+                        </tr>
+                        <tr>
+                            <th>Address：</th>
+                            <td>{$region_list[$order_info['province']]['name']}，{$region_list[$order_info['city']]['name']}，
+                                {$region_list[$order_info['district']]['name']}，{$order_info.address}</td>
+                        </tr>
+                        <tr>
+                            <th>Phone Number：</th>
+                            <td>{$order_info.mobile}</td>
+                        </tr>
+                        <tr>
+                            <th>Delivery Style：</th>
+                            <td>{$order_info.shipping_name}</td>
+                        </tr>
+                        <tr>
+                            <th>Tracking Number：</th>
+                            <td>{$order_info.invoice_no} <a href="http://www.kuaidi100.com/" target="_blank">(点击查询)</a> </td>
+                        </tr>
+                        <!-- <tr>
+                            <th>发票信息：</th>
+                            <td>{$order_info.invoice_title}</td>
+                        </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- 收货信息-end -->
+        <!-- 商品清单-start -->
+        <div class="o-info o-inff pi">
+            <div class="fl">
+                <span class=" ma-ri-15 fo-si-16">Order No.: <a href="javascript:void(0);">{$order_info.order_sn}</a></span>
+            </div>
+        </div>
+        <div class="list-group-title">
+            <table class="merge-tab" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th class="col-pro">Goods</th>
+                    <th class="col-price">Unit Price</th>
+                    <th class="col-price">Discount Price</th>                    
+                    <th class="col-quty">Qty</th>
+                    <th class="col-pay">Product Total</th>
+                    <th class="col-operate">State</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="merge-list">
+            <div class="ma-0--1">
+                <div class="o-pro">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                        <volist name="order_info.goods_list" id="good">
+                            <tr>
+                                <td class="col-pro-img">
+                                    <p>
+                                        <a href="{:U('Goods/goodsInfo',array('id'=>$good[goods_id]))}" target="_blank">
+                                            <img alt="{$good.goods_name}" src="{$good.goods_id|goods_thum_images=78,78}">
+                                        </a>
+                                    </p>
+                                </td>
+                                <td class="col-pro-info te-al-le"><p class="p-name"><a title="" target="_blank" href="{:U('Goods/goodsInfo',array('id'=>$good[goods_id]))}">{$good.goods_name}</a></p></td>
+                                <td class="col-price"><em>$</em><span>{$good.goods_price}</span></td>
+                                <td class="col-price"><em>$</em><span>{$good.member_goods_price}</span></td>                                
+                                <td class="col-quty">{$good.goods_num}</td>
+                                <td rowspan="1" class="col-pay"><p><em>$</em><span>{$good['member_goods_price'] * $good['goods_num']}</span></p></td>
+                                <td rowspan="1" class="col-operate">                                    
+                                    <if condition="($order_info[return_btn] eq 1) and ($good[is_send] eq 1)">                                    
+                                        <p class="p-link"><a style="color:#999;" href="{:U('Home/User/return_goods',array('order_id'=>$order_info['order_id'],'order_sn'=>$order_info['order_sn'],'goods_id'=>$good['goods_id'],'spec_key'=>$good['spec_key']))}">Apply for Refund</a></p>    
+                                    </if>
+                                    <if condition="($order_info.comment_btn eq 1) and ($good['is_comment'] eq 0)">
+                                        <p class="p-link"><a href="{:U('Home/User/comment')}" target="_blank"><span>Comments</span></a></p>
+                                    </if>                                    
+                                </td>
+                            </tr>
+                        </volist>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="fr wcnhy">
+                <div class="fzoubddv" style="background-color:#FFF">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <td class="tal">Product Total：</td>
+                            <td class="tar">&nbsp;¥&nbsp;
+                                <em id="order-cost-area">{$order_info.goods_price}</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tal">Shipping Fee：</td>
+                            <td class="tar">&nbsp;¥&nbsp;
+                                <em id="order-deliveryCharge">{$order_info.shipping_price}</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tal">Points：</td>
+                            <td class="tar">-&nbsp;¥&nbsp;
+                                <em><span id="oreder-huaban-num">{$order_info.integral_money}</span> </em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tal">Coupons：</td>
+                            <td class="tar">-&nbsp;¥&nbsp;
+                                <em><span id="order-couponDiscount">{$order_info.coupon_price}</span> </em>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="tal">Balance
+                            </td>
+                            <td class="tar">-&nbsp;¥&nbsp;<em>{$order_info.user_money}</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tal">Promotion
+                            </td>
+                            <td class="tar">-&nbsp;¥&nbsp;<em>{$order_info.order_prom_amount}</em>
+                            </td>
+                        </tr>                        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="order-action-area te-al-ri cl-bo">
+                <div class="woypdbe sc-acti-list" style="background-color:#f5f5f5; padding:10px 0 20px 0">
+                    <span class="p-subtotal-price">Order Total (Including Delivery)：<b>¥&nbsp;&nbsp;<span class="vab" id="payableTotal">{$order_info.order_amount}</span></b></span>
+                </div>
+            </div>
+            <div class="woypdbe sc-acti-list pa-to-20">                    
+                <if condition="$order_info.cancel_btn eq 1"><a class="Sub-orders gwc-qjs" onClick="cancel_order({$order_info.order_id})"><span>Cancel Order</span></a></if>
+                <if condition="$order_info.pay_btn eq 1"><a class="Sub-orders gwc-qjs" href="{:U('/Home/Cart/cart4',array('order_id'=>$order_info[order_id]))}"><span>to Pay</span></a></if>
+                <if condition="$order_info.receive_btn eq 1"><a class="Sub-orders gwc-qjs" onClick=" if(confirm('Confirm Received the Goods ?')) location.href='{:U('Home/User/order_confirm',array('id'=>$order_info['order_id']))}'"><span>Confirm Receipt</span></a></if>
+            </div>
+        </div>
+        <!-- 商品清单-end -->
+    </div>
+</div>
+<div class="he80"></div>
+<!--------footer-开始-------------->
+<include file="Public/footer2" />
+<!--------footer-结束-------------->
+
+</body>
+<script>
+    /*$(function () {
+     $("#h-s").click(function () {
+     $('.ec-ta-x').css('left','124px');
+     $('.ec-ta-x').css('width','110px');
+     $(this).addClass("cullent");
+     $('#q-s').removeClass("cullent");
+     });
+     });
+     */
+</script>
+
+<script>
+    $(function () {
+        $("#h-s").mouseover(function () {
+            $('.ec-ta-x').css('left','124px');
+            $('.ec-ta-x').css('width','110px');
+            $(this).addClass("cullent");
+        });
+        $("#h-s").mouseout(function () {
+            $('.ec-ta-x').css('left','0px');
+            $('.ec-ta-x').css('width','124px');
+            $(this).removeClass("cullent");
+        });
+    });
+    $(function () {
+        $("#q-s").mouseover(function () {
+            $('.ec-ta-x').css('left','0px');
+            $(this).addClass("cullent");
+        });
+        $("#q-s").mouseout(function () {
+            $('.ec-ta-x').css('left','0px');
+        });
+    });
+    //取消订单
+    function cancel_order(id){
+        if(!confirm("确定取消订单?"))
+            return false;
+        location.href = "/index.php?m=Home&c=User&a=cancel_order&id="+id;
+    }
+</script>
+</html>

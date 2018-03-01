@@ -1,0 +1,125 @@
+<include file="Public/header"/>
+<body>
+<header>
+<div class="tab_nav">
+  <div class="header">
+    <div class="h-left"><a class="sb-back" href="{:U('User/order_list')}" title="back"></a></div>
+    <div class="h-mid">Order details</div>
+    <div class="h-right">
+      <aside class="top_bar">
+        <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</header>
+<include file="Public/menu"/>
+<div id="tbh5v0">						
+	<div class="order">
+	
+		<div class="detail_top">
+			<div class="lan">
+				<dl>
+				<dt class="dingdan_1"></dt>
+				<dd><span>Order status：&nbsp;&nbsp;&nbsp;&nbsp;{$order_info.order_status_desc}</span><br>
+				    <span class="dingdanhao">Order number&nbsp;:&nbsp;{$order_info.order_sn}</span><br>
+				    <span>Shipping expenses&nbsp;:${$order_info.shipping_price}</span>
+				</dd>
+				</dl>
+			</div>
+		
+			<dl style="border-bottom:1px solid #eeeeee">
+			<dt style=" position:absolute;" class="dingdan_2"></dt>
+			<dd style=" margin-left:30px;"><span class="zhif">Payment methods&nbsp;:&nbsp;{$order_info.pay_name}</span>
+				<span class="zhif">Amount &nbsp;:&nbsp;${$order_info.order_amount}</span>			 			 
+                <if condition="$order_info.pay_btn eq 1">
+	                <a href="{:U('Mobile/Cart/cart4',array('order_id'=>$order_info['order_id']))}" class="zhifu" style=" color:#fff; font-size:16px;">to pay</a>
+                </if>			    
+			</dd>
+			</dl>
+		
+			<dl>
+			<dt class="dingdan_3"></dt>
+			<dd><h3>Consignee&nbsp;:&nbsp;{$order_info.consignee}<em>{$order_info.mobile}</em></h3>
+				<div class="adss">Detailed address&nbsp;:&nbsp;{$region_list[$order_info['province']]['name']},{$region_list[$order_info['city']]['name']},{$region_list[$order_info['district']]['name']},{$order_info.address}</div>
+			</dd>
+			</dl>
+		
+			<if condition="$order_info[shipping_time] gt 0">
+			<dl style="border-top:1px solid #eeeeee; margin-top:10px; height:70px; padding-bottom:0px;">
+			<dt class="dingdan_4"><img src="__STATIC__/images/wuliuimg.png" width="30" height="70"></dt>
+			<dd><h3>Tracking number:{$order_info.invoice_no}</h3>
+			<p><a href="{:U('User/express',array('order_id'=>$order_info['order_id']))}" target="_blank">View Logistics</a></p>
+			</dd>
+			</dl>
+			</if>
+		</div>
+		
+		<div class="ord_list1">
+			<h2><img src="__STATIC__/images/dianpu.png">Website self-management</h2>
+            
+	<!--商品列表-->	
+    <volist name="order_info.goods_list" id="good">            
+			<div class="order_list">
+		        <a href="{:U('/Mobile/Goods/goodsInfo',array('id'=>$good['goods_id']))}">
+		          <dl>
+		          <dt><img src="{$good.goods_id|goods_thum_images=100,100}"></dt>
+		          <dd class="name" class="pice" style=" width:55%;">
+	                  <strong>{$good.goods_name}</strong><span>{$good.spec_key_name}</span>
+                   </dd>
+		          <dd class="pice" style=" font-size:13px; color:#F60; width:25%;">${$good['member_goods_price']}<em>x{$good['goods_num']}</em></dd>
+		          <dd class="pice" style=" font-size:13px; color:#F60; width:25%;">                  
+                  	<em>
+                          <if condition="($order_info[return_btn] eq 1) and ($good[is_send] eq 1)">
+                          	<a href="{:U('Mobile/User/return_goods',array('order_id'=>$order_info[order_id],'order_sn'=>$order_info[order_sn],'goods_id'=>$good[goods_id],'spec_key'=>$good['spec_key']))}" style="color:#999;">Apply for after sale</a>
+                          </if>
+                    </em>
+                  </dd>
+		          </dl>
+		          </a>
+		          <div class="pic" style=" border:0;"><span>Subtotal：</span><strong>${$good['member_goods_price'] * $good['goods_num']}</strong></div>
+		    </div>
+	</volist>
+	<!-- end 商品列表-->										       
+			<div class="jiage">
+				<p>Total Amount&nbsp;:&nbsp;<span class="price">${$order_info.goods_price}</span></p>				
+				<p>Shipping&nbsp;:&nbsp;<span class="price">${$order_info.shipping_price}</span></p>
+                <p>Via Coupons&nbsp;:&nbsp;<span class="price">-${$order_info.coupon_price}</span></p>
+				<p>Via Points&nbsp;:&nbsp;<span class="price">-${$order_info.integral_money}</span></p>	
+                                <!-- <p>余额&nbsp;:&nbsp;<span class="price">${$order_info.user_money}</span></p>	 -->
+                <p>Promotions Activities&nbsp;:&nbsp;<span class="price">-${$order_info.order_prom_amount}</span></p>                                
+				<p>Last Amount金额&nbsp;:&nbsp;<span class="price1">${$order_info.order_amount}</span></p>						
+			</div>
+		</div>
+		  
+		<section class="qita">
+		    <div class="navContent"> 
+		    <ul>
+				<li class="first">Shipping style&nbsp;:&nbsp;{$order_info.shipping_name}</li>	
+				<li>Payment method&nbsp;:&nbsp;{$order_info.pay_name}</li>
+			</ul>
+		    </div>      
+		</section>
+		
+		<div style=" height:50px;"></div> 
+		
+		<div class="detail_dowm">
+			<div class="anniu1">
+                <if condition="$order_info.cancel_btn eq 1"><a onClick="cancel_order({$order_info.order_id})" class="on_comment">Cancel order</a></if>
+                <if condition="$order_info.pay_btn eq 1"><a href="{:U('Mobile/Cart/cart4',array('order_id'=>$order_info['order_id']))}" class="on_comment">Pay now</a></if>
+                <if condition="$order_info.receive_btn eq 1"><a href="{:U('Mobile/User/order_confirm',array('id'=>$order_info['order_id']))}" class="on_comment">Confirm receipt</a></if>    
+                <if condition="$order_info.shipping_btn eq 1"><a href="{:U('User/express',array('order_id'=>$order_info['order_id']))}" class="on_comment">View Logistics</a></if>
+			</div> 
+		</div>
+	</div>		
+</div>
+<script> 
+    //取消订单
+    function cancel_order(id){
+        if(!confirm("Confirm to cancel order?"))
+            return false;
+        location.href = "/index.php?m=Mobile&c=User&a=cancel_order&id="+id;
+    }
+</script>
+</body>
+</html>

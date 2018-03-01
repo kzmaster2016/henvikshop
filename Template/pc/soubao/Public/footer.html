@@ -1,0 +1,64 @@
+<div class="fn-cms-footer">
+  <div class="m-footer-g">
+    <div class="footer-map">
+      <ul class="fn-clear">
+        <li class="map"><i class="footer-icon z-icon"></i><strong class="tit">正品低价</strong><br/>
+          <span class="desc">正品行货 品质保障</span>
+        </li>
+        <li class="line"></li>
+        <li class="map"><i class="footer-icon q-icon"></i><strong class="tit">品类齐全</strong><br/>
+          <span class="desc">品类齐全 选择丰富</span>
+        </li>
+        <li class="line"></li>
+        <li class="map"><i class="footer-icon k-icon"></i><strong class="tit">快速配送</strong><br/>
+          <span class="desc">多仓直发 极速配送</span>
+        </li>
+        <li class="line"></li>
+        <li class="map"><i class="footer-icon t-icon"></i><strong class="tit">售后无忧</strong><br/>
+          <span class="desc">7天无理由退货</span>
+        </li>
+      </ul>
+    </div>
+    <div class="server-list">
+      <ul class="fn-clear">
+	    <tpshop sql="select * from `__PREFIX__article_cat` where cat_id in(1,2,3,4,7)" key="k" item='v'>
+         <li><i class="list-icon icon{$k+1}"></i>
+          <dl class="list-item">
+            <dt>{$v[cat_name]}</dt>
+            <tpshop sql="select * from `__PREFIX__article` where cat_id = $v[cat_id]  and is_open=1" key="k2" item='v2'>
+            	<dd><a href="{:U('Home/Article/detail',array('article_id'=>$v2[article_id]))}">{$v2[title]}</a></dd>
+            </tpshop>
+          </dl>
+        </li>
+ 		</tpshop>
+        <li class="app-item">
+          <p>TPshop官网</p>
+          <img width="90" height="90" title="" alt="TPshop网客户端" src="__STATIC__/images/qrcode_vmall_app01.png">
+        </li>
+      </ul>
+    </div>
+    <div class="site-info">
+      <div class="foot-nav">
+	      <a href="" target="_blank">公司介绍</a>| 
+	      <a href="" target="_blank">媒体报道</a>| 
+	      <a href="" target="_blank">热搜索词</a>| 
+	      <a href="" target="_blank">友情链接</a>| 
+	      <a href="" target="_blank">商家入驻</a>| 
+	      <a href="" target="_blank">招商标准</a>| 
+	      <a href="" style="cursor:default;text-decoration:none;">客服热线 {$tpshop_config['shop_info_phone']}</a>
+	  </div>
+      <div class="link">
+        <p>
+        Copyright © 2016-2025 {$tpshop_config['shop_info_store_name']}  版权所有 保留一切权利 备案号:{$tpshop_config['shop_info_record_no']}
+        
+        <!--您好,请您给TPshop留个友情链接-->
+        &nbsp;&nbsp;<a href="http://www.tp-shop.cn/">TPshop开源商城</a>
+        <!--您好,请您给TPshop留个友情链接-->        
+        </p>        
+      </div>
+      <div class="inline-box logowall"><a href="" class="item shgs" target="_blank"></a><a href="" class="item shwl" target="_blank"></a><a href="" class="item cxwz" target="_blank"></a><a href="" class="item kxwz" target="_blank"></a><a href="" class="item hyyz" target="_blank"></a></div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="__STATIC__/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="__STATIC__/js/common.js"></script>

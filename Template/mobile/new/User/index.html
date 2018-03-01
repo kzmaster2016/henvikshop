@@ -1,0 +1,43 @@
+<include file="Public/header"/>
+<body>      
+<div id="tbh5v0">
+<div class="user_com">
+
+<include file="Public/uer_topnav"/>
+
+<div class="Wallet">
+	<ul>
+	<!-- <li class="bain1"><strong>${$user['user_money']}</strong><span>balance</span></li> -->
+	<li class="bain1"><strong>{$coupon_count}</strong><span>Coupon</span></li>
+	<li><strong>{$user['pay_points']}</strong><span>Points</span></li>
+	</ul>
+	<!-- <a href="{:U('Mobile/User/account')}"><em class="Icon Icon1"></em><dl><dt>我的钱包</dt><dd style="color:#aaaaaa;">查看我的钱包</dd></dl></a> -->
+</div>
+
+
+<div class="Wallet">
+	<a href="{:U('Mobile/User/order_list')}" ><em class="Icon Icon2"></em><dl class="b"><dt>Orders</dt><dd>View orders</dd></dl></a>
+	<a href="{:U('Mobile/User/coupon')}"><em class="Icon Icon3"></em><dl class="b"><dt>My coupons</dt><dd>&nbsp;</dd></dl></a>
+	<a href="{:U('Mobile/User/comment')}"><em class="Icon Icon4"></em><dl class="b"><dt>My comments</dt><dd>View comments</dd></dl></a>
+	<a href="{:U('Mobile/User/collect_list')}"><em class="Icon Icon10"></em><dl class="b"><dt>Collection</dt><dd>&nbsp;</dd></dl></a>
+	<!-- <a href="{:U('Mobile/User/withdrawals')}"><em class="Icon Icon1"></em><dl><dt>申请提现</dt><dd>&nbsp;</dd></dl></a> -->
+</div>
+<div class="Wallet">
+	<a href="{:U('User/address_list')}"><em class="Icon Icon5"></em><dl class="b"><dt>Address management</dt><dd>&nbsp;</dd></dl></a>
+	<a href="{:U('User/points')}"><em class="Icon Icon6"></em><dl class="b"><dt>Points</dt><dd>&nbsp;</dd></dl></a>
+	<a href="{:U('User/message_list')}"><em class="Icon Icon7"></em><dl class="b"><dt>My message</dt><dd>&nbsp;</dd></dl></a>
+	<a href="{:U('User/return_goods_list')}"><em class="Icon Icon11"></em><dl class="<if condition="$tpshop_config['distribut_switch'] eq 1">b</if>"><dt>After-sale service</dt><dd>&nbsp;</dd></dl></a>
+    
+    <if condition="$tpshop_config['distribut_switch'] eq 1">
+	<!-- <a href="{:U('Distribut/index')}"><em class="Icon Icon1"></em><dl><dt>我发展收益</dt><dd>&nbsp;</dd></dl></a>     -->
+    </if>    
+</div>
+<div class="Wallet">
+	<a href="{:U('User/logout')}"><em class="Icon Icon8"></em><dl><dt>Log out</dt></dl></a>
+</div>
+</div>
+<include file="Public/footer"/>
+</div>
+<include file="Public/footer_nav"/>
+</body>
+</html>

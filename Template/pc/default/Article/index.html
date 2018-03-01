@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<!--<load href="__ROOT__/Extend/Ueditor/third-party/SyntaxHighlighter/shCoreDefault.css"/>-->
+<link rel='stylesheet' type='text/css' href='/Public/plugins/ueditor/third-party/SyntaxHighlighter/shCoreBlue.css'/>
+<script type="text/javascript" src="/Public/plugins/ueditor/third-party/SyntaxHighlighter/shCore.js"></script> 
+<script type="text/javascript">      
+SyntaxHighlighter.all();       
+</script>
+</head>
+<body>
+<div id="detail">
+	<div id="container">
+		<div id="header">
+			<h1 class="blogName"><a href="http://mordax.blogbus.com" title="http://mordax.blogbus.com">{$article.title}</a></h1>
+			<div class="description">{$article.keywords} </div>
+			<div class="clear"></div>
+		</div>
+       <div id="innerContainer">
+           <div class="innerTop"></div>
+            <div id="outerContent">
+                <div id="content">
+                    <div class="contentTop"></div>
+                         <ul id="posts">
+                            <div class="postsTop"></div>
+                            <div class="context"><span class="pre"><a href='http://www.blogbus.com/mordax-logs/88254808.html'>&lt;&lt;&nbsp;&nbsp;跳脱，2010这泥潭</a></span> | <span class="top"><a href="http://mordax.blogbus.com">首页</a></span> | <span class="next"></span></div>
+                            <!--list-->
+                            <li>
+                                <div class="postHeader">
+                                    <h3>2015-11-04</h3>                                   
+                                </div>
+                                <div class="postBody">
+									{$article.content|htmlspecialchars_decode}
+                                </div>                
+                            </li>
+                            <!--/list-->
+                            <div class="postsBottom"></div>
+                        </ul>
+
+                   
+                </div>
+            </div>
+            <div class="innerBottom"></div>
+        </div>        
+		<div class="clear"></div>
+</div>
+</div>
+</body>
+</html>

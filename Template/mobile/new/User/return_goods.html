@@ -1,0 +1,170 @@
+<include file="Public/header"/>
+<body>
+<header>
+<div class="tab_nav">
+  <div class="header">
+    <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="back"></a></div>
+    <div class="h-mid">Apply for after sale</div>
+    <div class="h-right">
+      <aside class="top_bar">
+        <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</header>
+<include file="Public/menu"/>
+	<form name="return_form" id="return_form" autocomplete="off" method="post" enctype="multipart/form-data" >
+		<div class="main_sq">
+			<div class="touchweb-com_searchListBox" id="goods_list">
+		   		<li>
+	                <a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$goods['goods_id']))}" class="item">
+						<div class="pic_box">
+	                        <img title="{$goods['goods_name']}" src="{$goods[goods_id]|goods_thum_images=400,400}" />
+						</div>
+						<div class="title_box">{$goods['goods_name']}</div>
+					</a>
+			    </li>
+			</div>
+		<div class="T_H">
+			<div class="retu_sq"><a id="retu_a_sq" class="orange_sq">Return goods</a><input type="radio" style="display:;" checked="" value="0" name="type"></div>
+			<div class="chan_sq"><a id="chec_a_sq">Exchange</a><input type="radio" style="display:;" value="1" name="type"></div>
+		</div>
+		<div class="ques_sq">
+			<div class="ques_desc_sq">
+				<span>Problem Description:</span>
+				<div class="textarea_sq">
+	                <textarea name="reason" id="reason"></textarea>
+				</div>
+			</div>
+		</div>	
+		<div class="file_up_sq">
+			<div class="file_sq">
+				<div> 
+					<div class="p_main">
+                        <h2>Upload pictures:</h2>
+                        <a class="file" href="javascript:;"><div style="width:60px;height:60px;" id="fileList0"><img width="60" height="60"></div><input type="file" accept="image/*" name="return_imgs[]" onchange="handleFiles(this,0)"></a>
+                        <a class="file" href="javascript:;"><div style="width:60px;height:60px;" id="fileList1"><img width="60" height="60"></div><input type="file" accept="image/*" name="return_imgs[]" onchange="handleFiles(this,1)"></a>
+                        <a class="file" href="javascript:;"><div style="width:60px;height:60px;" id="fileList2"><img width="60" height="60"></div><input type="file" accept="image/*" name="return_imgs[]" onchange="handleFiles(this,2)"></a>
+                        <a class="file" href="javascript:;"><div style="width:60px;height:60px;" id="fileList3"><img width="60" height="60"></div><input type="file" accept="image/*" name="return_imgs[]" onchange="handleFiles(this,3)"></a>
+                        <span style=" font-size:14px; display:block; width:100%; overflow:hidden">
+                    </div>
+				</div>
+			</div>
+		</div>
+		<div class="send sq">
+			<div class="sendssq">
+				<span>Return address:</span>
+				<ul>
+					<li>Return address:：{$tpshop_config['shop_info_address']}</li>
+					<li>Working time：(Mon-Sat) 08：00-19:00</li>
+					<li>Service numbers：{$tpshop_config['shop_info_phone']}</li>
+				</ul>
+			</div>
+		</div>
+		<div class="submit_sq">
+	        <a href="javascript:void(0)" onClick="submit_form();" name="btnSubmit"><s></s>Submit</a>
+		</div>
+	</div>
+      <input type="hidden" name="order_id" value="{$order_id}" />
+      <input type="hidden" name="order_sn" value="{$order_sn}" />
+      <input type="hidden" name="goods_id" value="{$goods_id}" />
+      <input type="hidden" name="spec_key" value="{$_GET[spec_key]}" />
+ </form>    
+ 
+<script type="text/javascript">
+
+  function submit_form()
+  {
+
+	  var reason = $.trim($('#reason').val());
+	  var return_imgs= $.trim($('#return_imgs').val());
+	  if(reason == '')
+	  {
+		  alert('Please enter the reason for the return');// alert('请输入退换货原因!');
+		  return false;
+	  }
+
+	  var ff = document.getElementsByName("return_imgs[]");
+
+	  if((ff[0].value.length + ff[1].value.length + ff[2].value.length + ff[3].value.length) == 0)
+	  {
+		  if(!confirm('Sure you could not send pictures'))
+		  {
+			  return false;
+		  }
+      }
+	  $('#return_form').submit();
+  } 
+   
+   //  退换货颜色切换
+	$(document).ready(function(){
+			//$('#retu_a_sq').addClass('orange_sq');
+			$('#retu_a_sq').click(function(){
+				if ($(this).hasClass('orange_sq')) {
+					$('#chec_a_sq').removeClass('orange_sq');
+				} else{
+					$(this).addClass('orange_sq');
+					$(this).siblings('input').trigger('click');
+					$('#chec_a_sq').removeClass('orange_sq');
+				}
+			});
+			$('#chec_a_sq').click(function(){
+				if ($(this).hasClass('orange_sq')) {
+					$('#retu_a_sq').removeClass('orange_sq');
+				} else{
+					$(this).addClass('orange_sq');
+					$(this).siblings('input').trigger('click');						
+					$('#retu_a_sq').removeClass('orange_sq');
+				}
+			})
+
+	})
+	
+window.URL = window.URL || window.webkitURL;
+function handleFiles(obj,id) {
+	fileList = document.getElementById("fileList"+id);
+		var files = obj.files;
+		img = new Image();
+		if(window.URL){	
+			
+			img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
+			img.width = 60;
+	    	img.height = 60;
+			img.onload = function(e) {
+				window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
+			}
+		    if(fileList.firstElementChild){
+		         fileList.removeChild(fileList.firstElementChild);
+		    } 
+			fileList.appendChild(img);
+		}else if(window.FileReader){
+			//opera不支持createObjectURL/revokeObjectURL方法。我们用FileReader对象来处理
+			var reader = new FileReader();
+			reader.readAsDataURL(files[0]);
+			reader.onload = function(e){	
+		            img.src = this.result;
+		            img.width = 60;
+		            img.height = 60;
+		            fileList.appendChild(img);
+			}
+	    }else
+	    {
+			//ie
+			obj.select();
+			obj.blur();
+			var nfile = document.selection.createRange().text;
+			document.selection.empty();
+			img.src = nfile;
+			img.width = 60;
+		    img.height = 60;
+			img.onload=function(){
+			  
+		    }
+			fileList.appendChild(img);
+	    }
+}
+	
+</script>
+</body>
+</html>

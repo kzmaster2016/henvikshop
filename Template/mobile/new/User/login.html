@@ -1,0 +1,143 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta name="Generator" content="TPshop1.2" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Login in-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/login.css"/>  
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/mobile_common.js"></script>
+<script type="text/javascript" src="__STATIC__/js/layer.js" ></script>
+</head>
+<body>
+  <header id="header" class='header'>
+    <div class="h-left"><a href="javascript:history.back(-1)" class="sb-back"></a></div>
+	<div class="h-mid">Sign In</div>
+ </header>
+  	<div class="denglu">
+		<form action="" method="post">        	
+            <div class="Login">
+				<dl>
+	            <dt>Account：</dt>
+			    	<dd><input type="text" name="username" id="username" placeholder="Phone Number/E-mail" value="" /></dd>
+				</dl>
+                <dl style=" margin-top:15px;">
+                <dt>Password：</dt>
+					<dd><input type="password" name="password" id="password" placeholder="Password"/></dd>
+	            </dl>
+	            <dl style=" margin-top:15px;">
+                <dt>Verify code：</dt>
+					<dd><input class="zc-text wi96" type="text" name="verify_code" id="verify_code" placeholder="" style="width: 120px;" />
+					<img class="po-ab to0" id="verify_code_img" width="120" height="40" src="{:U('Home/User/verify')}"  onclick="verify(this)" /></dd>
+	            </dl>
+				<div class="field submit-btn">
+					<input type="button" class="btn_big1" onClick="checkSubmit()" value="Sign In" />
+					<input type="hidden" name="referurl" id="referurl" value="{$referurl}">
+				</div>
+            <div class="ng-foot">
+              <div class="ng-cookie-area" >
+                <label class="bf1 login_ffri">
+					<input type="checkbox" name="remember" value="1" checked=""> &nbsp;automatically sign in
+				</label>
+              </div>
+              <div class="ng-link-area" >
+                <span style=" margin-right:5px; border-right:1px solid #eeeeee">
+                  <a href="{:U('User/reg')}" >No Account？  Join Us</a>
+                </span>
+                 <span class="user_line"></span>
+                   <span >
+                  <a href="{:U('User/forget_pwd')}" >Forgot Password?</a>
+                </span>
+              </div>
+              <!-- <div class="third-area ">
+                <div class="third-area-a">第三方登录</div>
+                <a class="ta-qq" href="{:U('LoginApi/login',array('oauth'=>'qq'))}" target="_blank" title="QQ"></a>
+                <a class="ta-alipay" href="{:U('LoginApi/login',array('oauth'=>'alipay'))}" target="_blank" title="alipay"></a>
+              </div> -->
+            </div>			
+          </div>
+		</form>
+	</div>
+<script type="text/javascript">
+
+function checkSubmit()
+{
+	
+	var username = $.trim($('#username').val());
+	var password = $.trim($('#password').val());
+	var referurl = $('#referurl').val();
+	if(username == ''){
+		showErrorMsg('Account may not be empty!');
+		return false;
+	}
+	if(!checkMobile(username) && !checkEmail(username)){
+		showErrorMsg('Account format does not match!');
+		return false;
+	}
+	if(password == ''){
+		showErrorMsg('Password may not be empty!');
+		return false;
+	}
+	
+	if($.trim($('#verify_code').val()) == ''){
+		showErrorMsg('Verify code may not be empty!');
+		return false;
+	}	
+	//$('#login-form').submit();
+	$.ajax({
+		type : 'post',
+		url : '/index.php?m=Mobile&c=User&a=do_login&t='+Math.random(),
+		data : {username:username,password:password,referurl:referurl},		
+		dataType : 'json',
+		success : function(res){
+			if(res.status == 1){
+				top.location.href = res.url;
+			}else{
+				showErrorMsg(res.msg);
+			}
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			showErrorMsg('The network failed. Please refresh the page and try again');
+		}
+	})
+}
+
+
+    function checkMobile(tel) {
+        var reg = /(^1[3|4|5|7|8][0-9]{9}$)/;
+        if (reg.test(tel)) {
+            return true;
+        }else{
+            return false;
+        };
+    }
+    
+    function checkEmail(str){
+        var reg = /^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        if(reg.test(str)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    function showErrorMsg(msg){
+    	//$('.msg-err').show();
+    	//$('.J-errorMsg').html(msg);
+    	layer.open({content:msg,time:2});
+    }
+    
+    function verify(){
+        $('#verify_code_img').attr('src','/index.php?m=Home&c=User&a=verify&r='+Math.random());
+     }
+
+</script>	
+</body>
+</html>

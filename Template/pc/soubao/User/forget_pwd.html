@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>忘记密码-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="stylesheet" href="__STATIC__/css/security_set.css">
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<div class="wrap">
+<div class="bread_crumbs"> 
+  <a href="{:U('Home/User/index')}" class="crumbs_font">用户中心</a>&gt;<span class="color">找回密码</span>
+</div>
+<div class="col_main" style="float: none; width: auto;">
+		<div class="main security_passwd">
+			<!-- themes star -->
+			<div class="themes_title">
+				<h3>安全设置</h3>
+			</div>
+			<!-- themes end -->
+			<section class="security_passwd">
+				<div class="wrapper-3">
+					<div class="pub-step" id="step">
+						<div class="steps-nav fixed w4">
+							<p class="step-nav step-nav-1 go">
+								1.填写用户名<i></i>
+							</p>
+							<p class="step-nav step-nav-2">
+								2.验证身份<i></i>
+							</p>
+							<p class="step-nav step-nav-3">
+								3.设置新密码<i></i>
+							</p>
+							<p class="step-nav step-nav-4">4.完成</p>
+						</div>
+						<div class="steps-con block-00">
+							<div class="step-col fn-form" data-fn-verify="">
+							   <form id="forget_pwd" action="{:U('User/identity')}" method="post">
+								<ul class="pub-ul">
+									<li><span class="title">账户名：</span>
+										<div class="con verify-group">
+											<input type="text" class="it-01 form-control verify-ctrl" name="username" id="username" onblur="chkuser()">
+											<input type="hidden" name="type" value="forget">
+											<span class="v-tips verify-tips" data-tips-for="username">
+											<i class="icon"></i><span class="txt"></span></span>
+										</div>
+									</li>
+									<li class="li-02 captcha_row"><span class="title">验证码：</span>
+										<div class="con verify-group">
+											<input type="text" class="msg-code ie-01 verify-ctrl left" name="verify_code" id="captcha"> 
+											<img id="captchaImg" src="/index.php?m=Home&c=User&a=verify&type=forget" alt="captcha" class="ie-02 left" onclick="verify()"/> 
+											<span class="a0066cc left">看不清？<a class="reloadCaptcha target_no" onclick="verify()" href="javascript:void(0);">换一张</a></span>
+											<span class="v-tips verify-tips" data-tips-for="captcha"><i class="icon">
+											</i><span class="txt"></span></span>
+										</div>
+									</li>
+									<li>
+										<button id="fx_next" type="button" class="btn_120 verify-ctrl" onclick="chkcaptcha()">下一步</button>
+									</li>
+								</ul>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<div style="clear: both;"></div>
+<include file="User/footer" />
+<script>
+function verify(){
+    $('#captchaImg').attr('src','/index.php?m=Home&c=User&a=verify&type=forget&r='+Math.random());
+}
+
+var uflag = false;
+var cflag = false;
+
+function chkuser(){
+	$('span[data-tips-for="username"]').find('.txt').empty();
+	var username = $('#username').val();
+	if(username == ''){
+		show_error('username','用户名不能为空');
+		return false;
+	}else{
+		$.ajax({
+			url:'/index.php?m=Home&c=User&a=check_username&t='+Math.random(),
+			type:'post',
+			dataType:'json',
+			data:{username:username},
+			success:function(t){
+				if(t==1){
+					$('span[data-tips-for="username"]').css('display','inline');
+					$('span[data-tips-for="username"]').find('i').removeClass('icon');
+					$('span[data-tips-for="username"]').find('i').removeClass('icon-warn');
+					$('span[data-tips-for="username"]').find('i').addClass('icon-loss');
+					$('span[data-tips-for="username"]').find('.txt').empty();
+					uflag = true;
+				}else{
+					show_error('username','用户名错误');
+				}
+			}
+		})
+	}
+}
+
+function chkcaptcha(){
+	$('span[data-tips-for="captcha"]').find('.txt').empty();
+	var captcha = $('#captcha').val();
+	if(captcha == ''){
+		show_error('captcha','验证码不能为空');
+		return false;
+	}else if(captcha.length!=4){	
+		show_error('captcha','验证码错误');
+		return false;
+	}else{
+		$.ajax({
+			url:'/index.php?m=Home&c=User&a=check_captcha&t='+Math.random(),
+			type:'post',
+			dataType:'json',
+			data:{verify_code:captcha,type:'forget'},
+			success:function(t){
+				if(t==1){
+					$('span[data-tips-for="captcha"]').css('display','inline');
+					$('span[data-tips-for="captcha"]').find('i').removeClass('icon');
+					$('span[data-tips-for="captcha"]').find('i').removeClass('icon-warn');
+					$('span[data-tips-for="captcha"]').find('i').addClass('icon-loss');
+					$('span[data-tips-for="captcha"]').find('.txt').empty();
+					//cflag = true;
+					gonext();
+				}else{
+					show_error('captcha','验证码不正确');
+					return false;
+				}
+			}
+		})
+	}
+}
+
+function gonext(){
+	if($('#username').val() == ''){
+		show_error('username','用户名不能为空');
+		return;
+	}
+	if($('#captcha').val() == ''){
+		show_error('captcha','验证码不能为空');
+		return;
+	}	
+	//if(!uflag){
+		//show_error('username','用户名验证有误');
+		//return;
+	//}else if(!cflag){
+	//	show_error('captcha','图形验证码有误');
+	//	return;
+	//}
+//	if(uflag && cflag){
+		$('#forget_pwd').submit();
+//	}
+}
+
+function show_error(type,msg){
+	$('span[data-tips-for="'+type+'"]').css('display','inline');
+	$('span[data-tips-for="'+type+'"]').find('i').removeClass('icon');
+	$('span[data-tips-for="'+type+'"]').find('i').removeClass('icon-loss');
+	$('span[data-tips-for="'+type+'"]').find('i').addClass('icon-warn');
+	$('span[data-tips-for="'+type+'"]').find('.txt').empty().html(msg);
+}
+</script>
+</body>
+</html>	

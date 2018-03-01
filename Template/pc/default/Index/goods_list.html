@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>goods list-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+
+<body>
+<!--------头部开始-------------->
+<include file="Public/header" />
+<!--------头部结束--------------> 
+<link rel="stylesheet" href="__STATIC__/css/page.css" type="text/css">
+<script src="__PUBLIC__/js/pc_common.js"></script>
+
+	<div class="layout ov-hi">
+		<div class="breadcrumb-area">
+        	<a href="/">Home</a> 
+            <foreach name="navigate_cat" key="k" item="v">
+                    >> <a  href="{:U('/Home/Goods/goodsList',array('id'=>$k))}">{$v}</a>
+            </foreach>
+        </div>        
+	<!--------筛选 form 表单 开始-------------->
+	<form action="{:U('Home/index/ajaxGoodsList',array('id'=>$_GET[id]))}" name="filter_form" id="filter_form">
+        <div class="layout" style="margin-top:10px">
+        	<div class="Commodity-screening">
+            	<div class="list-brand">
+                	<div class="list-Classification">Brand:</div>
+                	<div class="list-default">
+                    	<ul class="ov-hi">                            
+                            <foreach name="brand_arr" item="v" key="k">
+                    		<li>
+                                <a href="javascript:void(0);" >{$v['name']}</a>
+                                <input type="checkbox" name="brand_id[]" value="{$v['id']}" onClick="ajax_sourch_submit();" <if condition="$v['id'] eq $_GET['brand_id']">checked</if> />
+                            </li>
+                    	    </foreach>	 
+                    	</ul>
+                    </div>
+                </div>
+                    
+                <!--帅选商品规格-->                
+                <foreach name="filter_spec" item="v" key="k">
+                <div class="list-brand">
+                	<div class="list-Classification">{$v.name}:</div>
+                	<div class="list-default">
+                    	<ul class="ov-hi">
+                            <foreach name="v[spec_item]" item="v2" key="k2">
+	                    		<li>
+	                                <a href="{$v2[id]}">{$v2[item]}</a>
+	                                <input type="checkbox" name="spec_item_id[{$v[id]}][]" value="{$v2[id]}" onClick="ajax_sourch_submit();"/>
+	                            </li>
+                    	    </foreach>	
+                    	</ul>
+                    </div>
+                </div>
+                </foreach>
+                <!--帅选商品规格 end -->                   
+                <!--帅选商品属性-->                
+                <foreach name="filter_attr" item="v" key="k">
+                <div class="list-brand">
+                	<div class="list-Classification">{$v.attr_name}:</div>
+                	<div class="list-default">
+                    	<ul class="ov-hi">
+                            <foreach name="v[attr_values]" item="v2" key="k2">
+                    		<li>
+                            <a href="{$v2}">{$v2}</a>
+                            <input type="checkbox" name="attr_id[{$v.attr_id}][]" value="{$v2}" onClick="ajax_sourch_submit();"/>
+                            </li>
+                    	    </foreach>	
+                    	</ul>
+                    </div>
+                </div>
+                </foreach>
+                <!--帅选商品属性 end -->        
+    
+                <div class="list-brand">
+                	<div class="list-Classification">Price:</div>
+                	<div class="list-default">
+                    	<ul class="ov-hi fl">                            
+                            <foreach name="search_price" item="v" key="k">
+                    		<li>
+                            	<a href="">{$v[start]}-{$v[end]}</a>
+	                            <input type="radio" name="filter_price" value="{$v[start]}-{$v[end]}" onClick="ajax_sourch_submit();"/>
+                            </li>
+                            </foreach>    
+                    	</ul>
+                        <div class="sl-price">
+                            <input class="ma-le-30" type="text" name="filter_price1" />
+                            <em>-</em>
+                            <input type="text" name="filter_price2" />
+                            <a class="sl-price-qd" href="javascript:void(0);" onClick="ajax_sourch_submit();">Confirm</a>
+                        </div>
+                    </div>
+                </div>
+      
+                <div class="list-brand">
+                	<div class="list-Classification">Sort:</div>
+                	<div class="list-default">
+                    	<ul class="ov-hi">
+                    		<li><a href="javascript:void(0);" onClick="orderBy('goods_id');">Default</a></li>
+                    		<li><a href="javascript:void(0);" onClick="orderBy('shop_price');">Price<i class="ifica-i"></i></a></li>
+                    		<li><a href="javascript:void(0);" onClick="orderBy('comment_count');">Comments<i class="ifica-i ifica-pjs"></i></a></li>
+                    		<li><a href="javascript:void(0);" onClick="orderBy('on_time');">Timer<i class="ifica-i"></i></a></li>
+                    		<li>
+                            <input type="hidden" name="orderby" id="orderby" value="goods_id"/> 
+                            <input type="hidden" name="orderdesc" id="orderdesc" value="asc"/>                            
+                            </li>                            
+                    	</ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="cat_id" value="{$cat_id}" /><!--商品分类id-->
+        <input type="hidden" name="search_key" value="{$Think.post.search_key}" /><!--关键词搜索-->
+</form>        
+
+<script>
+
+$(document).ready(function(){
+	 // 初始化 就调用一下搜索
+	ajax_sourch_submit(1);
+	
+});
+
+
+
+ // 点击排序 触发 
+ function orderBy(v){
+	 
+	 $("input[name='orderby']").val(v); // 根据 哪个字段排序
+	 
+	 var orderdesc = $("input[name='orderdesc']").val(); // 降序or升序 现在为隐藏域
+	 if(orderdesc == 'asc')
+		 $("input[name='orderdesc']").val('desc'); // 降序
+      else	 
+		 $("input[name='orderdesc']").val('asc'); // 升序
+		 
+ 	 ajax_sourch_submit(1); // ajax 调用 搜索一下	 
+ }
+
+
+ /*** ajax 提交表单 查询商量列表结果*/  
+ function ajax_sourch_submit(page)
+ {	 
+	 if(page == null) page = 1;
+	 	 
+		$.ajax({
+			type : "POST",
+			url:"/index.php?m=Home&c=index&a=ajaxGoodsList&p="+page,//+tab,
+			data : $('#filter_form').serialize(),// 你的formid 搜索表单 序列化提交
+			success: function(data){
+				$("#ajax_return").html('');
+				$("#ajax_return").append(data);
+			}
+		}); 
+ }
+  
+	/* ajax 点击分页触发的事件 点击下一页时 一样提交表单, 不同的是 改变一下分页 p 参数 */
+　　$(".pagination a").live("click",function(){	
+		cur_page = $(this).data('p');
+		ajax_sourch_submit(cur_page);	
+　　}); 
+</script>
+<!--------筛选 form 表单 结束-------------->
+
+
+<!--------产品开始-------------->
+<div id="ajax_return"><!--ajax return--></div>
+<!--------产品end-------------->
+
+    </div>
+    
+<!--------右边小飘窗-开始-------------->
+<!--
+    <div class="hungBar">
+    	<a href="#top" class="rtop"></a>
+    	<a href="tencent://message/?uin={$tpshop_config['shop_info_qq']}&amp;Site=TPshop商城&amp;Menu=yes" target="_blank" class="rqq"></a>
+    	<a href="tencent://message/?uin={$tpshop_config['shop_info_qq']}&amp;Site=TPshop商城&amp;Menu=yes" target="_blank" class="rkefu"></a>
+    </div>
+-->    
+<!--------右边小飘窗-结束-------------->
+
+<!--------footer-开始-------------->
+<include file="Public/footer" />
+<!--------footer-结束-------------->
+
+</body>
+</html>

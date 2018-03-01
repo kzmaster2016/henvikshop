@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <title>消息通知-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}"/>
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}"/>
+</head>
+<body>
+<!-- 头部-s -->
+<include file="User/header"/>
+<!-- 头部-e -->
+<link rel="stylesheet" href="__STATIC__/css/favorite.css">
+
+<div class="wrap">
+    <div class="bread_crumbs"><a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">消息通知</span>
+    </div>
+    <!--菜单-->
+    <include file="User/menu"/>
+    <!--菜单-->
+    <!--侧边导航栏结束-->
+    <div class="col_main">
+        <div class="main my_order">
+            <div class="wddd-li">
+                <ul>
+                    <li class="wddd-red" id="ALL" onclick="ajax_message(0);"><a>全部消息</a></li>
+                    <li id="WAITPAY" onclick="ajax_message(1);"><a>系统消息<em></em></a></li>
+                    <li id="WAITSEND" onclick="ajax_message(2);"><a>活动通知<em></em></a></li>
+                </ul>
+            </div>
+            <div class="wddd-js ov-in">
+                <div class="tp_notice">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="clear: both;"></div>
+<include file="User/footer"/>
+<script>
+
+    $(function () {
+        ajax_message(0);
+        $('.wddd-li ul li').click(function () {
+            $(this).addClass('wddd-red').siblings().removeClass('wddd-red');
+        });
+    });
+
+    /**
+     * @author dyr
+     * 消息ajax请求
+     * @param type
+     */
+    function ajax_message(type) {
+        $.ajax({
+            type: "post",
+            url: "{:U('Home/User/ajax_message_notice')}",
+            data:{type:type},
+            dataType: 'html',
+            success: function (data) {
+                if (data) {
+                    $(".tp_notice").html('');
+                    $(".tp_notice").append(data);
+                } else {
+                    $(".tp_notice").html('');
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

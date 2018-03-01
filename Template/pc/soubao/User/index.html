@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="__STATIC__/css/appointment.css">
+<title>用户中心-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="stylesheet" href="__STATIC__/css/common_order.css"></link>
+</head>
+<style>
+    .indexloading{text-align: center; padding-top: 20px}
+    .indexloading img{ width:16px; height: 16px }
+    .my_card .brand {
+    	background: url(../static/images/card_bg.png) 0 -100px no-repeat;
+    }
+	.related .browse_related_list .slide_box a:hover{ border:0}
+	div.informations .in_01 .personal_head img {
+	  width: 84px;
+	  height: 84px;
+	  border: 1px solid #f1f1f1;
+	  padding: 2px;
+	  border-radius: 50%;
+	  -moz-border-radius: 50%;
+	  -webkit-border-radius: 50%;
+	  behavior: url(iecss3.htc);
+	  position:relative;
+	  z-index:2;
+	}		
+</style>
+<!-- 头部-s -->
+<include file="User/header" />
+<!-- 头部-e -->
+<div class="wrap"> 
+  <!-- bread crumbs star -->
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font target_no">我的TPshop</a> </div>
+  <!-- bread crumbs end --> 
+  
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单--> 
+  
+  <!-- 首页右侧 start -->
+  <div class="col_main myfeiniu">
+    <div class="informations clearfix">
+      <ul>
+        <li class="in_01">
+          <span id="loadingpic" class="indexloading"> <a class="personal_head   target_no" href="javascript:void(0);"><img width="100" height="100" src="{$user.head_pic|default='__STATIC__/images/img88.jpg'}"></a> </span>
+          <h2>
+            <span class="num" id="spanNickname">{$user.nickname}</span>
+            <div> <a class="usertitle target_no" href="" >普通会员</a> </div>
+            <p id="greeting" class="greeting">您好，欢迎来到TPshop网</p>
+          </h2>
+        </li>
+        <!--                     <li class="in_02"> --> 
+        <!--                         <i class="icon_purse"></i> --> 
+        <!--                         <dl class="inf_purse"> --> 
+        <!--                             <dt class="tips">购物卡余额</dt> --> 
+        
+        <!--                         </dl> --> 
+        <!--                     </li> -->
+        <li class="in_02">
+          <div id="myQuanBonusBalance"> <i class="icon_line"></i> 
+          <a class="target_no" href=""> 
+             <i class="icon_yue"></i>
+            <span class="label">会员折扣</span>
+            <span class="text"><small class="rmb">{$user[discount] * 10}</small> 折</span>
+            <span class="go">&gt;</span>
+          </a> 
+          </div>
+          <div id="myAcctBalance"> 
+             <i class="icon_line"></i> 
+             <a class="target_no" href=""> 
+                 <i class="icon_purse"></i>
+                <span class="label">账户余额</span>
+                <span class="text"><small class="rmb">{$user[user_money]}</small> 元</span>
+                <span class="go">&gt;</span>
+            </a>
+            </div>
+          <div id="myAvaliableScore"> 
+          <i class="icon_line"></i> 
+          <a class="target_no" href=""> 
+          	<i class="icon_point"></i>
+            <span class="label">可用积分</span>
+            <span class="text"><small class="rmb">{$user[pay_points]}</small> 分</span>
+            <span class="go">&gt;</span>
+          </a>
+          </div>
+        </li>
+        <li class="in_03">
+          <div id="loadinguserinfo" class="slide_box J_slide_box">
+            <div class="account_security">
+              <span class="title">账户安全：</span>
+              <div class="progress_bar">
+                <div style="width:80%" class="progress"></div>
+              </div>
+              <span class="security_tips">高</span>
+            <!--  <a class="security_up blue target_no" href="https://i.tp-shop.cn/safetySettings/view">强化</a>-->
+            </div>
+            <ul class="genre clearfix">
+              <li>
+                <span class="gray"><i class="icon_phone"></i>手机</span>
+                <a class="blue target_no" href="{:U('/Home/User/mobile_validate',array('type'=>'mobile','step'=>1))}">
+                    <if condition="$user['mobile_validated'] eq 0">未绑定<else/>更换绑定</if>
+                </a>
+              </li>
+              <li>
+                <span class="gray"><i class="icon_email"></i>邮箱</span>
+                <a class="red target_no" href="{:U('/Home/User/email_validate',array('type'=>'email','step'=>1))}">
+	                <if condition="$user['email_validated'] eq 0">未绑定<else/>更换绑定</if>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="grid_02">
+      <div class="middle_infor">
+        <div class="order_tips">
+          <div class="cell_title clearfix">
+            <h2>我的订单</h2>
+            <p class="type">
+              <a class="target_no" href="{:U('Home/User/order_list',array('type'=>'WAITPAY'))}"  title="待付款">待付款</a>
+              <span class="v_line"></span>
+              <a class="target_no" href="{:U('Home/User/order_list',array('type'=>'WAITSEND'))}" title="待发货">待发货</a>
+              <span class="v_line"></span>
+              <a class="target_no" href="{:U('Home/User/order_list',array('type'=>'WAITRECEIVE'))}" title="待收货">待收货</a>
+              <span class="v_line"></span>
+              <a class="target_no" href="{:U('Home/User/order_list',array('type'=>'WAITCCOMMENT'))}" title="待评价">待评价</a>
+            </p>                        
+              <a href="{:U('Home/User/order_list')}" class="order_viewAll">查看全部订单</a> 
+          </div>
+          <div class="order_list J_order_list">
+          
+           <tpshop sql="select * from `__PREFIX__order` where user_id = $user[user_id] order by order_id desc limit 1" item="v" key="k" >
+           <?php  
+           		$v = set_btn_order_status($v);  // 添加属性  包括按钮显示属性 和 订单状态显示属性
+           ?>
+            <if condition="count($v) gt 0"> 
+              <!--购买过商品-->
+              <table class='paying'>
+                <tr class="list_top">
+                  <td colspan="3">
+                    <div class="f_left order_info">
+                      <span class="time num">{$v[add_time]|date="Y-m-d H:i",###}</span>
+                      <span class="order_No">订单号：<small class="num">{$v['order_sn']}</small></span>
+                    </div>
+                    <div class="f_right order_tip">
+                      <span class="num">金额：<em class="rmb">￥</em>{$v['order_amount']}</span>                      
+                      		<if condition="$v.pay_btn eq 1"><a href='{:U('/Home/Cart/cart4',array('order_id'=>$v[order_id]))}' class="btn_pay">立即付款</a></if>
+                      		<if condition="$v.receive_btn eq 1"><a onclick="if(confirm('你确定收到货了吗?')) location.href='{:U('Home/User/order_confirm',array('id'=>$v['order_id']))}'"  class="btn_pay">收货确认</a></if>                      
+                     </div>
+                  </td>
+                </tr>
+	           <tpshop sql="select * from `__PREFIX__order_goods` where order_id = $v[order_id]" item="v2" key="k2">
+                <tr class='list_cont '>
+                  <td class="td_01">
+                    <div class="list_main clearfix">
+                    	<a href="{:U('Home/Goods/goodsInfo',array('id'=>$v2[goods_id]))}" class="J_hover"> <img src="{$v2.goods_id|goods_thum_images=80,80}"></a>
+                        {$v2.goods_name}
+                    </div>
+                  </td>
+                  <td class="td_02">
+                    <p><a class="target_no" href="{:U('Home/User/order_detail',array('id'=>$v[order_id]))}">订单详情</a></p>
+                  </td>
+                  <td class="td_03">
+                    <p><a href='{:U('Home/Goods/goodsInfo',array('id'=>$v2[goods_id]))}' class="btn-02">再次购买</a></p>
+                    <if condition="($v[comment_btn] eq 1) and ($v2[is_comment] eq 0)">
+	                    <p><a href='{:U('Home/User/comment')}' class="btn-02">评价</a></p>                        
+                    </if>                    
+                  </td>
+                </tr>
+                </tpshop> 
+                <!-- 预售单处理 -->
+              </table>
+              <!--购买过商品 end-->
+              <else />
+              <!--未购买过商品-->
+              <div class="null">
+                <p>您还没购买过商品哟，<a class="blue" title="去逛逛吧！" alt="去逛逛吧！" href="/" target="_blank">去逛逛吧！</a></p>
+              </div>
+              <!--未购买过商品 end--> 
+            </if>
+           </tpshop> 
+            
+            
+          </div>
+        </div>
+        <div class="items_collect">
+          <h4 class="cell_title">商品收藏</h4>
+          <div class="browse_related_list J_slide_parent">
+                     
+           <tpshop sql="select * from __PREFIX__goods_collect where user_id = $user[user_id] order by collect_id desc limit 3" result_name="collect_result"></tpshop>          
+            <if condition="count($collect_result) gt 0"> 
+              <!--有收藏-->
+              <div id="favShow" class="slide_box J_slide_box">
+                <ul class="clearfix">
+                    <foreach name="collect_result" item="v">
+                          <li>                         
+                              <a target="_blank" class="items_tit" href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">
+                              	 <img width="100" height="100" src="{$v.goods_id|goods_thum_images=100,100}">
+                              </a>
+                          </li>
+                     </foreach>  
+                </ul>
+              </div>
+              <div class="view_all_order" id="favMore"><a class="target_no" href="{:U('Home/User/goods_collect')}">查看更多收藏</a></div>
+              <!--有收藏 end-->
+              <else />
+              <!--没有收藏-->
+              <div class="null">
+                <p>您还没收藏商品哟，<a class="blue" title="去逛逛吧！" href="/">去逛逛吧！</a></p>
+              </div>
+              <!--没有收藏 end--> 
+            </if>
+          </div>
+        </div>
+        <div class="my_card">
+          <h4 class="cell_title">我的优惠券</h4>
+          <div class="browse_related_list J_slide_parent">          
+           <tpshop sql="select * from __PREFIX__goods_collect where user_id = $user[user_id] order by collect_id desc limit 3" result_name="coupon_list"></tpshop>
+            <if condition="count($collect_result) gt 0">           
+              <!--有优惠券-->
+              <div id="favShow" class="slide_box J_slide_box">
+                <ul class="clearfix">
+                 <foreach name="collect_result" item="v">
+                      <a target="_blank" class="items_tit" href="{:U('Home/User/coupon')}">
+                         <img width="100" height="100" src="__STATIC__/images/youhuiquan.jpg">
+                      </a>
+                  </foreach>
+                </ul>
+              </div>
+              <div class="view_all_order" id="cardMore"><a class="target_no" href="{:U('Home/User/coupon')}">查看更多优惠券</a></div>
+              <!--有优惠券-->
+              <else />
+              <!--没有优惠券-->
+              <div class="null">
+                <p>您还没有优惠券哦.</p>
+              </div>
+              <!--没有优惠券 end--> 
+            </if>
+          </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="related">
+          <div class="ui_tab">
+            <ul class="ui_tab_nav clearfix">
+              <li class="active"><a href="">为你推荐</a>
+                <span class="v_line" style="display: none;"></span>
+              </li>
+            </ul>
+            <div class="nav_line"></div>
+            <div class="ui_tab_content">
+              <div class="ui_panel" style="display:block">
+                <div class="browse_related_list J_slide_parent" data-scrollNum="4" data-maxNum="4" data-controller="1" data-speed="400" data-index="0"> 
+                  <!--为你推荐-->
+                  <div id="guessShow" class="slide_box J_slide_box">
+                    <ul class="clearfix">
+			         <tpshop sql="select * from __PREFIX__goods order by goods_id desc limit 4"  item="v" key="k" >
+                      <li class="heig_tz">
+                          <a class="items_tit items_tz" href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">
+                                <img width="150" height="150" src="{$v.goods_id|goods_thum_images=160,160}">
+                                <span class="items_tit">{$v[goods_name]}</span>
+                                <span class="num"><em class="rmb">￥</em>{$v[shop_price]}</span>                             
+                          </a>                      
+                      </li>
+                     </tpshop> 
+                    </ul>
+                  </div>
+                  <!--为你推荐 end--> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right_infor">
+        <div class="fl weixin_box">
+          <div class="clearfix in">
+            <span class="wxcodes fl"><img src="__STATIC__/images/qrcode_weixin.png" width="80" height="80"/></span>
+            <p class="fl wxtxt">
+              <span>下载APP手机端</span>
+            </p>
+          </div>
+        </div>
+        <div class="my_cart">
+          <h4 class="cell_title">我的购物车</h4>
+          <div class="browse_related_list" id="cartShow">
+           <tpshop sql="select * from __PREFIX__cart where user_id = $user[user_id] order by id desc limit 8" result_name="cart_list"></tpshop>
+            <if condition="count($cart_list) gt 0">             
+              <!--购物车有商品-->
+              <ul class="clearfix">
+               <foreach name="cart_list" item="v">
+                    <li>
+                       <img width="100" height="100" alt="{$v[goods_name]}" src="{$v.goods_id|goods_thum_images=100,100}">
+                       <div class="mask">
+	                       <a class="items_tit" href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">
+                                <span class="goods_name">{$v[goods_name]}</span>
+                                <span class="num"><em class="rmb">￥</em>{$v[member_goods_price]}</span>
+                            </a>
+                        </div>
+                    </li>
+               </foreach>
+              </ul>
+              <div class="view_all_order" id="cartMore"><a href="{:U('Home/Cart/cart')}" title="查看更多">查看更多</a></div>
+              <!--购物车有商品 end-->
+              <else />
+              <!--购物车没商品-->
+              <div class="null">
+                <p>购物车内没有商品，<a class="blue" title="去逛逛吧！" href="/">去逛逛吧！</a></p>
+              </div>
+              <!--购物车没商品  end--> 
+            </if>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 首页右侧  end --> 
+</div>
+<div style="clear: both;"></div>
+<!--导入用户中心的底部-->
+<include file="User/footer" />
+</body>
+</html>

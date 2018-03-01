@@ -1,0 +1,204 @@
+*{
+	margin:0;
+	padding:0;
+}
+.dircontent {
+    width: 100%;
+    background-color: #ededed;
+    font-family: "Helvetica neue",Helvetica,Tahoma,"lantinghei sc","Microsoft Yahei",sans-serif;
+    color: #000;
+	overflow:hidden;
+}
+.sort {
+    margin-top: 20px;
+}
+.container {
+    width: 1190px;
+    margin: 0 auto;
+}
+.berserk {
+    margin-right: -20px;
+    margin-bottom: 30px;
+}
+.sort .berserk-item {
+    border: 1px solid #ddd;
+    width: 542px;
+    height: 298px;
+}
+.berserk-item {
+    float: left;
+    display: inline;
+    width: 542px;
+    height: 300px;
+    padding: 20px 20px 10px;
+    margin: 0 20px 20px 0;
+    background-color: #FFF;
+}
+.berserk-pic {
+    position: relative;
+    width: 542px;
+    height: 230px;
+    overflow: hidden;
+	text-align:center;
+}
+.dircontent a:hover {
+    color: #ff4500;
+}
+.berserk-pic a {
+    display: block;
+    width: 542px;
+    height: 230px;
+}
+.dircontent a {
+    color: #000;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+.scale:hover .scale-img {
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
+}
+.scale-img {
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+}
+.dilay-item:hover .time, .berserk-item:hover .time {
+    padding-right: 20px;
+    -webkit-transition: padding .3s ease;
+    -moz-transition: padding .3s ease;
+    -o-transition: padding .3s ease;
+    transition: padding .3s ease;
+}
+.time {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding-right: 10px;
+    height: 25px;
+    line-height: 25px;
+    -webkit-transition: padding .3s ease;
+    -moz-transition: padding .3s ease;
+    -o-transition: padding .3s ease;
+    transition: padding .3s ease;
+}
+.dilay-item:hover .time-bg, .berserk-item:hover .time-bg {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    background-color: #ff4500;
+}
+.time-bg {
+    z-index: 1;
+    position: absolute;
+    height: 25px;
+    width: 100%;
+    opacity: .7;
+    filter: alpha(opacity=70);
+    background-color: #333;
+}
+.dilay-item:hover .time .icon, .berserk-item:hover .time .icon {
+    background-position: -7px -14px;
+}
+.time-bg .icon {
+    display: block;
+    width: 5px;
+    height: 25px;
+    margin-left: -5px;
+    background-position: 0 -14px;
+}
+.sprite {
+	/*
+    background: url("__STATIC__/images/icon.png?1553590") no-repeat;
+    background-image: -webkit-image-set(url("__STATIC__/images/icon.png?1553590") 1x,url("__STATIC__/images/icon@2x.png?1553590") 2x);
+    background-image: -moz-image-set(url("__STATIC__/images/icon.png?1553590") 1x,url("__STATIC__/images/icon@2x.png?1553590") 2x);
+    background-image: -ms-image-set(url("__STATIC__/images/icon.png?1553590") 1x,url("__STATIC__/images/icon@2x.png?1553590") 2x);
+    _background: url("__STATIC__/images/icon.gif?1553590") no-repeat;
+	*/
+}
+.time-txt {
+    z-index: 2;
+    position: relative;
+    color: #FFF;
+}
+.berserk-info {
+    height: 60px;
+}
+.berserk-info .info-txt {
+    padding-top: 0;
+}
+.info-txt {
+    float: right;
+    display: inline;
+    padding-top: 6px;
+}
+.berserk-info .info-txt h4 {
+    text-align: right;
+    font-weight: 100;
+}
+.berserk-info .info-txt p {
+    text-align: right;
+    color: #999;
+}
+.berserk-info .info-logo {
+    margin-top: 10px;
+}
+.berserk-info .info-logo img {
+    width: 120px;
+    height: 60px;
+    margin-right: 16px;
+}
+.info-logo img {
+    float: left;
+    display: inline;
+}
+.berserk-info .info-logo .title {
+    padding-top: 10px;
+}
+.berserk-info .info-logo p {
+    line-height: 20px;
+}
+.info-logo p {
+    line-height: 60px;
+    font-size: 14px;
+}
+.berserk-info .info-logo .info {
+    color: #999;
+    font-size: 12px;
+}
+.berserk-info .info-logo p {
+    line-height: 20px;
+}
+.info-txt strong {
+    font-size: 30px;
+    color: #ff4600;
+    font-family: "Century Gothic";
+    vertical-align: -2px;
+    padding-right: 3px;
+}
+.berserk-info .info-txt p {
+    text-align: right;
+    color: #999;
+}
+.saleNum{
+	font-size:12px;
+}
+a{ 
+	text-decoration:none;
+	color:#333;
+}

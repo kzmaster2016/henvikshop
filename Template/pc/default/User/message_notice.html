@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Message Notice-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+    <link rel="stylesheet" href="__STATIC__/css/page.css" type="text/css">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+    <script src="__STATIC__/js/slider.js"></script>
+
+</head>
+
+<body>
+<!--------头部开始-------------->
+<include file="Public/header" />
+<!--------头部结束-------------->
+
+<div class="layout ov-hi">
+    <div class="breadcrumb-area">    
+	    <foreach name="navigate_user" key="k" item="v">
+	        <if condition="$k neq 'Home'"> > </if>  
+            <a href="{$v}">{$k}</a> 
+        </foreach>
+    </div>
+</div>
+<div class="layout pa-to-10 fo-fa-ar">
+    <!--菜单-->
+    <include file="User/menu" />
+    <!--菜单-->
+    <div class="fr wi940">
+        <div class="he50 wddd">
+            <div class="fl ddd-h2">
+                <h2><span>Massages </span></h2>
+            </div>
+
+        </div>
+        <div class="wddd-li">
+            <ul>
+                <li class="wddd-red" id="ALL" onclick="ajax_message(0);"><a>All </a></li>
+                <li id="WAITPAY" onclick="ajax_message(1);"><a>System Notice<em></em></a></li>
+                <li id="WAITSEND" onclick="ajax_message(2);"><a>Activities Message<em></em></a></li>
+            </ul>
+        </div>
+        <div class="wddd-js ov-in">
+            <div class="tp_notice">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="he80"></div>
+<!--------footer-开始-------------->
+<include file="Public/footer2" />
+<!--------footer-结束-------------->
+
+
+</body>
+<script>
+
+    $(function () {
+        ajax_message(0);
+        $('.wddd-li ul li').click(function() {
+            $(this).addClass('wddd-red').siblings().removeClass('wddd-red');
+        });
+    });
+
+    /**
+     * @author dyr
+     * 消息ajax请求
+     * @param type
+     */
+    function ajax_message(type) {
+        $.ajax({
+            type: "post",
+            url: "{:U('Home/User/ajax_message_notice')}",
+            data:{type:type},
+            dataType: 'html',
+            success: function (data) {
+                if (data) {
+                    $(".tp_notice").html('');
+                    $(".tp_notice").append(data);
+                } else {
+                    $(".tp_notice").html('');
+                }
+            }
+        });
+    }
+  
+</script>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>优惠券-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<style type="text/css">
+.favorites_title ul li,.favorites .favorites_content .clearfix li{width:19.8%}
+.favorites_title ul li, .favorites .favorites_content .clearfix li:last-child{border:0}
+</style>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<!-- 头部-e -->
+<link rel="stylesheet" href="__STATIC__/css/favorite.css">
+
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">优惠券</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+   <div class="col_main">
+  <div class="main coupon shop_red"> 
+    <!-- themes star -->
+    <div class="themes_title">
+      <h3>我的优惠券</h3>
+    </div>
+    <!-- themes end -->
+    <div class="ui_tab">
+      <ul class="ui_tab_nav">
+        <li class="<if condition="$_GET['type'] eq null">active</if>"><a class="target_no" href="{:U('Home/User/coupon')}">未使用</a></li>
+        <li class="<if condition="$_GET['type'] eq 1">active</if>"><a class="target_no" href="{:U('Home/User/coupon',array('type'=>1))}">已使用</a></li>
+        <li class="last <if condition="$_GET['type'] eq 2">active</if>"><a href="{:U('Home/User/coupon',array('type'=>2))}" class="target_no" >已过期</a></li>        
+      </ul>
+      <div class="ui_tab_content">
+        <div style="display: block;" class="ui_panel"></div>
+      </div>
+    </div>    
+    <!-- <div id="status_0" style="display:block;" class="tickets_list clearfix">
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+            <volist name="coupon_list" id="coupon">
+                <tr>
+                    <td class="col-pro-info te-al wi197"><p>{$coupon.name}</p></td>
+                    <td class="wi150"><span>{$coupon.code|default='N'}</span></td>
+                    <td class="col-quty wi138">{$coupon.money}</td>
+                    <td rowspan="1" class="col-pay wi252"><span>{$coupon.use_end_time|date='Y-m-d H:s',###}</span></td>
+                    <td rowspan="1" class="col-operate">
+                        <p class="p-link">{$coupon.condition}</p>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>    
+        
+    </div> -->
+    <div class="favorites">
+    <div class="favorites_list">
+    	<div class="favorites_title">
+                <ul>
+                  <li class="">优惠券类型</li>
+                  <li class="">优惠券编号</li>
+                  <li class="">优惠金额</li>
+                  <li class="">有效期</li>
+                  <li class="">使用要求（订单金额）</li>
+                </ul>
+              </div>
+            <div id="favList" class="favorites_content">
+            <volist name="coupon_list" id="coupon">
+              <ul class="clearfix">
+                  <li><span>{$coupon.name}</span></li>
+                  <li><span>{$coupon.code|default='N'}</span></li>
+                  <li> <em class="rmb">￥</em>{$coupon.money}</li>
+                  <li><span>{$coupon.use_end_time|date='Y-m-d',###}</span></li>
+                  <li><span>{$coupon.condition}</span></li>
+               </ul>
+             </volist>               
+             </div>  
+       </div>
+   </div>
+   <div class="operating fixed" id="bottom">
+   		<div class="fn_page clearfix">
+    			{$page} 
+    	</div>
+    </div>
+  </div>
+  <!-- col main end --> 
+</div> 
+</div>
+ 
+<div style="clear: both;"></div>
+<include file="User/footer" />
+</body>
+</html>

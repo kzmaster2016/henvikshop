@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Repair / Return-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/css/page.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/css/outhu.css" type="text/css">
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+<!--------头部开始--------------> 
+<include file="Public/header" /> 
+<!--------头部结束-------------->
+
+<div class="layout ov-hi">
+  <div class="breadcrumb-area">
+    <foreach name="navigate_user" key="k" item="v">
+      <if condition="$k neq 'Home'"> > </if>
+      <a href="{$v}">{$k}</a> </foreach>
+  </div>
+</div>
+<div class="layout pa-to-10 fo-fa-ar"> 
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->
+  <div class="fr wi940">
+    <div id="main">
+      <div class="mod-main mod-comm">         
+        <div class="mc">
+          <tbdoy> </tbdoy>
+          <table class="tb-void tb-top">
+            <colgroup>
+            <col width="110">
+            <col width="120">
+            <col width="">
+            <col width="120">
+            <col width="120">
+            <col width="100">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Repair / Return No.</th>
+                <th>Order No.</th>
+                <th>Goods Name</th>
+                <th>Apply Time</th>
+                <th>State</th>
+                <th>Act</th>
+              </tr>
+            </thead>
+            <tbody>
+              <volist name="list" id="item">            
+              <tr>
+                <td align="center"><a target="_blank" href="">{$item.id}</a></td>
+                <td><a target="_blank" href="{:U('Home/User/order_detail',array('id'=>$item['order_id']))}">{$item.order_sn}</a></td>
+                <td><div><a href="{:U('Home/Goods/goodsInfo',array('id'=>$item[goods_id]))}" target="_blank">{$goodsList[$item[goods_id]]}</a> </div></td>
+                <td>{$item.addtime|date="Y-m-d",###}</td>
+                <td>
+                    <if condition="$item['status'] eq 0">Wait to Process</if>
+                    <if condition="$item['status'] eq 1">Processing</if>
+                    <if condition="$item['status'] eq 2">Completed</if>
+                </td>
+                <td><a href="{:U('Home/User/return_goods_info',array('id'=>$item[id]))}">Look</a></td>
+              </tr>
+             </volist>              
+            </tbody>
+          </table>
+        </div>
+        <div class="mt10 clearfix" style="text-align:center">{$page}</div>
+      </div>
+      <div class="mod-main mod-comm">
+        <div class="mt">
+          <h3>Repair / return for common problems</h3>
+        </div>
+        <div class="mc">1"application" button if it is grey, probably because the orders have not been completed or that the goods are in the repair / return;</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="he80"></div>
+<!--------footer-开始--------------> 
+<include file="Public/footer2" /> 
+<!--------footer-结束-------------->
+</body>
+</html>

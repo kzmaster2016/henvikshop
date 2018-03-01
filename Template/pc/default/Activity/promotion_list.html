@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>flash sale-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="icon" href="/ico.png" type="image/x-icon" />
+
+<!-- Bootstrap 3.3.4 -->
+<link href="__PUBLIC__/bootstrap/css/bootstrap_grid.css" rel="stylesheet" type="text/css" />
+<!-- FontAwesome 4.3.0 -->
+<!-- <link href="__PUBLIC__/bootstrap/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> -->
+<link rel="stylesheet" href="__STATIC__/css/promoteList.css" type="text/css">
+<script src="__PUBLIC__/js/pc_common.js"></script>
+
+</head>
+<body>
+<!--头部开始-->
+<include file="Public/header"/>
+ 
+<!--促销列表-->
+<div class="dircontent">
+  <div class="sort container">
+    <div class="flash-salse-top">
+      <h1 class="font-black">
+          <span>Flash Sale</span>
+          <em class="bg"></em>
+      </h1>
+      <div class="flash-banner">      
+      </div>
+    </div>
+    <div class="promotion_nav">
+  
+      <foreach name="promotion_list" item="v" key="k">
+        <if condition='$v["id"]==2'> 
+          <assign name="on_time" value="$v['end_time']"/>
+        </if>
+        <if condition='$v["id"]==3'> 
+          <assign name="clear_time" value="$v['end_time']"/>
+        </if>
+        <div class="item <if condition='$k==1'>active</if>">
+          {$v['name']}
+        </div>
+      </foreach>
+    </div>
+    <!-- <?php 
+    dump($promotion_list);
+    ?>  -->
+    <div class="promotion_con">
+      <div class="last-chance item">
+        
+        <ul class="promotion-list flash-list clearfix">
+          <foreach name="last_chance_list" item="v" key="k">
+          <li class="col-sm-6 col-md-4 flash_list_item">
+            <a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" class="li-box">
+              <div class="pro-img">
+                <img src="{$v.goods_id|goods_thum_images=200,200}" class="flash-img-lazyload" alt="{$v[goods_name]}">
+              </div>
+              <div class="pro-msg">
+                <p class="pro-name font-regular">{$v[goods_name]}</p>
+                <p class="pro-price">
+                  <span class="new-price font-black">${$v['goods_promotion']['price']}</span>
+                  <span class="sale">{:calPriceScale($v[origin_price],$v[market_price],$v[shop_price],$v['goods_promotion']['price'])}% OFF</span>
+                </p>
+                <p class="old-price">${$v[origin_price]}</p>
+                <!-- <div class="pro-claim">
+                  <span>18% Claimed</span>
+                  <div class="claimed-percent" style="width:18%;"></div>
+                </div> -->
+              </div>
+            </a>
+          </li>
+          </foreach>
+        </ul>
+      </div>
+      <div class="on-going item active">
+        <div class="on-going-title">
+          <p class="flash-act-title">UP TO 60% OFF</p>
+          <div class="new-flash-time" id="on-going-end-time" data-time="1516341600000">
+            Special ends in
+            <span class="last-time"><i class="t-hour">03</i>:<i class="t-min">23</i>:<i class="t-sec">35</i></span>
+          </div>
+        </div>
+        <script>
+            
+            function GetRTime1(){       
+              var lastTime = GetRTimeDetail('{$on_time|date="Y/m/d H:i:s",###}');   
+              $('.on-going-title .last-time .t-hour').text(lastTime.h);     
+              $('.on-going-title .last-time .t-min').text(lastTime.m);     
+              $('.on-going-title .last-time .t-sec').text(lastTime.s);     
+            }
+
+            GetRTime1();
+
+            var time1=setInterval(GetRTime1,1000);
+        </script>
+        <ul class="promotion-list flash-list clearfix">
+          <foreach name="on_going_list" item="v" key="k">
+          <!-- <?php            
+            if($v['origin_price']>0){
+              $rate = ($v['origin_price']-$v['goods_promotion']['price'])/$v['origin_price']*100;
+            }elseif($v['market_price']>$v['goods_promotion']['price']){
+              $rate = ($v['market_price']-$v['goods_promotion']['price'])/$v['market_price']*100;
+            }
+          ?> -->
+          <li class="col-sm-6 col-md-4 flash_list_item">
+            <a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" class="li-box">
+              <div class="pro-img">
+                <img src="{$v.goods_id|goods_thum_images=200,200}" class="flash-img-lazyload" alt="{$v[goods_name]}">
+              </div>
+              <div class="pro-msg">
+                <p class="pro-name font-regular">{$v[goods_name]}</p>
+                <p class="pro-price">
+                  <span class="new-price font-black">${$v['goods_promotion']['price']}</span>
+                  <span class="sale">{:calPriceScale($v[origin_price],$v[market_price],$v[shop_price],$v['goods_promotion']['price'])}% OFF</span>
+                </p>
+                <p class="old-price">${$v[origin_price]}</p>
+                <!-- <div class="pro-claim">
+                  <span>18% Claimed</span>
+                  <div class="claimed-percent" style="width:18%;"></div>
+                </div> -->
+              </div>
+            </a>
+          </li>
+          </foreach>       
+        </ul>
+      </div>
+      
+      <div class="will-come item">
+        <div class="will-come-title">
+          <p class="flash-act-title">JUST A MINUTE</p>
+          <div class="new-flash-time" id="on-going-end-time" data-time="1516341600000">
+            Clearance ends in
+            <span class="last-time"><i class="t-hour">03</i>:<i class="t-min">23</i>:<i class="t-sec">35</i></span>
+          </div>
+        </div>
+        <script>
+            
+            function GetRTime2(){       
+              var lastTime2 = GetRTimeDetail('{$clear_time|date="Y/m/d H:i:s",###}');   
+              $('.will-come-title .last-time .t-hour').text(lastTime2.h);     
+              $('.will-come-title .last-time .t-min').text(lastTime2.m);     
+              $('.will-come-title .last-time .t-sec').text(lastTime2.s);     
+            }
+
+            GetRTime2();
+
+            var time2=setInterval(GetRTime2,1000);
+        </script>
+        <ul class="promotion-list flash-list clearfix">
+          <foreach name="will_come_list" item="v" key="k">
+
+          <li class="col-sm-6 col-md-4 flash_list_item">
+            <a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" class="li-box">
+              <div class="pro-img">
+                <img src="{$v.goods_id|goods_thum_images=200,200}" class="flash-img-lazyload" alt="{$v[goods_name]}">
+              </div>
+              <div class="pro-msg">
+                <p class="pro-name font-regular">{$v[goods_name]}</p>
+                <p class="pro-price">
+                  <span class="new-price font-black">${$v['goods_promotion']['price']}</span>
+                  <span class="sale">{:calPriceScale($v[origin_price],$v[market_price],$v[shop_price],$v['goods_promotion']['price'])}% OFF</span>
+                </p>
+                <p class="old-price">${$v[origin_price]}</p>
+                <!-- <div class="pro-claim">
+                  <span>18% Claimed</span>
+                  <div class="claimed-percent" style="width:18%;"></div>
+                </div> -->
+              </div>
+            </a>
+          </li>
+          </foreach>
+        </ul>
+      </div>
+    </div>     
+  </div>   
+</div>
+<script type="text/javascript">
+  $('.promotion_nav .item').click(function(event) {
+    $(this).addClass('active').siblings().removeClass('active');
+    $('.promotion_con .item').removeClass('active').eq($(this).index()).addClass('active');
+  });
+</script>
+
+
+<!--footer-开始-->
+<include file="Public/footer" />
+<!--footer-结束-->
+<!-- 页面访问统计 -->
+<script src="https://s22.cnzz.com/z_stat.php?id=1261971213&web_id=1261971213" language="JavaScript"></script> 
+</body>
+</html>

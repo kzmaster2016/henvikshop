@@ -1,0 +1,269 @@
+﻿/*************************************************
+ ************************************************/
+
+/* 公共css */
+.mt10{margin-top:10px} 
+.mt20{margin-top:20px}
+.mt30{margin-top:30px}
+.mb10{margin-bottom:10px}
+.mb13{margin-bottom:13px}
+.mb20{margin-bottom:20px}
+.mb30{margin-bottom:30px}
+.mb40{margin-bottom:40px}
+.ml5{margin-left: 5px}
+.pl15{padding-left:15px}
+.pl30{padding-left:30px}
+.f12{font-size: 12px;}
+
+
+.u-diaolog-mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: url(../images/member/yin.png) repeat;
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.u-diaolog-login {
+    width: 463px;
+    height: 453px;
+    border: 6px solid #6b6b6b;
+    background-color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 1001;
+}
+.u-diaolog-login .u-title {
+    width: 100%;
+    height: 37px;
+    line-height: 37px;
+    background: none repeat scroll 0 0 #f7f7f7;
+    position: relative;
+}
+.u-diaolog-login .u-title h3 {
+    font-family: 'Microsoft YaHei','微软雅黑';
+    font-size: 14px;
+    color: #666666;
+    font-weight: bold;
+}
+.u-diaolog-login .u-title i {
+    width: 12px;
+    height: 12px;
+    overflow: hidden;
+    display: inline-block;
+    position: absolute;
+    right: 15px;
+    top: 13px;
+    background: url(../images/member/dialog-login.png) no-repeat -16px -40px;
+    cursor: pointer;
+}
+.u-diaolog-login .u-title i:hover {
+    background-position: -30px -40px;
+}
+.u-diaolog-login-content {
+	font-family: 'Microsoft YaHei','微软雅黑';
+	font-size: 12px;
+    margin-top: 30px;
+    padding: 0 79px;
+    width:305px;
+}
+.u-diaolog-login-content .u-reg,.u-diaolog-login-content .u-forget {
+    width: 305px;
+    text-align: right;
+}
+.u-diaolog-login-content .u-reg a {
+    color: #da3a4c;
+}
+.u-diaolog-login-content .u-input {
+    position: relative;
+    height: 38px;
+    line-height: 38px;
+    width: 303px;
+    border: 1px solid #cccccc;
+}
+.u-diaolog-login-content .u-input .u-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 38px;
+    height: 38px;
+    overflow: hidden;
+    display: inline-block;
+    border-right: 1px solid #eee;
+    background: url(../images/member/dialog-login.png) center center no-repeat;
+
+}
+.u-diaolog-login-content .u-input .u-name {
+    background-position: 0 0;
+}
+.u-diaolog-login-content .u-input .u-pwd {
+    background-position: -40px 0;
+}
+
+.u-diaolog-login-content .u-input .u-txt {
+	font-family: 'Microsoft YaHei','微软雅黑';
+    line-height: 17px;
+    height: 17px;
+    border: 0;
+    outline: none;
+    padding: 10px 0 10px 45px;
+    width: 258px;
+    float: none;
+    overflow: hidden;
+    font-size: 14px;
+    color: #ccc;
+}
+.u-diaolog-login-content .u-forget {
+    margin-bottom: -2px;
+}
+.u-diaolog-login-content .u-forget a {
+    float:right;
+    color: #666666;
+}
+.u-diaolog-login-content .u-btn {
+    width: 303px;
+    height: 34px;
+    border: 1px solid #bc1b2b;
+}
+
+.u-diaolog-login-content .ltxt {
+    float:left;
+}
+
+.u-diaolog-login-content .ltxt label {
+    font-size:12px;
+    font-family: 'Microsoft YaHei';
+    color:#666;
+}
+
+.u-diaolog-login-content .ltxt .ainput {
+    vertical-align: middle;
+    margin-right: 4px;
+    margin-bottom: 2px;
+}
+.u-diaolog-login-content .ltxt .ntxt {
+    margin-left: 8px;
+    color: #f22e00;
+    font-size:12px;
+    font-family: 'Microsoft YaHei';
+
+}
+.u-diaolog-login-content .u-btn input {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    color: #fff;
+    background-color: #da3a4c;
+    text-align: center;
+    font-family: 'Microsoft YaHei', '微软雅黑', tahoma, arial, simsun, "宋体";
+    font-size: 18px;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+}
+.u-diaolog-login-content .u-btn input:hover {
+    background-color: #ce0c22;
+}
+.u-diaolog-login-content .u-message-error {
+    width: 273px;
+    height: 26px;
+    line-height: 26px;
+    border: 1px solid #FFBDBE;
+    background-color: #FFEBEB;
+    color: #da3a4c;
+    position: relative;
+    display: none;
+}
+.u-diaolog-login-content .u-mb-msg {
+    border: 1px solid #ffe9b1;
+    background-color: #fff4d8;
+}
+.u-diaolog-login-content .u-message-error i {
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
+    position: absolute;
+    left: 10px;
+    top: 6px;
+    background: url(../images/member/dialog-login.png) no-repeat 0 -40px;
+}
+.u-diaolog-login-content .u-authcode {
+    border: none;
+    height: 40px;
+}
+.u-diaolog-login-content .u-vcode {
+    height: 38px;
+    border: 1px solid #ccc;
+    float: left;
+}
+.u-diaolog-login-content .u-authcode .u-txt02 {
+    height: 16px;
+    width: 63px;
+    padding: 10px 0 11px 25px;
+}
+.u-diaolog-login-content .u-authcode .u-vcode-img {
+    width: 124px;
+    overflow: hidden;
+    float: left;
+}
+.u-diaolog-login-content .u-authcode .u-change {
+    color: #2176dd;
+}
+
+.u-diaolog-login-content .u-qq {
+    position: relative;
+    width: 303px;
+    height: 22px;
+    line-height: 22px;
+    text-align: left;
+}
+.u-diaolog-login-content .u-qq span {
+    font-size: 12px;
+    color: #999999;
+}
+.u-diaolog-login-content .u-qq i:hover {
+	background-position: -30px 0;
+}
+.u-diaolog-login-content .u-qq a:nth-child(3) i:hover {
+    background-position: -30px 0;
+}
+.u-diaolog-login-content .u-qq i {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-bottom: -5px;
+    margin-left: 10px;
+    top: -5px;
+    background: url(../images/member/enterprise.png) no-repeat 0 0;
+}
+.u-diaolog-login-content .u-qq a:nth-child(3) i{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-bottom: -5px;
+    margin-left: 50px;
+    top: -5px;
+    background: url(../images/alipay.png) no-repeat 0 0;
+}
+.u-diaolog-login-content .u-input-error {
+    border-color: #da3a4c;
+}
+.u-diaolog-login-content .u-input-focus {
+    border-color: #999 ;
+}
+
+.mb40 .qq {
+  background: url(../images/member/enterprise.png) no-repeat 0 0;
+}
+.mb40 .qq:hover {
+  background-position: -30px 0;
+}
+
+.u-diaolog-login-content .u-mb-msg i {
+  background: url(../images/member/fn-icon.png) no-repeat 0 0;
+}

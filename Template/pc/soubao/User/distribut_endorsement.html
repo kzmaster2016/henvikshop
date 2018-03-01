@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>账户管理-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<!-- 头部-e -->  
+<link rel="stylesheet" href="__STATIC__/css/favorite.css">
+
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">资金管理</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+   <div class="col_main">
+    <div class="main balance"> 
+      <!-- themes star -->
+      <div class="themes_title">
+        <h3>账户余额</h3>        
+      </div>
+      <!-- themes end --> 
+      <!-- message star -->
+      <div class="message">
+        <ul class="clearfix">
+          <li class="mes_01"> <i class="icon_purse"></i>
+            <div>
+              <p class="txt">可用余额</p>
+              <p class="num"><em class="rmb">￥</em>{$user.user_money}</p>
+            </div>
+          </li>
+          <li class="mes_02"> <i class="icon_lock"></i>
+            <div>
+              <p class="txt">可用积分</p>
+              <p class="num"><em class="rmb"></em>{$user.pay_points}</p>
+            </div>
+          </li>
+          <li class="mes_03"> <i class="icon_question" id="question"></i> </li>
+          <li class="mes_04"> <span class="txt"></span> <span class="status"></span> </li>
+        </ul>
+        <div class="tip" id="question_tip"> 尚未提现完成的金额 </div>
+      </div>
+      <!-- message end -->
+      <div class="ui_tab">
+        <ul class="ui_tab_nav">
+          <li class="active"><a id="activeHref" class="activeHref" href=""  >我的代言人：一级代言人（4）人</a></li>
+          <li class="active fr_ss"><input class="ss_distri" type="text" value=""/><input class="ss_dis_bu" type="button" value="搜索" /></li>
+        </ul>
+        <div class="ui_tab_content">
+          <div class="ui_panel" id="noComment" style="display: block;"> 
+            <!-- Details List star -->
+            <div class="details_list">
+              <div class="details_list_tit clearfix">
+                <ul>
+                  <li class="col_w16">昵称</li>
+                  <li class="col_w16">会员</li>
+                  <li class="col_w16">关注时间</li>
+                  <li class="col_w16">会员ID</li>
+                  <li class="col_w35">操作</li>
+                </ul>
+               </div>
+             	 <div class="details_list_tit2 clearfix">
+                    <ul>
+                      <li class="col_w16">某某某</li>
+                      <li class="col_w16">否</li>
+                      <li class="col_w16">2016-06-14 17:32</li>
+                      <li class="col_w16">2016061503105162</li>
+                      <li class="col_w35"><a style="cursor: pointer;" href="">留言</a></li>
+                    </ul>
+               </div>
+               <div class="details_list_tit2 clearfix">
+                    <ul>
+                      <li class="col_w16">某某某</li>
+                      <li class="col_w16">否</li>
+                      <li class="col_w16">2016-06-14 17:32</li>
+                      <li class="col_w16">2016061503105162</li>
+                      <li class="col_w35"><a style="cursor: pointer;" href="">留言</a></li>
+                    </ul>
+               </div>
+               <div class="details_list_tit2 clearfix">
+                    <ul>
+                      <li class="col_w16">某某某</li>
+                      <li class="col_w16">否</li>
+                      <li class="col_w16">2016-06-14 17:32</li>
+                      <li class="col_w16">2016061503105162</li>
+                      <li class="col_w35"><a style="cursor: pointer;" href="">留言</a></li>
+                    </ul>
+               </div>
+              </div>
+              <div id="balanceDetail"  class="details_list_cont"> </div>
+            </div>
+            <!-- Details List end --> 
+            <!-- page next star -->
+	            <div class="operating fixed" id="bottom">
+                    <div class="fn_page clearfix">
+                            {$page} 
+                    </div>
+                </div>             
+            <!-- page next end --> 
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
+ 
+<div style="clear: both;"></div>
+<include file="User/footer" />
+</body>
+</html>

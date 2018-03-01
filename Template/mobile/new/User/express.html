@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>单号查询结果 - 快递100</title>
+<meta name="Keywords" content="快递单号查询结果"/>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="white">
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/express.css"/>  
+</head>
+<body>
+	<div class="viewport enableNavbar enableToolbar enableScroll enableTransition">
+    <if condition="$_GET['display'] eq null">
+		<header class="navbar">
+			<ul>
+				<li>查看物流</li>
+				<li><a class="back" data-id="back" href="javascript:history.back(-1)">返回</a></li>
+				<li></li>
+			</ul>
+		</header>
+     </if>   
+		<section class="content">
+			<div class="wrap">
+				<div class="inactive prev" index="0"></div>
+				<div class="active" index="1"  style="transform: translate3d(0px, 0px, 0px);">
+					<div id="J_oper_plugin">
+						<div class="logis-order">订单商品</div>
+						<foreach name="order_goods" item="v">
+							<div class="mb-ollr">
+								<div class="ol-l">
+									<a class="fragment" href="{:U('Goods/goodsInfo',array('id'=>$v[goods_id]))}"><img src="{$v.goods_id|goods_thum_images=200,200}"></a>
+								</div>
+								<div class="ol-r">
+									<a class="fragment">
+										<h3><span>{$v.goods_name}</span></h3>
+										<p class="r-price"> {$v.goods_price}</p>
+										<p class="d-total"> 共{$v.goods_num}件 </p>
+									</a>
+								</div>
+							</div>
+						</foreach>
+						<div class="logis-info">
+							<p> 物流公司  {$delivery.shipping_name} </p>
+							<p> 运单号码  {$delivery.invoice_no} </p>
+						</div>
+						<div class="logis-detail">
+							<ul>
+								<li>
+									<if condition="$result[status] eq 1">
+									<p class="logis-detail-date">物流动态</p>
+										<foreach name="result.data" item="vo" key="k">
+											<div class="logis-detail-d  <if condition="$k eq 0">logis-detail-first</if>">
+												<div class="logis-detail-content">
+													<p class="logis-detail-content-time"> {$vo.time} </p>
+													<p class="logis-detail-content-detail"> {$vo.context} </p>
+												</div>
+											</div>
+										</foreach>
+									<else />
+									<p style="background:#fff;color:#F40;broder:1 #666 solid;font-size:16px;line-height:20px;">{$result.message}</p>
+									</if>
+								</li>
+							</ul>
+						</div>
+						<div style="padding:20px 0 10px 0;"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</body>
+</html>

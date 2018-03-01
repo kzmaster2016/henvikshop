@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>系统提示-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link href="__STATIC__/css/tsinformation.css" rel="stylesheet" type="text/css">
+</head>
+<body class="detailfont">
+<include file="Public/min-header"/>
+<!--中间内容-->
+<div id="warpper" class="clearfix">
+<?php if(isset($message)) {?>
+   <!-- 处理成功 -->
+   <div class="box-ts">
+    	<i><img src="__STATIC__/images/success_ts.png"></i>         
+        <ul>
+        	<li><h3> <?php echo($message); ?><h3></li>
+                <li><a href="javascript:void(0);">页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b></a></li>
+                <li>
+                    <a href="/">首页</a> <a href="/index.php?m=Home&c=Cart&a=cart">购物车</a>
+                    <a href="/index.php?m=Home&c=User&a=index">用户中心</a>
+                </li>
+        </ul>        
+    </div>
+<?php }else{?>        
+     <!-- 处理失败 -->
+     <div class="box-ts">
+    	<i><img src="__STATIC__/images/error_ts.png"></i>
+        <ul>
+            <li><h3><?php echo($error); ?></h3></li>
+            <li><a href="javascript:void(0);">页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b></a></li>
+            <li>
+                <a href="/">首页</a> <a href="/index.php?m=Home&c=Cart&a=cart">购物车</a>
+                <a href="/index.php?m=Home&c=User&a=index">用户中心</a>
+            </li>
+        </ul>
+    </div>   
+<?php }?>            
+</div>
+<!--中间内容 end-->
+<include file="Public/footer" /> 
+<script type="text/javascript">
+
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+
+</script>
+</body>
+</html>

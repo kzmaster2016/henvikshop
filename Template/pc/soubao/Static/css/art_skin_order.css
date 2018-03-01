@@ -1,0 +1,109 @@
+﻿
+/* artDialog skin  */
+.aui_nw, .aui_n, .aui_ne, .aui_w, .aui_e, .aui_sw, .aui_s, .aui_se {
+	background:rgba(0, 0, 0, .3);
+	background:#000\9!important;
+	filter:alpha(opacity=30);
+	opacity:0.3;
+}
+.aui_state_lock .aui_nw, .aui_state_lock .aui_n, .aui_state_lock .aui_ne, .aui_state_lock .aui_w, .aui_state_lock .aui_e, .aui_state_lock .aui_sw, .aui_state_lock .aui_s, .aui_state_lock .aui_se {
+	background:rgba(0, 0, 0, .4);
+	background:#000\9!important;
+	filter:alpha(opacity=40);
+	opacity:0.4;
+}
+.aui_outer, .aui_inner {
+	border: 0;
+}
+
+.aui_title {
+	background: #F6F6F6;
+	border-bottom: 0;
+	height: 30px;
+	line-height: 30px;
+}
+.aui_close {
+	font-weight: bold;
+	outline: 0;
+}
+.aui_close:hover {
+	color: #999555;
+	background: none;
+}
+.aui_content {
+	padding: 20px 25px 10px;
+}
+.aui_buttons {
+	text-align: center;
+	padding: 0 8px 15px;
+	position: relative;
+	left: 0;
+	top: 0;
+	width: auto;
+	margin: 0 auto;
+}
+.aui_state_focus .aui_title {
+	color: #3c3c3c;
+	font-weight: bold;
+	font-size: 14px;
+}
+.aui_state_lock .aui_border {
+	box-shadow: none;
+}
+.aui_buttons button {
+	margin: 0 10px 10px;
+	padding: 0 3px 3px;
+	*padding-top: 5px;
+	width: 81px;
+	height: 28px;
+	box-shadow: none;
+	color: #3c3c3c;
+	text-shadow: none;	
+	border: 0;
+	border-radius: 0;
+	letter-spacing: 0;
+	vertical-align: middle;
+}
+.aui_buttons button:focus {
+	box-shadow: none;
+	border: none;
+}
+.aui_buttons button.btn_ok {
+	background: url(../images/btn_01.png) no-repeat;
+	color: #fff;
+	filter: none;
+	margin-left: 35px;
+}
+.aui_buttons button.btn_ok:hover {
+	background: url(../images/hbtn_01.png) no-repeat;
+}
+.aui_buttons button.btn_120 {
+	background: url(../images/btn_120.png) no-repeat;
+	color: #fff;
+	filter: none;
+	margin-left: 30px;
+	width: 120px;
+}
+.aui_buttons button.btn_120:hover {
+	background: url(../images/hbtn_120.png) no-repeat;
+}
+.aui_buttons button.btn_84 {
+	background: url(../images/btn_084.png) no-repeat;
+	color: #6c6c6c;
+	filter: none;
+	width: 84px;
+}
+.aui_buttons button.btn_84:hover {
+	background: url(../images/hbtn_084.png) no-repeat;
+}
+.aui_buttons button.btn_no {
+	background: url(../images/btn_02.png) no-repeat;
+	filter: none;
+}
+.aui_header, .aui_buttons button {
+	font: 12px/1.5 tahoma,宋体,arial,sans-serif;
+}
+.aui_buttons {
+	background-color: #fff;
+    border-top: 0;
+}

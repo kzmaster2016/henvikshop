@@ -1,0 +1,168 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta name="Generator" content="TPshop1.2" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Security Center-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/login.css"/>  
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/mobile_common.js"></script>
+<script type="text/javascript" src="__STATIC__/js/layer.js" ></script>
+</head>
+<body>
+<header id="header" class='header'>
+    <div class="h-left"><a href="javascript:history.back(-1)"></a></div>
+	<div class="h-mid">Retrieve password</div>
+</header>
+<div id="tbh5v0">
+	<div class="find">        
+	<section class="innercontent">
+	<form action="" method="post" id="fpForm" name="fpForm" class="c-form login-form">
+			<div class="item validate_type">
+				<label style=" font-size:14px;">Please select authentication style:</label>
+				<select id="validate_type" name="validate_type"  class="select">					
+					<if condition="strstr($user['username'],'@')">                    
+						<option id="validate_type_email" value="email" val="{$user.email}">Email</option>
+					 <else />
+						<option id="validate_type_mobile" value="mobile" val="{$user.mobile}">Phone number</option>
+					</if>
+				</select>
+		    </div>
+			<div class="v_mobile v_item">
+					<label>Phone number：</label>
+					<span id="l_mobile_phone">{$user['mobile']}</span>
+			</div>
+			<div id="c_mobile_code" class="field auth-code v_item v_mobile">
+				<div class="codeTxt">
+					<input type="text" id="mobile_code" name="mobile_code" placeholder="Mobile verification code" class="hq_phone" />
+				</div>
+				<input id="zphone" type="button" value="Get verification code" class="m_phone" style="color:#FFF;"/>
+			</div>
+			<div class="email v_email v_item" style="display: none">
+					<label>Email：</label>
+					<span id="l_email">{$user['email']}</span>
+			</div>  
+                                    
+			<div id="c_email_code" class=" v_item v_email" style="display: none">
+                <div class="codeTxt">
+					<input type="text" id="email_code" name="email_code" class="hq_phone" value="" />
+                </div>
+                <div class="codePhoto">
+				<input id="zemail" type="button" value="et verification code" class="m_phone" style=" color:#FFF">
+				</div>
+			</div>
+            <div class="submit-btn " style=" padding-top:40px;">
+				<input type="button" name="button" id="btn_submit" class="btn_big1" value="Submit" />
+			</div>
+	</form>
+   </section>
+<include file="Public/footer"/>
+</div>
+</div>
+<include file="Public/footer_nav"/>
+<script type="text/javascript">
+function show_validate_type(validate_type_obj){
+	var type = $(validate_type_obj).val();
+	var value = $("#validate_type_"+type).attr("val");
+	$("#l_"+type).html(value);
+	$(".v_item").hide();
+	$(".v_"+type).show();
+}
+
+function sendcode(o){
+	var type = $("#validate_type").val();
+	var send = $("#validate_type_"+type).attr("val");
+	$.ajax({
+		url:'/index.php?m=Mobile&c=User&a=send_validate_code&t='+Math.random(),
+		type:'post',
+		dataType:'json',
+		data:{type:type,send:send},
+		success:function(res){
+			if(res.status==1){
+				countdown(o);
+			}else{
+				layer.open({content:res.msg,time:2});
+			}
+		}
+	})
+}
+
+$(document).ready(function(){
+	
+	show_validate_type($("#validate_type"));
+	
+	$("#validate_type").change(function(){
+		show_validate_type($(this));
+	});
+	
+	$("#zphone").click(function(){
+		sendcode($(this));
+	});
+	
+	$("#zemail").click(function(){
+		sendcode($(this));
+	});
+	
+	$("#btn_submit").click(function(){		
+		var type = $("#validate_type").val();
+		var send = $("#validate_type_"+type).attr("val");
+		if(type == 'mobile'){
+			if($("#mobile_code").val().length == 0){
+				$("#mobile_code").focus();
+				alert("The verification code cannot be empty!");
+				return false;
+			}
+			tpcode = $("#mobile_code").val();
+		}else if(type == 'email'){
+			if($("#email_code").val().length == 0){
+				$("#email_code").focus();
+				alert("The verification code cannot be empty!");
+				return false;
+			}
+			tpcode = $("#email_code").val();
+		}
+		$.ajax({
+			url:'/index.php?m=Mobile&c=User&a=check_validate_code&t='+Math.random(),
+			type:'post',
+			dataType:'json',
+			data:{code:tpcode,send:send},
+			success:function(res){
+				if(res.status==1){
+					window.location.href = '/index.php?m=Mobile&c=User&a=set_pwd';
+				}else{
+					layer.open({content:res.msg,time:2});
+				}
+			}
+		})		
+	});	
+});
+
+var wait = 150;
+function countdown(obj, msg) {
+	obj = $(obj);
+	if (wait == 0) {
+		obj.removeAttr("disabled");
+		obj.val(msg);
+		wait = 150;
+	} else {
+		if (msg == undefined || msg == null) {
+			msg = obj.val();
+		}
+		obj.attr("disabled", "disabled");
+		obj.val(wait + "秒后重新获取");
+		wait--;
+		setTimeout(function() {
+			countdown(obj, msg)
+		}, 1000)
+	}
+}
+</script>
+</body>
+</html>

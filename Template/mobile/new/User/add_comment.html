@@ -1,0 +1,212 @@
+<include file="Public/header"/>
+<style type="text/css">
+ .jsstar{list-style: none;
+     margin: 0px;padding: 0px;
+     width:80%;height: 30px;
+     position: relative; 
+  }
+  .jsstar li{
+     padding:0px;float: left; width:25px;height:25px;
+     background:url(__STATIC__/images/star_rating.gif) 0 0px no-repeat;background-size: auto 50px
+  }  
+.jsstar span{
+     font-size: 14px; line-height:30px; margin-left:10px; color:#F00
+ } 
+.content{border: 1px solid #e6e6e6; border-radius:5px;background: #fff; position: relative;}
+.w600 {width: 98%;margin: 0 auto;}
+.content textarea {
+    width: 100%;height: 120px;display: block; border: 0; background: none;
+    font-size: 16px;line-height: 24px;;padding: 8px; resize: none;
+    border-bottom: 1px solid #e6e6e6;word-break: break-all;
+}
+</style>
+<body>
+<header>
+      <div class="tab_nav">
+        <div class="header">
+          <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="back"></a></div>
+          <div class="h-mid">Comment</div>
+          <div class="h-right">
+            <aside class="top_bar">
+              <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+</header>
+<include file="Public/menu"/>
+<form id="add_comment" method="post" enctype="multipart/form-data" onSubmit="return validate_comment()">
+<input type="hidden" name="order_id" value="{$order_goods.order_id}">
+<input type="hidden" name="goods_id" value="{$order_goods.goods_id}">
+<div class="pj">
+<dl>
+	<dt><img src="{$order_goods.goods_id|goods_thum_images=200,200}" width="50"/></dt>
+	<dd>
+	<p>{$order_goods.goods_name}</p>
+	<span> {$order_goods.spec_key_name}</span>
+	</dd>
+</dl>
+<div class="pingfen">
+<div class="w600 content"> 
+	 <textarea id="content_13" name="content" placeholder="to comment the goods you have bought" required=""></textarea> 
+</div>
+<h2>Score:</h2>
+<ul>	
+<li>Description：</li>
+    <ul class="jsstar" style=" width:80%"> <span></span>
+    <input name="goods_rank" value="0" type="hidden">
+        <li  title="1"></li>
+        <li  title="2"></li>
+        <li  title="3"></li>
+        <li  title="4"></li>
+        <li  title="5"></li>
+    </ul>
+</ul>
+ <ul>	
+<li>Service quality：</li> 
+    <ul class="jsstar" style=" width:80%"> <span></span>
+    <input name="service_rank" value="0" type="hidden">
+        <li title="1"></li>
+        <li title="2"></li>
+        <li title="3"></li>
+        <li title="4"></li>
+        <li title="5"></li>
+    </ul>
+</ul>
+ <ul>	
+<li>Delivery speed：</li>
+    <ul class="jsstar" style=" width:80%"><span></span>
+    <input name="deliver_rank" value="0" type="hidden">
+        <li title="1"></li>
+        <li title="2"></li>
+        <li title="3"></li>
+        <li title="4"></li>
+        <li title="5"></li>
+    </ul>
+</ul>
+</div>
+<div class="p_main">
+<h2>Upload pictures：</h2>
+<a href="javascript:;" class="file"><div id="fileList0" style="width:60px;height:60px;"><img width="60" height="60"></div><input type="file" onChange="handleFiles(this,0)" name="comment_img_file[]" accept="image/*"></a>
+<a href="javascript:;" class="file"><div id="fileList1" style="width:60px;height:60px;"><img width="60" height="60"></div><input type="file" onChange="handleFiles(this,1)" name="comment_img_file[]" accept="image/*"></a>
+<a href="javascript:;" class="file"><div id="fileList2" style="width:60px;height:60px;"><img width="60" height="60"></div><input type="file" onChange="handleFiles(this,2)" name="comment_img_file[]" accept="image/*"></a>
+<a href="javascript:;" class="file"><div id="fileList3" style="width:60px;height:60px;"><img width="60" height="60"></div><input type="file" onChange="handleFiles(this,3)" name="comment_img_file[]" accept="image/*"></a>
+<span style=" font-size:14px; display:block; width:100%; overflow:hidden">
+<input type="checkbox" name="hide_username" value="1">Anonymous evaluate</span> 
+</div>
+<div class="p_main">
+	<span style=" display:block; width:90%; overflow:hidden; margin:auto; margin-bottom:20px; margin-top:20px;">
+		<input name="" type="submit" value="Submit" class="m_pingjia" />
+	</span>
+</div>
+</div>
+</form>
+</body>
+<script>
+function validate_comment(){
+	var content = $("#content_13").val();
+	var error = [];
+	var img_num = 0;
+	var AllImgExt=".jpg|.jpeg|.gif|.bmp|.png|";//全部图片格式类型 
+	//var title = document.getElementById("title").value;
+	$(".file input").each(function(index){
+		FileExt = this.value.substr(this.value.lastIndexOf(".")).toLowerCase(); 	
+		if(this.value!=''){
+		    img_num++;
+			if(AllImgExt.indexOf(FileExt+"|")==-1){
+			     error.push((index+1)+"th picture format is error"); 
+			}
+		}    
+	});
+	$(".jsstar input").each(function(index){
+	   if(this.value == '0'){
+	       if(this.name == 'goods_rank'){
+	            error.push('Please rate the description!');
+	        };
+	       if(this.name == 'service_rank'){
+	            error.push('Please give the service score!');
+	        };
+	       if(this.name == 'deliver_rank'){
+	            error.push('Please score the logistics!');
+	        };
+	    }
+	});
+	 if(content == ''){
+	    error.push('Comment content can not be empty!');
+	}
+	
+	if(error.length>0){
+	   alert(error);
+	   return false;
+	}else{
+	  return true;
+	}
+}
+
+
+$(document).ready(function(){
+ 	$(".jsstar li").mouseover(function(){
+        $(this).parent().find("li").css({"background-position":"left top"});
+        for(var i=0; i<$(this).attr("title"); i++){
+        	$(this).parent().find("li").eq(i).css({"background-position":"left bottom"});
+       }
+	});
+
+	$(".jsstar li").mouseout(function(){
+    	$(this).parent().find("li").css({"background-position":"left top"});
+     	for(var i=0; i<$(this).parent().find("input").val(); i++){
+        	$(this).parent().find("li").eq(i).css({"background-position":"left bottom"});
+    	}
+	});
+
+	$(".jsstar li").click(function(){
+   	 	$(this).parent().find("input").val($(this).attr("title"));
+   	 	$(this).parent().find("span").html($(this).attr("title")+"stars");
+    });
+});
+
+window.URL = window.URL || window.webkitURL;
+function handleFiles(obj,id) {
+	fileList = document.getElementById("fileList"+id);
+		var files = obj.files;
+		img = new Image();
+		if(window.URL){	
+			
+			img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
+			img.width = 60;
+	    	img.height = 60;
+			img.onload = function(e) {
+				window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
+			}
+		    if(fileList.firstElementChild){
+		         fileList.removeChild(fileList.firstElementChild);
+		    } 
+			fileList.appendChild(img);
+		}else if(window.FileReader){
+			//opera不支持createObjectURL/revokeObjectURL方法。我们用FileReader对象来处理
+			var reader = new FileReader();
+			reader.readAsDataURL(files[0]);
+			reader.onload = function(e){	
+		            img.src = this.result;
+		            img.width = 60;
+		            img.height = 60;
+		            fileList.appendChild(img);
+			}
+	    }else
+	    {
+			//ie
+			obj.select();
+			obj.blur();
+			var nfile = document.selection.createRange().text;
+			document.selection.empty();
+			img.src = nfile;
+			img.width = 60;
+		    img.height = 60;
+			img.onload=function(){
+			  
+		    }
+			fileList.appendChild(img);
+	    }
+}
+</script>
+</html>

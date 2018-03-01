@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Home {$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="icon" href="/ico.png" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/plugins/slick/slick.css">
+</head>
+<body>
+<!--头部开始-->
+<include file="Public/header"/>
+<!-- 首页轮播图片 轮播js 广告-->
+<script src="__PUBLIC__/plugins/slick/slick.min.js"></script>
+<!-- <script src="__PUBLIC__/js/layer/layer.js"></script> -->
+<!--头部结束-->
+<!-- <div>
+{$Think.config.DATA_CACHE_TIME} <br>        
+{$Think.TPSHOP_CACHE_TIME}
+    <php>
+    echo  IS_WIN;
+    echo C('DATA_CACHE_TYPE');
+    echo '<br>';
+    echo C('URL_MODEL');
+    </php>   
+</div> -->
+
+<!--banner-开始-->
+	<div class="nav-banner">
+        <div id="banner_tabs" class="flexslider">
+            <ul class="slides">                
+                <!---广告 select * from __PREFIX__ad where position_id = 2 limit 1-->
+                <adv limit="5" item="v" pid="2">
+                <li>
+                    <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>>                       
+                        <img src="{$v[ad_code]}" width="980" height="400"  title="{$v[title]}" style="{$v[style]}"/>
+                    </a>
+                </li>
+   			  </adv>          
+            </ul>      
+    	</div>	
+	</div>
+<!--banner结束-->
+<!--热卖-首发-新闻-公告-开始-->
+    <div class="layout">
+    	<div class="bs-le">
+        	<div class="first">
+            	<ul class="index-top-list clearfix">                 
+                <tpshop sql="select * from `__PREFIX__goods` where is_new = 1 and is_hot = 1 and is_recommend = 1 and is_on_sale = 1 order by goods_id desc limit 4" item="v" key="k" > 
+                    <?php 
+                        if($v[prom_type]>0){
+                            $v['goods_promotion'] = get_goods_promotion($v['goods_id']);
+                        }
+                    ?>
+            		<li class="sellers">
+                    	<div class="best">
+                        	<div class="best-about">
+                            	<div class="best_img"  >
+                                	<a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}"><img src="{$v.goods_id|goods_thum_images=180,180}" style="width:180px; height:180px;"/></a>
+                                </div>
+                                <div class="best_name">
+                                	<a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">
+                                    <span>{$v.goods_name|getSubstr=0,12}</span>
+                                    </a>
+                                </div>
+                                <div class="best_Introduction">
+                                	<div class="intr-t">{$v['goods_remark']|getSubstr=0,30}</div>
+                                </div>
+                                <div class="price">
+                                	<!-- <span>$</span><em>{$v['shop_price']}</em><i><del>${$v[origin_price]}</del></i>  -->
+                                    <span>$</span><em>{$v['goods_promotion']['price']?$v['goods_promotion']['price']:$v[shop_price]}</em><i><del>${$v[origin_price]}</del></i>
+                                </div>
+                                <!-- <div class="imm-button">
+                                	<a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">
+                                    <span>立即抢购</span>
+                                    </a>
+                                </div> -->
+                                <!-- <div class="tag">
+                                <if condition="$v['is_new'] eq '1'">
+                                    <span>NEW</span>
+                                <else/>
+                                    <span>HOT</span>
+                                </if>    
+                                </div> -->
+                            </div>
+                        </div>
+                    </li>
+            	 </tpshop> 
+            	</ul>
+            </div>
+        </div>
+    	<div class="bs-ri">
+        	<div class="ris-adve"><!--公告上方广告位-->
+                <adv  limit="1" item="v" pid="7"> 
+                    <a href="{$v[ad_link]}" <if condition="$v['target'] eq 1">target="_blank"</if>>
+	            		<img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}"/>
+                    </a>
+				</adv>
+            </div>
+        	<div class="ris-notice">
+            	<div class="notice_t">
+                	<ul>
+                		<li id="not_col"><a href="">Notice</a></li>
+                		<li id="not_new"><a href="">News</a></li>
+                	</ul>
+                </div>
+            	<div class="notice_b">
+                	<ul class="nob1">
+                            <tpshop sql="select * from `__PREFIX__article`  where cat_id = 5 order by article_id desc limit 4" item="v" key="k" >    
+                		<li><a href="{:U('Home/Article/detail',array('article_id'=>$v[article_id]))}">
+                        {$v['title']}
+                        </a></li>
+                            </tpshop>    
+                	</ul>
+                    <ul class="nob2">
+                            <tpshop sql="select * from `__PREFIX__article`  where cat_id = 6 order by article_id desc limit 4" item="v" key="k" >    
+                		<li><a href="{:U('Home/Article/detail',array('article_id'=>$v[article_id]))}">
+                        {$v['title']}
+                        </a></li>
+                            </tpshop>    
+                     </ul>
+                </div> 
+            </div>
+              
+        	</div>	
+        </div>            
+    </div>
+
+<!--热卖-首发-新闻-公告-结束-->
+
+	
+<div class="index-main">
+ <!--楼层-开始-->
+<tpshop sql="select * from `__PREFIX__goods_category` where is_show = 1 and `level` = 1  and id not in(7,8) limit 7" key="key" item='val'>
+<?php 
+    $cat_id_arr = getCatGrandson($val[id]); 
+    $cat_id_str = implode(',',$cat_id_arr);
+?>
+    <div class="layout-wrap">
+        <div class="layout layer">
+            <div class="ground-flool">
+                <div class="flool-t clearfix">
+                    <h2>{$val[name]}</h2>   
+                    <div class="ind-child-cats">
+                       <tpshop sql="select * from `__PREFIX__goods_category` where is_show = 1 and parent_id = $val[id]" key="key2" item='val2'>
+                        <em>{$val2[name]}</em>
+                        </tpshop>  
+                    </div>  
+                    
+                </div>
+
+                <div class="flool-b layer clearfix">
+                    <ul class="index-main-list index-list-l clearfix">
+                        <tpshop sql="select * from `__PREFIX__goods` where cat_id in($cat_id_str) and is_on_sale = 1 and is_recommend = 1 order by goods_id limit 2" key="k" item='v'>
+                        <?php 
+                            if($v[prom_type]>0){
+                                $v['goods_promotion'] = get_goods_promotion($v['goods_id']);
+                            }
+                        ?>
+                        <li class="sellers sell_ons sellers1">
+                        <div class="best" style="background: url({$v.goods_id|goods_thum_images=222,222}) center center/cover no-repeat;">        <a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}"></a>                          
+                                <div class="price">
+                                    <span>$</span><em>{$v['goods_promotion']['price']?$v['goods_promotion']['price']:$v[shop_price]}</em> 
+                                    <!-- <span>$</span><em>{$v[shop_price]}</em>  -->
+                                </div>                                           
+                        </div>
+                        </li>
+                        </tpshop>
+                        
+                    </ul>
+                    <ul class="index-main-list index-list-r clearfix">
+                        <tpshop sql="select * from `__PREFIX__goods` where  cat_id in($cat_id_str) and is_on_sale = 1 and is_new = 1 order by goods_id limit 0,7" key="k" item='v'>
+                            <?php 
+                                if($v['prom_type']>0){
+                                    $v['goods_promotion'] = get_goods_promotion($v['goods_id']);
+                                }
+                            ?>
+                            <li class="sellers sellers2 sell_ons">
+                                <div class="best">
+                                    <div class="best-about">
+                                        <div class="best_img best_img2 best_img3">
+                                            <a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}"><img src="{$v.goods_id|goods_thum_images=180,180}" /></a>
+                                        </div>
+                                        <div class="intr-t intr-t3"><a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">{$v.goods_name}</a></div>
+                                        <div class="price prices">
+                                            <!-- <span>$</span><em>{$v.shop_price}</em><i><del>${$v[origin_price]}</del> </i>  -->
+                                            <span>$</span><em>{$v['goods_promotion']['price']?$v['goods_promotion']['price']:$v[shop_price]}</em><i><del>${$v[origin_price]}</del> </i> 
+                                        </div>
+                                        <div class="tag">
+                                            <span>NEW</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                       </tpshop>   
+                       <tpshop sql="select * from `__PREFIX__goods` where  cat_id in($cat_id_str) and is_on_sale = 1 and is_new = 1 order by goods_id limit 7,1" key="k" item='v'>
+                            <?php 
+                                if($v['prom_type']>0){
+                                    $v['goods_promotion'] = get_goods_promotion($v['goods_id']);
+                                }
+                            ?>
+                            <li class="sellers sellers3 sell_ons">
+                                <div class="best">
+                                    <div class="best-about">
+                                        <div class="best_img best_img2 best_img3">
+                                            <a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}"><img src="{$v.goods_id|goods_thum_images=180,180}" /></a>
+                                        </div>
+                                        <div class="intr-t intr-t3"><a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">{$v.goods_name}</a></div>
+                                        <div class="price prices">
+                                            <!-- <span>$</span><em>{$v.shop_price}</em><i><del>${$v[origin_price]}</del></i> -->
+                                            <span>$</span><em>{$v['goods_promotion']['price']?$v['goods_promotion']['price']:$v[shop_price]}</em><i><del>${$v[origin_price]}</del> </i> 
+                                        </div>
+                                        <div class="tag">
+                                            <span>HOT</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                       </tpshop> 
+                       <li class="sellers sellers3 sell_ons view-more-wrap">
+                           <a href="{:U('Home/Goods/goodsList')}?id={$val[id]}">VIEW MORE</a>
+                       </li>          
+                    </ul>                   
+                </div>
+            </div>
+        </div>   
+    </div>
+</tpshop>    
+<!--楼层-结束-->
+</div>
+
+<!--footer-开始-->
+<include file="Public/footer" />
+<script src="https://s22.cnzz.com/z_stat.php?id=1261971213&web_id=1261971213" language="JavaScript"></script>
+<!--footer-结束-->
+<script>	
+$(document).ready(function(){
+			
+		  /* 新闻和公告的 js 切换*/
+		  $(".nob2").css("display", "none");			
+		  $("#not_col").hover(function(){
+			$(".nob1").css("display", "block");
+			$(".nob2").css("display", "none");
+			$(this).css('background-color','#FFF');
+			$("#not_new").css('background-color','#fcf7f7');
+		  });
+		   /* 新闻和公告的 js 切换*/
+		  $("#not_new").hover(function(){
+			$(".nob2").css("display", "block")
+			$(".nob1").css("display", "none");
+			$(this).css('background-color','#FFF');
+			$("#not_col").css('background-color','#fcf7f7');
+		  })
+          $('#banner_tabs .slides').slick({
+            dots: true,
+            autoplay:true
+            }); 
+
+});		
+</script>	 
+
+<script src="__PUBLIC__/js/jqueryUrlGet.js"></script><!--获取get参数插件-->
+<script> 
+set_first_leader(); //设置推荐人 
+// 如果是手机浏览器跳到手机
+if(isMobileBrowser())
+   location.href="{:U('Mobile/Index/index')}";
+</script>
+
+</body>
+</html>

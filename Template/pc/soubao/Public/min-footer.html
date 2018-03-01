@@ -1,0 +1,54 @@
+<!-- footer start [[-->
+<div class="foot">
+          <div class="foot-box container fn-clear fixed">
+    <dl class="foot-item foot-phone">
+              <dt>{$tpshop_config['shop_info_phone']}</dt>
+              <!--<dd>CEO邮箱：ceo@tp-shop.cn</dd>-->
+              <dd>客服邮箱：CS@tp-shop.cn</dd>
+            </dl>
+	    <tpshop sql="select * from `__PREFIX__article_cat` where cat_id in(1,2,3,4,7)" key="k" item='v'>
+	    	<dl class="foot-item foot-list">
+              <dt class="">{$v[cat_name]}</dt>
+              <tpshop sql="select * from `__PREFIX__article` where cat_id = $v[cat_id]" key="k2" item='v2'>
+            	<dd><a target="_blank" href="{:U('Home/Article/detail',array('article_id'=>$v2[article_id]))}">{$v2[title]}</a></dd>
+              </tpshop>
+	        </dl>
+	    </tpshop>  
+    <dl class="foot-item foot-attention">
+              <dd>
+        <div class="att-weixin"> <img src="__STATIC__/images/weixin.png" width="85" height="85"> </div>
+        <p>TPshop网微信</p>
+      </dd>
+              <dd>
+        <div class="att-client"> <img src="__STATIC__/images/app.png" width="85" height="85"> </div>
+        <p>TPshop网客户端</p>
+      </dd>
+            </dl>
+  </div>
+  <div class="foot-info container">
+    <p>Copyright <em>©</em> 2016-2025 {$tpshop_config['shop_info_store_name']}  版权所有 保留一切权利 备案号:{$tpshop_config['shop_info_record_no']}</p> 
+    <ul class="foot-chop">
+              <!--			<li class="icbc">
+							<a href="" target="_blank"></a>
+						</li>
+						<li class="alipay">
+							<a href="" target="_blank"></a>
+						</li>
+						<li class="unionpay">
+							<a href="" target="_blank"></a>
+						</li>
+						<li class="tenpay">
+							<a href="" target="_blank"></a>
+						</li>-->
+              <li class="gongshang"> <a href="" target="_blank"></a> </li>
+              <li class="sh-letter"> <a href="" target="_blank"></a> </li>
+              <li class="honesty"> <a href="" target="_blank"></a> </li>
+              <li> <a href="" target="_blank"> <img src="__STATIC__/images/time_cnnic.jpg"> </a> </li>
+              <li> <a href="" target="_blank"> <img src="__STATIC__/images/aqlm.jpg"> </a> </li>
+            </ul>
+  </div>
+</div>
+<script type="text/javascript" src="__STATIC__/js/jquery.lazyload.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script type="text/javascript" src="__STATIC__/js/common.js"></script>
+<!-- footer end ]]-->

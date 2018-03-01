@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta content="zh-cn" http-equiv="content-language">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="Cache-control" content="public" max-age="no-cache">
+<link rel="canonical" href="http://beauty.tp-shop.cn">
+<title>频道页面-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link href="__STATIC__/css/beauty.min.css" rel="stylesheet" type="text/css">
+<link href="__STATIC__/css/beautycare.css" rel="stylesheet" type="text/css">
+<link href="__STATIC__/css/channel.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<include file="Public/min-header" />
+<div class="clearfix tp_page" id="wrapper">
+  <div class="g-sld tracker_market" id="bgcolor" style="background: rgb(159, 197, 232);">
+    <div class="g-pst ma m-sld-clh fixed"> 
+      <!-- 左侧导航 begin -->
+      <div class="m_wg_area m-sld-lst fl" data-local="leftmenu" data-max="1"> 
+        <!-- menu nav -->
+        <div class="J_wd_pendant">           
+          <!-- 二级begin --> 
+          <!-- lst -->
+          <div class="m-lst g-bk">
+          <h1 style="line-height:20px;font-size:14px;color:#3c3c3c;padding:10px 0 10px 15px;background-color:#ffdadf;overflow:hidden;white-space: nowrap;">
+          		{$parent_name}
+          </h1>
+            <ul>
+              <foreach name="channel_cate" item="cat" key="k">
+	              <li class="">
+	                <dl class="g-ln" <if condition="($k+1) eq count($channel_cate)">style="border: none;"</if>>
+	                  <dt><a href="{:U('Home/Goods/goodsList',array('id'=>$cat[id]))}" class="" target="_blank">{$cat.name}</a></dt>
+	                  <dd>
+	                  	  <foreach 	name="cat.hot_sub" item="vv">
+		                  	<a href="{:U('Home/Goods/goodsList',array('id'=>$vv[id]))}" class="z-select" target="_blank">{$vv.name}</a>
+		                  </foreach>
+		               </dd>
+	                </dl><i>&gt;</i>
+	              </li>
+              </foreach>
+            </ul>
+          </div>
+          <!-- 二级end --> 
+          
+          <!-- 三级begin -->
+          <div class="m-dtl">
+          	<foreach name="channel_cate" item="vo" key="k">
+            <div class="g-snv" style="margin-top:{$k*32+40}px;display:none;">
+              <div class="g-szt fixed"> 
+               <foreach name="vo.sub_menu" item="v2" key="k2">
+                   <span><a href="{:U('Home/Goods/goodsList',array('id'=>$v2[id]))}" class="" target="_blank">{$v2.name}</a></span>
+               </foreach>
+			 </div>
+              <div class="g-brd fixed">
+                <p>
+                	 <foreach name="vo.brand" item="v3">
+	                	<a href="{:U('Home/Goods/goodList',array('brand_id'=>$v3[id]))}" target="_blank"> 
+	                	<img src="{$v3.logo}" width="70" height="30" alt="" title="{$v3[name]}"></a> 
+	                </foreach>
+    			</p>
+              </div>
+            </div>
+            </foreach>
+          </div>
+          <!-- 三级 end --> 
+        </div>
+      </div>
+      <!-- 左侧导航 end --> 
+      
+      <!-- 右侧的轮播产品展示 -->
+      <div class="m_wg_area m-mum-slide oh fl" data-local="toproll" data-max="1">
+        <div class="J_animateSlider J_wd_pendant" data-arrow="1" data-position="2" data-animate="1" data-auto="1" data-slider="1">
+          <div class="u-ms-lst slide fl oh" id="slideMain">
+            <ul class="slider-main">
+              <adv limit="6" item="v" pid="'50'.$_GET[id].'1'" key="k">
+              	<li data-bgcolor="{$v.bgcolor}" class="<if condition="$k eq 0"> z-select</if>" style="position: absolute; z-index: 0; opacity: 0;"> 
+              	<a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>><img src="{$v[ad_code]}" alt=""  title="{$v[title]}" style="{$v[style]}"></a> </li>
+              </adv>
+            </ul>
+            <ul class="s-ctr slider-nav" style="width: 1000px;">
+              <adv limit="6" item="v" pid="'50'.$_GET[id].'1'" key="k">
+              	 <li class="slider-item <if condition="$k eq 0"> z-select</if>"></li>
+              </adv>
+            </ul>
+            <div class="s-pg J_page_box" style="display: none;">
+            	<a href="javascript:;" class="s-prev slider-prev">&lt;</a>
+            	<a href="javascript:;" class="s-next slider-next" style="margin-left: 440px;">&gt;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 右侧的轮播产品展示 end --> 
+      <!-- 轮播右侧小广告 -->
+      <div class="m_wg_area" data-local="topright" data-max="1"> </div>
+      <!-- 轮播右侧小广告 end --> 
+    </div>
+  </div>
+  <div class="J_side_nav_trigger"></div>
+  <div class="module editable F_dynamic" moduleid="1551308" parentmoduleid="1551308">
+    <div class="layout container mt30">
+      <div class="layout-hd">
+        <div class="layout-title fl">达人推荐</div>
+      </div>
+      <div class="recommend-goods">
+      
+       <adv limit="1" item="v" pid="'50'.$_GET[id].'2'" key="k">
+        <div class="item "> 
+         <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>> <img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]} class="img100">
+          <div class="word">
+            <p class="up">{$v[ad_name]}</p>
+            <p class="down"></p>
+          </div>
+          </a> 
+        </div>
+       </adv>
+       <adv limit="1" item="v" pid="'50'.$_GET[id].'3'" key="k">
+        <div class="item "> 
+         <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>> <img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]} class="img100">
+          <div class="word">
+            <p class="up">{$v[ad_name]}</p>
+            <p class="down"></p>
+          </div>
+          </a> 
+        </div>
+       </adv>
+       <adv limit="1" item="v" pid="'50'.$_GET[id].'4'" key="k">
+        <div class="item "> 
+         <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>> <img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]} class="img100">
+          <div class="word">
+            <p class="up">{$v[ad_name]}</p>
+            <p class="down"></p>
+          </div>
+          </a> 
+        </div>
+       </adv>
+       <adv limit="1" item="v" pid="'50'.$_GET[id].'5'" key="k">
+        <div class="item last"> 
+         <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if>> <img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]} class="img100">
+          <div class="word">
+            <p class="up">{$v[ad_name]}</p>
+            <p class="down"></p>
+          </div>
+          </a> 
+        </div>
+       </adv>                     
+        
+      </div>
+    </div>
+  </div>
+  <!-- 1~6F-s -->
+  <foreach name="channel_cate" item="vo" key="k">
+  <if condition="$k lt 3">
+  <div class="module F_dynamic" parentmoduleid="{$k}">
+    <div class="layout beauty-floor beauty-floor-01 container mt30" data-floor="1">
+      <div class="layout-hd editable" moduleid="">
+        <div class="layout-title fl" floorname="面部护肤" icon="">{$vo.name}</div>
+        <div class="cates-list">
+	        <foreach name="vo.sub_menu" item="v2" key="k">
+		        <if condition="$k gt 5">
+		        	<a class="cates"<if condition="$v2[is_hot] eq 1">style="color: #da3a4c;"</if> >{$v2.name}</a>
+		        </if>
+	        </foreach>
+	    </div>
+      </div>
+      <div class="floor floor-switch">
+        <div class="floor-left step-slide editable ui-switchable" moduleid="1557937_left" fnp="switch-slide" data-widget-cid="widget-f060b19407b91859ce5e6716883a8148">
+          <div class="step"> <a> <img class="img100" src="http://img15.fn-mart.com/group1/M00/C5/4D/CsnBPlYp3cyAEoxdAABixlQhDXc585.jpg" data-images="http://img15.fn-mart.com/group1/M00/C5/4D/CsnBPlYp3cyAEoxdAABixlQhDXc585.jpg"> </a>
+            <div class="nav" style="top:68px">
+              <ul data-role="nav" class="nav-list ui-switchable-nav">
+              	<foreach name="vo.sub_menu" item="v3" key="k">
+              		<if condition="$k lt 6">
+              			<li class="ui-switchable-trigger <if condition="$k eq 0">ui-switchable-active</if>">
+              				<span>{$v3.name}</span><em></em><i></i>
+              			</li>
+              		</if>
+              	</foreach>
+              </ul>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="slide-wrap ui-switchable-content" data-role="content">
+              <foreach name="vo.sub_menu" item="vv" key="k">
+              	<if condition="$k lt 7">
+	              <div class="slide-item" <if condition="$k gt 0"> style="display: none;"</if> >
+	                <ul class="slide-left">
+	                <foreach name="vv.sub_goods" item="vg" key="k2">
+	                  <li class="good good-big">
+	                    <div class="info"> 
+	                    	<span class="num">NO.{$k2+1}</span> 
+	                    	<a href="{:U('Home/Goods/goodsInfo',array('id'=>$vg[goods_id]))}" class="title" target="_blank">{$vg.goods_name}</a> 
+	                    	<span class="price">￥<font id="" class="">{$vg.shop_price}</font></span> 
+	                    </div>
+	                    <a href="{:U('Home/Goods/goodsInfo',array('id'=>$vg[goods_id]))}" target="_blank"> 
+	                    	<img class="good-big-img img100" src="{$vg.goods_id|goods_thum_images=400,400}" data-images="{$vg.goods_id|goods_thum_images=400,400}" alt=""> 
+	                    </a> 
+	                  </li>
+	                 </foreach>
+	                </ul>
+	              </div>
+	            </if>
+              </foreach>
+            </div>
+          </div>
+        </div>
+        <div class="floor-right editable" moduleid="">
+          <div class="item item-h2"> 
+             <adv pid="'51'.$_GET[id].$k" limit="1" item="vv">
+          	   <a href="{$vv.ad_link}" class="img-box" <if condition="$vv['target'] eq 1">target="_blank"</if>>
+          	   	  <img title="{$vv[title]}" style="{$vv[style]}" src="{$vv[ad_code]}" class="img100 img-effect" >
+          	   </a>
+          	</adv>
+          </div>
+        </div>
+      </div>
+      
+      <?php     
+        $cat_id_arr = getCatGrandson($vo[id]); // 找到某个大类下面的所有子分类id
+        $cat_id_str = implode(',',$cat_id_arr);      
+      ?>
+      
+      <div class="brand-slide editable ui-switchable" moduleid="1557937_bottom" fnp="brand-slide" data-widget-cid="widget-626a691d3389b7c9fc8bb8496ad82b83">
+        <ul class="slide ui-switchable-content" data-role="content" style="position: relative; width: 35791197px; left: 0px;">
+        <tpshop sql="select * from `__PREFIX__goods` where cat_id in($cat_id_str) and is_on_sale = 1 order by goods_id limit 4" key="k5" item='v5'>
+          <li class="item ui-switchable-clone" style="float: left;"> <a href="javascript:;"> <img class="img img100" src="{$v5.goods_id|goods_thum_images=150,150}"/> </a>
+            <div class="intro"> <a class="title" href="javascript:;">{$v5.goods_name|getSubstr=0,18}</a> <span class="price">￥<font id="201504CM170003044_1557937" class="">89</font></span> </div>
+          </li>
+        </tpshop>          
+        </ul>
+        <a href="javascript:;" class="ctrl ctrl-prev ui-switchable-prev-btn" data-role="prev"></a> <a href="javascript:;" class="ctrl ctrl-next ui-switchable-next-btn" data-role="next"></a> </div>
+    </div>
+  </div>
+  </if>
+  </foreach>
+  <!-- 1~6F-e --> 
+</div>
+<include file="Public/footer" /> 
+<script type="text/javascript" src="__STATIC__/js/channel.js"></script>
+<script type="text/javascript">
+$('.ui-switchable-nav').each(function(){
+	var _this = this;
+	$(_this).children().each(function(i,o){
+		$(o).hover(function(){
+			$(o).siblings().removeClass('ui-switchable-active');
+			$(o).addClass('ui-switchable-active');
+			$(_this).parent().parent().siblings().children().children().hide();
+			$(_this).parent().parent().siblings().children().children().eq(i).show();
+		});
+	})
+})
+
+</script>
+</body>
+</html>

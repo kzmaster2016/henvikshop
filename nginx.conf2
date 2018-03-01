@@ -1,0 +1,75 @@
+server
+    {
+        listen 80;
+        #listen [::]:80;
+        server_name www.tp-shop.cn;
+        index index.html index.htm index.php default.html default.htm default.php;
+        root  /home/wwwroot/www.tp-shop.cn;
+
+       location / {
+            index  index.htm index.html index.php;  
+            if (!-e $request_filename){
+                #地址作为将参数rewrite到index.php上。tp框架接收s参数为controller和action，不少框架都利用这种方式来实现伪pathinfo模式（pathinfo为php功能，nginx并不支持）
+                rewrite ^/(.*)$ /index.php?s=$1 last;
+                break;
+            }
+        }
+	#上面的正则能解决不带xx.php的，这条正则是为了rewrite url中带index.php/admin/admin/login这种，思路是一样的，将index.php后的字符串当成参数
+	location ~ /.*\.php/ {
+                rewrite ^(.*?/?)(.*\.php)(.*)$ /$2?s=$3 last;
+		break;
+	}
+        location ~ \.php/?.*$ {
+	    root  /home/wwwroot/www.tp-shop.cn;
+            fastcgi_pass  unix:/tmp/php-cgi.sock;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;           
+            include fastcgi_params;
+            #set $path_info "";
+            #定义变量 $real_script_name，用于存放真实地址
+            #set $real_script_name $fastcgi_script_name;
+            #如果地址与引号内的正则表达式匹配
+            #if ($fastcgi_script_name ~ "^(.+?\.php)(/.+)$") {
+                #将文件地址赋值给变量 $real_script_name
+                #set $real_script_name $1;
+                #将文件地址后的参数赋值给变量 $path_info
+                #set $path_info $2;
+            #}
+            #配置fastcgi的一些参数
+            #fastcgi_param SCRIPT_FILENAME $document_root$real_script_name;
+            #fastcgi_param SCRIPT_NAME $real_script_name;
+            #fastcgi_param PATH_INFO $path_info;
+        }
+
+	location ~.*\.(jpg|png|jpeg)$
+      	{
+	    root  /home/wwwroot/www.tp-shop.cn;
+       	    #expires 30d;
+        }
+
+     # js css缓存一小时
+       location ~.*\.(js|css)$ {
+           root  /home/wwwroot/www.tp-shop.cn;
+           #expires 1h;
+       }
+        include other.conf;
+        #error_page   404   /404.html;
+        include enable-php.conf;
+
+        location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+        {
+            expires      30d;
+        }
+
+        location ~ .*\.(js|css)?$
+        {
+            expires      12h;
+        }
+
+        location ~ /\.
+        {
+            deny all;
+        }
+	error_log  /home/wwwlogs/www.tp-shop.cn.err;
+        access_log  /home/wwwlogs/www.tp-shop.cn.log;
+    }

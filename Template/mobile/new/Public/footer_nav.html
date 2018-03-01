@@ -1,0 +1,48 @@
+<div style="height:50px; line-height:50px; clear:both;"></div>
+<div class="v_nav">
+	<div class="vf_nav">
+		<ul>
+			<li> <a href="{:U('Index/index')}">
+			    <i class="vf_1"></i>
+			    <span>Home</span></a></li>
+			<li><a href="tel:{$tpshop_config['shop_info_phone']}">
+			    <i class="vf_2"></i>
+			    <span>Service</span></a></li>
+			<li><a href="{:U('Goods/categoryList')}">
+			    <i class="vf_3"></i>
+			    <span>Category</span></a></li>
+			<li>
+			<a href="{:U('Cart/cart')}">
+			   <em class="global-nav__nav-shop-cart-num" id="cart_quantity" style="right:9px;"></em>
+			   <i class="vf_4"></i>
+			   <span>Cart</span>
+			   </a>
+			</li>
+			<li><a href="{:U('User/index')}">
+			    <i class="vf_5"></i>
+			    <span>User Center</span></a>
+			</li>
+		</ul>
+	</div>
+</div> 
+<script type="text/javascript">
+$(document).ready(function(){
+	  var cart_cn = getCookie('cn');
+	  if(cart_cn == ''){
+		$.ajax({
+			type : "GET",
+			url:"/index.php?m=Home&c=Cart&a=header_cart_list",//+tab,
+			success: function(data){								 
+				cart_cn = getCookie('cn');
+				$('#cart_quantity').html(cart_cn);						
+			}
+		});	
+	  }
+	  $('#cart_quantity').html(cart_cn);
+});
+</script>
+<!-- 微信浏览器 调用微信 分享js-->
+<if condition="$signPackage neq null">
+	<include file="Public/wx_share"/>
+</if>
+<!-- 微信浏览器 调用微信 分享js  end-->

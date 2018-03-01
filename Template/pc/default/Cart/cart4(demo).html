@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<form id="checkout-form" action="/index.php?m=api&c=PayPal&a=pay_order" method="post">
+    <input type="hidden" name="order_sn" id="order_sn" value="{$order['order_sn']}"> <!-- 订单编号-->
+    <input type="hidden" id="payment_method_nonce" name="nonce">
+    <input type="hidden" name="payment_type" id="payment_type" value="paypal">
+
+    <input type="text" name="email" id="email" placeholder="email" value="{$order['email']}">
+    <input type="text" name="first_name" id="first_name" placeholder="first name" value="{$order['consignee']}">
+    <!-- <input type="text" name="last_name" id="last_name" placeholder="last_name" value="Doe"> -->
+    <input type="text" name="country" id="country" placeholder="country" value="{$order['country']}">
+    <input type="text" name="city" id="city" placeholder="city" value="{$order['city']}">
+    <input type="text" name="state" id="state" placeholder="state" value="{$order['province']}">
+    <input type="text" name="postcode" id="postcode" placeholder="postcode" value="{$order['zipcode']}">
+    <input type="text" name="address" id="address" placeholder="address" value="{$order['address']}">
+    <input type="text" name="mobile" id="mobile" placeholder="mobile" value="{$order['mobile']}">
+
+
+    <!-- <input type="button" value="PayPal" id="checkout_paypal"> -->
+
+</form>
+
+<!-- 隐藏paypalbutton,通过上面的paypal button触发 -->
+<form id="paypal_form" style="">
+</form>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<script>
+    // We generated a client token for you so you can test out this code
+    // immediately. In a production-ready integration, you will need to
+    // generate a client token on your server (see section below).
+    $(function() {
+        var nonceJQ = $("#payment_method_nonce");
+        var form = document.querySelector('#checkout-form');
+
+       /* var checkpaypal_btn = false;
+        //checkout with paypal
+        $("#checkout_paypal").click(function () {
+            // $("input[name='payment_type']").val('PayPal');
+            checkpaypal_btn = true;
+            console.log('hello');
+
+            document.getElementById("braintree-paypal-button").click();
+
+        });*/
+
+        var initPaypal = function (clientToken) {
+            braintree.setup(clientToken, "paypal", {
+                container: "paypal_form",
+                singleUse: false,
+                onPaymentMethodReceived: function (obj) {
+                    console.log('paypal in');
+                    console.log(obj);
+
+                    /*var detail = obj.details;
+                    var payType = obj.type;*/
+
+                    var payerId = detail.payerId;
+                    var nonce = obj.nonce;
+
+                    nonceJQ.val(nonce);
+
+                    if (payerId) {
+                        form.submit();
+                    }else{
+                        window.location.reload();
+                    }
+                    
+
+                    // var order_form = document.getElementById("order_form");
+
+                    /*if(checkpaypal_btn){
+                        checkpaypal_btn = false;
+                        form.submit();
+                    }else{
+                        window.location.reload();
+                    }*/
+                }, 
+                onReady: function (obj) {
+                }
+
+            });
+        };
+
+        /*var client_token = 'eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJkZjc5OTg3YjA2YTE1N2JkMmI2NGE0NGU2YjAwZGUzNmMzMDMxYjNkYmRhNzAzZTc5MTYyYjIwMWFlYzVjMWY5fGNsaWVudF9pZD1jbGllbnRfaWQkc2FuZGJveCQ0ZHByYmZjNnBoNTk1Y2NqXHUwMDI2Y3JlYXRlZF9hdD0yMDE3LTA2LTEzVDA3OjU2OjMzLjA0NTY4NTU3MyswMDAwXHUwMDI2bWVyY2hhbnRfaWQ9dDdmbWNwYjNzcnMyM2djdyIsImNvbmZpZ1VybCI6Imh0dHBzOi8vYXBpLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb206NDQzL21lcmNoYW50cy90N2ZtY3BiM3NyczIzZ2N3L2NsaWVudF9hcGkvdjEvY29uZmlndXJhdGlvbiIsImNoYWxsZW5nZXMiOltdLCJlbnZpcm9ubWVudCI6InNhbmRib3giLCJjbGllbnRBcGlVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvdDdmbWNwYjNzcnMyM2djdy9jbGllbnRfYXBpIiwiYXNzZXRzVXJsIjoiaHR0cHM6Ly9hc3NldHMuYnJhaW50cmVlZ2F0ZXdheS5jb20iLCJhdXRoVXJsIjoiaHR0cHM6Ly9hdXRoLnZlbm1vLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb20iLCJhbmFseXRpY3MiOnsidXJsIjoiaHR0cHM6Ly9jbGllbnQtYW5hbHl0aWNzLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb20vdDdmbWNwYjNzcnMyM2djdyJ9LCJ0aHJlZURTZWN1cmVFbmFibGVkIjpmYWxzZSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImRpc3BsYXlOYW1lIjoidGVzdCBmYWNpbGl0YXRvcidzIFRlc3QgU3RvcmUiLCJjbGllbnRJZCI6IkFiTUhFTVAzVkJBSXItOHpFQ0IxbDZ4LVVPWGNFa1ppSzZVWWpnVjZfanNWc04wYktrRVN3SHR1a2gtNXJaNkNWTFZoRTJxaVZsWmZaSGhQIiwicHJpdmFjeVVybCI6Imh0dHBzOi8vZXhhbXBsZS5jb20iLCJ1c2VyQWdyZWVtZW50VXJsIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSIsImJhc2VVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbSIsImFzc2V0c1VybCI6Imh0dHBzOi8vY2hlY2tvdXQucGF5cGFsLmNvbSIsImRpcmVjdEJhc2VVcmwiOm51bGwsImFsbG93SHR0cCI6dHJ1ZSwiZW52aXJvbm1lbnROb05ldHdvcmsiOmZhbHNlLCJlbnZpcm9ubWVudCI6Im9mZmxpbmUiLCJ1bnZldHRlZE1lcmNoYW50IjpmYWxzZSwiYnJhaW50cmVlQ2xpZW50SWQiOiJtYXN0ZXJjbGllbnQzIiwiYmlsbGluZ0FncmVlbWVudHNFbmFibGVkIjp0cnVlLCJtZXJjaGFudEFjY291bnRJZCI6IlVTRCIsImN1cnJlbmN5SXNvQ29kZSI6IlVTRCJ9LCJjb2luYmFzZUVuYWJsZWQiOmZhbHNlLCJtZXJjaGFudElkIjoidDdmbWNwYjNzcnMyM2djdyIsInZlbm1vIjoib2ZmIn0=';*/
+        /*initPaypal(client_token);*/
+
+       var client_token = '';
+       var getTokenInitPayPal = function () {
+            $.ajax({
+                url: "http://localhost:8080/index.php?m=api&c=PayPal&a=generate_token",
+                type: "GET",
+                async: true,
+                data: {
+                },
+                // timeout: 5000,
+                dataType: 'json',
+                success:function(data){
+                    if(data.status == 0) {
+                        client_token = data.client_token;
+                        initPaypal(client_token);
+                    }else{
+                        alert(data.msg);
+                    }
+                },
+                error: function(xhr){
+                    console.log(xhr);
+                },
+                complete: function(){
+
+                }
+            });
+       };
+       getTokenInitPayPal(); //执行后获取client_token和初始化initPaypal()函数
+
+    })
+
+</script>
+</html>

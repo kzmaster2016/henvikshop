@@ -1,0 +1,352 @@
+<link href="__STATIC__/css/common_www.css" rel="stylesheet" type="text/css" />
+<link href="__STATIC__/css/public.css" rel="stylesheet" type="text/css" />
+<link href="__STATIC__/css/default.css" rel="stylesheet" type="text/css" />
+<link href="__STATIC__/css/art_skin_order.css" rel="stylesheet" type="text/css" />
+<link href="__STATIC__/css/common.css" rel="stylesheet" type="text/css" />
+<link href="__STATIC__/css/message.index.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="__STATIC__/css/minicart.css">
+<script type="text/javascript" src="__STATIC__/js/jquery-1.9.0.min.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<!--[if lt IE 9]>
+		<script src="js/html5.js"></script>
+<![endif]-->
+<style type="text/css">
+#global-topbar .topbar-right #msg_center {
+	background: none;
+}
+.topbar-right #msg_center .tips {
+	position: absolute;
+	left: -30px;
+	top: 28px;
+	min-width: 70px;
+	max-width: 132px;
+	height: 20px;
+ *line-height: 19px;
+	border-radius: 2px;
+	padding: 0px 20px 0 10px;
+	background: #666;
+	color: #fff;/*display: none;*/
+}
+#msg_center .tips .tip-cnt {
+	color: #fff;
+	text-decoration: none;
+}
+#msg_center .tips .tip-cnt span {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.tips .tip-t {
+	position: absolute;
+	left: 72px;
+	top: -11px;
+	width: 0;
+	height: 0;
+	font-size: 0;
+	border-width: 6px;
+	border-style: dashed dashed solid dashed;
+	border-color: transparent transparent #666 transparent;
+}
+.tips .tip-times {
+	position: absolute;
+	display: block;
+	right: 5px;
+	top: 0px;
+	font-size: 16px;
+	font-style: normal;
+	color: #bfb5b5;
+	cursor: pointer;
+}
+.tips .tip-times:hover {
+	color: #fff;
+}
+#global-topbar .topbar-right #msg_center .num {
+	color: #f00;
+}
+#show_category {
+	float:left
+}
+.catagories {
+	display:none
+}
+#show_category:hover .catagories {
+	display:block
+}
+.catagory-detail {
+	display:none;
+	min-height:456px
+}
+#global-nav .catagories li:hover {
+	margin-right: -10px;
+	color: #fff;
+	background: #f22e00;
+}
+#global-nav .catagories li:hover h3 {
+	color:#FFF
+}
+#global-nav .catagories li h3 a:hover {
+	color:#FFF
+}
+ul.catagories li:hover:after {
+	content:"";
+	position:absolute;
+	border-right:2px solid #f22e00;
+	right:-2px;
+	height:30px;
+	z-index:199;
+}
+ul.catagories li:hover .catagory-detail {
+	display:block
+}
+.icon-feiniu:before{
+	content:'';
+	background-image:none;
+	display:none;
+}
+</style>
+<div id="global-topbar">
+  <div class="topbar-wrapper clearfix">
+    <ul class="topbar-left">
+      <li class="dropdown my-location">
+        <span class="current-place"></span>
+        <i class="icon-location icon-down"></i> </li>
+    </ul>
+    <ul class="topbar-right" id="topbar-right">
+      <li id="wellcome_wording"><a href="{:U('Home/user/index')}">{$user['nickname']}</a></li>
+      <li id="link_signin" style="display: none;"></li>
+      <if condition="$user_id gt 0">
+      <li id="link_signup"><a href="{:U('Home/user/logout')}" class="signup target_no">[退出]</a></li>
+      </if>
+      <li><a href="{:U('Home/user/index')}">我的TPshop</a></li>
+      <li><a href="{:U('Home/Article/detail',array('article_id'=>17))}" target="_blank">帮助中心</a></li>
+    </ul>
+  </div>
+</div>
+<div class="wrapper clearfix" id="global-header">
+  <div id="hd-banner" class="wrapper"> 
+    <!--
+		<a href="" target="_blank"><img src="__STATIC__/images/201602261202471456459367_kk-0.jpg" width="1220" height="60" alt""></a>
+	--> 
+  </div>
+  <div id="headerall" class="wrapper clearfix"> <a href="/" title="首页" class="logohref">
+    <h1 id="hd-logo" class="icon-feiniu">
+      <img src="{$tpshop_config['shop_info_store_logo']}"/>
+    </h1>
+    </a>
+<!--搜索框-->
+    <div id="hd-search">
+      <div class="search-form">
+		<form name="sourch_form" id="sourch_form" method="post" action="{:U("/Home/Goods/search")}">
+		  <input type="text" data-role="input-search" autocomplete="off" class="search-keyword"  name="q" id="q" value="{$Think.post.search_key}" placeholder="搜索关键字"/>
+          <button class="btn-search" type="submit"onclick="if($.trim($('#q').val()) != '') $('#sourch_form').submit();">搜索</button>
+        </form>
+      </div>
+      <div class="hd-hot-keywords">
+        <ul id="hotsearch">
+        	<foreach name="tpshop_config.hot_keywords" item="wd" key="k">
+        		<li><a href="{:U('Home/Goods/search',array('q'=>$wd))}" <if condition="$k eq 0">class="ht"</if>>{$wd}</a></li>
+        	</foreach>          
+        </ul>
+      </div>
+    </div>
+<!--搜索框  end -->    
+    <!--鼠标移动上去 显示购物车-->
+    <div id="hd-my-cart">
+      <span class="icon-cart-gwc">
+      <span class="quantity col888"><b><em class="cart_quantity"></em></b></span>
+      </span>
+      <p class="icon-cart-hd">我的购物车</p>
+      <div id="show_minicart" style="display:none;">
+            <if condition="count($cartList) eq 0">
+                <div id="content_test">
+                  <div id="minicart" class="ui_poptip minicart minicartContent">
+                    <div class="ui_poptip_container">
+                      <div class="ui_poptip_arrow poptip_up"></div>
+                      <div class="ui_poptip_content">
+                        <span class="nop emptycart">购物车中没有TPshop商品哟！</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            <else />
+                <div id="content_test">
+                  <div class="ui_poptip minicart minicartContent" id="minicart">
+                    <div class="ui_poptip_container">
+                      <div class="ui_poptip_arrow poptip_up"></div>
+                      <div class="ui_poptip_content">
+                        <div class="mini_product">
+                          <p class="mini_tit">最新加入商品</p>
+                          <div class="cart_con js_cart_top">
+                            <foreach name="cartList" item="v"  key="k">
+                              <div class="one_active js_camp_list">
+                                <ul class="ul_product   js_cart_pro_list" cart_id="798325">
+                                  <li><a class="pdetail" href=""><img src="{$v.goods_id|goods_thum_images=60,60}">
+                                    <p>
+                                      <span class="name">{$v[goods_name]}</span>
+                                      <span class="price"><em class="symbol">¥</em>{$v[goods_price]}</span>
+                                    </p>
+                                    </a>
+                                    <div class="mini_op">                                    
+                                    <a class="delete js_delete" onclick="header_cart_del({$v.id});" href="javascript:void(0);">删除</a>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </div>
+                            </foreach>
+                          </div>
+                          <div class="mini_total clearfix">
+                            <p class="cart_num">共<span class="num" id="total_qty">{$cart_total_price[anum]}</span>件商品</p>
+                            <p class="cart_total">
+                              <span class="tit">共计</span>
+                              <span class="price"><em class="symbol">¥</em>
+                              <span id="total_pay">{$cart_total_price[total_fee]}</span>
+                              </span>
+                            </p>
+                          </div>
+                          <p class="cart_bot"><a class="cart_buy" href="{:U('Home/Cart/cart')}">去购物车结算</a></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </if>       
+      </div>
+    </div>
+    <!--鼠标移动上去 显示购物车 end--> 
+  </div>
+  <div id="header"></div>
+</div>
+<nav id="global-nav" class="clearfix">
+  <div class="wrapper">
+    <div id="show_category">
+      <span class="catagories-title"><i class="icon"></i><a style="color:#fff;text-decoration:none;" href="javascript:void(0);" >全部商品分类</a></span>
+      <ul class="catagories">
+        <foreach name="goods_category_tree" key="k" item='v'>
+          <li cate_id="C24640">
+            <span class="icon-drink"></span>
+            <h3 class="catagory"><a href="{:U('Home/Goods/goodsList',array('id'=>$v[id]))}">{$v[name]}</a></h3>
+            <div class="catagory-detail clearfix cate_loading">
+              <div class="sub-item J_cate_item hide">
+                <div class="col fl">
+                  <foreach name="v[tmenu]" key="k2"  item="v2">
+                    <if condition="($k2 % 3) eq 0">
+                      <dl class="fixed">
+                        <dt> <a href="{:U('Home/Goods/goodsList',array('id'=>$v2[id]))}">{$v2[name]}</a> </dt>
+                        <dd>
+                          <foreach name="v2[sub_menu]" item="v3" key="k3" > <a href="{:U('Home/Goods/goodsList',array('id'=>$v3[id]))}">{$v3[name]}</a> </foreach>
+                        </dd>
+                      </dl>
+                    </if>
+                  </foreach>
+                </div>
+                <div class="col fl">
+                  <foreach name="v[tmenu]" key="k2"  item="v2">
+                    <if condition="($k2 % 3) eq 1">
+                      <dl class="fixed">
+                        <dt> <a href="{:U('Home/Goods/goodsList',array('id'=>$v2[id]))}">{$v2[name]}</a> </dt>
+                        <dd>
+                          <foreach name="v2[sub_menu]" item="v3" key="k3" > <a href="{:U('Home/Goods/goodsList',array('id'=>$v3[id]))}">{$v3[name]}</a> </foreach>
+                        </dd>
+                      </dl>
+                    </if>
+                  </foreach>
+                </div>
+                <div class="col fl">
+                  <foreach name="v[tmenu]" key="k2"  item="v2">
+                    <if condition="($k2 % 3) eq 2">
+                      <dl class="fixed">
+                        <dt> <a href="{:U('Home/Goods/goodsList',array('id'=>$v2[id]))}">{$v2[name]}</a> </dt>
+                        <dd>
+                          <foreach name="v2[sub_menu]" item="v3" key="k3" > <a href="{:U('Home/Goods/goodsList',array('id'=>$v3[id]))}">{$v3[name]}</a> </foreach>
+                        </dd>
+                      </dl>
+                    </if>
+                  </foreach>
+                </div>
+                <div class="col brand fl">
+                  <ul class="fixed">
+                   <volist name="v.brand" id="br" mod="2">
+	                  <li class="lst" <eq name="mod" value="1">even</eq>>
+	                  	<a href="" target="_blank">
+	                  	<img class="nav-prod" src="__STATIC__/images/loading.gif" alt="" data-images="{$br.logo}" height="40" width="80"></a>
+	                  </li>
+                  </volist> 
+                  </ul>
+                  <!--分类商品图片-->
+                      <a class="ad mt15" href="{:U('Home/Goods/goodsList',array('id'=>$v[id]))}"> 
+	                      <img src="{$v[image]}" height="150" width="210"> 
+                      </a> 
+                  <!--分类商品图片 end-->                     
+                  </div>
+              </div>
+            </div>
+          </li>
+        </foreach>
+      </ul>
+    </div>
+    <ul class="horizontal-nav">
+      <li is_fresh="0"><a class="" href="/">
+        <span>首页</span>
+        <i class=""></i></a></li>
+      <tpshop sql="SELECT * FROM `__PREFIX__navigation` where is_show = 1 ORDER BY `sort` DESC" key="k" item='v'>
+        <li is_fresh="0"> 
+          <a <if condition="$v[is_new] eq 1">target="_blank"</if>href="{$v[url]}" >
+          <span>{$v[name]}</span>
+          <i class=""></i> </a> </li>
+      </tpshop>
+    </ul>
+  </div>
+</nav>
+<script>
+/**
+* 鼠标移动端到头部购物车上面 就ajax 加载
+*/
+// 鼠标是否移动到了上方
+var header_cart_list_over = 0;
+var cart_cn = getCookie('cn');
+$("#hd-my-cart").hover(function(){
+   $("#show_minicart").show(); // 显示购物车列表			
+      if(header_cart_list_over == 1) return false;
+       header_cart_list_over = 1;
+   		$.ajax({
+   			type : "GET",
+   			url:"/index.php?m=Home&c=Cart&a=header_cart_list&template=header_cart_list2",//+tab,
+   			success: function(data){	
+   				//cart_cn = getCookie('cn');
+   			 	$("#hd-my-cart > #show_minicart").html(data);							
+   			}
+   		});	
+},function(){
+	 (typeof(t) == "undefined") || clearTimeout(t); 	 
+	 t = setTimeout(function () { 
+			header_cart_list_over = 0; /// 标识鼠标已经离开	        
+	  }, 2000);		
+      $("#show_minicart").hide();//  隐藏购物车列表
+});
+
+$('.cart_quantity').html(cart_cn);
+
+$(document).ready(function(){
+	var cart_cn = getCookie('cn');
+	$('.cart_quantity').html(cart_cn);
+})
+// ajax 删除购物车的商品
+function header_cart_del(ids)
+{
+	$.ajax({
+		type : "POST",
+		url:"{:U('Home/Cart/ajaxDelCart')}",//+tab,
+		data:{ids:ids}, // 
+	    dataType:'json',		
+		success: function(data){
+		  // alert(data.msg);
+		   if(data.status == 1)				
+			{
+				header_cart_list_over = 0; /// 标识鼠标已经离开
+				$("#hd-my-cart > .icon-cart-hd").trigger('mouseenter');	 // 无法触发 hover 改为 trigger('mouseenter');//hover修改为mouseenter/mouseleave/mouseover/mouseout
+			}
+		}
+	});
+}
+</script>

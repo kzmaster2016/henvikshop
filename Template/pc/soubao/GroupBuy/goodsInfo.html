@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{$goods.goods_name}-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="applicable-device" content="pc">
+<meta name="mobile-agent" content="format=html5;url=http://m.tp-shop.cn/item/201504CM250000409">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!--<link rel="stylesheet" href="__STATIC__/css/common.css?v=1459218814">-->
+</head>
+<body class="detailfont">
+<include file="Public/min-header"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/detail.css">
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/jquery.jqzoom.css">
+<div class="container" id="tracker_item">
+<!-- 在线客服--> 
+<!-- 在线客服--> 
+<!-- 面包屑导航 -->
+<div class="breadcrumb"> <strong><a href="/">首页</a></strong>
+  <span>
+  	<foreach name="navigate_goods" key="k" item="v"> 
+  		&nbsp;<i>></i>&nbsp;<a href="{:U('/Home/Goods/goodsList',array('id'=>$k))}">{$v}</a>
+   </foreach>
+  </span>&nbsp;<i>></i>&nbsp;<em>{$goods.goods_name}...</em> 
+</div>
+<!-- 面包屑导航 end ]] --> 
+<!-- 商品内容部分头部 start [[-->
+<div class="product-main fn-clear">
+  <div class="product-info">
+    <div class="product-info-title">
+      <h1 class="superboler"> {$goods.goods_name}</h1>
+      <p title="尖头 平底 单鞋 蝴蝶结">{$goods.goods_remark}</p>
+    </div>
+    <!-- 价格、尺寸&评价 start [[-->
+    <div class="product-info-mian fn-clear"> 
+      <!-- 价格、尺寸 start [[-->
+      <form id="buy_goods_form" name="buy_goods_form" method="post" >
+        <div class="product-value">
+          <div class="product-value-area">
+            <ul class="product-value-anything product-value-price hide" style="display: block;">
+              <li class="refer fn-clear"> <em class="send">送积分&nbsp;
+                <span id="point">49</span>
+                <a href="http://sale.tp-shop.cn/help_center/hc-6.html" target="_blank" class="help_center_url">详</a></em>
+                <span class="attr">参&nbsp;考&nbsp;价</span>
+                <del> <q class="fn-rmb">¥</q><strong class="fn-rmb-num">{$goods.market_price}</strong> </del> </li>
+              <li class="nett fn-clear">
+                <if condition="$goods['promoting'] eq 1">
+                  <span class="attr ssm-price-label">优&nbsp;惠&nbsp;价&nbsp;</span>
+                  <else/>
+                  <span class="attr fn-price-label">肥&nbsp;鱼&nbsp;价&nbsp;</span>
+                </if>
+                <span class="attr hide groupby-price-label"><i>团购价</i></span>
+                <span class="attr hide groupby-pre_sale">预&nbsp;售&nbsp;价&nbsp;</span>
+                <span class="attr hide groupby-reservation">预&nbsp;约&nbsp;价&nbsp;</span>
+                <div class="nett-box fn-clear" id="J_product_value">
+                  <div class="nett-box-value"> <q class="fn-rmb">¥</q>
+                    <if condition="$goods['promoting'] eq 1"> <strong class="fn-rmb-num"> {$goods.promote_price} </strong> <i class="onlylost">仅剩<em><strong>9</strong></em>天</i> <i class="two hide" id="saleCountTime" data-time="23600">仅剩<strong id="time">0</strong>时<strong id="minute">0</strong>分<strong id="second">0</strong>秒</i>
+                      <else/>
+                      <strong class="fn-rmb-num"> {$goods.shop_price} </strong> <i class="clue" style="display: inline;">（<a href="javascript:void(0);" id="toprice">降价通知</a>）</i> </if>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="product-norm" id="productNorm">
+            <div class="product-minheight"> 
+              <!-- 促销信息 start [[-->
+              <dl class="rush public-pl67 fn-clear marginFR25">
+                <div id="J_is_promotion">
+                  <dt class="attr">促销信息</dt>
+                </div>
+                <dd class="rush-info marginB5">
+                  <ul>
+                    <!-- 促销积分 -->
+                    <li id="J_privilege"> </li>
+                    <!-- 促销积分 end -->
+                    <li id="J_gifts"> 
+                      <!-- 点击打开：赠品&优惠卷 end ]]--></li>
+                    <li id="J_promotion">
+                      <div class="rush-info-box">
+                        <p class="rush-info-tag"> <em class="red-block">折扣</em> </p>
+                        <div>
+                          <span title="指定商品满1件8.0折">指定商品满1件8.0折</span>
+                          <a href="" target="_blank" class="rush-info-link">立即参加<i class="angle"></i></a> </div>
+                      </div>
+                    </li>
+                    <li id="J_combina"> 
+                      <!-- 点击打开：赠品&优惠卷 end ]]--></li>
+                    <li id="J_voucher"> 
+                      <!-- 点击打开：赠品&优惠卷 end ]]--> 
+                    </li>
+                  </ul>
+                </dd>
+              </dl>
+              <!-- 促销信息 end ]]-->
+              <div id="J_color_format"> 
+                <!-- 颜色 start [[-->
+                <foreach name="filter_spec" item="v" key="k" >
+                  <if condition="$k eq '颜色'">
+                    <dl class="product-color product-select public-pl67 fn-clear marginFR25">
+                      <dt class="attr">选择颜色</dt>
+                      <dd class="product-color-info">
+                        <ul class="selectCtrl matchProduct fn-clear J_color " data-v="color_select">
+                          <foreach name="v" item="v2" key="k2" >
+                            <li <if condition="$k2 eq 0 "> class="select" </if>> 
+                              <input type="radio" style="display:none;" name="goods_spec[{$k}]" value="{$v2[item_id]}"  <if condition="$k2 eq 0 ">checked="checked"</if>/>
+                              <span data-spec="" data-id="{$v2[item_id]}" title="{$v2[item]}"><img src="{$v2['src']}"></span>
+                              <b class="ok"></b> <i></i> 
+                            </li>
+                          </foreach>
+                        </ul>
+                      </dd>
+                    </dl>
+                    <!-- 颜色 end ]]-->
+                    <else/>
+                    <!-- 规格 start [[-->
+                    <dl class="product-format product-select public-pl67 fn-clear marginFR25">
+                      <dt class="attr">选择{$k}</dt>
+                      <dd class="product-format-info fn-clear">
+                        <ul class="selectCtrl matchProduct fn-clear J_etalon " data-v="size_select">
+                          <foreach name="v" item="v2" key="k2" >
+                            <li <if condition="$k2 eq 0 "> class="select" </if>> 
+                            <input type="radio" style="display:none;" name="goods_spec[{$k}]" value="{$v2[item_id]}" <if condition="$k2 eq 0 ">checked="checked"</if>/>
+                              <span data-spec="35" data-id="{$v2[item_id]}" title="{$v2[item]}">{$v2[item]}</span>
+                              <b class="ok"></b> </li>
+                          </foreach>
+                        </ul>
+                      </dd>
+                    </dl>
+                    <!-- 规格 end ]]--> 
+                  </if>
+                </foreach>
+              </div>
+              
+              <!-- 已选择 start [[--
+               <div id="J_showhide_spec">
+                       <dl class="marginFR25 product-opt public-pl67 fn-clear">
+                           <dt class="attr">已&nbsp;选&nbsp;择</dt>
+                           <dd class="product-opt-info">
+                               <p>
+                                   <span class="M_color">"绿色"</span>                                                            
+                                   <span class="M_size">"38"</span>
+                               </p>
+                           </dd>
+                       </dl>
+               </div>
+               <!-- 已选择 end ]]--> 
+              
+              <!-- 预约 start ]]-->
+              <div id="J_reservation"> </div>
+              <!-- 预约 end ]]--> 
+              <!-- 预售 start ]]-->
+              <div id="J_pre_sale"> </div>
+              <!-- 预售 end [[--> 
+              <!-- 数量 start [[-->
+              <dl class="product-number public-pl67 fn-clear hide marginFR25" style="display: block;">
+                <dt class="attr">购买数量</dt>
+                <dd class="product-number-select">
+                  <ul>
+                    <li class="number fn-clear" data-type="match"> <a href="javascript:void(0);" class="mins no-mins" data-carnum="-1">−</a>
+                      <input type="text" value="1" class="buyNum tbuyNum" name="goods_num" autocomplete="off">
+                      <a href="javascript:void(0)" class="add" data-carnum="1">+</a> </li>
+                    <li id="pre_label" style="display:none">已预订数量<strong id="numValue">1</strong>件，剩余数量<strong id="numLast" data-maxnum=""></strong>件</li>
+                    <li id="ssm_limit_label" style="display:none">限购<strong id="ssm_limit">99</strong>件
+                      <span style="display:none" id="over_limit_label">，超过以购物车结算为准 </span>
+                    </li>
+                    <li id="ssm_label" style="display:none">促销库存<strong id="ssm_qty">99</strong>件
+                      <span style="display:none" id="over_qty_label">，超过以购物车结算为准 </span>
+                    </li>
+                  </ul>
+                </dd>
+              </dl>
+              <!-- 数量 end ]]--> 
+              <!-- 提交按钮 start [[-->
+              <div class="product-button public-pl67 fn-clear marginFR25">
+                <p class="beforebuy-txt create-txt"></p>
+                <div class="btn-con">
+                  <input type="hidden" name="goods_id" value="{$goods.goods_id}" />
+                  <a id="btnAddCart" href="javascript:;" onclick="javascript:AjaxAddCart({$goods.goods_id},1,0);" class="btn btn-ent flyShop">加入购物车</a> <a id="btnAvailableInform" href="javascript:void(0)" class="btn hide">到货通知</a> </div>
+              </div>
+              <!-- 提交按钮 end ]]--> 
+            </div>
+            <!-- 温馨提示 start -->
+            <dl class="warm public-pl67 marginFR25 hide">
+              <dt class="attr hide">温馨提示</dt>
+            </dl>
+            <!-- 温馨提示 end ]]--> 
+            <!-- 服务承诺 start [[-->
+            <dl class="sevice public-pl67 marginFR25">
+              <dt class="attr">服务承诺</dt>
+              <dd> <a><i class="fn-icon seven"></i>
+                <span>支持7天无理由退货</span>
+                </a> <a><i class="fn-icon"></i>
+                <span>正品保证</span>
+                </a> <a><i class="fn-icon"></i>
+                <span>假一赔三</span>
+                </a> </dd>
+            </dl>
+            <!-- 服务承诺 end ]]--> 
+          </div>
+        </div>
+        <!-- 价格、尺寸 end ]]-->
+      </form>
+      <!-- 店铺信息&评价 start [[-->
+      <div class="product-evaluate"> 
+        <!-- 看了又看 start [[-->
+        <div class="side-public side-look item-cf">
+          <div class="side-title fn-clear">
+            <span class="title">看了又看</span>
+            <div class="side-barter"> <a href="javascript:;" class="renovate"></a> 
+            <a href="javascript:;" class="barter" onclick="replace_look()">换一批</a> </div>
+          </div>
+          <ul id="see_and_see">
+
+          </ul>
+        </div>
+        <!-- 看了又看 end ]]--> 
+      </div>
+      <!-- 店铺信息&评价  end ]]--> 
+    </div>
+    <!-- 价格、尺寸&评价 end ]]--> 
+  </div>
+  <!-- 商品大图&小图展示  start [[-->
+  <div class="product-gallery">
+    <div class="product-photo" id="photoBody"> 
+      <!-- 商品大图介绍 start [[-->
+      <div class="product-img jqzoom"> 
+      	<img id="zoomimg" src="{$goods.goods_id|goods_thum_images=400,400}" alt="名典 2015尖头平底单鞋 新款休闲春秋女鞋 舒适蝴蝶结平底鞋 D51136" jqimg="{$goods.goods_id|goods_thum_images=800,800}"> 
+      </div>
+      <!-- 商品大图介绍 end ]]--> 
+      <!-- 商品小图介绍 start [[-->
+      <div class="product-small-img fn-clear"> <a href="javascript:;" class="next-left next-btn fl disabled"></a>
+        <div class="pic-hide-box fl">
+          <ul class="small-pic" style="left:0;">
+            <foreach name="goods_images_list" item="v" key="k" >
+               <li class="small-pic-li <if condition="$k eq 0">active</if>"> 
+               	 <a href="javascript:;"><img src="{$v.small_pic}" data-img="{$v.img_url}" data-big="{$v.big_pic}" alt="名典 2015尖头平底单鞋 新款休闲春秋女鞋 舒适蝴蝶结平底鞋 D51136怎么样"> <i></i></a> 
+               </li>
+            </foreach>
+          </ul>
+        </div>
+        <a href="javascript:;" class="next-right next-btn fl"></a> </div>
+      <!-- 商品小图介绍 end ]]--> 
+      <!-- 商品放大镜经过图 start [[-->
+      <div class="big-pic"> <img  class="postion_img" src="http://img01.fn-mart.com/C/item/2015/0425/201504C250000054/201504C250000116_032572112_800x800_w1.jpg" alt=""  width="800" height="800"> </div>
+      <!-- 商品放大镜经过图 end ]]--> 
+    </div>
+    <!-- 收藏商品 start [[-->
+    <div class="collect"> 
+    	<a href="javascript:void(0);" id="collectLink"><i class="collect-ico collect-ico-null"></i>
+      	<span class="collect-text">收藏商品</span>
+      	<em class="J_FavCount"></em></a> 
+      	<!-- <a href="javascript:void(0);" id="collectLink"><i class="collect-ico collect-ico-ok"></i>已收藏<em class="J_FavCount">(20)</em></a> --> 
+    </div>
+    <!-- 分享商品 -->
+    <div class="share"> <a  href="#none" clstag="shangpin|keycount|product|share_2"> <b></b><em>分享</em> </a> </div>
+  </div>
+  <!-- 商品大图&小图展示  end ]]--> 
+</div>
+<!-- 商品内容部分头部 end ]]--> 
+<!-- 商品内容部分左侧侧边栏 start [[-->
+<div class="product-about fn-clear">
+<!-- 商品内容部分左侧侧边栏 相关分类&同类其他品牌&看了又看&picadd start [[-->
+<div class="product-side fl"> 
+  <!-- 相关分类 start [[-->
+  <div class="side-related side-public">
+    <h2 class="title">相关分类</h2>
+    <div class="side-related-inner fn-clear "> 
+    	<foreach name="siblings_cate" item="cat">
+	    	<a href="{:U('Home/Goods/goodList',array('id'=>$cat[id]))}" target="_blank">{$cat.name}</a>
+		</foreach>
+    </div>
+  </div>
+  <!-- 销量排行榜 start [[-->
+  <div class="side-public side-look sale-top">
+    <h2 class="title">销量排行榜</h2>
+    <ul>
+      <tpshop sql="select * from `__PREFIX__goods` where is_recommend = 1 and cat_id=$goods[cat_id] order by goods_id desc limit 6" item="v" key="k" >
+      	<li>
+	      	<a href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" class="look-img" target="_blank">
+	       	<img src="{$v.goods_id|goods_thum_images=200,200}" alt=""></a>
+	        <h4 class="look-title"><a href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" target="_blank">{$v.goods_name}</a></h4>
+	        <p class="look-price"><del><q class="fn-rmb">¥</q><strong class="fn-rmb-num">{$v.market_price}</strong></del>
+	        <q class="fn-rmb">¥</q> <strong class="fn-rmb-num">{$v.shop_price}</strong></p>
+	        <a href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" class="look-bottom" target="_blank">查看详情</a> 
+        </li>
+      </tpshop>
+    </ul>
+  </div>
+  <!-- 销量排行榜 end ]]--> 
+</div>
+<!-- 商品内容部分左侧侧边栏 相关分类&同类其他品牌&看了又看&picadd end ]]--> 
+<!-- 商品内容主题部分 start [[-->
+<div class="product-detail fl">
+<!-- 优惠套餐&任意搭配 start [[-->
+<div class="detail-package detail-tabcont">
+<div id="J_package_list"> </div>
+<!-- 优惠套餐&任意搭配 end ]]--> 
+<!-- 商品介绍&规格包装&评价&售后服务 start [[-->
+<div class="product-article detail-tabcont fn-clear">
+<!-- tab切换 start [[-->
+<div class="detail-tab">
+  <ul class="tab fn-clear J_tabFixed">
+    <li class="tab-bottn"> <a href="javascript:;"></a> </li>
+    <li class="tab-inner" id="tabInner"> 
+    	<a href="javascript:void(0);" class="tab-toggle  tab-cur">商品介绍</a> 
+    	<a href="javascript:void(0);" class="tab-toggle">规格参数</a> 
+      	<a href="javascript:void(0);" class="tab-toggle">评价（<em class="total_comment">{$commentStatistics['c0']}</em>）</a> 
+      	<a href="javascript:void(0);" class="tab-toggle">售后服务</a>
+      	<div class="addshop-tab" id="J_addshop_tab"> 
+      	</div>
+    </li>
+  </ul>
+</div>
+<!-- tab切换 end ]]--> 
+<!-- 商品介绍&规格包装&评价&售后服务 内容部分 start [[-->
+<div class="detail-public" id="detailTop">
+
+<!-- 商品介绍 start [[-->
+<div class="detail-depict detail-box fn-clear show"> 
+  <!-- 商品介绍内容部分 start [[-->
+  <div class="depict-left fl"> 
+    <!-- 商品介绍内容部分__规格参数 start [[ -->
+    <div class="depict-text">
+      <p class="depict-text-title" id="p1">商品名称：{$goods.goods_name}</p>
+      <ul class="depict-list fn-clear">
+        <li>
+          <span>品牌：</span>
+          <span><a href="" title="">{$goods.brand_id}</a></span>
+        </li>
+        <li>
+          <span>货号：</span>
+          <span title="平跟">{$goods.goods_sn}</span>
+        </li>
+        <foreach name="goods_attr_list" item="v" key="k" >
+        <if condition="$k lt 9">
+	        <li>
+	          <span>{$goods_attribute[$v[attr_id]]}：</span>
+	          <span title="{$v[attr_value]}">{$v[attr_value]}</span>
+	        </li>
+        </if>
+        </foreach>
+      </ul>
+    </div>
+    <div class="u-rmd-slide slide hide" id="todayRec"></div>
+    {$goods.goods_content|htmlspecialchars_decode} 
+    <!--  商品介绍内容部分__规格参数 end ]] --> 
+  </div>
+  <!-- 商品介绍内容部分__右导航部分 end ]]-->
+  <div class="depict-right fr">
+    <div class="depict-aside">
+      <ul class="aside-list J_tabFixed">
+        <li class="aside-cur"> <a href="javascript:;" data-id="product_information"><i class="round-icon"></i>商品描述</a> </li>
+      </ul>
+    </div>
+  </div>
+  <!-- 商品介绍内容部分 end ]]--> 
+</div>
+<!-- 商品介绍 end ]]--> 
+<!-- 规格包装 start [[-->
+<div class="detail-norm detail-box hide">
+  <table class="norm-table">
+    <tbody>
+      <tr class="title">
+        <th colspan="2">规格</th>
+      </tr>
+      <foreach name="goods_attr_list" item="v" key="k" >
+        <tr>
+          <td>{$goods_attribute[$v[attr_id]]}</td>
+          <td>{$v[attr_value]}</td>
+        </tr>
+      </foreach>
+    </tbody>
+  </table>
+  <div class="spec">
+    <table class="norm-table-body">
+      <tbody>
+        <tr class="title">
+          <th colspan="2"></th>
+        </tr>
+        <tr>
+          <td class="norm-td"></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="norm-td"></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="norm-td"></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="norm-td"></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <p> </p>
+  </div>
+</div>
+<!-- 规格包装 end ]]--> 
+<!-- 评价 start [[-->
+<div class="detail-assess detail-box hide">
+  <div class="fn-comment" id="comment" style="">
+    <div class="fn-comment-title">
+      <div class="fn-mt">
+        <h3 class="fl">商品评价</h3>
+        <span class="c-01">（共
+        <span class="red">
+        <span data-user-count="1">51</span>
+        位</span>
+        参加本商品评论）</span>
+        <span class="fn-mt-a">所有评论均来自已购买本商品会员</span>
+      </div>
+      <div class="fn-mc fix">
+        <div class="fn-mc-lt">
+          <div class="c-01"> <strong>
+            <span data-good-comment-pre="1">{$commentStatistics['rate1']}</span>
+            <b>%</b></strong>
+            <p>好评率</p>
+          </div>
+          <dl>
+            <dd>好评(
+              <span data-good-comment-pre="1">{$commentStatistics['rate1']}</span>
+              %)</dd>
+            <dt>
+              <div data-good-bar="1" style="width: 96px;"></div>
+            </dt>
+            <dd>中评(
+              <span data-middle-comment-pre="1">{$commentStatistics['rate2']}</span>
+              %)</dd>
+            <dt>
+              <div data-middle-bar="1" style="width: 1px;"></div>
+            </dt>
+            <dd>差评(
+              <span data-low-comment-pre="1">{$commentStatistics['rate3']}</span>
+              %)</dd>
+            <dt>
+              <div data-low-bar="1" style="width: 3px;"></div>
+            </dt>
+          </dl>
+        </div>
+        <div class="fn-mc-ce">
+          <p>牛人评价：</p>
+          <ul class="fn-comment-yun">
+            <li>穿上很舒服(42)</li>
+            <li>质量不错(15)</li>
+            <li>面料不错(14)</li>
+            <li>弹性很好(12)</li>
+            <li>手感不错(11)</li>
+            <li>物流快速(10)</li>
+            <li>颜色好看(10)</li>
+            <li>服务满意(8)</li>
+          </ul>
+        </div>
+        <div class="fn-mc-rt">
+          <button class="btn" data-mask-show="1">发表评价</button>
+          <p class="double_points">
+            <span>发表评价可获得TPshop积分哦~ <br>
+            加精置顶还可赢双倍积分<br>
+            </span>
+            详见<a href="http://sale.tp-shop.cn/help_center/hc-6.html">[积分规则]</a></p>
+        </div>
+      </div>
+      <!-- /.fn-mc --> 
+    </div>
+    <div class="fn-comment-list">
+      <div class="fn-mt fix">
+        <ul>
+          <li data-comment-type="0" class="on">全部评论(
+            <span data-totel-comment="1">{$commentStatistics['c0']}</span>
+            )</li>
+          <li data-comment-type="1">好评(
+            <span data-good-comment="1">{$commentStatistics['c1']}</span>
+            )</li>
+          <li data-comment-type="2">中评(
+            <span data-middle-comment="1">{$commentStatistics['c2']}</span>
+            )</li>
+          <li data-comment-type="3">差评(
+            <span data-low-comment="1">{$commentStatistics['c2']}</span>
+            )</li>
+          <li data-comment-type="4">追评(
+            <span data-se-comment="1">2</span>
+            )</li>
+          <li data-comment-type="5">回复(
+            <span data-replay-comment="1">2</span>
+            )</li>
+          <li data-comment-type="6">晒单(
+            <span data-image-comment="1">0</span>
+            )</li>
+        </ul>
+        <div class="fn-mt-bor" style="left: 0px;"></div>
+      </div>
+      <!-- /.fn-mt 评论导航 -->
+      <div class="fn-comment-not" style="display: none;"> 暂无商品评价！只有购买过该商品的用户才能进行评价哦！ </div>
+      <div id="ajax_comment_return"> </div>
+    </div>
+  </div>
+  <div class="loading_box" id="loadingBox" style="display: none;">
+    <span class="loading_text"> <i class="loading_icon"></i>
+    <span>载入中，请稍等...</span>
+    </span>
+  </div>
+</div>
+<!-- 评价 end ]]--> 
+<!-- 售后服务 start [[-->
+<div class="detail-service detail-box hide">
+<!--转单非生鲜-->
+	<p style="font-weight: bold;padding: 20px 0 0 30px;">本商品由TPshop网入驻商家提供配送服务，购买前请仔细阅读以下退货说明</p>
+	<dl>
+	<dt class="red">商家直送的商品退货流程（七天无理由退货）：</dt>
+		<dd>
+		  <ol>
+		    <li>自买家签收商品隔日起七日内可自助提交退货申请，请直接至「<a class="sevice_url" target="_blank" href="https://member.tp-shop.cn/order/orderList">我的订单</a>」→「<a class="sevice_url" target="_blank" href="https://member.tp-shop.cn/order/orderList">退订</a>」提交退货申请。</li>
+		    <li>顾客依照「退订」中的退货寄件地址自行安排第三方物流或快递寄回商品，并且支付运费。</li>
+		    <li>商品退回检測无误后，TPshop网将提交退款申请, 通过线上支付的订单办理退货, 实际款项会依照各银行作业时间返还至您原支付方式。</li>
+		    <li>若退回商品有缺件、影响二次销售状况时，不符合退货条件, 退款作业将暂时停止，TPshop网客服人员会与您联系说明，并由商家将商品返还给您 （如对于结果有异议,可联系<a class="sevice_url" target="_blank" href="https://member.tp-shop.cn/docheck/maomao_checkin?u=aHR0cDovL2Zub25saW5lLmZlaW5pdS5jb20vbGl2ZTgwMC9jaGF0Q2xpZW50L2NoYXRib3guanNwP2NvbXBhbnlJRD04OTM0JmNvbmZpZ0lEPTEyMSZlbnRlcnVybD1odHRwcyUzQSUyRiUyRm1lbWJlci5mZWluaXUuY29tJTJGJnBhZ2VyZWZlcnJlcj0lRTYlOUYlQTUlRTglQUUlQTIlRTUlOEQlOTUtJUU4JUFFJUEyJUU1JThEJTk1JUU1JTg4JTk3JUU4JUExJUE4Jms9MSZpbmZvPXVzZXJJZCUzRHJvZ2VybW9jJTQwZ21haWwuY29tJTI2bG9naW5uYW1lJTNEMjAxNTA4Q1AxMDAwMTQxNCUyNmdyYWRlJTNENCUyNm5hbWUlM0Ryb2dlcm1vYyU0MGdtYWlsLmNvbSUyNm1lbW8lM0RNRU1PK1RFU1QlMjZ0aW1lc3RhbXAlM0QxNDM5MTY5ODI1ODAzJTI2aGFzaENvZGUlM0RBODQ3QjM4RDBFRDc0NTIzMkI1QjAyOUE2MTMxRjQ3Mg==">TPshop客服咨询</a>或<a class="sevice_url" target="_blank" href="https://member.tp-shop.cn/my_returns/return_list_apply">重新发起申请退货</a>并补充相关凭证）。</li>
+		  </ol>
+		</dd>
+		<dt class="red">商家直送的商品退货流程（有理由退货）：</dt>
+		<dd>
+		  <ol>
+		    <li>由于商品缺件、寄错商品、产品瑕疵等原因而发起的退货，请直接至「<a class="sevice_url" target="_blank" href="https://member.tp-shop.cn/order/orderList">我的订单</a>」→「<a class="sevice_url" target="_blank" href="https://member.tp-shop.cn/order/orderList">退订</a>」提交退货申请。</li>
+		    <li>顾客依照「<a class="sevice_url red">退订</a>」中的退货寄件地址自行安排第三方物流或快递寄回商品，并且垫付运费。</li>
+		    <li>商品退回检測无误后，TPshop网将提交退款申请, 通过线上支付的订单办理退货, 实际款项会依照各银行作业时间返还至您原支付方式。同时TPshop网会补贴10元抵用券到您的TPshop网帐户以作为退货运费补偿。</li>
+		    <li>若退回商品有缺件、影响二次销售状况时，不符合退货条件, 退款作业将暂时停止，TPshop网客服人员会与您联系说明，并由商家将商品返还给您 （如对于结果有异议,可连系<a class="sevice_url" target="_blank" href="https://member.tp-shop.cn/docheck/maomao_checkin?u=aHR0cDovL2Zub25saW5lLmZlaW5pdS5jb20vbGl2ZTgwMC9jaGF0Q2xpZW50L2NoYXRib3guanNwP2NvbXBhbnlJRD04OTM0JmNvbmZpZ0lEPTEyMSZlbnRlcnVybD1odHRwcyUzQSUyRiUyRm1lbWJlci5mZWluaXUuY29tJTJGJnBhZ2VyZWZlcnJlcj0lRTYlOUYlQTUlRTglQUUlQTIlRTUlOEQlOTUtJUU4JUFFJUEyJUU1JThEJTk1JUU1JTg4JTk3JUU4JUExJUE4Jms9MSZpbmZvPXVzZXJJZCUzRHJvZ2VybW9jJTQwZ21haWwuY29tJTI2bG9naW5uYW1lJTNEMjAxNTA4Q1AxMDAwMTQxNCUyNmdyYWRlJTNENCUyNm5hbWUlM0Ryb2dlcm1vYyU0MGdtYWlsLmNvbSUyNm1lbW8lM0RNRU1PK1RFU1QlMjZ0aW1lc3RhbXAlM0QxNDM5MTY5ODI1ODAzJTI2aGFzaENvZGUlM0RBODQ3QjM4RDBFRDc0NTIzMkI1QjAyOUE2MTMxRjQ3Mg==">TPshop客服咨询</a>或<a class="sevice_url" target="_blank" href="https://member.tp-shop.cn/my_returns/return_list_apply">重新发起申请退货</a>并补充相关凭证）。</li>
+		  </ol>
+		</dd>
+		<dt class="red">注意：</dt>
+		<dd>
+		  <ol>
+		    <li>顾客办理退货后，需要自行联系物流公司将退货商品寄回TPshop网指定退货地点；该商品为TPshop入驻商家直送，暂未提供上门取件的服务，不便之处，敬请谅解。</li>
+		    <li>TPshop网办理退货不收取任何手续费、入仓费等费用，退货时如遇快递公司要求收取额外费用，建议您更换其他快递。</li>
+		    <li>顾客需选择快递方式将商品寄回，并支付快递费用，本商品退货不接受平邮或以到付形式寄回包裹。</li>
+		    <li>由“有理由退货”而产生的TPshop运费补贴（10元抵用券）有效期为2个月。</li>
+		    <li>多张订单同一包裹寄回，仅补贴一次运费。TPshop网有权对无正当理由多次退货或拒收商品的用户保留不再给予10元抵用券退货补贴的权利。</li>
+		    <li>退回来的包裹中用纸条写明退货的订单号和TPshop帐号名称，才可以顺利完成退货。</li>
+		    <li>退货发回来以后请顾客留存物流单号和对应快递公司，便于后续追踪退件物流信息。</li>
+		  </ol>
+		</dd>
+		<dt class="red">温馨提醒：</dt>
+		<dd>
+		  <ol>
+		    <li>此商品由入驻TPshop网的商家直接发货，且不支持货到付款。</li>
+		    <li>商品会以第三方物流方式配送。</li>
+		    <li>配送地址需在快递可送货范围内，如遇偏远地区无法送达的地方，我们会将商品送达当地最近物流点并通知顾客自提。</li>
+		    <li>物品需本人签收，收到物品请务必先行检查，确认完好后再签收。</li>
+		    <li>如果收货过程中，发现任何问题请第一时间联系TPshop网客服400-920-6565，我们会及时解决您的问题。</li>
+		  </ol>
+		</dd>
+		<dt class="red">以下状况TPshop网将不接受您的退货：</dt>
+		<dd>
+		  <ol>
+		    <li>商品非TPshop网所贩售出之商品，如：商品序号不符。</li>
+		    <li>未经授权的维修、误用、碰撞、疏忽、滥用、进液、事故、改动、不正确的安装所造成的商品质量问题，或撕毁、涂改标贴、机器序号、 防伪标记。</li>
+		    <li>若有索取发票未随货退回、或发票有经涂改、破损影响识别之状况。</li>
+		    <li>食品类、保健品、烟酒类、化妆品、个人卫生用品、耗材、电池、胶卷、虚拟商品、软件类等商品已有拆封状况；服饰、配件类已进行修改。</li>
+		    <li>商品说明书、保修卡涂改、污损、缺少未退回。</li>
+		    <li>商品包装破损，配件、附件不齐全、污损等。</li>
+		    <li>其他依法律/规不受理退货者，如:知识产权保护商品。</li>
+		    <li>虚拟类商品，例如礼品卡，购物卡，手机充值、游戏点卡等充值类商品，以及门票、提货券、机票、旅游套餐等一次性消费服务类商品等。</li>
+		  </ol>
+		</dd>
+	</dl>
+</div>
+<!-- 售后服务 end ]]-->
+</div>
+<!-- 商品介绍&规格包装&评价&售后服务 内容部分 end ]]-->
+</div>
+<!-- 商品介绍&规格包装&评价&售后服务 end ]]--> 
+<!-- seo商品详情 -->
+<!--<div class="audit">
+  <div class="audit-btnArea"> <a class="audit-btn">
+    <h5 class="audit-tilte">商品简介</h5>
+    <span class="audit-icon audit-up"></span>
+    </a> </div>
+  <div class="audit-txt"> </div>
+</div>-->
+<!-- seo商品详情 end -->
+</div>
+<!-- 商品内容主题部分 end ]]-->
+</div>
+<!-- 商品内容部分左侧侧边栏 end ]]-->
+</div>
+</div>
+
+<!-- 弹层内容块 start [[--> 
+<!-- 看了又看 -->
+<div style="display:none">
+      <ul id="look_see">
+       <foreach name="look_see" item="look">
+       <li>
+	     	 <a href="{:U('Home/Goods/goodsInfo',array('id'=>$look[goods_id]))}" class="look-img" target="_blank"> <img src="{$look.goods_id|goods_thum_images=200,200}" alt=""></a>
+	         <h4 class="look-title">
+	         	<a href="{:U('Home/Goods/goodsInfo',array('id'=>$look[goods_id]))}">{$look.goods_name|getSubstr=0,30}</a>
+	         </h4>
+	         <p class="look-price">
+	         	<del><q class="fn-rmb">¥</q><strong class="fn-rmb-num">{$look.market_price}</strong></del>
+	         	<q class="fn-rmb">¥</q> <strong class="fn-rmb-num">{$look.shop_price}</strong>
+	         </p>
+       </li>
+	  </foreach>
+     </ul>
+</div>
+
+<!-- 预售内容块 start [[-->
+<div id="preSaleBox" class="collect-public" style="display:none;">
+  <div class="colect-top"> <i class="colect-fail"></i>
+    <div class="conect-title">
+      <span>下手太慢哦，商品已被抢走。</span>
+      <div class="add-cart-btn fn-clear"> <a href="javascript:;" class="ui-button ui-button-f80 fl go-shopping">继续购物</a><a href="www.tp-shop.cn" class="ui-button ui-button-122 fl">返回首页</a> </div>
+    </div>
+  </div>
+</div>
+<!-- 预售内容块 end ]]--> 
+<!-- 加入购物车内容块 start [[-->
+<div id="addCartBox" class="collect-public" style="display:none;">
+  <div class="colect-top"> <i class="colect-icon"></i>
+    <div class="conect-title">
+      <span>添加成功！</span>
+      <div class="add-cart-btn fn-clear"> <a href="javascript:;" class="ui-button ui-button-f80 fl go-shopping">继续购物</a><a href="http://buy.tp-shop.cn/cart/index" class="ui-button ui-button-122 fl">去购物车结算</a> </div>
+    </div>
+  </div>
+  <div id="watch">
+    <span>购买此宝贝的用户还购买了：</span>
+    <ul class="fn-clear buy-list">
+    </ul>
+  </div>
+</div>
+<!-- 加入购物车内容块 end ]]--> 
+<!-- 优惠券领取 start [[-->
+<div id="addCoupon-box" class="collect-public">
+  <div class="colect-top addCoupon-top"> <i class="colect-icon"></i>
+    <div class="conect-title">
+      <span>恭喜您优惠券领取成功！</span>
+      <div class="conect-txt">
+        <p>优惠金额：<strong class="promote"></strong> </p>
+        <p class="postal_type">使用范围：限TPshop自营商品</p>
+        <p>使用时间：
+          <span class="promote-time"></span>
+        </p>
+        <p class="hide">还可领取：
+          <span class="va_take_qty">0</span>张</p>
+        <p class="autohref">5秒后页面自动跳转</p>
+      </div>
+      <div class="add-cart-btn"> <a href="https://i.tp-shop.cn/coupon/coupon_lists?firstOpen=0" class="ui-button ui-button-80">查看优惠券</a> </div>
+      <p class="hide marginT8">点击查看 <a href="https://i.tp-shop.cn/coupon/coupon_lists?firstOpen=0">我的优惠券>></a> 
+    </div>
+  </div>
+</div>
+<!-- 优惠券领取 end ]]--> 
+<!-- 收藏单品内容块 start [[-->
+<div id="collect-box" class="collect-public">
+  <div class="colect-top"> <i class="colect-icon"></i>
+    <div class="conect-title marginB10">
+      <span>成功加入收藏夹！</span>
+      <p>查看<a href="http://my.tp-shop.cn/favorite/prodsFavorite ">我的收藏夹</a> </p>
+    </div>
+  </div>
+  <div id="watch">
+    <span>收藏了该商品的用户还喜欢</span>
+    <ul class="fn-clear watch-list">
+    </ul>
+  </div>
+</div>
+<!-- 收藏单品内容块 end ]]--> 
+<!-- 订阅到货通知 start [[-->
+<div id="togoods-box" class="collect-public">
+  <div class="togoods-title">
+    <span>30日内商品一旦到货，我们立即通过手机短信、邮件、消息中心通知您</span>
+  </div>
+  <div class="togoods-content">
+    <ul>
+      <li><em>手机号码：</em><input type="text" class="go-input txt-phone-num"><i>*手机号码不能为空</i> </li>
+      <li><em>邮箱地址：</em><input type="text" class="go-input txt-email"><i></i> </li>
+      <li><label><input type="checkbox" checked="checked" class="radio"> 添加到收藏夹</label></li>
+      <li class="button"><a href="javascript:void(0);" class="ui-button ui-button-80" id="togoodsSubmit">提交</a> </li>
+    </ul>
+  </div>
+</div>
+<!-- 订阅到货通知 end ]]--> 
+<!-- 订阅到货通知成功 start [[-->
+<div id="togoods-sub-box" class="collect-public to-public">
+  <div class="colect-top"> <i class="colect-icon"></i>
+    <div class="conect-title">
+      <span>商品订阅到货通知成功！</span>
+    </div>
+  </div>
+  <div id="watch">
+    <span>游览了此商品的用户还看了：</span>
+    <ul class="fn-clear watch-list">
+    </ul>
+  </div>
+</div>
+<!-- 订阅到货通知 end ]]--> 
+<!-- 订阅降价通知 start [[-->
+<div id="toprice-box" class="collect-public">
+  <div class="togoods-title">
+    <span>30日内商品一旦降价，我们立即通过手机短信、邮件、消息中心通知您</span>
+  </div>
+  <div class="togoods-content">
+    <ul>
+      	<li class="go-one"><em>价格低于：</em><input type="text" class="go-input  txt-price"> 元时，通知我<i></i> </li>
+      	<li><em>手机号码：</em><input type="text" class="go-input txt-phone-num"><i></i> </li>
+      	<li><em>邮箱地址：</em><input type="text" class="go-input  txt-email"><i></i> </li>
+      	<li><label><input type="checkbox" class="radio" checked="checked"> 添加到收藏夹</label></li>
+      	<li class="button"><a href="javascript:void(0);" class="ui-button ui-button-80" id="topriceSubmit">提交</a></li>
+    </ul>
+  </div>
+</div>
+<!-- 订阅降价通知 end ]]--> 
+<!-- 订阅到货通知成功 start [[-->
+<div id="toprice-sub-box" class="collect-public to-public">
+  <div class="colect-top"> <i class="colect-icon"></i>
+    <div class="conect-title">
+      <span>订阅成功</span>
+    </div>
+  </div>
+  <div id="watch">
+    <span>游览了此商品的用户还看了：</span>
+    <ul class="fn-clear watch-list">
+    </ul>
+  </div>
+</div>
+<!-- 订阅到货通知 end ]]--> 
+<!-- 规格修改小弹层1 start [[-->
+<div class="small-layer">
+  <div class="small-layer-cont"> <i class="small-layer-close"></i>
+    <div class="small-layer-body" id="J_layer_body"> </div>
+  </div>
+</div>
+<!-- 规格修改小弹层1 end ]]--> 
+<!-- 预约手机登入 start [[-->
+<div id="reservation-box" class="collect-public hide">
+  <div class="togoods-title rese-title">
+    <span>请确认填写信息以提高您的抢购成功率，我们将会在商品抢购开始前通过免费短信提醒您。</span>
+  </div>
+  <div class="togoods-content rese-content">
+    <ul>
+      <li><em><span class="">*</span> 手机号码：</em><input type="text" class="go-input txt-phone-num"><i></i> </li>
+      <li><em><span class="rese-verifi">*</span>验证码：</em>
+        <input type="text" class="go-input go-verifi txt-verifi fl">
+        <img class="phone-verifi fl marginR10" id="input-verifi"/><i></i> </li>
+      <li><em>
+        <span class="">*</span>手机验证：</em>
+        <input type="text" class="go-input go-verifi txt-phone-verifi fl">
+        <a class="phone-verifi fl marginR10" id="phone-verifi" href="javascript:;">获取验证码</a><i></i> <a class="fl hide" href="javascript:;" id="phone-verif-time"></a> </li>
+      <li class="button"><a href="javascript:void(0);" class="btn btn-appointment" id="reserSubmit"></a> </li>
+    </ul>
+  </div>
+  <div class="rese-prompt">
+    <p><strong class="fl">温馨提示：</strong>预约并不代表购买成功，请再开始购买时准时访问。数量有限，先到先得。</p>
+  </div>
+</div>
+<!-- 预约手机登入 end ]]--> 
+<!-- 预约状态 start [[-->
+<div id="appointment-box" class="collect-public hide">
+  <div class="colect-top rese-border"> <i class="colect-icon"></i>
+    <div class="conect-title">
+      <span class="marginB20">恭喜您预约成功。</span>
+      <p class="youself-appointment marginB20 hide">预约记录可以登入TPshop网，在“ 个人中心 > <a href="https://home.tp-shop.cn/appointment/index" class="myself-rese">我的预约</a> ”中查看</p>
+      <div class="add-cart-btn success-btn fn-clear hide"> <a href="javascript:;" class="ui-button ui-button-f80 fl go-shopping">继续购物</a><a href="https://home.tp-shop.cn/appointment/index" class="ui-button ui-button-f103 fl marginL10">查看我的预约</a> </div>
+      <div class="add-cart-btn fail-btn fn-clear hide"> <a href="javascript:;" class="ui-button ui-button-f80 fl go-shopping">确认</a> </div>
+    </div>
+  </div>
+</div>
+<!-- 预约状态 end ]]--> 
+ 
+<include file="Public/footer" /> 
+<script src="__PUBLIC__/js/layer/layer.js"></script> 
+<script type="text/javascript" src="__STATIC__/js/jquery.jqzoom.js"></script> 
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/pc_common.js"></script> 
+<script type="text/javascript">
+$(document).ready(function(){
+	/*商品缩略图放大镜*/
+	$(".jqzoom").jqueryzoom({
+		xzoom: 500,
+		yzoom: 500,
+		offset: 1, 
+		position: "right", 
+		preload:1,
+		lens:1
+	});
+	get_goods_price();
+	replace_look();
+	commentType = 1; // 评论类型
+    ajaxComment(1,1);// ajax 加载评价列表
+});
+
+var store_count = {$goods.store_count}; // 商品起始库存	
+//缩略图切换
+$('.small-pic-li').each(function(i,o){
+	var lilength = $('.small-pic-li').length;
+	$(o).hover(function(){
+		$(o).siblings().removeClass('active');
+		$(o).addClass('active');
+		$('#zoomimg').attr('src',$(o).find('img').attr('data-img'));
+		$('#zoomimg').attr('jqimg',$(o).find('img').attr('data-big'));
+		
+		$('.next-btn').removeClass('disabled');
+		if(i==0){
+			$('.next-left').addClass('disabled');
+		}
+		if(i+1==lilength){
+			$('.next-right').addClass('disabled');
+		}
+	});
+})
+
+//前一张缩略图
+$('.next-left').click(function(){
+	var newselect = $('.small-pic>.active').prev();
+	$('.small-pic>.active').removeClass('active');
+	$(newselect).addClass('active');
+	$('#zoomimg').attr('src',$(newselect).find('img').attr('data-img'));
+	$('#zoomimg').attr('jqimg',$(newselect).find('img').attr('data-big'));
+	var index = $('.small-pic>li').index(newselect);
+	if(index==0){
+		$('.next-left').addClass('disabled');
+	}
+	$('.next-right').removeClass('disabled');
+})
+
+//后前一张缩略图
+$('.next-right').click(function(){
+	var newselect = $('.small-pic>.active').next();
+	$('.small-pic>.active').removeClass('active');
+	$(newselect).addClass('active');
+	$('#zoomimg').attr('src',$(newselect).find('img').attr('data-img'));
+	$('#zoomimg').attr('jqimg',$(newselect).find('img').attr('data-big'));
+	var index = $('.small-pic>li').index(newselect);
+	if(index+1 == $('.small-pic>li').length){
+		$('.next-right').addClass('disabled');
+	}
+	$('.next-left').removeClass('disabled');
+})
+
+//商品介绍、规格、评论、售后切换
+$('#tabInner .tab-toggle').each(function(i,o){
+	$(o).click(function(){
+		$(o).addClass('tab-cur');
+		$(o).siblings().removeClass('tab-cur');
+		$('#detailTop .detail-box').hide();
+		$('#detailTop .detail-box').eq(i).show();
+	})
+});
+
+//购买数量+1
+$('.mins').click(function(){
+	var buynum = parseInt($('.buyNum').val());
+	if(buynum>1){
+		$('.buyNum').val(buynum-1);
+	}
+	if(buynum-1 ==1){
+		$('.mins').addClass('no-mins');
+	}
+	$('.add').removeClass('no-mins');
+	return false;
+});
+
+//购买数量-1
+$('.add').click(function(){
+	var buynum = parseInt($('.buyNum').val());
+	if(buynum<10){
+		$('.buyNum').val(buynum+1);
+	}
+	if(buynum+1 == store_count){
+		$('.add').addClass('no-mins');
+	}
+	$('.mins').removeClass('no-mins');
+	return false;
+});
+
+//选择规格属性
+$('.selectCtrl>li').each(function(){
+	if(!$(this).hasClass('nosold')){
+		$(this).click(function(){
+			$(this).siblings().removeClass('select');
+			$(this).siblings().children('input').prop('checked',false);
+			$(this).children('input').prop('checked',true);	
+			$(this).addClass('select');
+			get_goods_price();
+		})
+	}
+})
+
+ /*** 查询商品价格*/  
+ function get_goods_price()
+ {	 	 	
+
+	var goods_price = {$goods.shop_price}; // 商品起始价
+	var spec_goods_price = {$spec_goods_price};  // 规格 对应 价格 库存表   //alert(spec_goods_price['28_100']['price']);	
+	// 如果有属性选择项
+	if(spec_goods_price != null)
+	{
+		var goods_spec_arr = [];
+		$("input[name^='goods_spec']:checked").each(function(){
+			 goods_spec_arr.push($(this).val());
+		});    
+		var spec_key = goods_spec_arr.sort(sortNumber).join('_');  //排序后组合成 key
+		var goods_price = spec_goods_price[spec_key]['price']; // 找到对应规格的价格		
+		var store_count = spec_goods_price[spec_key]['store_count']; // 找到对应规格的库存
+	}
+	
+	$(".fn-rmb-num").html(goods_price); // 变动价格显示
+ }
+ 
+//用作 sort 排序用
+function sortNumber(a,b) 
+{ 
+	return a - b; 
+} 
+
+// 好评差评 切换
+$(".eval-cen-le a").click(function(){
+		$(".eval-cen-le li").removeClass('curres');	
+		$(this).parent().addClass('curres');	
+		commentType = $(this).data('t');// 评价类型   好评 中评  差评
+		ajaxComment(commentType,1);
+});
+								
+// 用ajax分页显示评论
+function ajaxComment(commentType,page){
+     $.ajax({
+         type : "GET",
+         url:"/index.php?m=Home&c=goods&a=ajaxComment&goods_id={$goods['goods_id']}&commentType="+commentType+"&p="+page,//+tab,
+         success: function(data){
+             $("#ajax_comment_return").html('');
+             $("#ajax_comment_return").append(data);
+         }
+     });
+}
+ 
+//看了又看切换
+var tmpindex = 0; 
+var look_see_length = $('#look_see').children().length;
+function replace_look(){
+	var listr='';
+	if(tmpindex*3>=look_see_length) tmpindex = 0;
+	//console.log(look_see_length);
+	$('#look_see').children().each(function(i,o){
+		if((i>=tmpindex*3) && (i<(tmpindex+1)*3)){
+			listr += '<li>'+$(o).html()+'</li>';
+		}
+	});
+	tmpindex++;
+	$('#see_and_see').empty().append(listr);
+} 
+
+$('#collectLink').click(function(){
+	var user_id = '{$user_id}';
+	if(user_id == '0'){
+	    layer.open({
+	        type: 2,
+	        title: '<b>登陆TPshop网</b>',
+	        skin: 'layui-layer-rim',
+	        shadeClose: true,
+	        shade: 0.5,
+	        area: ['470px', '450px'],
+	        content: "{:U('Home/User/pop_login')}", 
+	    });
+	}else{
+		$.ajax({
+			type:'post',
+			dataType:'json',
+			data:{goods_id:$('input[name="goods_id"]').val()},
+			url:"{:U('Home/Goods/collect_goods')}", 
+			success:function(res){
+				if(res.status == 1){
+					layer.msg('成功添加至收藏夹', {icon: 1});
+				}else{
+					layer.msg(res.msg, {icon: 3});
+				}
+			}
+		});
+	}
+})
+</script>
+</body>
+</html>

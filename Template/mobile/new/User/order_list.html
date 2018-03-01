@@ -1,0 +1,115 @@
+<include file="Public/header"/>
+<body>
+<header>
+<div class="tab_nav">
+   <div class="header">
+     <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="back"></a></div>
+     <div class="h-mid">My order</div>
+     <div class="h-right">
+       <aside class="top_bar">
+         <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+       </aside>
+     </div>
+   </div>
+ </div>
+</header>
+<include file="Public/menu"/>
+
+<div id="tbh5v0">
+<!--------筛选 form 表单 开始-------------->
+<form action="{:U('Mobile/order_list/ajax_order_list')}" name="filter_form" id="filter_form">  
+      <div class="Evaluation2">
+            <ul>
+              <li><a href="{:U('/Mobile/User/order_list')}" class="tab_head <if condition="$_GET[type] eq ''">on</if>"  >All</a></li>
+              <li><a href="{:U('/Mobile/User/order_list',array('type'=>'WAITPAY'))}"      class="tab_head <if condition="$_GET[type] eq 'WAITPAY'">on</if>">Waiting to Pay</a></li>
+              <li><a href="{:U('/Mobile/User/order_list',array('type'=>'WAITSEND'))}"     class="tab_head <if condition="$_GET[type] eq 'WAITSEND'">on</if>">Waiting Shipped</a></li>
+              <li><a href="{:U('/Mobile/User/order_list',array('type'=>'WAITRECEIVE'))}"  class="tab_head <if condition="$_GET[type] eq 'WAITRECEIVE'">on</if>">Waiting to Receive</a></li>
+              <li><a href="{:U('/Mobile/User/order_list',array('type'=>'WAITCCOMMENT'))}" class="tab_head <if condition="$_GET[type] eq 'WAITCCOMMENT'">on</if>">to Comment</a></li>
+            </ul>
+      </div>     
+      
+	<div class="order ajax_return">
+	   <volist name="lists" id="list">
+       <div class="order_list">
+          <h2>
+              <a href="javascript:void(0);">
+                  <img src="__STATIC__/images/dianpu.png"><span>Order number:{$list.order_sn}</span>
+                  <strong><if condition="$list[order_status] eq 5"><b>Obsolete</b></if>
+                  <img src="__STATIC__/images/icojiantou1.png"></strong>
+              </a>
+          </h2>
+         	<a href="{:U('/Mobile/User/order_detail',array('id'=>$list['order_id']))}">
+	          <volist name="list.goods_list" id="good">
+		          <dl style="position: relative">  
+		          <dt><img src="{$good.goods_id|goods_thum_images=200,200}"></dt>
+		          <dd class="name"><strong>{$good.goods_name}</strong>
+		          <span style="position: absolute;">{$good.spec_key_name} </span></dd>
+		          <dd class="pice">${$good['member_goods_price']}元<em>x{$good['goods_num']}</em></dd>
+				  <dd class="pice">                  
+                  	<em>                    	  
+                          <if condition="($list[return_btn] eq 1) and ($good[is_send] eq 1)">
+                          	<a href="{:U('Mobile/User/return_goods',array('order_id'=>$list[order_id],'order_sn'=>$list[order_sn],'goods_id'=>$good[goods_id],'spec_key'=>$good['spec_key']))}" style="color:#999;">Apply for after sale</a>
+                          </if>
+                    </em>
+                  </dd>                  
+                  
+		          </dl>
+	          </volist>
+          	</a>
+          <div class="pic">All {$list.goods_list|count} pieces<span>Paid：</span><strong>${$list['order_amount']}</strong></div>
+          <div class="anniu" style="width:95%">
+                <if condition="$list.cancel_btn eq 1"><span onClick="cancel_order({$list.order_id})">Cancel order</span></if>
+                <if condition="$list.pay_btn eq 1"><a href="{:U('Mobile/Cart/cart4',array('order_id'=>$list['order_id']))}">Pay now</a></if>
+                <if condition="$list.receive_btn eq 1"><a href="{:U('Mobile/User/order_confirm',array('id'=>$list['order_id']))}">Confirm receipt</a></if>    
+                <if condition="$list.comment_btn eq 1"><a href="{:U('/Mobile/User/comment')}">to Comment</a></if>
+                <if condition="$list.shipping_btn eq 1"><a href="{:U('User/express',array('order_id'=>$list['order_id']))}">View Logistics</a></if>
+          </div>
+       </div>
+		</volist>  
+    </div>
+  <!--查询条件-->
+  <input type="hidden" name="type" value="<?php echo $_GET['type'];?>" />
+</form>   
+<notempty name="lists"> 
+   <div id="getmore" style="font-size:.24rem;text-align: center;color:#888;padding:.25rem .24rem .4rem; clear:both">
+  		<a href="javascript:void(0)" onClick="ajax_sourch_submit()">click to more</a>
+  </div>         
+</notempty>    
+</div>
+
+
+<script language="javascript">
+var  page = 1;
+ 
+ /*** ajax 提交表单 查询订单列表结果*/  
+ function ajax_sourch_submit()
+ {	 	
+ 		page += 1; 	 
+		$.ajax({
+			type : "GET",
+			url:"/index.php?m=Mobile&c=User&a=order_list&type={$_GET['type']}&is_ajax=1&p="+page,//+tab,			
+//			url:"{:U('Mobile/User/order_list',array('type'=>$_GET['type']),'')}/is_ajax/1/p/"+page,//+tab,			
+			//data : $('#filter_form').serialize(),
+			success: function(data)
+			{
+				if(data == '')
+					$('#getmore').hide();
+				else  
+				{
+					$(".ajax_return").append(data);			
+					$(".m_loading").hide();
+				}
+			}
+		}); 
+ }
+ 
+//取消订单
+function cancel_order(id){
+	if(!confirm("sure to cancel the order?"))
+		return false;
+	location.href = "/index.php?m=Mobile&c=User&a=cancel_order&id="+id;
+}
+
+</script>
+</body>
+</html>

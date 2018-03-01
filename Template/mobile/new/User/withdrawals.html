@@ -1,0 +1,127 @@
+<include file="Public/header"/>
+<body>      
+<div id="tbh5v0">
+<div class="user_com">
+<include file="Public/uer_topnav"/>
+
+<div class="endorse_hend">
+	<p>提现信息</p>
+</div>
+
+<div class="Wallet">
+	<div class="cash_num bb1">
+        <form action="" method="post" enctype="multipart/form-data" name="distribut_form" id="distribut_form">
+            <p class="tx_cash"><span>提现金额：</span><input type="text" id="money" name="money" placeholder="最少提现额度{$tpshop_config['distribut_min']}" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')"/></p>
+            <p class="tx_cash"><span>银行名称：</span><input type="text" id="bank_name" name="bank_name" placeholder="如:支付宝,农业银行,工商银行等..."/></p>
+            <p class="tx_cash"><span>收款账号：</span><input type="text" id="account_bank" name="account_bank" placeholder="如:支付宝账号,建设银行账号"/></p>
+            <p class="tx_cash"><span>开户名：</span><input type="text" id="account_name" name="account_name" placeholder="开户人姓名"/></p>            
+            <p class="tx_cash"><span>验证码：</span>
+            <input type="text" name="verify_code" id="verify_code" placeholder="请输入下面的验证码" style="width:200px;" />
+            <img class="po-ab to0" id="verify_code_img" width="100" height="30" src="{:U('User/verify',array('type'=>'withdrawals'))}"  onclick="verify(this)" />
+            </p> 
+            <p><a id="cash_submit" href="javascript:void(0);" onClick="checkSubmit();">确定提交</a></p>
+		</form>        
+	</div>
+	<div class="cash_num">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="ajax_return">
+			<tr>
+				<th>编号</th>
+				<th>申请日期</th>                
+				<th>金额</th>
+				<th>状态</th>
+			</tr> 
+           <foreach name="list" item="v" > 
+            <tr>
+                <td>{$v['id']}</td>
+                <td>{$v['create_time']|date="Y-m-d",###}</td>
+                <td>{$v['money']}</td>
+                <td>
+                    <if condition="$v[status] eq 0">申请中</if>
+                    <if condition="$v[status] eq 1">申请成功</if>
+                    <if condition="$v[status] eq 2">申请失败</if>                   
+                </td>
+            </tr>
+            </foreach>                                      
+		</table>
+	    <notempty name="list">
+	          <p style="text-align: center;" id="getmore"><a href="javascript:void(0)" onClick="ajax_sourch_submit()">点击加载更多</a></p>        
+        </notempty>            
+	</div>
+</div>
+
+
+</div>
+<include file="Public/footer"/>
+</div>
+<include file="Public/footer_nav"/>
+</body>
+<script>
+// 表单验证提交
+function checkSubmit(){
+	var money = $.trim($('#money').val());
+	var bank_name = $.trim($('#bank_name').val());
+	var account_bank = $.trim($('#account_bank').val());
+	var account_name = $.trim($('#account_name').val());
+	var verify_code = $.trim($('#verify_code').val());
+	
+	if(money == '')
+	{
+		alert('提现金额必填');
+		return false;
+	}
+	if(money < {$tpshop_config['distribut_min']} || money > {$user['user_money']})
+	{
+		//alert("每次最少提现额度{$tpshop_config['distribut_min']},你的账户余额{$user['user_money']}");
+		//return false;
+	}
+			
+	if(bank_name == '')
+	{
+		alert('银行名称必填');
+		return false;
+	}
+	if(account_bank == '')
+	{
+		alert('收款账号必填');
+		return false;
+	}
+	if(account_name == '')
+	{
+		alert('开户名必填');
+		return false;
+	}
+	if(verify_code == '')
+	{
+		alert('验证码必填');
+		return false;
+	}
+	$('#distribut_form').submit();
+}
+
+// 验证码切换
+function verify(){
+   $('#verify_code_img').attr('src','/index.php?m=Mobile&c=User&a=verify&type=withdrawals&r='+Math.random());
+}
+
+var  page = 1;
+ /*** ajax 提交表单 查询订单列表结果*/  
+ function ajax_sourch_submit()
+ {	 	 	 
+        page += 1;
+		$.ajax({
+			type : "GET",			
+			url:"/index.php?m=Mobile&c=User&a=withdrawals&is_ajax=1&p="+page,//+tab,
+//			data : $('#filter_form').serialize(),// 你的formid 搜索表单 序列化提交
+			success: function(data)
+			{
+				if($.trim(data) == '')
+					$('#getmore').hide();
+				else{
+				    $("#ajax_return").append(data);
+				}
+			}
+		}); 
+ } 
+ 
+</script>	
+</html>

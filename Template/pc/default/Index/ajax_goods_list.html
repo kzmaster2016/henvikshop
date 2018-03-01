@@ -1,0 +1,37 @@
+<div class="flool-b layer wi1220">
+    <ul class="flool-cle">
+
+    <foreach name="list" item="v" key="k" >
+        <li class="sellers sellers-two sell_ons">
+            <div class="best-two ma0-20-20-0">
+                <div class="he364 about-ced best-tans">
+                    <div class="best_img best_img2 best_img3">
+                        <a href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}"><img src="{$v.goods_id|goods_thum_images=428,428}" /></a>
+                    </div>
+                        <div class="intr-t intr-t3 pa0-20">{$v[goods_name]|getSubstr=0,30}</div>
+                    <div class="price prices">
+                        <span>¥</span><em>{$v[shop_price]}</em>
+                    </div>
+                    <div class="add-join">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td align="center" class="joins-ri"><a onClick="AjaxAddCart({$v[goods_id]},1,1);">Add to cart</a></td>
+                            <td align="center" class="joins-le"><a href="">{$v[comment_count]} comments</a></td>
+                          </tr>
+                        </table>
+                    </div>
+                    <div class="tag">
+                        <img src="__STATIC__/images/1382593860805.png" alt="首发" />
+                    </div>
+                </div>
+            </div>
+        </li>
+      </foreach>
+        
+    </ul>
+</div>
+<!--------产品结束-------------->
+
+<!--------分页start-------------->
+<div style="text-align:center;"> {$page} </div>
+<!--------分页结束-------------->

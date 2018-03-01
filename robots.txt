@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /Application/Admin/
+Disallow: /admin.php
+Disallow: /config.php
+Disallow: /db_help.class.php
+Disallow: /function.php
+Disallow: /UpgradeLogic.php
+Disallow: /upgrade.php
+Disallow: /*?*

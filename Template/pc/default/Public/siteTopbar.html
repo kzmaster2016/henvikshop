@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+<script src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<div class="site-topbar">
+    <div class="layout clearfix" style="text-align: center;position: relative;">
+        <div class="t1-l clearfix" style="position: absolute;left: 0;top: 0;">
+            <ul class="t1-l-ul">
+                <li class="t1font"><a target="_blank" href="{:U('/Home/Article/detail',array('article_id'=>22))}">Online Service</a></li>
+                <li class="t1img">&nbsp;</li>
+                <li class="t1font"><a href="javascript:;">Order Status</a></li>
+            </ul>
+        </div>
+        <div class="" style="display: inline-block;line-height: 38px;color: #eee;">FREE SHIPPING on orders over ${$tpshop_config.shopping_freight_free}</div>
+        <div class="t1-r clearfix" style="position: absolute;right: 0;top: 0;">
+            <ul class="t1-r-ul islogin" style="display:none;">
+                <li class="t1font"> <a href="{:U('Home/User/index')}" class="logon userinfo"></a></li>
+                <li class="t1img">&nbsp;</li> 
+                <li class="t1font"><a href="{:U('Home/user/logout')}">Sign Out</a></li>                         
+                <li class="t1img">&nbsp;</li>              
+                <li class="t1font"><a href="{:U('Home/User/order_list')}">My Orders</a></li>       
+            </ul>
+            <ul class="t1-r-ul nologin" style="display:none;">
+                <li class="t1font"><a href="{:U('Home/user/login')}">Sign In</a></li>
+                <li class="t1img">&nbsp;</li>
+                <li class="t1font"><a href="{:U('Home/User/reg')}">Register</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var uname= getCookie('uname');
+        if(uname == ''){
+            $('.islogin').remove();
+            $('.nologin').show();
+        }else{
+            $('.nologin').remove();
+            $('.islogin').show();
+            $('.userinfo').html(decodeURIComponent(uname));
+        }
+    })
+</script>

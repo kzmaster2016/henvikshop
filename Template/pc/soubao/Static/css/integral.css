@@ -1,0 +1,204 @@
+﻿@charset "utf-8";
+/**
+ * @authors zmh.zhu
+ * @description 
+ * @date    2015-01-15 16:40:08
+ * @version 1.0
+ */
+/**收货地址高德地图 @japin.pan 20151019 start**/
+body, ul, ol, li, dl, dd, p, h1, h2, h3, h4, h5, h6, form, fieldset, .pr, .pc {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 0px;
+  font: 12px/1.5 simsun,tahoma,arial,sans-serif;
+}
+a {
+  text-decoration: none;
+  color: #666666;
+}
+.content {
+  width: 100%;
+  overflow: hidden;
+  min-width: 990px;
+}
+.main {
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 60px;
+  width: 1190px;
+  overflow: hidden;
+  max-width: 1190px;
+}
+.exchange {
+  padding-left: 15px;
+  border-bottom: 2px solid #c70034;
+  overflow: hidden;
+  background-color: #fff;
+}
+.exchange ul .travel {
+  background-color: #c70034;
+}
+.exchange ul li {
+  float: left;
+  font-size: 14px;
+  height: 46px;
+  text-align: center;
+  line-height: 46px;
+}
+
+.exchange ul .travel a {
+  color: #fff;
+  padding: 0 16px;
+}
+.exchange ul li a {
+  color: #333;
+  display: block;
+  padding: 0 16px;
+}
+.bdnr {
+  overflow: hidden;
+  background-color: #fff;
+}
+.bdnr .jffw {
+  background-color: #F7F7F7;
+  border: 1px solid #E9E9E9;
+  height: 35px;
+  line-height: 35px;
+  padding: 0 15px;
+  margin: 0 15px;
+  margin-top: 12px;
+  color: #333;
+}
+.bdnr .jffw .bt_ {
+  width: 60px;
+  height: 20px;
+  border: 1px solid #ddd;
+  background: url(images/my.png) 5px center no-repeat;
+  padding-left: 16px;
+  padding-right: 5px;
+}
+.bdnr .jffw input {
+  vertical-align: middle;
+  margin-top: -3px;
+}
+.bdnr .jffw #range #selectBtn {
+  /* display: none; */
+  display: inline-block;
+  border: 1px solid #D4C3C3;
+}
+address, cite, dfn, em, i, var {
+  font-style: normal;
+}
+.bdnr .jffw .ysp {
+  float: right;
+  font-size: 13px;
+}
+.bdnr .jffw .ysp a {
+  margin: 0 7px;
+}
+.bdnr .jffw .ysp em {
+  font-style: normal;
+  color: #c70034;
+}
+.bdnr .jfxq {
+  padding-top: 25px;
+  overflow: hidden;
+}
+.bdnr .jfxq ul li {
+  margin-left: 15px;
+  float: left;
+  width: 200px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #fff;
+}
+.bdnr .jfxq ul li .p1 {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+.bdnr .jfxq ul li p {
+  margin-top: 5px;
+}
+
+.bdnr .jfxq ul li .p1 img {
+  width: 200px;
+  height: 200px;
+  vertical-align: top;
+  border: medium none;
+}
+.bdnr .jfxq ul li .p2 {
+  line-height: 16px;
+  height: 40px;
+}
+.bdnr .jfxq ul li .p4 {
+  line-height: 25px;
+  opacity: 1.0;
+  font-family: "微软雅黑";
+}
+.bdnr .jfxq ul li .p4 .lx3 {
+  color: #C70034;
+  font-size: 12px;
+}
+.bdnr .jfxq ul li .p4 .lx1 {
+  color: #c70034;
+  font-size: 12px;
+}
+.bdnr .jfxq ul li .p4 .lx4 {
+  color: #666666;
+  font-size: 12px;
+}
+.bdnr .jfxq ul li .p4 a {
+  float: right;
+  background-color: #c70034;
+  text-align: center;
+  color: #fff;
+  width: 70px;
+  height: 25px;
+}
+.bdnr .dj {
+  padding: 0 15px;
+  width: 1160px;
+  margin-bottom: 60px;
+}
+.dj {
+  text-align: right;
+  width: 1130px;
+  margin-top: 10px;
+  line-height: 28px;
+  overflow: hidden;
+}
+
+.dj .prepage, .dj .nextpage {
+  padding: 0 10px;
+  width: auto;
+}
+.dj a {
+  border: 1px solid #E5E5E5;
+  display: inline-block;
+  width: 30px;
+  height: 28px;
+  text-align: center;
+}
+.current {
+  background: #c70034;
+  cursor: default;
+  color: #fff;
+}
+.dj .bt {
+  width: 26px;
+  height: 24px;
+  margin: 2px 0;
+  border: 1px solid #E5E5E5;
+  text-align: center;
+}
+.dj .bt1 {
+  border: 1px solid #E5E5E5;
+  height: 28px;
+  color: #333;
+  text-align: center;
+  padding: 0 10px;
+  background-color: #F2F2F2;
+}
+/**收货地址高德地图 @japin.pan 20151019 end**/

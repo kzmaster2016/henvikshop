@@ -1,0 +1,257 @@
+<include file="Public/header"/>
+<body>
+<header>
+    <div class="tab_nav">
+        <div class="header">
+            <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="back"></a></div>
+            <div class="h-mid">Changes information</div>
+            <div class="h-right">
+                <aside class="top_bar">
+                    <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a
+                            href="javascript:;"></a></div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</header>
+<include file="Public/menu"/>
+<div id="tbh5v0">
+    <div class="Personal">
+        <div id="tbh5v0">
+            <div class="innercontent1">
+                <form method="post" action="" id="edit_profile" onSubmit="return checkinfo()">
+                    <div class="name"><span>Nickname</span>
+                        <input type="text" name="nickname" id="nickname" value="{$user.nickname}" placeholder="*昵称"
+                               class="c-f-text">
+                    </div>
+
+                    <div class="name1"><span>Gender</span>
+                        <ul>
+                            <li
+                            <?php if($user['sex']==0) {echo 'class="on"';} ?>   >
+                            <label for="sex0">
+                                <input type="radio" name="sex" value="0" tabindex="2" class="radio"
+                                       id="sex0" <?php if($user['sex']==0) {echo 'checked="checked"';} ?>>
+                                secrecy</label>
+                            </li>
+                            <li
+                            <?php if($user['sex']==1) {echo 'class="on"';} ?> >
+                            <label for="sex1">
+                                <input type="radio" name="sex" value="1" tabindex="3" class="radio"
+                                       id="sex1" <?php if($user['sex']==1) {echo 'checked="checked"';} ?> >
+                                male</label>
+                            </li>
+                            <li
+                            <?php if($user['sex']==2) {echo 'class="on"';} ?> >
+                            <label for="sex2">
+                                <input type="radio" name="sex" value="2" tabindex="4" class="radio"
+                                       id="sex2" <?php if($user['sex']==2) {echo 'checked="checked"';} ?>>
+                                female</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="name">
+                        <label for="email_ep"> <span>Email</span>
+                            <input name="email" value="{$user.email}" id="email_ep" placeholder="*Email address" type="text"/>
+                        </label>
+                    </div>
+                    <div class="field submit-btn">
+                        <input type="submit" value="Confirm" class="btn_big1"/>
+                    </div>
+                </form>
+            </div>
+
+            <div class="innercontent1">
+                <form method="post" action="" id="edit_mobile" onSubmit="return checkMobileForm()">
+                    <div class="name">
+                        <label for="email_ep"> <span>Phone Number</span>
+                            <input name="mobile" value="{$user.mobile}" id="mobile_ep" placeholder="*Phone Number" type="text"/>
+                        </label>
+                    </div>
+                    <div class="name">
+                        <label for="email_ep"> <span>Verification Code</span>
+                            <input type="text" id="mobile_code"  name="mobile_code" placeholder="Verification Code" />
+                            <input id="zphone" type="button" rel="mobile" value="Get verification Code" onClick="sendcode(this)"
+                                   class="zphone">
+                        </label>
+                    </div>
+                    <div class="field submit-btn">
+                        <input type="submit" value="Confirm" class="btn_big1"/>
+                    </div>
+                </form>
+            </div>
+
+            <div class="innercontent11">
+                <form name="formPassword" action="{:U('User/password')}" method="post" onSubmit="return editPassword()">
+                    <h4 class="title">Change password</h4>
+
+                    <div class="field_pwd">
+                        <label for="password">
+                            <input type="password" name="old_password" id="password" class="c-f-text" placeholder="Original password"
+                                   value=""/>
+                        </label>
+                    </div>
+                    <div class="field_pwd">
+                        <label for="new_password">
+                            <input type="password" name="new_password" id="new_password" class="c-f-text"
+                                   placeholder="New password"/>
+                        </label>
+                    </div>
+                    <div class="field_pwd">
+                        <label for="comfirm_password">
+                            <input type="password" name="confirm_password" id="comfirm_password" class="c-f-text"
+                                   placeholder="Confirm password"/>
+                        </label>
+                    </div>
+                    <div class="field submit-btn">
+                        <input type="submit" value="Confirm" class="btn_big1"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('.name1 ul li').click(function () {
+            $(this).find("input").attr("checked", "checked");
+            $('.name1 ul li').removeClass("on");
+            $(this).addClass("on");
+        })
+    </script>
+</div>
+
+<script language="javascript">
+    $(function () {
+        $('input[type=text],input[type=password]').bind({
+            focus: function () {
+                $(".global-nav").css("display", 'none');
+            },
+            blur: function () {
+                $(".global-nav").css("display", 'flex');
+            }
+        });
+    })
+
+    var email_empty = "Please enter your email address!";
+    var email_error = "The e-mail address you entered is not in the correct format!";
+    var old_password_empty = "Please enter your original password!";
+    var new_password_empty = "Please enter a new password of 6 bits or more!";
+    var confirm_password_empty = "Please enter more than 6 confirmation passwords!";
+    var both_password_error = "The password you entered for the second time is inconsistent!";
+    /* 会员修改密码 */
+    function editPassword() {
+        var frm = document.forms['formPassword'];
+        var old_password = frm.elements['old_password'].value;
+        var new_password = frm.elements['new_password'].value;
+        var confirm_password = frm.elements['comfirm_password'].value;
+
+        var msg = '';
+        var reg = null;
+
+        if (old_password.length == 0) {
+            msg += old_password_empty + '\n';
+        }
+
+        if (new_password.length < 6) {
+            msg += new_password_empty + '\n';
+        }
+
+        if (confirm_password.length < 6) {
+            msg += confirm_password_empty + '\n';
+        }
+
+        if (new_password.length > 0 && confirm_password.length > 0) {
+            if (new_password != confirm_password) {
+                msg += both_password_error + '\n';
+            }
+        }
+
+        if (msg.length > 0) {
+            alert(msg);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function checkinfo() {
+        var nickname = $('#nickname').val();
+        var email = $('#email_ep').val();
+        if (nickname == '') {
+            alert("Nicknames cannot be empty");
+            return false;
+        }
+
+        if (!checkEmail(email)) {
+            alert("The Email format is incorrect");
+            return false;
+        }
+        return true;
+    }
+
+    function checkMobileForm() {
+        var mobile = $('#mobile_ep').val();
+        var mobile_code = $('#mobile_code').val();
+        if (!checkMobile(mobile)) {
+            alert("The phone is not in the right format");
+            return false;
+        }
+        if (mobile_code == '') {
+            alert("Please fill in the mobile phone verification code");
+            return false;
+        }
+        if (!mobile_flag) {
+            alert("Please get your mobile verification code first");
+            return false;
+        }
+        return true;
+    }
+
+
+    var mobile_flag = false;
+    //发送验证码
+    function sendcode(o) {
+        var mobile = $('#mobile_ep').val();
+        if (!checkMobile(mobile)) {
+            alert("Phone number is not in the right format");
+        } else {
+            $.ajax({
+                url: '/index.php?m=Mobile&c=User&a=send_validate_code&t=' + Math.random(),
+                type: 'post',
+                dataType: 'json',
+                data: {type: $(o).attr('rel'), send: $.trim($('#mobile_ep').val())},
+                success: function (res) {
+                    if (res.status == 1) {
+                        mobile_flag = true;
+                        countdown(o);
+                    } else {
+                        mobile_flag = false;
+                        layer.open({content: res.msg, time: 2});
+                    }
+                }
+            });
+        }
+    }
+
+    var wait = 150;
+    function countdown(obj, msg) {
+        obj = $(obj);
+        if (wait == 0) {
+            obj.removeAttr("disabled");
+            obj.val(msg);
+            wait = 150;
+        } else {
+            if (msg == undefined || msg == null) {
+                msg = obj.val();
+            }
+            obj.attr("disabled", "disabled");
+            obj.val(wait + "seconds later,Regain");
+            wait--;
+            setTimeout(function () {
+                countdown(obj, msg)
+            }, 1000)
+        }
+    }
+</script>
+</body>
+</html>

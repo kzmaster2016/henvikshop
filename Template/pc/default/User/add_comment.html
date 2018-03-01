@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>服务评价-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+	<script src="__PUBLIC__/js/global.js"></script>
+    <script src="__PUBLIC__/js/pc_common.js"></script>    
+	<script src="__PUBLIC__/js/layer/layer.js"></script><!-- 弹窗js 参考文档 http://layer.layui.com/-->  
+</head>
+
+<body>
+<form id="comment_form">
+    <table width="100%" border="1">
+    <tbody>
+            <tr>
+                <td>
+                    商家服务评分
+                </td>
+                <td>
+                    <img onMouseMove="c(this,event)" src="__STATIC__/images/start/stars0.gif" alt="">
+                    <input type="hidden" name="service_rank" value="0">
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    物流评分
+                </td>
+                <td>
+                    <img  onmousemove="c(this,event)" src="__STATIC__/images/start/stars0.gif" alt="">
+                    <input type="hidden" name="deliver_rank" value="0">
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    商品评分
+                </td>
+                <td>
+                    <img onMouseMove="c(this,event)" src="__STATIC__/images/start/stars0.gif" alt="">
+                    <input type="hidden" name="goods_rank" value="0">
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    评论内容
+                </td>
+                <td>
+                    <div id="show"></div>
+                    <textarea style="display: none" class="input" id="saytext2" name="content"></textarea>
+                    <div onMouseOut="settext()" name="saytext" id="saytext" contenteditable="true" style="width: 500px;height: 180px;border: solid 1px #f2f4ff"></div>
+                    <p><span class="emotion">表情</span></p>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    图片
+                </td>
+                <td>
+                    <input type="text" id="img">
+                    <button type="button" onClick="GetUploadify2(1,'img','comment','add_img')">上传图片</button>
+                </td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td id="img_container">
+
+                </td>
+            </tr>
+    <tr>
+        <td>提交</td>
+        <td><input onClick="submit_comment()" type="button" value="提交评论"></td>
+    </tr>
+    </tbody>
+</table>
+</form>
+<script src="/Public/js/jquery-1.8.2.min.js"></script>
+<script src="/Public/js/jquery.qqFace.js"></script>
+<script type="text/javascript">
+    function submit_comment(){
+        var service_rank = parseInt($('#service_rank').val());
+        var deliver_rank = parseInt($('#deliver_rank').val());
+        var goods_rank = parseInt($('#goods_rank').val());
+
+        if(!service_rank> 0){
+			layer.msg('请为商家服务评分', { icon: 1, time: 2000 });   //2秒关闭（如果不配置，默认是3秒）
+            return false;
+        }
+        if(!deliver_rank> 0){
+			layer.msg('请为物流评分', { icon: 1, time: 2000 });   //2秒关闭（如果不配置，默认是3秒）
+            return false;
+        }
+        if(!goods_rank> 0){
+            layer.msg('请为商品评分', { icon: 1, time: 2000 });   //2秒关闭（如果不配置，默认是3秒）
+            return false;
+        }
+
+        var data = $('#comment_form').serialize();
+        $.ajax({
+            type : "POST",
+            url:"{:U('Home/User/add_comment')}",
+            data :data,// 你的formid 搜索表单 序列化提交
+            success: function(data){
+
+            }
+        });
+    }
+
+    function settext(){
+        var text = $("#saytext").html();
+        $('#saytext2').html(text);
+    }
+
+    $(function(){
+        $('.emotion').qqFace({
+            id : 'facebox',
+            assign:'saytext',
+            path:'/Public/arclist/'	//表情存放的路径
+        });
+    });
+    //查看结果
+    function replace_em(str){
+        str = str.replace(/\</g,'&lt;');
+        str = str.replace(/\>/g,'&gt;');
+        str = str.replace(/\n/g,'<br/>');
+        str = str.replace(/\[em_([0-9]*)\]/g,'<img src="/Public/arclist/$1.gif" border="0" />');
+        return str;
+    }
+
+    function uploadimg(){
+        //检查是否超过限制数量
+        GetUploadify2(1,'','comment','add_img')
+    }
+    function delimg(file,t){
+        $.get(
+            "/index.php?m=Admin&c=Uploadify&a=delupload",{action:"del", filename:file},function(){}
+        );
+        var img_obj = $(t).prev();
+        var input_obj = $(t).prev().prev();
+
+        $(t).remove();
+        $(img_obj).remove();
+        $(input_obj).remove();
+    }
+    function add_img(str){
+        var tpl = '<input type="hidden" name="comment_img[]" value="$IMG"><img width="150" height="150" src="$IMG" alt=""><button onclick="delimg(\'$IMG\',this)">删除</button>';
+        str = tpl.replace(/\$IMG/g,str);
+        $('#img_container').append(str);
+        //console.log(str);
+    }
+</script>
+<script>
+    function c(obj,event){
+        //var obj = $(obj);
+        var objTop = getOffsetTop(obj);//对象x位置
+        var objLeft = getOffsetLeft(obj);//对象y位置
+
+        var mouseX = event.clientX+document.body.scrollLeft;//鼠标x位置
+        var mouseY = event.clientY+document.body.scrollTop;//鼠标y位置
+        //计算点击的相对位置
+        var objX = mouseX-objLeft;
+        var objY = mouseY-objTop;
+        clickObjPosition = objX + "," + objY;
+        if(objX < 13 && objX > 0){
+            $(obj).attr('src','__STATIC__/images/start/stars1.gif');
+            $(obj).next().val(1);
+        }
+        if(objX < 28 && objX > 13){
+            $(obj).attr('src','__STATIC__/images/start/stars2.gif');
+            $(obj).next().val(2);
+        }
+        if(objX < 43 && objX > 28){
+            $(obj).attr('src','__STATIC__/images/start/stars3.gif');
+            $(obj).next().val(3);
+        }
+        if(objX < 58 && objX > 43){
+            $(obj).attr('src','__STATIC__/images/start/stars4.gif');
+            $(obj).next().val(4);
+        }
+        if(objX < 74 && objX > 58){
+            $(obj).attr('src','__STATIC__/images/start/stars5.gif');
+            $(obj).next().val(5);
+        }
+        //alert(clickObjPosition);
+    }
+
+    function getOffsetTop(obj){
+        var tmp = obj.offsetTop;
+        var val = obj.offsetParent;
+        while(val != null){
+            tmp += val.offsetTop;
+            val = val.offsetParent;
+        }
+        return tmp;
+    }
+
+    function getOffsetLeft(obj){
+        var tmp = obj.offsetLeft;
+        var val = obj.offsetParent;
+        while(val != null){
+            tmp += val.offsetLeft;
+            val = val.offsetParent;
+        }
+        return tmp;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta name="Generator" content="TPshop1.2" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Set password-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/login.css"/>  
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/mobile_common.js"></script>
+<script type="text/javascript" src="__STATIC__/js/layer.js" ></script>
+</head>
+<body>
+<header id="header" class='header'>
+    <div class="h-left"><a href="javascript:history.back(-1)"></a></div>
+	<div class="h-mid">Password retrieval</div>
+</header>
+<div id="tbh5v0">
+	<div class="find">        
+	<section class="innercontent">
+		<if condition="$is_set eq 1">
+		<div class="find_box_end">
+				<p>New password settings successfully!</p>
+				<p>Please keep your new password in mind!</p>
+				<p class="on_go">
+					<a href="{:U('User/login')}" title="Sign in now" class="btn_big1" style=" color:#FFF">Sign in now&gt;&gt;</a>
+				</p>
+		</div>
+		<else/>
+		<form action="" method="post" id="formPassword" name="formPassword">
+			<div class="field pwd" style=" margin-top:20px">
+				<input name="password" id="password" type="password" placeholder="Please input a password" class="c-form-txt-normal" />
+			</div>
+			<div class="field pwd">
+				<input name="password2" id="comfirm_password" type="password" placeholder="Please confirm the password again" class="c-form-txt-normal" />
+			</div>
+			<div class="submit-btn">
+				<input type="button" id="btn_submit" name="btn_submit" class="btn_big1" value="Submit" onClick="checkpwd()"/>
+			</div>
+		</form>
+		</if>
+	</section>
+<script type="text/javascript">
+
+function checkpwd() {
+	var new_password = $('#password').val();
+	var confirm_password = $('#comfirm_password').val();
+	if(new_password == '' || confirm_password == ''){
+		layer.open({content:'Password cannot be empty',time:2});
+		return false;
+	}else if(new_password.length<6 || confirm_password.length<6){
+		layer.open({content:'Password length must not be less than 6 bits',time:2});
+		return false;
+	}else if(new_password != confirm_password){
+		layer.open({content:'The two password input is inconsistent',time:2});
+		return false;
+	}else{
+		$('#formPassword').submit();
+	}
+}
+</script>
+<include file="Public/footer"/>
+</div>
+</div>
+<include file="Public/footer_nav"/>
+</body>
+</html>

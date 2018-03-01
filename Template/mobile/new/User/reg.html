@@ -1,0 +1,291 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta name="Generator" content="tpshop" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>register-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/login.css"/>  
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script type="text/javascript" src="__STATIC__/js/layer.js" ></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/mobile_common.js"></script>
+</head>
+<body>
+<header id="header" class='header'>
+	<div class="h-left"><a href="javascript:history.back(-1)" class="back"></a></div>
+    <div class="h-mid">Register</div>
+</header>
+<div id="tbh5v0">
+	<div class="log_reg_box">
+		<ul class="tab" id="logRegTab">
+			<li id="mob_log" class="curr" onClick="changeForm(this)">
+				<span>
+					<font>Phone</font>
+				</span>
+			</li>
+			<li id="email_log" class="curr currr" onClick="changeForm(this)">
+				<span>
+					<font>E-mail</font>
+				</span>
+			</li>
+		</ul>
+		<div id="logRegTabCon">
+			<div class="log_reg_item" id="phonearea">
+				<form action="" id="mobileForm" name="mobileForm" method="post"  onsubmit="return check_submit()">
+						<div class="field phone">
+							<input type="text" id="username" name="username" placeholder="Phone Number" class="c-form-txt-normal" onBlur="checkMobilePhone(this.value);" />
+							<div class="tips">
+								<span id="mobile_phone_notice"></span>
+							</div>
+						</div>
+						<div class="field pwd">
+							<input type="password" id="password" name="password" placeholder="Password" class="c-form-txt-normal" onBlur="check_password(this.value);" />
+							<div class="tips">
+								<span id="password_notice"></span>
+							</div>
+						</div>
+						<div class="field pwd">
+							<input type="password" id="password2" name="password2" placeholder="Confirm Password" class="c-form-txt-normal" onBlur="check_confirm_password(this.value);" />
+							<div class="tips">
+								<span id="confirm_password_notice"></span>
+							</div>
+						</div>
+						<!-- <div class="yanzheng"  style=" margin-top:0px;">
+						                              <div class="codeTxt">
+								<input type="text" id="mobile_code"  name="mobile_code" placeholder="手机验证码" />
+						                              </div>
+						                               <div class="codePhoto">
+								<input id="zphone" type="button" rel="mobile" value="获取手机验证码 " onClick="sendcode(this)" class="zphone" style=" color:#FFF">
+						                               </div>
+						</div> -->
+						<input type="submit" id="btn_submit" name="Submit" class="btn_big1" value="Join Now"/>
+				</form>
+			</div>
+			<div class="log_reg_item hide" id="emailarea">
+				<form action="" method="post" id="emailForm" name="emailForm" onSubmit="return check_submit()">
+					<div class="field email">
+							<div class="st">
+								<input type="email" name="username" placeholder="E-mail" value="" class="c-form-txt-normal" id="username" onBlur="checkEmail2(this.value);" />
+							</div>
+							<div class="tips">
+								<span id="email_notice"></span>
+							</div>
+						</div>
+						<div class="field pwd">
+							<div>
+								<input type="password" name="password" id="password" onBlur="check_password(this.value);" value="" placeholder="Password" class="c-form-txt-normal" />
+							</div>
+							<div class="tips">
+								<span id="password_notice"> </span>
+							</div>
+						</div>
+						<div class="field pwd">
+							<div>
+								<input type="password" name="password2" id="password2" onBlur="check_confirm_password(this.value);" value="" placeholder="Confirm Password" class="c-form-txt-normal">
+							</div>
+							<div class="tips">
+								<span id="confirm_password_notice"> </span>
+							</div>
+						</div>
+						<!-- <div class="yanzheng" style=" margin-top:0px;">
+						                              <div class="codeTxt">
+								<input type="text" id="email_code" name="email_code"  placeholder="邮箱验证码"/></div>
+						                                   <div class="codePhoto">
+									<input id="zemail" name="getemailcode" type="button" rel="email" value="获取邮箱验证码 " class="zphone" onClick="sendcode(this)" style=" color:#FFF" />
+						                                  </div>
+						</div> -->
+						<input type="checkbox" style="display: none" name="agreement" value="1" checked="checked" required />
+						<input type="submit" id="btn_submit" name="Submit" class="btn_big1" value="Join Now" />
+				</form>
+			</div>
+		</div>
+	</div>			
+<include file="Public/footer"/>			
+</div>
+<script type="text/javascript">
+
+setCurrentForm($("#mobileForm"));
+var flag = false;
+
+function changeForm(obj){
+	$(obj).removeClass('currr');
+	$(obj).siblings().addClass('currr');
+	if($(obj).attr('id')=='mob_log'){
+		$('#phonearea').show();
+		setCurrentForm($("#mobileForm"))
+		$('#emailarea').hide();
+	}else{
+		$('#phonearea').hide();
+		setCurrentForm($("#emailForm"))
+		$('#emailarea').show();
+	}
+}
+
+function setCurrentForm(formObj) {
+	currentForm = $(formObj);
+}
+
+function checkEmail2(email){
+	if(email == ''){
+		$('#email_notice').css('color','red');
+		$('#email_notice').html('* The Email cannot be empty');
+		flag = false;
+	}else if(checkEmail(email)){
+		$.ajax({
+			type : "GET",
+			url:"/index.php?m=Home&c=Api&a=issetMobileOrEmail",//+tab,
+//			url:"{:U('Mobile/User/comment',array('status'=>$_GET['status']),'')}/is_ajax/1/p/"+page,//+tab,
+			data :{mobile:email},// 你的formid 搜索表单 序列化提交
+			success: function(data)
+			{
+				if(data == '0')
+				{
+					$('#email_notice').css('color','green');
+					$('#email_notice').html('* can register');
+					flag = true;
+					console.log(flag);
+				}else{
+					$('#email_notice').css('color','red');
+					$('#email_notice').html('* The Email already exists');
+					flag = false;
+				}
+			}
+		});
+	}else{
+		$('#email_notice').css('color','red');
+		$('#email_notice').html('* The Email is incorrect');
+		flag = false;
+	}
+}
+
+
+function checkMobilePhone(mobile){
+	if(mobile == ''){
+		$('#mobile_phone_notice').css('color','red');
+		$('#mobile_phone_notice').html('* Phone number cannot be empty');
+		flag = false;
+	}else if(checkMobile(mobile)){
+		
+	$.ajax({
+			type : "GET",			
+			url:"/index.php?m=Home&c=Api&a=issetMobile",//+tab,
+//			url:"{:U('Mobile/User/comment',array('status'=>$_GET['status']),'')}/is_ajax/1/p/"+page,//+tab,
+			data :{mobile:mobile},// 你的formid 搜索表单 序列化提交
+			success: function(data)
+			{
+				if(data == '0')
+				{
+					$('#mobile_phone_notice').css('color','green');
+					$('#mobile_phone_notice').html('* can register');
+					flag = true;
+				}else{
+					$('#mobile_phone_notice').css('color','red');
+					$('#mobile_phone_notice').html('* Phone number already exists');
+					flag = false;
+				}
+			}
+		});		
+	}else{
+		$('#mobile_phone_notice').css('color','red');
+		$('#mobile_phone_notice').html('* Phone number is not correct format');
+		flag = false;
+	}
+}
+
+
+function check_password(password) {
+	if (password.indexOf(" ") != -1) {
+		$(currentForm).find('#password_notice').css('color','red').html("Password cannot contain spaces");
+		flag = false;
+	} else if (password.length < 6) {
+		$(currentForm).find('#password_notice').css('color','red').html('Password must not be less than 6 characters');
+		flag = false;
+	} else {
+		$(currentForm).find('#password_notice').css('color','green').html('can register');
+		flag = true;
+	}
+}
+
+function check_confirm_password(confirm_password) {
+	var password = $(currentForm).find('#password').val();
+	if (password.indexOf(" ") != -1) {
+		$(currentForm).find('#confirm_password_notice').css('color','red').html("Password cannot contain spaces");
+		flag = false;
+		return false;
+	}
+	if (confirm_password.length < 6) {
+		$(currentForm).find('#confirm_password_notice').css('color','red').html('Password must not be less than 6 characters');
+		flag = false;
+		return false;
+	}
+	if (confirm_password != password) {
+		$(currentForm).find('#confirm_password_notice').css('color','red').html('The two password is inconsistent');
+		flag = false;
+	} else {
+		$(currentForm).find('#confirm_password_notice').css('color','green').html('can register');
+		flag = true;
+	}
+}
+
+
+function check_submit()
+{ 
+	var username = $.trim($(currentForm).find('#username').val());
+	var password = $(currentForm).find('#password').val();
+	var password2= $(currentForm).find('#password2').val();		
+	if(username.length >0 && password.length > 0 && password2.length > 0 && flag)
+	{
+		return true;
+	} else{
+		return false;	
+	}
+		 
+}
+
+function sendcode(o){
+	console.log(flag);
+	if(flag){
+		$.ajax({
+			url:'/index.php?m=Mobile&c=User&a=send_validate_code&t='+Math.random(),
+			type:'post',
+			dataType:'json',
+			data:{type:$(o).attr('rel'),send:$.trim($(currentForm).find('#username').val())},
+			success:function(res){
+				if(res.status==1){
+					countdown(o);
+				}else{
+					layer.open({content:res.msg,time:2});
+				}
+			}
+		})
+	}
+}
+
+/*var wait = 150;
+function countdown(obj, msg) {
+	obj = $(obj);
+	if (wait == 0) {
+		obj.removeAttr("disabled");
+		obj.val(msg);
+		wait = 150;
+	} else {
+		if (msg == undefined || msg == null) {
+			msg = obj.val();
+		}
+		obj.attr("disabled", "disabled");
+		obj.val(wait + "秒后重新获取");
+		wait--;
+		setTimeout(function() {
+			countdown(obj, msg)
+		}, 1000)
+	}
+}*/
+</script>
+</body>
+</html>

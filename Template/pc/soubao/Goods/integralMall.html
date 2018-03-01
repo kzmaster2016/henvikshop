@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-language" content="utf-8" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+    <meta http-equiv="Cache-control" content="public" max-age="no-cache" />
+    <link rel="shortcut icon"  href="http://static02.fn-mart.com/img/feiniu_favicon.ico" />
+    <link rel="apple-touch-icon" sizes="114x114" href="http://static02.fn-mart.com/images/touch-icon-iphone-136.png" />
+    <link rel="alternate" media="only screen and (max-width:640px)" href="http://m.tp-shop.cn/category/C18973">
+    <meta name="applicable-device" content="pc">
+    <meta name="mobile-agent" content="format=html5;url=http://m.tp-shop.cn/category/C18973">
+    <title>商品列表-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <!--[if lte IE 9]>
+    <script src="http://static02.fn-mart.com/js/html5.js"></script>
+    <script src="http://static02.fn-mart.com/js/IE9.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://static02.fn-mart.com/css/ie.css"/>
+    <![endif]-->
+    <link rel="stylesheet" href="__STATIC__/css/integral.css">
+    <link rel="stylesheet" href="__STATIC__/css/page.css">
+    <style type="text/css">
+        .num{bottom: 0 !important;}
+    </style>
+</head>
+<body>
+<include file="Public/header" />
+<div class="content">
+    	<div class="main">
+            <div class="exchange">
+                <ul id="cate_ul">
+                    <li <empty name="Think.get.id">class="travel"</empty> id="cate">
+                    <a href="{:U('Home/Goods/integralMall')}">全部分类</a>
+                    </li>
+                    <volist name="goods_category" id="gc">
+                        <li <if condition="$_GET['id'] eq $gc['id']">class="travel"</if>>
+                        <a href="{:U('Home/Goods/integralMall',array('id'=>$gc['id']))}">{$gc['name']}</a>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+            <div class="bdnr">
+            	<div class="jffw">
+                    <div id="range" style="display:inline-block;">
+                        积分范围：
+                        <input type="text" class="bt_" name="minValue" id="minValue" value="{$_GET['minValue']}"> -
+                        <input type="text" class="bt_" name="maxValue" id="maxValue" value="{$_GET['maxValue']}">
+                        <button type="button" id="selectBtn" onclick="search();"><i class="icon-key"></i>查找</button>
+                    </div>
+                    兑换方式：
+                    <select style=" padding:0 5px;" name="brandType" id="brandType">
+                         <option value="0">全部</option>
+                         <option value="1" <if condition="$_GET['brandType'] eq 1">selected="selected"</if>>积分+金额</option>
+                         <option value="2" <if condition="$_GET['brandType'] eq 2">selected="selected"</if>>全积分</option>
+                    </select>　　
+                    <input name="is_new" type="checkbox" <if condition="$_GET['is_new'] eq 1">checked="checked"</if> value="1" id="is_new"> 新品　　
+                    <input name="exchange" type="checkbox" <if condition="$_GET['exchange'] eq 1">checked="checked"</if> value="" id="exchange"> 我能兑换的商品　　
+                    <!--<input name="" type="checkbox" value="" id="memberShip"> 会员专享-->
+                    <input name="cat_id" id="cat_id" value="{$_GET['id']}" type="hidden" />　
+                    <div class="ysp" id="totlePage">共{$goods_list_count}个商品
+                        <a class="prepage" href="javascript:void(0);" onclick="prePagination();">&lt;</a> 
+                        <span><em id="pageIndex">{$nowPage}</em>/<em id="pageCount">{$totalPages}</em></span>
+                        <a class="nextpage" href="javascript:void(0);" onclick="nextPagination();">&gt;</a>
+                    </div>
+                </div>
+                <div class="jfxq">
+                	<ul id="goods_ul">
+                        <volist name="goods_list" id="goods">
+                    	<div id="jfdhsp">
+                            <li>
+                                <p class="p1">
+                                    <a target="_blank" href="{:U('Home/Goods/goodsInfo',array('id'=>$goods['goods_id']))}">
+                                        <img src="{$goods['goods_id']|goods_thum_images=200,200}">
+                                    </a>
+                                </p>
+                                <p class="p2">
+                                    <a target="_blank" href="{:U('Home/Goods/goodsInfo',array('id'=>$goods['goods_id']))}">{$goods['goods_name']}</a>
+                                </p>
+                                <p class="p4">
+                                  <span class="lx3">¥</span>
+                                    <span class="lx1">{$goods['shop_price']-$goods['exchange_integral']/$point_rate}</span>
+                                    <span class="lx4">+</span>
+                                    <span class="lx1">{$goods['exchange_integral']}</span>
+                                    <span class="lx4">积分</span>
+                                  <a target="_blank" href="{:U('Home/Goods/goodsInfo',array('id'=>$goods['goods_id']))}">立即兑换</a>
+                                </p>
+                            </li>
+                        </div>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="djs">
+					{$page}
+               </div>
+            </div>
+        </div>
+    </div>
+<include file="Public/footer" />
+<script>
+    $(document).ready(function(){
+        //切换兑换方式
+        $('#brandType').change(function(){
+            search();
+        });
+        //选中新品
+        $("#is_new").bind("click", function () {
+            search();
+        });
+        //用户能买的商品
+        $("#exchange").bind("click", function () {
+            search();
+        });
+    })
+
+    //搜索
+    function search() {
+        var minValue = parseInt($('#minValue').val());//积分起始范围
+        var maxValue = parseInt($('#maxValue').val());//积分截止范围
+        var cat_id = $('#cat_id').val();//商品分类id
+        var brandType = $('#brandType').find("option:selected").val();
+        var url = "/index.php?m=Home&c=goods&a=integralMall";
+
+        if($('#minValue').val() != ''){
+            if(!isPositiveNum(minValue)){
+                layer.alert('范围有误', {icon: 2});
+                return false;
+            }else{
+                url += "&minValue="+minValue;
+            }
+        }
+
+        if($('#maxValue').val() != ''){
+            if(!isPositiveNum(maxValue)){
+                layer.alert('范围有误', {icon: 2});
+                return false;
+            }else{
+                url += "&maxValue="+maxValue;
+            }
+        }
+
+        if($('#minValue').val() != '' && $('#maxValue').val() != '' && maxValue < minValue){
+            layer.alert('范围有误', {icon: 2});
+            return false;
+        }
+
+        if(cat_id!=0 && cat_id!=''){
+            url += "&id="+cat_id;
+        }
+
+        if(brandType!=''){
+            url += "&brandType="+brandType;
+        }
+
+        if($("#is_new").is(":checked")){
+            url += "&is_new="+1;
+        }
+        if($("#exchange").is(":checked")){
+            url += "&exchange="+1;
+        }
+
+        window.location.href=url;
+    }
+
+    //检查是否为正整数
+    function isPositiveNum(s)
+    {
+        var re = /^\d+$/;
+        return re.test(s);
+    }
+
+</script>
+</body>
+</html>

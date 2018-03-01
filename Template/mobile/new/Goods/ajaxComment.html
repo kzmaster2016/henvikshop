@@ -1,0 +1,62 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <!---晒单end--> 
+<if condition="$commentlist neq ''">
+<div class="comment_list" id="commentList">
+    <ul>
+      <foreach name="commentlist" item="v" key="k">
+      <li class="comment_item">
+        <div class="content_head" <if condition="($k+1) eq count($comment_list)"> style="border-bottom:0px solid #CCC;"<else/>style="border-bottom:1px solid #CCC;"</if>>
+	          <div class="info">
+	            <div class=" comment_star">
+	              <div class="one"><em>		<img src="{$user['head_pic']|default=" __STATIC__/images/user68.jpg"}"><span>{$user['nickname']}</span></em></div>
+	              <div class="name">
+	              		
+	              		{$v.username}
+	              		<em><img src="__STATIC__/images/stars{$v.service_rank}.png" alt="" /></em>
+	              </div>
+	               <div class="two">{$v.add_time|date='Y-m-d H:i',###}</div>
+	            </div>
+	          </div>
+	          <p> {$v['content']|htmlspecialchars_decode}</p>         
+			 <!---晒单-->   
+			<if condition="$v['img'] neq ''">
+			    <!--<div class="shaidan">       
+			      <h4>{$value.title}</h4>
+			      <p>{$value.content}</p>
+			   	</div>-->
+					<div class="sd_img">
+					<dl id="gallery">
+						<foreach name="v['img']" key="key" item="v2"> 
+						    <dd>
+						    	<a href="{$v2}"><img src="{$v2}" width="100px" heigth="100px"></a>
+						    </dd>
+						</foreach>
+					</dl>
+					</div>
+			</if>
+
+			<!--管理员回复-->  
+			<foreach name="replyList" item="val">
+			<p style=" color:#F60; border-top:1px dashed #e5e5e5; padding-top:8px; margin-top:10px"><span>manager{$val.username} reply：<br></span>{$val.content}</p> 
+			</foreach>          
+   		</div>
+   	  </li>
+  </foreach>
+</ul>
+<if condition="count($commentlist) gt 5"> 
+<div class="comment_page"> 
+
+		<a href="javascript:{$comments.page_prev}" class="prev">prev</a> 
+
+	<a href="javascript:;" class="prev" >{$comments.page}/{$comments.page_count}</a> 
+
+		<a href="javascript:{$comments.page_next}" class="next" >next</a>
+
+</div>
+</if>
+<else/>
+<div class="comment_list" >
+	<div class="score">no user comments</div>
+</div>
+</div>
+</if>

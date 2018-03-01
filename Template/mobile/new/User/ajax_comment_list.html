@@ -1,0 +1,47 @@
+<foreach name="comment_list" item="vo" key="k"> 
+    <div class="pingjia">
+          <h2>Buying time：{$vo.add_time|date='Y-m-d H:i',###}</h2>
+          <dl>
+          <dt><img src="{$vo.goods_id|goods_thum_images=200,200}"></dt>
+          <dd><span>{$vo.goods_name}</span><strong>${$vo.goods_price}</strong></dd>
+          <dd>
+          	<if condition="$vo[is_comment] eq 0">
+          	<a class="remark" href="{:U('User/add_comment',array('rec_id'=>$vo[rec_id]))}">Evaluate order</a>
+          	<else/>
+          	<a class="remark" href="{:U('User/order_detail',array('id'=>$vo[order_id]))}">View order</a>
+          	</if>
+          </dd>
+          </dl>
+	     <if condition="$vo[is_comment] eq 1">
+		 	<div class="pj_main">
+		       <ul>
+
+		       		<li><em>comment：</em><img src="__STATIC__/images/stars{$vo.goods_rank}.png"></li>                
+                    
+		       		<li class="pj_w">{$vo.content|htmlspecialchars_decode}</li>
+		       </ul>		
+				<!--晒单-->
+				<if condition="$v['img'] neq ''">
+			       <ul>
+			       		<li><em>The sun：{$vo.comment.title}</em></li>
+			       		<li class="pj_w">{$vo.comment.message}</li>
+			       </ul>
+			       <div class="sd_img">
+			        <dl id="gallery">
+					<foreach name="vo['img']"  key="key" item="v2">
+				       <dd><a href="{$v2}"><img src="{$v2}" width="100px" heigth="100px"></a></dd>
+					</foreach>
+			        </dl>
+			       </div>
+				</if>
+				<!--管理员回复-->			
+				<foreach name="replyList" item="val">
+				       <ul style="border-top:1px dashed #e5e5e5; padding-top:8px; margin-top:10px">
+				       <li><em style=" color:#F60">manager{$val.user_name}reply：</em></li>
+				       <li class="pj_w" style=" color:#F60; font-size:12px;">{$val.content}</li>
+				       </ul>
+				</foreach> 
+		  	</div>
+		</if>                
+    </div>
+</foreach> 

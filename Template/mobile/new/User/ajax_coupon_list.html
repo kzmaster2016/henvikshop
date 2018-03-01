@@ -1,0 +1,11 @@
+<volist name="coupon_list" id="coupon">
+    <div class="offercard_page offercard_type<if condition="$_GET['type'] eq 0">1</if><if condition="$_GET['type'] eq 1">2</if><if condition="$_GET['type'] eq 2">0</if>">
+        <span class="offercard_price">&yen;<em>{$coupon.money|intval}</em></span>
+        <span class="offercard_typename">coupon</span>
+        <span class="offercard_classfy">reach over</span>
+        <span class="offercard_type">{$coupon.condition}use</span>
+        <a class="offercard_use" href="javascript:void();">&yen;{$coupon.money}</a>
+        <span class="offercard_limit">useful time{$coupon.use_end_time|date='Y-m-d',###}</span>
+        <i class="clear"></i>
+    </div> 			
+</volist>	 

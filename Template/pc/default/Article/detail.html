@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>help center-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="stylesheet" href="__STATIC__/css/base.css" type="text/css">
+<link rel="icon" href="/ico.png" type="image/x-icon" />
+<link rel="stylesheet" href="__STATIC__/css/helpcenter.css" type="text/css">
+</head>
+<body>
+<!--头部开始-->
+<include file="Public/header" />
+<!--头部结束-->
+
+<div class="w main">
+    <div class="subside-box">
+        <div class="subside-in">
+		    <h3 class="h3-title" style="letter-spacing: 2px;">FAQ</h3>
+	        <tpshop sql="select * from `__PREFIX__article_cat` where cat_id in(1,3,7)" key="k" item='v'>
+		         <dl class="subside-mod on">
+		            <dt class="title">
+		               	 {$v[cat_name]}<b class="icon02"></b>
+		            </dt>           
+		            <dd class="subside-cnt">
+		                <ul class="subside-list">
+		                    <tpshop sql="select * from `__PREFIX__article` where cat_id = $v[cat_id] and is_open=1" key="k2" item='v2'>
+		                        <li data-parent-name="购物指南" data-parent-id="21" data-name="交易条款" data-id="28" class="list-item <if condition="$article.article_id eq $v2[article_id]">current</if>">
+		                            <a href="{:U('Home/Article/detail',array('article_id'=>$v2[article_id]))}">{$v2[title]}</a>
+		                        </li>
+		                    </tpshop>
+		                </ul>
+		            </dd>
+		        </dl>
+	  		</tpshop>
+		</div>
+    </div>
+    <div class="content">
+        <div class="breadcrumb">
+    		<span id="sLevel1">FAQ</span> &gt;
+    		<a href="#"><span id="sLevel2">{$cat_name}</span></a>
+		</div>
+	
+		<div class="contxt">
+		    <div class="help-tit1 flk06">{$article.title}</div>
+	    	<div class="help_box" style="margin: 0px; padding: 10px 10px 10px 20px; color: rgb(102, 102, 102); line-height: 18px; font-family: Arial, Verdana, 宋体; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">
+			    <p style="padding: 0px; margin-top: 0px; margin-bottom: 0px;"><br>
+			    	{$article.content|htmlspecialchars_decode} 
+	                <!--html_entity_decode-->
+				</p>
+			</div>
+		</div>
+	</div>
+
+<!--footer-开始-->
+<include file="Public/footer" />
+<!--footer-结束-->
+</div>
+</body>
+<script type="text/javascript">
+$(function(){
+	  $(".all-selfservice-box .lump-list").hover(function(){$(this).addClass("hover")},function(){$(this).removeClass("hover")})
+	  $(".subside-mod .title").click(
+	    function(){
+	      if($(this).parent(".subside-mod").hasClass("on")){
+	    	  $(this).parent(".subside-mod").removeClass("on")
+	      }else{
+	        $(this).parent(".subside-mod").addClass("on")
+	      }
+	    });
+	  
+});
+</script>
+<script src="https://s22.cnzz.com/z_stat.php?id=1261971213&web_id=1261971213" language="JavaScript"></script>
+</html>

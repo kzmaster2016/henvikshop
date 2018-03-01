@@ -1,0 +1,49 @@
+﻿
+.informations .usertitle {
+	display: inline-block;
+}
+.msg-reminder {
+	position: relative;
+	display: inline-block;
+	width: 18px;
+	height: 12px;
+	vertical-align: middle;
+    margin-left: 5px;
+	background: url(../images/msgbox.png) no-repeat -35px -52px;
+}
+.msg-reminder span.count {
+	position: absolute;
+	top: -8px;
+	left: 9px;
+	right: auto;
+	padding: 0 5px;
+	font-size: 0;
+	word-wrap: normal;
+    word-break: normal;	
+}
+.msg-reminder .cir-l {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 14px;
+	width: 5px;
+	background: url(../images/msgbox.png) no-repeat -53px -51px;	
+}
+.msg-reminder .cir-r {
+	display: inline-block;
+	position: absolute;
+	right: -1px;
+	top: 0;
+	height: 14px;
+	width: 6px;
+	background: url(../images/msgbox.png) no-repeat -61px -51px;
+}
+.msg-reminder .cir-n {
+	color: #fff;
+	display: block;
+	font-size: 10px;
+	line-height: 14px;
+	background: #f46161;
+	/*-webkit-transform: scale(1,0.9);*/
+}

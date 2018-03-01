@@ -1,0 +1,92 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>All categories-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<link rel="icon" href="/ico.png" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/catalog.css"/>
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<style>
+.goods_nav{ width:30%; float:right; right:5px; overflow:hidden; position:fixed;margin-top:25px; z-index:9999999}
+</style>
+</head>
+<body>
+<!--分类切换--> 
+<div class="container">    
+  <div class="category-box">
+    <div class="category1" style="outline: none;" tabindex="5000">
+      <ul class="clearfix" style="padding-bottom:50px;">
+      <assign name="m" value="0"/>
+	    <foreach name="goods_category_tree" item="vo" key="k">
+           <if condition="$vo[level] eq 1">
+               <li <if condition="$m eq 0">class='cur' style='margin-top:46px'</if> data-id="{$m++}">{$vo['mobile_name']|getSubstr=0,12}</li>
+            </if>
+        </foreach>
+      </ul>
+    </div>
+    <div class="category2" style=" outline: none;" tabindex="5001">
+    <assign name="j" value="0"/>
+    <foreach name="goods_category_tree" key="kk" item="vo">      
+      <dl style="margin-top:46px;padding-bottom:50px;<if condition='$j eq 0'>display:block;<else/>display:none;</if>" data-id="{$j++}"> 
+        <!-- <span>            
+          <adv  limit="1" item="v" pid="400">          
+            <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if> >
+            <em>全部>></em>
+                <img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}">
+            </a>
+           </adv>               
+            </span>     -->
+        <foreach name="vo.tmenu" item="v2" key="k2"> 
+        <dt><a href="{:U('Mobile/Goods/goodsList',array('id'=>$v2[id]))}" >{$v2['name']}</a></dt> 
+        <dd> 
+	        <div class="fenimg">
+		        <foreach name="v2.sub_menu" item="v3">
+			        <div class="fen">
+			        	<a href="{:U('Mobile/Goods/goodsList',array('id'=>$v3[id]))}">{$v3['name']}</a> 
+			        </div>  
+		    	</foreach>
+	    	</div>
+        </dd>
+        </foreach>
+      </dl>
+   </foreach>
+    </div>
+  </div>
+</div>
+<!---切换js-->
+<include file="Public/footer_nav"/>
+<script>
+
+$(function () {
+    //滚动条
+    $(".category1,.category2").niceScroll({ cursorwidth: 0,cursorborder:0 });
+
+    //图片延迟加载
+ 	//$(".lazyload").scrollLoading({ container: $(".category2") });
+    //$('.category-box').height($(window).height());
+
+    //点击切换2 3级分类
+	var array=new Array();
+	$('.category1 li').each(function(){ 
+		array.push($(this).position().top-0);
+	});
+	
+	$('.category1 li').click(function() {
+		var index=$(this).index();
+		$('.category1').delay(200).animate({scrollTop:array[index]},300);
+		$(this).addClass('cur').siblings().removeClass();
+		$('.category2 dl').eq(index).show().siblings().hide();
+        $('.category2').scrollTop(0);
+	});
+
+});
+</script>
+<script src="__STATIC__/js/jquery.nicescroll.min.js"></script> 
+</body>
+</html>

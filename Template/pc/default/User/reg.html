@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>register-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <link rel="icon" href="/ico.png" type="image/x-icon" />
+</head>
+
+<body class="reg">
+
+<!--头部开始-->
+<include file="Public/header" />
+<script src="__STATIC__/js/slider.js"></script>
+<script src="__PUBLIC__/js/layer/layer.js"></script>
+<!--头部结束-->
+<div class="customer-header">
+</div>
+<div class="setout clearfix">
+    <!-- <div class="ema-tel">
+        <a class="ema-tab  tel-tab fr di-bl" href="#" id="tel_tab" onClick="reg_tab('tel_tab','ema_tab')">Phone</a>
+        <a class="tel-tab di-bl" href="#" id="ema_tab" onClick="">Email</a>
+    </div> -->
+    <!--邮箱注册-->
+    <div class="shuru-area fr" id="ema_tab_div">
+        <div class="tit-zc">
+            <h3><span>New to Henvik</span></h3>
+        </div>
+        <div class="shrk-bd-zc">
+            <form action="" method="post" onSubmit=" return check_submit(this)" id="reg_form">
+                 <table border="0" cellspacing="0" cellpadding="0">
+                    <tr>                      
+                        <td>
+                            <p>Name:</p>
+                            <input class="zc-text" type="text" name="nickname"  placeholder="" required/>
+                        </td>
+                    </tr>
+                    <tr>                   
+                        <td>
+                            <p>Email:</p>
+                            <input class="zc-text" type="text" name="email" id="username" placeholder="" required/>
+                        </td>
+                    </tr>
+                    <!-- 暂时关闭邮箱验证码 -->
+                    <!--  <if condition="$regis_smtp_enable eq 1">
+                        <tr>
+                            <th>Email Verification:</th>
+                            <td  class="po-re">
+                                <input class="zc-text wi96" name="code" id="code" type="text" placeholder="email code" required/>
+                                <button type="button" class="po-ab to0" style="width: 60px;height: 35px;margin-top: 10px;margin-left: 10px" id="count_down" onClick="send_smtp_reg_code()">Send</button>
+                            </td>
+                        </tr>
+                    </if> -->
+                    <tr>
+                        
+                        <td><p>Password:</p>
+                            <input class="zc-text" type="password" name="password" id="password" placeholder="6-16 chars" maxlengp="16" required/>
+                            
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <p>Confirm Password:</p>
+                        <td><input class="zc-text" type="password" name="password2" id="password2" placeholder="" required/></td>
+                    </tr> -->
+                    <tr>
+                        
+                        <td class="po-re"><p>Verification Code:</p>
+                            <input class="zc-text wi96 inblockm" name="verify_code" id="verify_code" type="text" placeholder="" required/>
+                            <img class="inblockm" width="120" height="35" id="reflsh_code"  src="{:U('Home/User/verify',array('type'=>'user_reg'))}" />
+                            <a class="inblockm"><img style="cursor: pointer;" src="__STATIC__/images/chg_image.png" onClick="verify('reflsh_code')" /></a>
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <p>&nbsp;</p>
+                        <td id="pa"><input class="checkboxs" name="agree" id="agree" type="checkbox" value="1" /><label for="agree">同意</label><a class="iages" href="">《帐号服务条款、隐私政策》</a></td>
+                    </tr> -->
+                    <tr>
+                        
+                        <td><p>&nbsp;</p><input type="submit" value="Join Now" class="zc-ljzc"/></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <p class="nu-miaf">Have Accont !&nbsp;&nbsp;<a href="{:U('Home/User/login')}">Sign In</a></p>
+        
+        
+    </div>
+    <!--邮箱注册-->
+
+</div>
+<div class="hr-60"></div>
+<div class="cust-footer">
+    <div class="setout po-re">
+        <div class="warrant-area">         
+            <p>Copyright © 2016-2025 {$tpshop_config['shop_info_store_name']}  All Rights Reserved  Record number:{$tpshop_config['shop_info_record_no']}</p>
+        </div>
+    </div>
+</div>
+<script>
+    flag = true;
+    $(document).ready(function(){
+        $("input[name='username']").blur(function () {
+            var username = $(this).val();
+            var re = /^(13[0-9]{9})|(15[^4,\\D][0-9]{8})|(18[0-9]{9})|(17[0-9]{9})|((\w{1,20}@\w{1,20}.[a-z]{2,5}))$/;
+            var id = $(this).attr("id");
+            if (re.test(username)) {
+                $.ajax({
+                    type : "GET",
+                    url:"/index.php?m=Home&c=Api&a=issetMobileOrEmail",//+tab,
+                    data :{mobile:username},// 你的formid 搜索表单 序列化提交
+                    success: function(data){
+                        if(data == '1'){
+                            flag = true;
+                        }else{
+                            flag = false;
+                        }
+                    }
+                });
+            }else{
+                flag = false;
+            }
+        })
+    });
+	// 普通 图形验证码 
+    function verify(id){
+        $('#'+id).attr('src','/index.php?m=Home&c=User&a=verify&type=user_reg&r='+Math.random());
+    }
+    function check_submit(obj){
+
+        var username = $(obj).find('input[name="username"]').val();
+        var password = $(obj).find('input[name="password"]').val();
+        var password2 = $(obj).find('input[name="password2"]').val();
+        var verify_code = $(obj).find('input[name="verify_code"]').val();
+        var agree = $(obj).find('input[type="checkbox"]:checked').val();
+        var error = '';
+        if(username == ''){
+            error += 'Account may not be empty!';
+        }
+        if(password == '' || password2 == ''){
+            error += 'Password may not be empty!\n';
+        }
+
+        /* if(password !== password2){
+            error += 'The password for the second time is inconsistent\n';
+        }*/
+
+        if(password.length < 6){
+            error += 'Password length must not be less than 6 bits\n';
+        }
+        if(verify_code == ''){
+            error += 'Please enter a verification code\n';
+        }
+        // if(!agree > 0){
+        //     error += '您没有同意注册协议\n';
+        // }
+        if(!flag){
+            error += 'The Account has been registered\n';
+        }
+        if(error){
+            layer.alert(error, {icon: 2});// alert(error);
+            return false;
+        }
+        return true;
+    }
+
+    // 发送邮箱验证
+    function send_smtp_reg_code(){
+        var email = $('#ema_tab_div').find('input[name="username"]').val();
+        if(!checkEmail(email)){
+            layer.alert('Please input a valid email address.', {icon: 2,title:'tip',btn:['Sure']});// alert('请输入正确的手机号码');
+            return;
+        }
+        $.ajax({
+            type : "POST",
+            url:"{:U('Home/User/send_validate_code')}",
+            data : {type:'email',send:email},// 你的formid
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                    $('#count_down').attr("disabled","disabled");
+                    intAs = {$sms_time_out}; // 发送邮箱
+                    jsInnerTimeout('count_down',intAs);
+                }
+                layer.alert(data.msg, {icon: 1});// alert(obj.msg);
+            }
+        });
+    }
+
+    $('#count_down').removeAttr("disabled");
+    //倒计时函数
+    function jsInnerTimeout(id,intAs)
+    {
+        var codeObj=$("#"+id);
+        //var intAs = parseInt(codeObj.attr("IntervalTime"));
+
+        intAs--;
+        if(intAs<=-1)
+        {
+            codeObj.removeAttr("disabled");
+            codeObj.text("send");
+            return true;
+        }
+        codeObj.text(intAs+'seconds');
+
+        setTimeout("jsInnerTimeout('"+id+"',"+intAs+")",1000);
+    };
+
+    // 电子邮件注册  和 手机号码注册 切换
+    function reg_tab(id,id2){
+        $('#'+id).addClass('on');
+        $('#'+id2).removeClass('on');
+        $('#'+id+'_div').show();
+        $('#'+id2+'_div').hide();
+    }
+    // 发送手机短信
+</script>
+<!-- 页面访问统计 -->
+<script src="https://s22.cnzz.com/z_stat.php?id=1261971213&web_id=1261971213" language="JavaScript"></script> 
+</body>
+</html>

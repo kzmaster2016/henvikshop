@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>个人信息-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link href="__STATIC__/css/personal.css" rel="stylesheet" type="text/css" />  
+<!-- 头部-s -->
+<include file="User/header" />
+<!-- 头部-e -->
+<style type="text/css">
+	.next,.prev,i.icon{background:none}
+	.prev:after{ content:"<"}
+	.next:after{ content:">"}
+	.daterangepicker{border:1px solid #dedede;}
+	.personal_info_image .name{margin-top:26px;}
+</style>
+<div class="wrap"> 
+  <!-- bread crumbs star -->
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="target_no">我的TPshop</a>&gt;<span class="color">个人信息</span> </div>
+  <!-- bread crumbs end --> 
+  
+  <!--侧边导航栏-->
+  
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单--> 
+ 
+  <!--侧边导航栏结束-->
+  
+  <!-- col main star -->
+  <div class="col_main">
+    <div class="main personal clearfix"> 
+      <!-- themes star -->
+      <div class="themes_title">
+        <h3>个人信息</h3>
+      </div>
+      <!-- themes end -->
+      <div class="personal_info clearfix">
+      <form action="" method="post" id="personal_info_form">
+        <div class="personal_info_content clearfix">
+          <div class="personal_info_image">
+            <div class="name"> <span>头像：</span> </div>
+            <div class="detail J_edit_photos">             
+              <img class="btn_upload" id="preview" src="{$user.head_pic|default='__STATIC__/images/headPic.jpg'}" onClick="GetUploadify2(1,'head_pic','head_pic','add_img')" />
+              <div class="edit J_btn_upload"> <a href="javascript:void(0);">编辑头像</a>
+				<input type="hidden" name="head_pic" id="head_pic" value="{$user.head_pic}">
+              </div>
+            </div>
+          </div>
+          <div class="personal_info_nickname">
+            <div class="name"> <span>*昵称：</span> </div>
+            <div class="detail">
+              <input type="text" name="nickname" id="nickname" value="{$user.nickname}"  maxlength="10" />
+              <span class="red"></span> </div>
+          </div>
+          <div class="personal_info_truename">
+            <div class="name"> <span>QQ：</span> </div>
+            <div class="detail">
+              <input type="text" name="qq" id="userInfo_nickName" value="{$user.qq}"maxlength="20" onpaste="this.value=this.value.replace(/[^\d]/g,'')" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" />
+              <span class="red"></span> </div>
+          </div>          
+          <div class="personal_info_truename">
+            <div class="name"> <span>生日：</span> </div>
+            <div class="detail" > 
+	              <input type="text" name="birthday" id="birthday" value="{$user.birthday|date="y-m-d",###}" />
+            </div>
+          </div>       
+		  <div class="personal_info_sex">
+            <div class="name"> <span>*性别：</span> </div>
+            <div class="detail" id="sex">
+              <ul>
+                <li>
+                  <input type="radio" name="sex" checked="checked" id="gd_secret" <if condition="$user['sex'] eq '0'">checked</if> value="0">
+                  <label for="male">保密</label>
+                </li>              
+                <li>
+                  <input type="radio" name="sex" id="gd_mile" style="margin-left:10px;" <if condition="$user['sex'] eq '1'">checked</if> value="1">
+                  <label for="male">男</label>
+                </li>
+                <li>
+                  <input type="radio" name="sex" id="gd_femile" style="margin-left:10px;" <if condition="$user['sex'] eq '2'">checked</if> value="2">
+                  <label for="female">女</label>
+                </li>
+              </ul>
+            </div>
+          </div>   
+                 
+          <div class="personal_info_bind">
+            <div class="bind">
+              <ul>
+                <li class="mobile">
+	                <span><i class="icon_phone"></i>手机</span>
+                	<a class="change target_no" href="{:U('Home/User/mobile_validate',array('type'=>'mobile','step'=>1))}">
+                	    <if condition="$user['mobile_validated'] eq 0">未验证(点击验证)<else/>已验证(点击修改)</if>
+                    </a>
+                </li>
+                <li class="mail">
+                	<span><i class="icon_email"></i>邮箱</span>
+                    <a class="null target_no" href="{:U('Home/User/email_validate',array('type'=>'email','step'=>1))}">
+                        <if condition="$user['email_validated'] eq 0">未验证(点击验证)<else/>已验证(点击修改)</if>
+                    </a>
+                </li>
+              </ul>
+            </div>
+            <div class="tips"> 注：修改密码请到
+            	 <a href="{:U('Home/User/password')}" class="target_no">更改</a>
+            </div>
+          </div>
+           
+          <div class="personal_info_btn"> 
+          <a href="javascript:void(0);" onClick="$('#personal_info_form').submit();" id="edit" class="btn_pay target_no" alt="确认保存" title="确认保存" canSend="true">确认保存</a> 
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- col main end --> 
+</div>
+<div style="clear: both;"></div>
+<!--导入用户中心的底部-->
+<include file="User/footer" /> 
+<link type="text/css" rel="stylesheet" href="/Public/plugins/daterangepicker/daterangepicker-bs3.css">
+<script type="text/javascript" src="/Public/plugins/daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="/Public/plugins/daterangepicker/daterangepicker.js"></script>
+<style>
+.daterangepicker{ display:none;}
+</style>
+
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/pc_common.js"></script>
+<script>
+$(document).ready(function() {
+		 		
+	// 生日时间
+	$('#birthday').daterangepicker({
+		singleDatePicker: true,
+		showDropdowns: true,
+		minDate:'1900-01-01',
+		maxDate:moment(),
+		startDate:moment(),
+        format : 'YYYY-MM-DD', //控件中from和to 显示的日期格式		
+	    locale : {
+            applyLabel : '确定',
+            cancelLabel : '取消',
+            fromLabel : '起始时间',
+            toLabel : '结束时间',
+            customRangeLabel : '自定义',
+            daysOfWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
+            monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月' ],
+            firstDay : 1
+        }
+	});						
+		
+		
+});
+    function delimg(file,t){
+        $.get(
+                "/index.php?m=Admin&c=Uploadify&a=delupload",{action:"del", filename:file},function(){}
+        );
+        $('#head_pic').val('');
+        $('#preview').attr('src','');
+        $(t).remove();
+    }
+    function add_img(str){
+		 
+        var head_pic = $('#head_pic').val();
+        $('#head_pic').val(str);
+        $('#preview').attr('src',str);
+        $('img[class="headpic"]').attr('src',str);
+//        if(!$('#delimg')){
+//            $('#img_box').append('<button id="delimg" type="button" onclick="delimg('+"'"+str+"'"+',this)">删除图片</button>');
+//        }else{
+//            $('#delimg').attr('onclick','delimg('+"'"+str+"'"+',this)');
+//        }
+        if(!head_pic){
+            $('#img_box').append('<button id="delimg" type="button" onclick="delimg('+"'"+str+"'"+',this)">删除图片</button>');
+        }else{
+            $('#delimg').attr('onclick','delimg('+"'"+str+"'"+',this)');
+        }
+
+    }
+</script>
+</html>

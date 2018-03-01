@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>申请售后-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/css/page.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/css/outhu.css" type="text/css">
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/pc_common.js"></script>
+<script src="__PUBLIC__/js/layer/layer.js"></script><!--弹窗js 参考文档 http://layer.layui.com/-->    
+</head>
+
+<body>
+<!--------头部开始--------------> 
+<include file="Public/header" /> 
+<!--------头部结束-------------->
+
+<div class="layout ov-hi">
+  <div class="breadcrumb-area">
+    <foreach name="navigate_user" key="k" item="v">
+      <if condition="$k neq '首页'"> > </if>
+      <a href="{$v}">{$k}</a> </foreach>
+  </div>
+</div>
+<div class="layout pa-to-10 fo-fa-ar"> 
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->
+  <div class="fr wi940">
+    <form name="return_form" id="return_form" autocomplete="off" method="post">
+      <div class="mod-main mod-comm" id="air03">
+        <div class="mt">
+          <h3>申请售后</h3>          
+        </div>
+        <div class="mc">
+          <table class="tb-void mb10">
+            <thead>
+              <tr>
+                <th>商品</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><ul class="list-proinfo" id="removeTheSingleGife">
+                    <li class="fore1"> 
+                    <a href="{:U('Home/Goods/goodsInfo',array('id'=>$goods['goods_id']))}" target="_blank">
+                     <img height="50" width="50" title="{$goods['goods_name']}" src="{$goods[goods_id]|goods_thum_images=50,50}" data-img="1" alt=""> 
+                     {$goods['goods_name']}
+                     </a>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div name="productInfo_zp-info" style="display:none"></div>
+        </div>
+        <div class="form">
+          <div class="item kfarea" id="sellerPrompt">
+            <div class="ml20"> <span><em>*</em><span style="color: red; "> 温馨提示：</span></span>
+              <label>本次售后服务将由 <span id="sellerNamePrompt" style="color: red; ">tpshop</span> 为您提供 </label>
+            </div>
+            <div class="clr"></div>
+          </div>
+          <div class="repair-steps" id="repairSteps">
+            <div class="repair-step repair-step-curr pt10 mb10" id="firstRepairStep"> 
+              
+              <!-- 服务类型 -->
+              <div class="item"> <span class="label"> <em> * </em> 服务类型： </span>
+                <div class="fl">
+                  <ul class="list-type list-type-new">
+                    <li name="applyType" id="3" class="selected"> 
+                    	<a href="javascript:void(0);">退货<b></b> </a> 
+                        <input type="radio" name="type" value="0" checked style="display:none;"/>
+                    </li>
+                    <li name="applyType" id="1" class="">
+                    	<a href="javascript:void(0);" >换货<b></b> </a> 
+                        <input type="radio" name="type" value="1" style="display:none;"/>
+                    </li>
+                  </ul>
+                </div>
+                <div class="clr"> </div>
+              </div>
+              <!-- 问题描述 外层div-->
+              <div id="miaoShuDiv" style=""> 
+                <!-- 大家电服务地址 --> 
+                
+ 
+                <!-- 问题描述 -->
+                <div class="item"> <span class="label"> <em> * </em> 问题描述： </span>
+                  <div class="fl">
+                    <textarea name="reason" id="reason" cols="" rows="" class="area"></textarea>
+                    <div class="ar ftx-03">10-500字</div>
+                    <div class="msg-text-01"> 请您如实填写申请原因及商品情况，字数在500字内。 </div>
+                  </div>
+                  <div class="clr"> </div>
+                </div>
+                
+                <!-- 图片信息 -->
+                <div class="item item01"> <span class="label">图片信息：</span>
+                  <div class="fl">
+                    <div class="i-btns" style="text-align: left;">
+                      <input type="button" value="上传照片" onClick="GetUploadify(5,'return_imgs','return_goods','return_imgs');" />
+                      <input type="text" name="imgs" id="return_imgs" readonly/>                      
+                    </div>                    
+                    <span id="uploadImgLoading" class="fl"></span> <span id="img_des" class="fl">为了帮助我们更好的解决问题，请您上传图片</span>
+                    <div class="clr"></div>
+                    <span class="msg-text">最多可上传5张图片，每张图片大小不超过5M，支持bmp,gif,jpg,png,jpeg格式文件</span>
+                    <div class="clr"></div>
+                    <div name="mscolluploadImg-info" style="display:none"></div>
+                  </div>
+                  <div class="clr"></div>
+                </div>
+                <!-- 问题描述 外层div--> 
+              </div>
+            </div>
+            <div id="defaultQueRenDiv" style="" class="repair-step"> 
+              <!-- 确认信息 -->
+              <div class="mt-10"> <strong>寄回地址</strong></div>
+              
+              <!-- 取货地址 -->
+              <div class="item" id="pickWareAddress_defaultShow" style="display: block;"> <span class="label"><em>*</em>寄回地址：</span>
+                <div class="fl">{$tpshop_config['shop_info_address']}</div>
+                <div class="clr"></div>
+              </div>
+              
+              <!-- 上班时间 -->
+              <div class="item" id="reserveDate_small_div_defaultShow" style="display: block;"> <span class="label"><em>*</em>上班时间：</span>
+                <div class="fl" id="reserveDate_small_div_defaultShow_fl"> (周一致周五) 08:00-19:00 (周六日) 休息</div>
+                <div class="clr"></div>
+              </div>
+              <!-- 客服电话 -->
+              <div class="item" id="reserveDate_small_div_defaultShow" style="display: block;"> <span class="label"><em>*</em>客服电话：</span>
+                <div class="fl" id="reserveDate_small_div_defaultShow_fl">{$tpshop_config['shop_info_phone']}</div>
+                <div class="clr"></div>
+              </div>
+                           
+              <!-- now --> 
+              <!-- 确认信息 外层div 结束 --> 
+            </div>
+            
+            <!-- 提交按钮 -->
+            <div class="item" id="submitDiv" style=""><span class="label">&nbsp;</span>
+              <div class="fl" name="divSubmit">
+                <div name="submitTips" style="display:none"></div>
+                <a href="javascript:void(0)" onClick="submit_form();" class="btn btn-7" name="btnSubmit"><s></s>提交</a> </div>
+              <div class="clr"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" name="order_id" value="{$order_id}" />
+      <input type="hidden" name="order_sn" value="{$order_sn}" />
+      <input type="hidden" name="goods_id" value="{$goods_id}" />
+      <input type="hidden" name="spec_key" value="{$_GET[spec_key]}" />
+    </form>
+  </div>
+</div>
+<div class="he80"></div>
+<!--------footer-开始--------------> 
+<include file="Public/footer2" /> 
+<!--------footer-结束-------------->
+
+</body>
+<script>
+  function submit_form()
+  {
+	  var reason = $.trim($('#reason').val());
+	  var return_imgs= $.trim($('#return_imgs').val());	  
+	  if(reason == '')
+	  {
+		  layer.alert('请输入退换货原因', {icon: 2});// alert('请输入退换货原因!');
+		  return false;
+	  }
+
+	  if(return_imgs == '')
+	  {
+		  if(!confirm('确定不传照片吗?'))
+		  {
+			  return false;
+		  }
+      }
+	  $('#return_form').submit();
+  } 
+  
+  // 上传退货拍照图片
+  function return_imgs(img)
+  {
+		$('#return_imgs').val(img);
+  }
+  
+
+   //  退换货颜色切换
+   $(document).ready(function(){
+	  $("ul.list-type-new li").click(function(){
+		$(this).addClass('selected').siblings().removeClass('selected');
+		$(this).children('input').trigger('click');
+	  });
+	});
+</script>
+</html>

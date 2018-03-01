@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>评论-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="stylesheet" href="__STATIC__/css/favorite.css">
+<link rel="stylesheet" href="__STATIC__/css/jh.css">
+
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/pc_common.js"></script>
+<script src="__PUBLIC__/js/layer/layer.js"></script><!-- 弹窗js 参考文档 http://layer.layui.com/-->  
+<!-- 头部-e -->
+
+
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">我的钱包</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+   <div class="col_main">
+    <div class="main evaluation"> 
+      <!-- themes star -->
+      <div class="themes_title">
+        <h3>我的钱包</h3>
+      </div>
+      <!-- themes end -->
+      <div class="aboutmoney mywallets" style="display:black">
+            <div class="usermoney">
+                <div class="usertop">
+                    <h2>账户概况</h2>
+                    <div class="usercontent">
+                        <ul class="account-balance">
+                            <li>
+                                <div class="balance"><p>账户余额</p></div>
+                                <div class="account"><h3>￥0.00</h3></div>
+                                <div class="topup">
+                                    <span class="tuchong"><a  onclick="mywalletstopup()">充值</a></span>
+                                    <span>|</span>
+                                    <span><a href="http://www.tpshop.com/index.php/Home/User/withdrawals.html">提现</a></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="balance"><p>积分</p></div>
+                                <div class="account"><h3>91</h3></div>
+                                <div class="topup"><span>100积分=1元</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="userc">
+                        <ul>
+                            <li><span>我的账户</span></li>
+                            <li><span>我的积分</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="userdown">
+                    <div class="userdown-top">
+                        <ul>
+                            <li class="alllist">全部</li>
+                            <li>充值记录</li>
+                            <li>消费记录</li>
+                        </ul>
+                    </div>
+                    <hr style="height: 1px; background: #dedede; border: none; margin-top: -2px;" />
+                    <div class="userdown-down">
+                        <div class="ttmt">
+                            <ul>
+                                <li>时间</li>
+                                <li>类型</li>
+                                <li>金额</li>
+                                <li>备注</li>
+                            </ul>
+                        </div>
+                        <div class="ttmt-list">
+                            <ul>
+                                <li>2016-08-18 13:46:59</li>
+                                <li>消费</li>
+                                <li>-￥1.00</li>
+                                <li>云购商品</li>
+                            </ul>
+                        </div>
+                        <div class="ttmt-list">
+                            <ul>
+                                <li>2016-08-18 13:46:59</li>
+                                <li>消费</li>
+                                <li>-￥1.00</li>
+                                <li>云购商品</li>
+                            </ul>
+                        </div>
+                        <div class="ttmt-list">
+                            <ul>
+                                <li>2016-08-18 13:46:59</li>
+                                <li>消费</li>
+                                <li>-￥1.00</li>
+                                <li>云购商品</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aboutmoney addmon" style="display:none">
+            <div class="usermoney topup-money">
+                <div class="userdown-top network-topup">
+                    <ul>
+                        <li class="alllist" style="margin-left: -1px">网银充值</li>
+                    </ul>
+                    <p onclick="mywalletsa();">返回我的钱包</p>
+                </div>
+                <hr style="height: 1px; background: #dedede; border: none; margin-top: -2px;" />
+                <div class="choicetu">
+                    <p>选择充值金额：</p>
+                    <div class="monettu">
+                        <div class="fop-main">
+                            <div class="m-tagbox m-multi-tag">
+                                <input type="hidden" name="" value="￥50.00">
+                                <a href="javascript:void(0)" class="tag-item">￥50.00<i class="t-check tptig"></i></a>
+                                <input type="hidden" name="" value="￥100.00">
+                                <a href="javascript:void(0)" class="tag-item">￥100.00<i class="t-check"></i></a>
+                                <input type="hidden" name="" value="￥200.00">
+                                <a href="javascript:void(0)" class="tag-item">￥200.00<i class="t-check"></i></a>
+                                <input type="hidden" name="" value="￥500.00">
+                                <a href="javascript:void(0)" class="tag-item">￥500.00<i class="t-check"></i></a>
+                                <div class="tag-define" data_id="tag_157">
+                                    <span class="define-label" style="display: block;"><i class="i-pen"></i><em>输入金额</em></span>
+                                    <input type="text" class="define-input" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fop-choice">
+                            <form action="/index.php/Home/Payment/getCode.html" method="post" name="cart4_form" id="cart4_form">
+        <div class="orde-sjyy">
+            <h3 class="titls">选择支付方式</h3>
+            <div class="bsjy-g">
+                <dl>
+                    <dd>
+                        <div class="order-payment-area">
+                            <div class="dsfzfpte">
+                                <b>选择支付方式</b>                               
+                            </div>
+                            <div class="po-re dsfzf-ee">
+                                <ul>
+                                <li>
+                                        <div class="payment-area">
+                                            <input type="radio" id="input-ALIPAY-1" value="pay_code=alipay" class="radio vam" name="pay_radio">
+                                            <label for="">
+                                                <img src="/plugins/payment/alipay/logo.jpg" width="120" height="40" onclick="change_pay(this);">
+                                            </label>
+                                        </div>
+                                    </li><li>
+                                        <div class="payment-area">
+                                            <input type="radio" id="input-ALIPAY-1" value="pay_code=cod" class="radio vam" name="pay_radio">
+                                            <label for="">
+                                                <img src="/plugins/payment/cod/logo.jpg" width="120" height="40" onclick="change_pay(this);">
+                                            </label>
+                                        </div>
+                                    </li><li>
+                                        <div class="payment-area">
+                                            <input type="radio" id="input-ALIPAY-1" value="pay_code=weixin" class="radio vam" name="pay_radio">
+                                            <label for="">
+                                                <img src="/plugins/payment/weixin/logo.jpg" width="120" height="40" onclick="change_pay(this);">
+                                            </label>
+                                        </div>
+                                    </li><li>
+                                        <div class="payment-area">
+                                            <input type="radio" id="input-ALIPAY-1" value="pay_code=unionpay" class="radio vam" name="pay_radio">
+                                            <label for="">
+                                                <img src="/plugins/payment/unionpay/logo.jpg" width="120" height="40" onclick="change_pay(this);">
+                                            </label>
+                                        </div>
+                                    </li><li>
+                                        <div class="payment-area">
+                                            <input type="radio" id="input-ALIPAY-1" value="pay_code=tenpay" class="radio vam" name="pay_radio">
+                                            <label for="">
+                                                <img src="/plugins/payment/tenpay/logo.jpg" width="120" height="40" onclick="change_pay(this);">
+                                            </label>
+                                        </div>
+                                    </li>                                                                    
+                                </ul>
+                            </div>
+                        </div>  
+                        
+                    <!--第三方网银支付 start-->
+                      <div class="order-payment-area">
+                            <div class="dsfzfpte">
+                                    <b>支付宝支付</b>
+                                    <em>网银支付</em>
+                                </div>
+                            <div class="po-re dsfzf-ee">
+                                    <ul>
+                                      <li>
+                                            <div class="payment-area">
+                                                <input type="radio" name="pay_radio" class="radio vam" value="pay_code=alipay&amp;bank_code=CMB-DEBIT" id="input-ALIPAY-1">
+                                                <label for="">
+                                                <img src="/Template/pc/soubao/Static/images/images-out/to_cmb.jpg" width="120" height="40" onclick="change_pay(this);">
+                                                </label>
+                                            </div>
+                                        </li><li>
+                                            <div class="payment-area">
+                                                <input type="radio" name="pay_radio" class="radio vam" value="pay_code=alipay&amp;bank_code=ICBC-DEBIT" id="input-ALIPAY-1">
+                                                <label for="">
+                                                <img src="/Template/pc/soubao/Static/images/images-out/to_icbc.jpg" width="120" height="40" onclick="change_pay(this);">
+                                                </label>
+                                            </div>
+                                        </li><li>
+                                            <div class="payment-area">
+                                                <input type="radio" name="pay_radio" class="radio vam" value="pay_code=alipay&amp;bank_code=COMM-DEBIT" id="input-ALIPAY-1">
+                                                <label for="">
+                                                <img src="/Template/pc/soubao/Static/images/images-out/COMM_OUT.gif" width="120" height="40" onclick="change_pay(this);">
+                                                </label>
+                                            </div>
+                                        </li><li>
+                                            <div class="payment-area">
+                                                <input type="radio" name="pay_radio" class="radio vam" value="pay_code=alipay&amp;bank_code=CCB-DEBIT" id="input-ALIPAY-1">
+                                                <label for="">
+                                                <img src="/Template/pc/soubao/Static/images/images-out/CCB_OUT.gif" width="120" height="40" onclick="change_pay(this);">
+                                                </label>
+                                            </div>
+                                        </li><li>
+                                            <div class="payment-area">
+                                                <input type="radio" name="pay_radio" class="radio vam" value="pay_code=alipay&amp;bank_code=CMBC" id="input-ALIPAY-1">
+                                                <label for="">
+                                                <img src="/Template/pc/soubao/Static/images/images-out/CMBC_OUT.gif" width="120" height="40" onclick="change_pay(this);">
+                                                </label>
+                                            </div>
+                                        </li><li>
+                                            <div class="payment-area">
+                                                <input type="radio" name="pay_radio" class="radio vam" value="pay_code=alipay&amp;bank_code=BOC-DEBIT" id="input-ALIPAY-1">
+                                                <label for="">
+                                                <img src="/Template/pc/soubao/Static/images/images-out/BOC_OUT.gif" width="120" height="40" onclick="change_pay(this);">
+                                                </label>
+                                            </div>
+                                        </li><li>
+                                            <div class="payment-area">
+                                                <input type="radio" name="pay_radio" class="radio vam" value="pay_code=alipay&amp;bank_code=ABC" id="input-ALIPAY-1">
+                                                <label for="">
+                                                <img src="/Template/pc/soubao/Static/images/images-out/ABC_OUT.gif" width="120" height="40" onclick="change_pay(this);">
+                                                </label>
+                                            </div>
+                                        </li><li>
+                                            <div class="payment-area">
+                                                <input type="radio" name="pay_radio" class="radio vam" value="pay_code=alipay&amp;bank_code=SHBANK" id="input-ALIPAY-1">
+                                                <label for="">
+                                                <img src="/Template/pc/soubao/Static/images/images-out/to_bos.jpg" width="120" height="40" onclick="change_pay(this);">
+                                                </label>
+                                            </div>
+                                        </li>                                                           
+                                    </ul>
+                            </div> 
+                        </div>                   
+                    <!--第三方网银支付 end -->
+                                                                
+                    </dd>
+                </dl>
+                <div class="order-payment-action-area">                    
+                    <a class="button-style-5 button-confirm-payment" href="javascript:void(0);" onclick="$('#cart4_form').submit();">确认支付方式</a>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="order_id" value="684">
+       <input type="hidden" name="__hash__" value="8472284b2e4791c78cc2aa0b484671d5_276ad4adb3d143fdd061e521c4babea5"></form>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+            
+      
+      
+    </div>
+  </div>
+</div>
+<div style="clear: both;"></div>
+<include file="User/footer" />
+
+<script>
+    $(function () {
+         $(".userdown-top ul li").click(function () {
+            $(this).addClass('alllist').siblings().removeClass('alllist');
+         });
+    });
+    
+    function mywalletsa() {
+            $('.mywallets').show();
+            $('.addmon').hide();
+    };
+    function mywalletstopup() {
+             $('.addmon').show();
+             $('.mywallets').hide();
+    };
+
+    $(document).ready(function() {
+        $(document).on('click','.tag-item',function(){
+            $(this).find('.t-check').addClass('tptig').parent().siblings().find('.t-check').removeClass('tptig')
+        });
+        $('.tag-define').click(function(){
+            var goods_id = $(this).attr('data_id').substr(4);
+            $(this).find('.define-label').hide();
+            $(this).find('.define-input').show().focus();
+            $(this).find('.define-input').blur(function(){
+                var ce = $(this).val();
+                ce = ce.replace(/\D|^0/g,'')
+                           
+                $(this).parent('.tag-define').siblings('.tag-item').each(function(){
+                    var a_text = $(this).text();
+                    if(ce == a_text && ce != ''){
+                        alert('已有该标签!');
+                        ce = '';
+                        $('.define-input').val('');
+                    }
+                });
+                if(ce == ''){
+                    $(this).prev('.define-label').show();
+                    $(this).hide();
+                }else{
+                    //remark[{$goods_list.goods_id}][rank]
+                    $(this).parent('.tag-define').prev('.tag-item').after('<input type="hidden" name="remark['+goods_id+'][tag][]" value="'+ce+'"/><a href="javascript:void(0)" class="tag-item">'+'￥'+ ce +'<i class="t-check"></i></a>');
+                    $(this).prev('.define-label').show();
+                    $(this).hide();
+                    $(this).val('');
+                }
+            })
+        });
+        
+    });
+</script>   
+</script>
+
+</body>
+</html>

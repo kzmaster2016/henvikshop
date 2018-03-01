@@ -1,0 +1,136 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta name="Generator" content="tpshop" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>update addrese-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<link rel="stylesheet" href="__STATIC__/css/public.css">
+<link rel="stylesheet" href="__STATIC__/css/user.css">
+
+<script src="__PUBLIC__/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="__STATIC__/js/layer.js" ></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/mobile_common.js"></script>
+</head>
+<body>
+      <header>
+      <div class="tab_nav">
+        <div class="header">
+          <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="back"></a></div>
+          <div class="h-mid">Address management</div>
+          <div class="h-right">
+            <aside class="top_bar">
+              <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+      </header>
+       	 <include file="Public/menu"/>
+<div id="tbh5v0">
+						
+<div class="addressmone">
+  <form action="{:U('Mobile/User/edit_address')}" method="post" onSubmit="return checkForm()">
+	<ul>
+       <li>
+    	<span>Consignee</span>  
+        <input name="consignee" id="consignee" type="text" value="{$address.consignee}" maxlength="12" placeholder="Consignee name"/>
+		</li>          
+       <li>
+          <span>Address</span>  
+          <input name='country' value='1' type="hidden">
+	             <select class="province_select"  name="province" id="province" onChange="get_city(this)">
+                      <option value="0">select </option>
+                        <volist name="province" id="p">
+                            <option <if condition="$address['province'] eq $p['id']">selected</if>  value="{$p.id}">{$p.name}</option>
+                        </volist>
+                 </select>
+                <select name="city" id="city" onChange="get_area(this)">
+                    <option  value="0">select </option>
+                    <volist name="city" id="p">
+                        <option <if condition="$address['city'] eq $p['id']">selected</if>  value="{$p.id}">{$p.name}</option>
+                    </volist>
+                </select>
+                <select name="district" id="district" onChange="get_twon(this)">
+                    <option  value="0">select </option>
+                    <volist name="district" id="p">
+                        <option <if condition="$address['district'] eq $p['id']">selected</if>  value="{$p.id}">{$p.name}</option>
+                    </volist>
+                </select>                 
+                <select class="di-bl fl seauii" name="twon" id="twon" <if condition="$address['twon'] gt 0 ">style="display:block;"<else/>style="display:none;"</if>>
+                    <volist name="twon" id="p">
+                        <option <if condition="$address['twon'] eq $p['id']">selected</if>  value="{$p.id}">{$p.name}</option>
+                    </volist>
+                </select>          
+        	</li>
+           <li>
+    		 <span>Detail address</span> <input type="text"  name="address" id="address" placeholder="Detail address" maxlength="100" value="{$address.address}"/>
+	       </li>
+           <li>
+			<span>Phone number</span> 
+            <input type="text" name="mobile" value="{$address.mobile}" onpaste="this.value=this.value.replace(/[^\d-]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d-]/g,'')" maxlength="15" placeholder="Phone number"/>
+	        </li>
+            <li>
+	    		<span style="font-size: 12px;">Postal Code/ZIP</span> 
+                <input type="text" name="zipcode" value="{$address.zipcode}" onpaste="this.value=this.value.replace(/[^\d]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d]/g,'')" maxlength="10"  placeholder="Postal Code/ZIP"/>
+	        </li>
+    	</ul>
+            <div style=" height:50px"></div>
+				<div class="dotm_btn">
+                
+                <if condition="$_GET['source'] eq 'cart2'"> <!--如果是下订单时提交过了的页面-->
+                     <input type="submit" value="Save and use this address" class="dotm_btn1" />
+	                 <input type="hidden" name="source" value="{$_GET[source]}" />
+                <else/>                
+                     <a href="javascript:void(0);" onClick="if (confirm('Are you sure to delete this delivery address?'))location.href='{:U('/Mobile/User/del_address',array('id'=>$address[address_id]))}'" class="dotm_btn2" style="color:#666;">Delete</a>
+                     <a href="{:U('/Mobile/User/set_default',array('id'=>$address[address_id]))}" class="dotm_btn3" style=" color:#FFF;font-size:14px;">Set as default address</a>
+                     <input type="submit" value="Save" class="dotm_btn1" />
+                </if>
+                 
+                </div>
+                <input type="hidden" name="id" value="{$address.address_id}" />
+		 
+    </form>
+</div>        </div>
+<script src="__PUBLIC__/js/validate2.js"></script>
+<script>
+    function checkForm(){
+        var consignee = $('input[name="consignee"]').val();
+        var province = $('select[name="province"]').find('option:selected').val();
+        var city = $('select[name="city"]').find('option:selected').val();
+        var district = $('select[name="district"]').find('option:selected').val();
+        var address = $('input[name="address"]').val();
+        var mobile = $('input[name="mobile"]').val();
+        var error = '';
+        if(consignee == ''){
+            error += 'The consignee cannot be empty <br/>';
+        }
+        if(province==0){
+            error += 'Select Country<br/>';
+        }
+        if(city==0){
+            error += 'Select Province/City<br/>';
+        }
+        if(district==0){
+            error += 'Select Town/Village<br/><br/>';
+        }
+        if(address == ''){
+            error += 'Please fill in the details<br/>';
+        }
+        if(!checkMobile(mobile)){
+            error += 'Phone number format is wrong<br/><br/>';
+		}
+        if(error){
+		    layer.open({content:error,time:2});
+            return false;
+        }
+			 
+        return true;
+    }
+</script> 
+</body>
+</html>

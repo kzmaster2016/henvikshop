@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Shipping Address-{$tpshop_config['shop_info_store_title']}</title>
+    <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <link rel="stylesheet" href="__STATIC__/css/index.css" type="text/css">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+    <script src="__STATIC__/js/slider.js"></script>
+</head>
+
+<body>
+<!--------头部开始-------------->
+<include file="Public/header" />
+<!--------头部结束-------------->
+<script src="__PUBLIC__/js/layer/layer.js"></script><!-- 弹窗js 参考文档 http://layer.layui.com/-->
+
+<div class="layout ov-hi">
+    <div class="breadcrumb-area">    
+	    <foreach name="navigate_user" key="k" item="v">
+	        <if condition="$k neq 'Home'"> > </if>  
+            <a href="{$v}">{$k}</a> 
+        </foreach>
+    </div>
+</div>
+<div class="layout pa-to-10 fo-fa-ar">
+    <!--菜单-->
+    <include file="User/menu" />
+    <!--菜单-->
+    <div class="fr wi940">
+        <div class="he50 wddd">
+            <div class="fl ddd-h2">
+                <h2><span>Shipping Address Management</span></h2>
+            </div>
+            <div class="fr ddd-h2">
+            	<h2><a href="javascript:;" class="co-red" onClick="address_edit({$list['address_id']})"><span>+Add A New Shipping Address</span></a></h2>
+            </div>
+        </div>
+
+        <div class="wddd-js ov-in">
+            <div class="list-group-title">
+                <table class="merge-tab" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th class="col-pro wi137">Consignee</th>
+                        <th class="">Address</th>
+                        <th class="wi118">Postal Code/ZIP</th>
+                        <th class="wi118">E-mail</th>
+                        <th class="wi172">Phone Number</th>
+                        <th class="col-operate wi199">Act</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="merge-list">
+ <if condition="empty($lists)"><!--没查询到数据-->
+     <p style="text-align:center"><img src="__STATIC__/images/null_data.jpg" width="400"  /></p>     
+ </if>               
+                <div class="ma-0--1">
+                    <div class="o-pro">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tbody>
+                            <volist name="lists" id="list">
+                                <tr <if condition="$list.is_default == 1"> class="defaul-address"</if> >
+                                    <td class="col-pro wi137">{$list.consignee}</td>
+                                    <td class="">
+                                        <span>
+                                        {$region_list[$list['country']]['name']},{$region_list[$list['city']]['name']},{$region_list[$list['district']]['name']}, {$list.address}
+                                        </span>
+                                        
+                                    </td>
+                                    <td class="wi118">{$list.zipcode}</td>
+                                    <td class="wi118">{$list.email}</td>
+                                    <td rowspan="1" class="wi172"><span>{$list.mobile}</span></td>
+                                    <td rowspan="1" class="col-operate wi199">
+                                        <p class="p-link  pfc"><a href="javascript:address_edit({$list['address_id']})">Edit</a></p>
+                                        <p class="p-link  pfc"><a href="{:U('Home/User/del_address',array('id'=>$list['address_id']))}">Delete</a></p>
+                                        <if condition="$list.is_default == 1">
+                                        <p class="p-link  pfc"><a class="red" href="{:U('Home/User/set_default',array('id'=>$list['address_id']))}">Set to Default</a></p>
+                                        </if>
+                                    </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="he80"></div>
+<!--------footer-开始-------------->
+<include file="Public/footer2" />
+<!--------footer-结束-------------->
+<style type="text/css">
+    .defaul-address{background: #ededed;}
+</style>
+
+</body>
+
+
+<script>
+    $(function () {
+        $(function () {
+            $("#q-s").mouseover(function () {
+                $('.ec-ta-x').css('left','0px');
+                $(this).addClass("cullent");
+            });
+            $("#q-s").mouseout(function () {
+                $('.ec-ta-x').css('left','0px');
+            });
+        });
+        $("#h-s").mouseover(function () {
+            $('.ec-ta-x').css('left','82px');
+            $(this).addClass("cullent");
+        });
+        $("#h-s").mouseout(function () {
+            $('.ec-ta-x').css('left','0px');
+            $(this).removeClass("cullent");
+        });
+    });
+
+    $(function () {
+        $("#j-s").mouseover(function () {
+            $('.ec-ta-x').css('left','164px');
+            $(this).addClass("cullent");
+        });
+        $("#j-s").mouseout(function () {
+            $('.ec-ta-x').css('left','0px');
+            $(this).removeClass("cullent");
+        });
+    });
+    /**
+     * 新增修改收货地址
+     * id 为零 则为新增, 否则是修改
+     *  使用 公共的 layer 弹窗插件  参考官方手册 http://layer.layui.com/
+     */
+    function address_edit(id)
+    {
+        if(id > 0)
+            var url = "/index.php?m=Home&c=User&a=edit_address&scene=1&call_back=call_back_fun&id="+id; // 修改地址  '/index.php/Home/User/add_address/scene/1/call_back/call_back_fun/id/id' //iframe的url /index.php/Home/User/add_address
+        else
+            var url = "/index.php?m=Home&c=User&a=add_address&scene=1&call_back=call_back_fun";	// 新增地址
+        layer.open({
+            type: 2,
+            title: 'Edit Shipping Address',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['880px', '580px'],
+            content: url,
+        });
+    }
+    // 添加修改收货地址回调函数
+    function call_back_fun(v){
+        layer.closeAll(); // 关闭窗口
+        location.href = location.href;
+    }
+</script>
+</html>

@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+</head>
+
+<body>
+<table width="980" border="1">
+    <tbody>
+    <tr>
+        <th width="474" scope="col">
+            <div align="center">订单号</div>
+        </th>
+        <th width="490" scope="col">
+            <div align="center">
+                {$order_info.order_sn}
+            </div>
+        </th>
+    </tr>
+    </tbody>
+</table>
+<table width="980" border="1">
+    <tbody>
+    <tr>
+        <td width="133">
+            <div align="center">状态</div>
+        </td>
+        <td width="831">
+            <div align="center">
+                {$order_status[$order_info['order_status']]}
+                /{$pay_status[$order_info['pay_status']]}
+                /{$shipping_status[$order_info['shipping_status']]}
+                <if condition="($order_info['pay_status'] eq '0') AND ($order_info['is_cod'] eq '0') AND ($order_info['order_status'] neq '3')">
+                    <a href="{:U('Home/User/order_pay',array('id'=>$order_info['order_id']))}">立即支付</a>
+                    <a href="{:U('Home/User/order_cancel',array('id'=>$order_info['order_id']))}">取消订单</a>
+                </if>
+                <if condition="($order_info['shipping_status'] eq '1') ">
+                    <a href="{:U('Home/User/order_confirm',array('id'=>$order_info['order_id']))}">确认收货</a>
+                </if>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table width="980" border="1">
+    <tbody>
+    <tr>
+        <td width="133">
+            <div align="center">收货人</div>
+        </td>
+        <td width="831">
+            <div align="center">
+                {$order_info.consignee}
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table width="980" border="1">
+    <tbody>
+    <tr>
+        <td width="133">
+            <div align="center">地址</div>
+        </td>
+        <td width="831">
+            <div align="center">
+                {$region_list[$order_info['province']]['name']}，{$region_list[$order_info['city']]['name']}，
+                {$region_list[$order_info['district']]['name']}，{$order_info.address}
+
+
+
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table width="980" border="1">
+    <tbody>
+    <tr>
+        <td width="133">
+            <div align="center">手机号码</div>
+        </td>
+        <td width="831">
+            <div align="center">
+                {$order_info.mobile}
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table width="980" border="1">
+    <tbody>
+    <tr>
+        <td width="133">
+            <div align="center">支付方式</div>
+        </td>
+        <td width="831">
+            <div align="center">
+                {$order_info.pay_name}
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table width="980" border="1">
+    <tbody>
+    <tr>
+        <td width="133">
+            <div align="center">物流</div>
+        </td>
+        <td width="831">
+            <div align="center">
+                {$order_info.shipping_name}
+
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table width="980" border="1">
+    <tbody>
+    <tr>
+        <td width="133">
+            <div align="center">快递单号</div>
+        </td>
+        <td width="831">
+            <div align="center">
+                {$order_info.invoice_no}
+
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table width="980" border="1">
+    <tbody>
+    <tr>
+        <td width="133">
+            <div align="center">商品</div>
+        </td>
+        <td width="831">
+            <volist name="order_info.goods_list" id="good">
+                <img width="150" height="150" src="{$good.original_img}" alt="">{$good.goods_name}----{$good.goods_price}----{$good.goods_number}<br>
+            </volist>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table width="980" border="1">
+    <tbody>
+    <tr>
+        <td width="133">
+            <div align="center">金额</div>
+        </td>
+        <td width="831">
+            <div align="center">
+                商品总价： {$order_info.goods_amount}
+                <br>
+                运费： {$order_info.shipping_fee}
+                <br>
+                折扣：- {$order_info.discount}
+                <br>
+                优惠券：- {$order_info.bonus}
+                <br>
+                订单总额：{$order_info.total_fee}
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

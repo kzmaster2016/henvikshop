@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>安全中心-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<!-- 头部-e -->
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/security_code.css"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/security_set.css"/>
+
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">安全设置</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+<div class="col_main">
+    <div class="main shop_red"> 
+          <!-- themes star -->
+          <div class="themes_title">
+        <h3>安全设置</h3>
+      </div>
+          <!-- themes end --> 
+          <!-- Security Center star -->
+          <div class="security_center">
+        <div class="security_center_top"> <a href="" class="personal_head target_no"> <img height="100" width="100" src="{$user.head_pic|default='__STATIC__/images/headPic.jpg'}" alt=""> </a>
+         <div class="pers_info">
+            <h3 class="name">{$user['nickname']}</h3>
+            <p class="rat"> 
+            	<span class='rat_00 <if condition="($user['email_validated'] eq 1) and ($user['email_validated'] eq 0)"> on </if>'>低</span>
+                <span class='rat_01 <if condition="($user['email_validated'] eq 1) or ($user['email_validated'] eq 1)"> on </if>'>中</span>
+                <span class='rat_02 <if condition="($user['mobile_validated'] eq 1) and ($user['email_validated'] eq 1)"> on </if>'>较高</span>
+             </p>
+            <p class="tips">本平台能保障你账户资金安全。</p>
+          </div>
+            </div>
+        <div class="security_center_list">
+          <ul>
+            <li class="list_name"> <i class="<if condition="$user['password'] eq ''">icon_big_warning<else/>icon_correct</if>"></i>登录密码 </li>
+            <li class="list_des">互联网账号存在被盗风险，建议您定期更改密码以保护账户安全。</li>
+            <li class="list_opear"> <a id="target_no" href="{:U('Home/User/password')}"  class="edit">修改</a> </li>
+          </ul>               
+          <ul>
+            <li class="list_name"> <i class="<if condition="$user['mobile_validated'] eq 0">icon_big_warning<else/>icon_correct</if>"></i>手机验证 </li>
+            <li class="list_des">您验证的手机：若已丢失或停用，请立即更换，避免账户被盗。</li>
+            <li class="list_opear">
+                <a id="target_no" href="{:U('Home/User/mobile_validate',array('type'=>'mobile','step'=>1))}" class="edit">
+	                 <if condition="$user['mobile_validated'] eq 0">未验证(点击验证)<else/>已验证(点击修改)</if>
+                </a> 
+            </li>
+          </ul>
+          <ul>
+            <li class="list_name"> <i class="<if condition="$user['email_validated'] eq 0">icon_big_warning<else/>icon_correct</if>"></i>邮箱验证 </li>
+            <li class="list_des">邮箱,互联网账号存在被盗风险，建议您立即绑定以保护账户安全。 </li>
+            <li class="list_opear"> 
+            	<a id="target_no" class="target_no" href="{:U('Home/User/email_validate',array('type'=>'email','step'=>1))}">
+	                <if condition="$user['email_validated'] eq 0">未验证(点击验证)<else/>已验证(点击修改)</if>
+                </a> 
+            </li>
+          </ul>
+            </div>
+      </div>
+          <!-- Security Center end --> 
+        </div>
+  </div>    
+</div>
+ 
+<div style="clear: both;"></div>
+<include file="User/footer" />
+</body>
+</html>

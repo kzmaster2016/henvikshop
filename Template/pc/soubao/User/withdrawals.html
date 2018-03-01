@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>账户管理-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<!-- 头部-e -->  
+<link rel="stylesheet" href="__STATIC__/css/favorite.css">
+
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">资金管理</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+   <div class="col_main">
+    <div class="main balance"> 
+      <!-- themes star -->
+      <div class="themes_title">
+        <h3>账户余额</h3>        
+      </div>
+      <!-- themes end --> 
+      <!-- message star -->
+      <div class="message">
+        <ul class="clearfix">
+          <li class="mes_01"> <i class="icon_purse"></i>
+            <div>
+              <p class="txt">可用余额</p>
+              <p class="num"><em class="rmb">￥</em>{$user.user_money}</p>
+            </div>
+          </li>
+          <li class="mes_02"> <i class="icon_lock"></i>
+            <div>
+              <p class="txt">可用积分</p>
+              <p class="num"><em class="rmb"></em>{$user.pay_points}</p>
+            </div>
+          </li>
+          <li class="mes_03"> <i class="icon_question" id="question"></i> </li>
+          <li class="mes_04"> <span class="txt"></span> <span class="status"></span> </li>
+        </ul>
+        <div class="tip" id="question_tip"> 尚未提现完成的金额 </div>
+      </div>
+      <!-- message end -->
+      <div class="ui_tab">
+        <ul class="ui_tab_nav">
+          <li class="active"><a id="activeHref" class="activeHref" href=""  >提现信息</a></li>
+        </ul>
+        <div class="ui_tab_content">
+          <div class="ui_panel" id="noComment" style="display: block;"> 
+            <!-- Details List star -->
+            	<div>
+				                <form action="" method="post" enctype="multipart/form-data" name="distribut_form" id="distribut_form">
+								<div class="cash_num bb1">
+									<p class="tx_cash">
+                                        <span>提现金额：</span>
+                                    	<input type="text" id="money" name="money"  class="imput_text vam" placeholder="最少提现额度{$tpshop_config['distribut_min']}" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')"/>
+                                    </p>
+									<p class="tx_cash">
+                                    	<span>银行名称：</span>
+                                        <input type="text" id="bank_name" name="bank_name" class="imput_text vam" placeholder="如:支付宝,农业银行,工商银行等..."/>
+                                    </p>
+									<p class="tx_cash">
+                                  	  <span>收款账号：</span>
+                                      <input type="text" id="account_bank" name="account_bank" class="imput_text vam" placeholder="如:支付宝账号,建设银行账号"/>
+                                    </p>
+									<p class="tx_cash">
+                                    	<span>开户名：</span>
+                                        <input type="text" id="account_name" name="account_name" class="imput_text vam" placeholder="开户人姓名"/>
+                                    </p>                                    
+									<p class="tx_cash">
+                                   		 <span>验证码：</span>
+                                          <input type="text" name="verify_code" class="imput_text vam" id="verify_code" placeholder="请输入下面的验证码" style="width:200px;" />
+	                                      <img class="yzm_code" id="verify_code_img" width="100" height="30" src="{:U('User/verify',array('type'=>'withdrawals'))}"  onclick="verify(this)" />
+                                    </p>
+									<p><a id="cash_submit"  onClick="checkSubmit();"  href="javascript:void(0);">确定提交</a></p>
+								</div>
+                                </form>
+								<div class="cash_num">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tr>
+                                            <th>编号</th>
+                                            <th>申请日期</th>                    
+                                            <th>金额</th>
+                                            <th>状态</th>
+										</tr>
+                                        <foreach name="list" item="v" > 
+										<tr>
+                                            <td>{$v['id']}</td>
+                                            <td>{$v['create_time']|date="Y-m-d",###}</td>
+                                            <td>{$v['money']}</td>                    
+                                            <td>
+                                            <if condition="$v[status] eq 0">申请中</if>
+                                            <if condition="$v[status] eq 1">申请成功</if>
+                                            <if condition="$v[status] eq 2">申请失败</if>                    
+                                            </td> 
+										</tr>
+										</foreach>        
+									</table>
+								</div>
+                <div class="operating fixed">
+                  <div class="fn_page clearfix">
+                         {$show}
+                  </div>
+                </div>
+							</div>
+            <!-- Details List end --> 
+            <!-- page next star -->
+
+	            <div class="operating fixed" id="bottom">
+                    <div class="fn_page clearfix">
+                            {$page} 
+                    </div>
+                </div>             
+            <!-- page next end --> 
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
+ 
+<div style="clear: both;"></div>
+<include file="User/footer" />
+</body>
+<script>
+// 表单验证提交
+function checkSubmit(){
+	var money = $.trim($('#money').val());
+	var bank_name = $.trim($('#bank_name').val());
+	var account_bank = $.trim($('#account_bank').val());
+	var account_name = $.trim($('#account_name').val());
+	var verify_code = $.trim($('#verify_code').val());
+	
+	if(money == '')
+	{
+		alert('提现金额必填');
+		return false;
+	}
+	if(money < {$tpshop_config['distribut_min']} || money > {$user['user_money']})
+	{
+		//alert("每次最少提现额度{$tpshop_config['distribut_min']},你的账户余额{$user['user_money']}");
+		//return false;
+	}
+			
+	if(bank_name == '')
+	{
+		alert('银行名称必填');
+		return false;
+	}
+	if(account_bank == '')
+	{
+		alert('收款账号必填');
+		return false;
+	}
+	if(account_name == '')
+	{
+		alert('开户名必填');
+		return false;
+	}
+	if(verify_code == '')
+	{
+		alert('验证码必填');
+		return false;
+	}
+	$('#distribut_form').submit();
+}
+
+// 验证码切换
+function verify(){
+   $('#verify_code_img').attr('src','/index.php?m=Home&c=User&a=verify&type=withdrawals&r='+Math.random());
+}
+
+ 
+</script>	
+</html>

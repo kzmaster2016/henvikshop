@@ -1,0 +1,29 @@
+<volist name="lists" id="list">
+       <div class="order_list">
+          <h2>
+              <a href="javascript:void(0);">
+                  <img src="__STATIC__/images/dianpu.png"><span>Shop name: website proprietary</span><strong>
+                  <img src="__STATIC__/images/icojiantou1.png"></strong>
+              </a>
+          </h2>
+         	<a href="{:U('/Mobile/User/order_detail',array('id'=>$list['order_id']))}">
+	          <volist name="list.goods_list" id="good">
+		          <dl>  
+		          <dt><img src="{$good.goods_id|goods_thum_images=200,200}"></dt>
+		          <dd class="name"><strong>{$good.goods_name}</strong>
+		          <span>{$good.spec_key_name} </span></dd>
+		          <dd class="pice">${$good['member_goods_price']}<em>x{$good['goods_num']}</em></dd>
+		          </dl>
+	          </volist>
+          	</a>
+          <div class="pic">All {$list.goods_list|count}pieces <span>paid：</span><strong>${$list['order_amount']}</strong></div>
+          <div class="anniu" style="width:95%">
+                <if condition="$list.cancel_btn eq 1"><span onClick="cancel_order({$list.order_id})">Cancel order</span></if>
+                <if condition="$list.pay_btn eq 1"><a href="{:U('Mobile/Cart/cart4',array('order_id'=>$list['order_id']))}">Pay now</a></if>
+                <if condition="$list.receive_btn eq 1"><a href="{:U('Mobile/User/order_confirm',array('id'=>$list['order_id']))}">Confirm receipt</a></if>
+                <if condition="$list.comment_btn eq 1"><a href="{:U('/Mobile/User/comment')}">to Comment</a></if>                
+                <if condition="$list.shipping_btn eq 1"><a href="{:U('User/express',array('order_id'=>$list['order_id']))}">View Logistics</a></if>        
+               <!-- <if condition="$list.return_btn eq 1"><a href="{:U('Mobile/Article/article',array('article_id'=>'22'))}" target="_blank">联系客服</a></if> -->
+          </div>
+       </div>
+</volist>  

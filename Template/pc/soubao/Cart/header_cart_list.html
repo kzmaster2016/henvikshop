@@ -1,0 +1,63 @@
+<if condition="count($cartList) eq 0">
+    <div class="empty-c">
+      <span class="ma"><i class="c-i oh"></i>购物车中没有商品哟！</span>
+    </div>
+<else />
+
+<div class="mn-c-m oh">
+    <!-- 购物车商品列表-->
+    <div class="mn-c-box J-sdb-cb js_cart_top">
+        <!-- 商家列表-->
+        <dl class="c-store mb15">
+            <dt class="c-store-tt fixed">
+                <a href="#" class="n fl" alt="" title="">自营</a>
+            </dt>
+            <dd class="c-list">
+                <!-- 商品列表-->
+                <!-- 商品列表+促销活动-->
+                <foreach name="cartList" item="v"  key="k">
+                <div class="c-prod">
+                    <div class="c-item fixed  js_cart_pro_list" cart_id="99583">
+                        <a class="del js_delete" onclick="header_cart_del({$v.id});" href="javascript:void(0);"></a>
+                        <p class="i fl mr5">
+                            <a href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" alt="" title="">
+                                <img src="{$v.goods_id|goods_thum_images=60,60}" height="50" width="50" alt="" title="">
+                            </a>
+                        </p>
+                        <p class="n fl">
+                            <a href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" class="" alt="" title="">
+                                	{$v[goods_name]}
+                            </a>
+                        </p>
+                        <p class="  fl js_mini_num"> * {$v[goods_num]} 件 </p>
+                        <p class="p fr mt5">
+                            <em>￥</em><span>{$v[member_goods_price]}</span>
+                        </p>
+                    </div>
+                </div>
+                </foreach>
+            </dd>
+        </dl>
+        <!-- 商家列表-->
+    </div>
+    <!-- 购物车结算-->
+    <div class="mn-c-total">
+        <div class="c-t fixed">
+            <p class="t-n fl">
+                <span id="total_qty">{$cart_total_price[num]}</span>件
+            </p>
+            <p class="t-p fr">
+                <em>￥</em>
+                <span id="total_pay">{$cart_total_price[total_fee]}</span>
+            </p>
+        </div>
+        <div class="c-btn">
+            <a href="{:U('Home/Cart/cart')}" alt="" title="">去购物车结算 &gt;&gt;</a>
+        </div>
+    </div>
+</div>
+
+</if>
+<script>
+   $(".cart_quantity").text('{$cart_total_price[anum]}'); // 购物车的总数量
+</script>

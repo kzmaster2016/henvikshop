@@ -1,0 +1,72 @@
+<include file="Public/header"/>
+<body>
+<header>
+<div class="tab_nav">
+  <div class="header">
+    <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="返回"></a></div>
+    <div class="h-mid">资金管理</div>
+    <div class="h-right">
+      <aside class="top_bar">
+        <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</header>
+<include file="Public/menu"/>
+<div id="tbh5v0">			
+<div style="background:#fff;">
+<div class="user_login_title"><h2><em>账户余额</em><span>￥{$user['user_money']}元</span></h2></div>
+<empty name="account_log">
+<p class="font12">您没有任何资金的变动哦！</p>
+<else/>
+<div class="Funds">
+  <ul>
+  <foreach name="account_log" item="item" key="k">
+    <li class="Funds_li" <if condition="$k eq count($account_log)"> style="border:0"</if>>
+    	<span class="icon <if condition='$k eq 0'>on</if>"></span>
+        <span>金额:<em>{$item.user_money}</em>,积分:<em>{$item.pay_points}</em></span>
+        <span>{$item.change_time|date='Y-m-d H:i:s',###}</span>
+        <span>{$item.desc}</span>
+    </li>
+  </foreach>
+  </ul>
+</div>
+<notempty name="account_log">
+   <div id="getmore" style="font-size:.24rem;text-align: center;color:#888;padding:.25rem .24rem .4rem; clear:both">
+  		<a href="javascript:void(0)" onClick="ajax_sourch_submit()">点击加载更多</a>
+  </div>
+</notempty>
+</empty>
+</div>
+<a href="javascript:goTop();" class="gotop"><img src="__STATIC__/images/topup.png"></a> 
+</div>
+<script>
+var  page = 1;
+ /*** ajax 提交表单 查询订单列表结果*/  
+ function ajax_sourch_submit()
+ {	 	 	 
+        page += 1;
+		$.ajax({
+			type : "GET",
+			url:"/index.php?m=Mobile&c=User&a=account&is_ajax=1&p="+page,//+tab,
+//			url:"{:U('Mobile/User/account',null,'')}/is_ajax/1/p/"+page,//+tab,
+//			data : $('#filter_form').serialize(),// 你的formid 搜索表单 序列化提交
+			success: function(data)
+			{
+				if($.trim(data) == '')
+					$('#getmore').hide();
+				else
+				    $(".Funds > ul").append(data);
+			}
+		}); 
+ } 
+</script>
+
+<script type="text/javascript">
+function goTop(){
+	$('html,body').animate({'scrollTop':0},600);
+}
+</script>
+</body>
+</html>

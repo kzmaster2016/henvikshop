@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-language" content="utf-8" />
+<meta name="renderer" content="webkit|ie-comp|ie-stand" />
+<meta http-equiv="Cache-control" content="public" max-age="no-cache" />
+<link rel="shortcut icon"  href="http://static02.fn-mart.com/img/feiniu_favicon.ico" />
+<link rel="apple-touch-icon" sizes="114x114" href="http://static02.fn-mart.com/images/touch-icon-iphone-136.png" />
+<link rel="alternate" media="only screen and (max-width:640px)" href="http://m.tp-shop.cn/category/C18973">
+<meta name="applicable-device" content="pc">
+<meta name="mobile-agent" content="format=html5;url=http://m.tp-shop.cn/category/C18973">
+<title>搜索页面-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<!--[if lte IE 9]>
+		<script src="http://static02.fn-mart.com/js/html5.js"></script>
+		<script src="http://static02.fn-mart.com/js/IE9.js"></script>
+		<link rel="stylesheet" type="text/css" href="http://static02.fn-mart.com/css/ie.css"/>
+		<![endif]-->
+<link rel="stylesheet" href="__STATIC__/css/category.css">
+	<style type="text/css">
+		.num{bottom: 0 !important;}
+	</style>
+</head>
+<body>
+<include file="Public/min-header" /> 
+<script type="text/javascript" src="__STATIC__/js/jquery.jqzoom.js"></script> 
+<script src="__PUBLIC__/js/pc_common.js"></script> 
+<div id="global-nav" class="clearfix">
+  <div class="m-nav-content">
+    <div class="m-nav-category"></div>
+    <div class="m-nav-search u-g-search"></div>
+    <div class="m-nav-cart"></div>
+  </div>
+</div>
+<!-- warpper-->
+<div id="warpper" class="clearfix">
+	<div class="m-breadnav" id="path-new">
+        <div class="item fl">
+            <div class="fl"> 
+                <span class="u-nav-title">搜索结果</span>
+            </div>
+        </div>        
+        <div class="u-left-icon"><i class="z-arrow"></i></div>
+        <div class="item fl">
+            <div class="fl"> 
+                <span class="u-nav-title selected">{$filter_param['q']}</span>
+            </div>
+        </div>  
+        <div class="u-left-icon"><i class="z-arrow"></i></div>
+        
+        <foreach name="filter_menu" item="v" key="k"> 
+            <a title="{$v['text']}" href="{$v['href']}" class="u-av-label">{$v['text']}<i></i></a>
+        </foreach>
+                 
+    </div>
+  <div class="cata_cart_left">
+    <div class="m-cart-left">
+        <p class="u-title"><a href="{:U("/Home/Goods/search",array('q'=>$filter_param['q']),'')}">全部分类</a></p>
+        <ul id="category_list_rst">
+        	<foreach name="cateArr" item="v" key="k">
+                <li><a style="cursor:pointer;"  href="{$v.href}" class="text13 <if condition="$_GET[id] eq $v[id]">selected</if>"><span>{$v.name}</span></a></li>
+            </foreach>
+        </ul>
+         <div class="f-cate-more"><a href="javascript:;" onClick="$('#category_list_rst').toggleClass('more');$(this).children('i').toggleClass('checked');">收缩<i></i></a></div>
+     </div>
+  <!-- 推荐热卖-->
+  <div class="m-rehotbox mt10" style='display:block;'>
+    <h2 class="rehottit">推荐热卖</h2>
+    <div class="rehotcon" id="rehotcon">
+     
+    <tpshop sql="select * from `__PREFIX__goods` where  is_recommend = 1 limit 5" item="v" key="k">
+      <div class="hotitem">
+        <div class="itemin">
+             <a class="proname"  href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">
+                 <img src="{$v.goods_id|goods_thum_images=200,200}">
+                  <span>{$v[goods_name]}</span>
+             </a>
+          <p class="itemprice">
+            <span class="new" rehot="90101748934_201480" style="display: block; float: left;"><i class="fn-rmb">¥</i>{$v[market_price]}</span>
+            <span class="old"><i class="fn-rmb">¥</i>{$v[shop_price]}</span>
+          </p>
+        </div>
+      </div>
+     </tpshop> 
+       
+    </div>
+  </div>
+</div>
+<div class="cata_shop_right" id="tracker_category"> 
+  <!-- 館頁屬性 -->
+  <div class="attribute_content">
+    <div class="attrs"> 
+      <!--帅选品牌-->
+      <if condition="$filter_brand neq null">
+      <div class='m-tr' >
+        <div class='g-left'>
+          <p>品牌</p>          
+        </div>
+        <div class='g-right ' >
+          <div class="g-list">
+            <ul class="f-list h76 ">
+              <foreach name="filter_brand" item="v" key="k">
+                <li> <a data-href="" href="{$v[href]}" data-key='brand' data-val='{$v[id]}'><i></i>{$v[name]}</a> </li>
+              </foreach>
+            </ul>
+            <div class="f-ext">
+                 <a  class="f-more brandMore" data-attr="attr_600002" href="javascript:;">更多<i></i></a>
+                 <a  class="f-check brand" data-attr="attr_600002" href="javascript:;"><i></i>多选</a> 
+            </div>
+            <div class="g-btns">
+            	<a  href="javascript:;" class="u-confirm" onClick="submitMoreFilter('brand',this);">确定</a>
+                <a href="javascript:;" class="u-cancel brand">取消</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </if>
+      <!--帅选规格-->
+      <foreach name="filter_spec" item="v" key="k">
+        <div class='m-tr' >
+          <div class='g-left'>
+            <p>{$v.name}</p>
+          </div>
+          <div class='g-right ' >
+            <div class="g-list">
+              <ul class="f-list ">
+                <foreach name="v[item]" item="v2" key="k2">
+                  <li> <a id='' data-href="" href="{$v2[href]}" data-key='{$v2[key]}' data-val='{$v2[val]}'><i></i>{$v2[item]}</a> </li>
+                </foreach>
+              </ul>
+              <div class="f-ext">
+                  <a  class="f-more " data-attr="attr_601115" href="javascript:;">更多<i></i></a>
+                  <a  class="f-check " data-attr="attr_601115" href="javascript:;"><i></i>多选</a>
+              </div>
+              <div class="g-btns">
+              	<a  href="javascript:;" class="u-confirm" onClick="submitMoreFilter('spec',this);">确定</a>
+                <a href="javascript:;" class="u-cancel ">取消</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </foreach>
+      <!--帅选属性-->
+      <foreach name="filter_attr" item="v" key="k">
+        <div class='m-tr' >
+          <div class='g-left'>
+            <p>{$v.attr_name}</p>
+          </div>
+          <div class='g-right ' >
+            <div class="g-list">
+              <ul class="f-list h76 ">
+                <foreach name="v[attr_value]" item="v2" key="k2">
+                  <li> <a data-href="{$v2[href]}" href="{$v2[href]}" data-key='{$v2[key]}' data-val='{$v2[val]}'><i></i>{$v2[attr_value]}</a> </li>
+                </foreach>
+              </ul>
+              <div class="f-ext"> 
+              	<a  class="f-more brandMore" data-attr="attr_600002" href="javascript:;">更多<i></i></a>
+                <a  class="f-check brand" data-attr="attr_600002" href="javascript:;"><i></i>多选</a>
+              </div>
+              <div class="g-btns">
+              	<a  href="javascript:;" class="u-confirm" onClick="submitMoreFilter('attr',this);">确定</a>
+                <a href="javascript:;" class="u-cancel brand">取消</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </foreach>      
+      <!--价格帅选-->
+      <if condition="$filter_price neq null">
+      <div class='m-tr' >
+        <div class='g-left'>
+          <p>价格</p>
+        </div>
+        <div class='g-right ' >
+          <div class="g-list">
+            <ul class="f-list h76 ">
+              <foreach name="filter_price" item="v" key="k">
+                <li> <a href="{$v[href]}" data-attr-desc=''><i></i>{$v[value]}</a> </li>
+              </foreach>
+			  <li class="m-pricebox">
+              <form action="<?php echo urldecode(U("/Home/Goods/search",$filter_param,''));?>" method="post" id="price_form">
+                    <input name="q" value="{$q}" type="hidden" />
+                    <input type="text" class="u-pri-start" onpaste="this.value=this.value.replace(/[^\d]/g,'')" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" name="start_price" id="start_price" />
+                    -
+                    <input type="text" class="u-pri-end" onpaste="this.value=this.value.replace(/[^\d]/g,'')" onkeyup="this.value=this.value.replace(/[^\d]/g,'')"  name="end_price" id="end_price" />
+                    <span style="cursor:pointer;" class="z-btn ensure03 u-btn-pri" href="javascript:;" onClick="if($('#start_price').val() !='' && $('#end_price').val() !='' ) $('#price_form').submit();">确认</span>
+              </form>      
+              </li>              
+            </ul>
+          </div>
+        </div>
+      </div>
+      </if>
+     <!--价格帅选 end-->
+      <a  class="f-out-more" href="javascript:;">更多选项<i></i></a> </div>
+  </div>
+  <!-- 館頁屬性 --> 
+  
+  <!-- 商品列表 -->
+  <div class="searchbox">
+    <div class="list clearfix">
+      <ul class="left text12" id="order_ul">
+        <!--        <li><a class="col7ac " href1="&sort=recommand&asc=0" style="cursor:pointer;">综合</a></li>-->
+        <li> <a class="col7ac  <if condition="$_GET[sort] eq ''">main</if>" href="<?php echo urldecode(U("/Home/Goods/search",$filter_param,''));?>" style="cursor:pointer;"> 默认 </a> </li>
+        <li> <a class="col7ac  <if condition="$_GET[sort] eq 'sales_sum'">main</if>" href="<?php echo urldecode(U("/Home/Goods/search",array_merge($filter_param,array('sort'=>'sales_sum')),''));?>" style="cursor:pointer;"> 销量 </a> </li>
+                
+        <if condition="$_GET['sort_asc'] eq 'desc'">
+        	<li><a class="col7ac  <if condition="$_GET[sort] eq 'shop_price'">main</if>" href="<?php echo urldecode(U("/Home/Goods/search",array_merge($filter_param,array('sort'=>'shop_price','sort_asc'=>'asc')),''));?>" style="cursor:pointer;">价格<span class="icon_s "></span></a></li>
+        <else />
+        	<li><a class="col7ac  <if condition="$_GET[sort] eq 'shop_price'">main</if>" href="<?php echo urldecode(U("/Home/Goods/search",array_merge($filter_param,array('sort'=>'shop_price','sort_asc'=>'desc')),''));?>" style="cursor:pointer;">价格<span class="icon_s "></span></a></li>            
+        </if>    
+                
+        <li><a class="col7ac  <if condition="$_GET[sort] eq 'comment_count'">main</if>" href="<?php echo urldecode(U("/Home/Goods/search",array_merge($filter_param,array('sort'=>'comment_count')),''));?>" style="cursor:pointer;">评论</a></li>
+        <li><a class="col7ac  <if condition="$_GET[sort] eq 'is_new'">main</if>"  href="<?php echo urldecode(U("/Home/Goods/search",array_merge($filter_param,array('sort'=>'is_new')),''));?>" style="cursor:pointer;">新品</a></li>
+      </ul>
+      <!-- Page -->
+      <div class="right text12" id="pagenavi">
+        <div class="all-number">
+          <span>共{$page->totalRows}个商品</span>
+        </div>
+        <p class="pageArea" data-countPage="1"> 
+          <!--<a class="bg_img1"></a>-->
+          <span class="colf22e01 fontT">{$page->nowPage}</span>
+          /
+          <span class="page_count fontT">{$page->totalPages}</span>
+          <!--<a href="" class="bg_img2"></a> </p>-->
+      </div>
+      <!-- Page End--> 
+    </div>
+    <!-- list --> 
+  </div>
+  <!-- searchbox -->
+  
+  <ul id="cata_choose_product" class="cart_containt clearfix listContainer">
+    <foreach name="goods_list" item="v" key="k">
+      <li>
+        <div class="nosinglemore"></div>
+        <div class="listbox clearfix"> 
+          <!-- 圖片 -->
+          <div class="listPic"> 
+          		<a rel="nofollow" target="_blank" href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" style="width:200px;height:200px;">
+                	<img width="200" height="200" style="display: block;" src="{$v.goods_id|goods_thum_images=200,200}" class="fn_img_lazy"> 
+                </a>             
+          </div>
+          <div class="list-scroll J_scrollBox clearfix"> <a href="javascript:void(0);" class="list-scroll-left cbtn"></a>
+            <div class="list-scroll-warp J_hideBox">
+              <dl class="J_mBox clearfix">            
+              <foreach name="goods_images" item="v2" key="k2">
+                  <if condition="$v2[goods_id] eq $v[goods_id]">
+                    <dd>
+	                    <a href="javascript:void(0);">
+                        	<img width="30"  height="30" data-img="{$v2[image_url]}" src="{$v2[image_url]}" style="display: block;">
+                        </a> 
+                    </dd>
+                  </if>
+              </foreach>
+              </dl>
+            </div>
+            <a href="javascript:void(0);" class="list-scroll-right cbtn"></a> </div>
+          
+          <!-- 价格 -->
+          <div class="discountPrice">
+            <div class="price-cash">
+              <span class="text13 colf22e01">¥</span>
+              <span class="text18 colf22e01 fontT" id="itemPrice_201510CM130003397">{$v[shop_price]}</span>
+              <del></del> 
+            <span class="text12" style="float: right;color: gray;position: relative;top:3px">{$v[sales_sum]}人付款</span>
+            </div>
+          </div>
+          <!-- 价格 end--> 
+          <!-- 品名 -->
+          <div class="listDescript"> <a target="_blank" href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}" class="text13">{$v[goods_name]}</a> </div>
+          <!-- 價格及字樣 -->
+          <div class="itemPrice" >
+            <div class="cart_wrapper" > <a style="cursor:pointer;" class="cartlimit" href="javascript:void(0);" onclick="javascript:AjaxAddCart({$v[goods_id]},1,0);" ></a></div>
+          </div>
+        </div>
+      </li>
+    </foreach>
+  </ul>
+  
+  <!-- Page -->
+  <div class="fn-page-css-1 pagintion fix" style="display: block;">
+  	<div class="pagenavi text12">{$page->show()}</div>
+  </div>
+  <!-- 商品列表 --> 
+</div>
+</div>
+
+<include file="Public/footer" />
+<script type="text/javascript">
+
+//############   分类导航折叠        ############
+$('span[name="submenuicon"]').each(function(){
+	 $(this).click(function(){
+		 if($(this).hasClass('menuplus')){
+			 $(this).removeClass('menuplus').addClass('menuminus');
+			 $(this).siblings('.second_div').find('ul').show();
+		 }else{
+			 $(this).removeClass('menuminus').addClass('menuplus');
+			 $(this).siblings('.second_div').find('ul').hide();
+		 }
+	 });
+})
+ 
+//############   更多类别属性筛选       ###########
+$('.f-out-more').click(function(){
+  $('.m-tr').each(function(i,o){
+    if(i >  7){
+      var attrdisplay = $(o).css('display');
+      if(attrdisplay == 'none'){
+        $(o).css('display','block');
+      }
+      if(attrdisplay == 'block'){
+        $(o).css('display','none');
+      }
+    }
+  });
+  if($(this).hasClass('checked')){
+    $(this).removeClass('checked tex-center').html('收起<i class="checked"></i>');
+  }else{
+    $(this).addClass('checked tex-center').html('更多选项');
+  }
+})
+
+//############   更多条件选择        ###########
+$('.f-more').click(function(){
+	if($(this).hasClass('checked')){
+		$(this).parent().siblings('ul').removeClass('z-show-more');
+		$(this).removeClass('checked').html('更多<i></i>');
+	}else{
+		$(this).parent().siblings('ul').addClass('z-show-more');
+		$(this).addClass('checked').html('收起<i class="checked"></i>');
+	}	
+})
+
+var cancelBtn = null;
+//############   多选框        ###########
+$('.f-check').click(function(){
+	var _this = this;
+	var st = 0;
+	//关闭前一个多选框
+	if(cancelBtn != null){
+		$(cancelBtn).parent().siblings('ul').removeClass('z-show-more');
+		$(cancelBtn).parent().siblings('ul').find('li >a').each(function(i,o){
+			$(o).removeClass('select selected');
+			$(o).attr('href',$(o).data('href'));
+			$(o).children('i').removeClass('selected').css('display','');
+			$(o).unbind('click');
+		});		
+		$(cancelBtn).parent().siblings('.f-ext').show().children('a').removeClass('checked');
+		$(cancelBtn).parent().hide();
+		$(cancelBtn).siblings().removeClass('u-confirm01');
+	}
+	cancelBtn = $(_this).parent().siblings('div').find('.u-cancel');
+	
+	//打开多选框
+	$(_this).addClass('checked');
+	$(_this).siblings().addClass('checked');
+	$(_this).parent().siblings('.g-btns').show();
+	$(_this).parent().siblings('ul').addClass('z-show-more');
+	$(_this).parent().siblings('ul').find('li>a').each(function(i,o){
+		$(o).addClass('select');
+		$(o).children('i').css('display','inline');
+		$(o).attr('href','javascript:;');
+		$(o).bind('click',function(){			
+			if($(o).hasClass('selected')){
+				$(o).removeClass('selected');
+				$(o).children('i').removeClass('selected');
+				st--;
+			}else{
+				$(o).addClass('selected');
+				$(o).children('i').addClass('selected');
+				$(_this).parent().siblings('.g-btns').children('.u-confirm').addClass('u-confirm01');
+				st++;
+			}
+			//如果没有选中项,确定按钮点不了
+			if(st==0){
+				$(_this).parent().siblings('.g-btns').children('.u-confirm').removeClass('u-confirm01');
+			}
+		});
+	});
+	$(_this).parent().hide();
+})
+
+
+//############   取消多选        ###########
+$('.g-btns .u-cancel').each(function(){
+	$(this).click(function(){
+		$(this).parent().siblings('ul').removeClass('z-show-more');
+		$(this).parent().siblings('ul').find('li >a').each(function(i,o){
+			$(o).removeClass('select selected');
+			$(o).attr('href',$(o).data('href'));
+			$(o).children('i').removeClass('selected').css('display','');
+			$(o).unbind('click');
+		});
+		$(this).parent().siblings('.f-ext').show().children('a').removeClass('checked');
+		$(this).parent().hide();
+		$(this).siblings().removeClass('u-confirm01');
+	});
+})
+
+//############   产品图片切换        ###########
+
+$('.list-scroll-warp').each(function(){
+	var _this = this;
+		
+	$(_this).children().children().each(function(i,o){
+		$(o).mouseover(function(){
+			$(o).siblings().removeClass('cur');
+			$(o).addClass('cur');			
+			var img_src = $(o).children().children().attr('data-img');
+			$(_this).parent().siblings('.listPic').find('a').children().attr('src',img_src);
+		})
+	})
+})
+
+//############   点击多选确定按钮      ############
+// t 为类型  是品牌 还是 规格 还是 属性
+// btn 是点击的确定按钮用于找位置
+ get_parment = <?php echo json_encode($_GET); ?>;	
+function submitMoreFilter(t,btn)
+{
+	// 没有被勾选的时候
+	if(!$(btn).hasClass("u-confirm01"))
+		return false;
+		
+	// 获取现有的get参数		
+	var key = ''; // 请求的 参数名称
+	var val = new Array(); // 请求的参数值
+	$(btn).parent().siblings(".f-list").find("li > a.selected").each(function(){
+		   key = $(this).data('key');
+		   val.push($(this).data('val'));
+	});
+	//parment = key+'_'+val.join('_');
+    
+	// 品牌
+	if(t == 'brand')
+	{
+		get_parment.brand_id = val.join('_');
+	}
+	// 规格
+	if(t == 'spec')
+	{
+		if(get_parment.hasOwnProperty('spec'))		
+		{		
+			get_parment.spec += '@'+key+'_'+val.join('_');
+		}		
+		else	
+		{		
+			get_parment.spec = key+'_'+val.join('_');
+		}		
+	}
+	// 属性
+	if(t == 'attr')
+	{
+		if(get_parment.hasOwnProperty('attr'))		
+		{		
+			get_parment.attr += '@'+key+'_'+val.join('_');
+		}		
+		else	
+		{		
+			get_parment.attr = key+'_'+val.join('_');
+		}		
+	}
+   // 组装请求的url	
+  var url = '';
+  for ( var k in get_parment )
+  { 
+		url += "&"+k+'='+get_parment[k];
+  } 
+
+	//console.log('get_parment',get_parment);	
+	location.href ="/index.php?m=Home&c=Goods&a=search"+url;
+}
+
+</script>
+</body>
+</html>

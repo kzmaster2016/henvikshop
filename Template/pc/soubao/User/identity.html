@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="stylesheet" href="__STATIC__/css/security_set.css">
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<div class="wrap">
+<div class="bread_crumbs"> 
+  <a href="{:U('Home/User/index')}" class="crumbs_font">用户中心</a>&gt;<span class="color">找回密码</span>
+</div>
+<div class="col_main" style="float: none; width: auto;">
+		<div class="main security_passwd">
+			<!-- themes star -->
+			<div class="themes_title">
+				<h3>安全设置</h3>
+			</div>
+			<!-- themes end -->
+			<section class="security_passwd">
+				<div class="wrapper-3">
+					<div class="pub-step" id="step">
+						<div class="steps-nav fixed w4">
+							<p class="step-nav step-nav-1">
+								1.填写用户名<i></i>
+							</p>
+							<p class="step-nav step-nav-2 go">
+								2.验证身份<i></i>
+							</p>
+							<p class="step-nav step-nav-3">
+								3.设置新密码<i></i>
+							</p>
+							<p class="step-nav step-nav-4">4.完成</p>
+						</div>
+							
+											<div class="steps-con block-01">
+											<div class="step-col way-ul-1 " id="verify-way">
+												<div id="way-se">
+													<label class="title" for="verify-type-selector">请选择验证方式：</label>
+													<div class="con">
+														<select id="verify-type-selector">
+															<if condition="strstr($_POST['username'],'@')">
+																<option value="email" selected alias-value="2">邮箱验证</option>
+                                                            <else / >
+																<option value="phone" selected alias-value="1">手机验证</option>                                                                
+															</if>
+														</select>
+													</div> 
+												</div>
+												<div class="captcha_row">
+														<!-- way-u-1 begin -->
+														<ul class="pub-ul way-u way-u-1 fn-form verify-captcha-sms" data-fn-verify="">
+															<if condition="$userinfo['mobile'] neq ''">
+															<li class="li-01"><span class="title">已验证手机号码：</span>
+																<div class="con verify-group">
+																	<span class="s-01">{$userinfo.mobile}</span>
+																</div>
+															</li>
+															</if>
+															<if condition="$userinfo['email'] neq ''">
+															<li class="li-02"><span class="title">已验证邮箱：</span>
+																<div class="con verify-group">
+																	<span class="s-01">{$userinfo.email}</span>
+																</div>
+															</li>
+															</if>
+															<li class="li-03"><span class="title">验证码：</span>
+																<div class="con verify-group">
+																	<input type="text" class="msg-code ie-01 verify-ctrl"  name="tpcode" id="tpcode" maxlength="10" value="">
+																	<input type="button" class="get-msg-code" id="sendSms" onclick="sendcode(this)" value="获取验证码">
+																	<span class="v-tips verify-tips" data-tips-for="tpcode"><i class="icon"></i><span class="txt"></span></span>
+																</div>
+															</li>
+															<li class="li-04">
+																<button type="button" class="btn_120 verify-ctrl" id="fx_next" onclick="setpwd()">下一步</button>
+															</li>
+														</ul>
+														<!-- way-u-1 end -->
+												</div>
+											</div>
+											<!-- /#step-col -->
+										</div>
+										<div class="steps-con off block-02" id="inform-hint">
+											<div class="step-col">
+												<div class="set-hint"><p></p><font color="red" size="+1"><p></p></font></div>
+											</div>
+										</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<input type="hidden" id="username" value="{$userinfo.username}"> 
+<div style="clear: both;"></div>
+<include file="User/footer" />
+<script>
+function sendcode(o){
+	$.ajax({
+		url:'/index.php?m=Home&c=User&a=send_validate_code&t='+Math.random(),
+		type:'post',
+		dataType:'json',
+		data:{type:$('#verify-type-selector').val(),send:$('#username').val()},
+		success:function(res){
+			if(res.status==1){
+				timer(o);
+			}else{
+				alert(res.msg);
+			}
+		}
+	})
+}
+
+var wait=180;
+function timer(o) { 
+	$('span[data-tips-for="tpcode"]').find('i').addClass('icon');
+	$('span[data-tips-for="tpcode"]').find('i').removeClass('icon-warn');
+	$('span[data-tips-for="tpcode"]').find('.txt').empty();
+    if (wait == 0) {  
+        o.removeAttribute("disabled");            
+        o.value="获取验证码";  
+        wait = 180;  
+    } else {  
+        o.setAttribute("disabled", true);  
+        o.value="重新发送(" + wait + ")";  
+        wait--;  
+        setTimeout(function() {  
+          timer(o)  
+        }, 1000)  
+    }  
+}
+
+var is_check = false;
+function checkcode(){
+	var tpcode = $('#tpcode').val();
+	$('span[data-tips-for="tpcode"]').css('display','inline');
+	$('span[data-tips-for="tpcode"]').find('i').removeClass('icon');
+	$('span[data-tips-for="tpcode"]').find('i').addClass('icon-warn');
+	if(tpcode == ''){
+		$('span[data-tips-for="tpcode"]').find('.txt').empty().html('验证码不能为空');
+		return;
+	}
+	if(tpcode.length != 4){
+		$('span[data-tips-for="tpcode"]').find('.txt').empty().html('验证码不正确');
+		return;
+	}
+	
+	$.ajax({
+		url:'/index.php?m=Home&c=User&a=check_validate_code&t='+Math.random(),
+		type:'post',
+		dataType:'json',
+		data:{code:tpcode,send:$('#username').val()},
+		success:function(res){
+			if(res.status==1){
+				is_check = true;
+				$('span[data-tips-for="tpcode"]').css('display','inline');
+				$('span[data-tips-for="tpcode"]').find('i').removeClass('icon-warn');
+				$('span[data-tips-for="tpcode"]').find('i').addClass('icon-loss');
+				$('span[data-tips-for="tpcode"]').find('.txt').empty();
+				window.location.href='/index.php?m=Home&c=User&a=set_pwd&t='+Math.random();
+			}else{
+				$('span[data-tips-for="tpcode"]').find('.txt').empty().html(res.msg);
+				//alert('验证码未验证通过');
+				return false;				
+			}
+		}
+	})
+}
+
+function setpwd(){
+	var tpcode = $('#tpcode').val();
+	$('span[data-tips-for="tpcode"]').css('display','inline');
+	$('span[data-tips-for="tpcode"]').find('i').removeClass('icon');
+	$('span[data-tips-for="tpcode"]').find('i').addClass('icon-warn');
+	if(tpcode == ''){
+		$('span[data-tips-for="tpcode"]').find('.txt').empty().html('验证码不能为空');
+		return;
+	}
+	if(tpcode.length != 4){
+		$('span[data-tips-for="tpcode"]').find('.txt').empty().html('验证码不正确');
+		return;
+	}
+	
+	checkcode();
+ 
+}
+</script>
+</body>
+</html>	

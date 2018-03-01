@@ -1,0 +1,429 @@
+﻿@charset "utf-8";
+/**
+ * @authors zmh.zhu
+ * @description 
+ * @date    2015-01-15 16:40:08
+ * @version 1.0
+ */
+/**收货地址高德地图 @japin.pan 20151019 start**/
+.amap-container {
+  cursor:url(http://webapi.amap.com/theme/v1.3/openhand.cur),default;
+}
+.amap-drag {
+  cursor:url(http://webapi.amap.com/theme/v1.3/closedhand.cur),default;
+}
+.form-verify {
+  position: static;
+  left: 0;
+  *left: 0;
+  top: 0;
+  margin-top: 30px;
+  margin-left: 106px;
+}
+.gd-add-Map {
+  width: 298px;
+  height: 298px;
+  border: 1px solid #ddd;
+  position: absolute;
+  right: 0;
+  top: -14px;
+}
+.gd-add-Map .maskbg {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  opacity: 0.6;
+  width: 300px;
+  height: 300px;
+  z-index: 10004;
+  background-color: rgb(51, 51, 51);
+}
+.gd-add-Map .maskBotbg {
+  display: inline-block;
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  opacity: 0.6;
+  width: 300px;
+  height: 40px;
+  z-index: 300;
+  background-color: rgb(0, 0, 0);
+}
+.gd-add-Map .maskTopbg {
+  display: inline-block;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  opacity: 0.6;
+  width: 100px;
+  height: 32px;
+  z-index: 290;
+  background-color: rgb(0, 0, 0);
+}
+.gd-add-Map .viewMap {
+  display: inline-block;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 100px;
+  height: 32px;
+  z-index: 290;
+}
+.gd-add-Map .viewMap a {
+  display: inline-block;
+  width: 100%;
+  height: 18px;
+  padding: 7px 0;
+  line-height: 18px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+}
+.gd-add-Map .viewMap i {
+  display: inline-block;
+  font-style: normal;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background: url(../images/viewbigmap.png) no-repeat;
+}
+.gd-add-Map .statusEdit b {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: normal;
+}
+.gd-add-Map .tipLayer {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  z-index: 99999;
+}
+.gd-add-Map .initSet {
+  width: 300px;
+  height: 300px;
+  background: url(../images/tip.png) no-repeat;
+}
+.gd-add-Map .tipLayer a.startSet {
+  display: inline-block;
+  position: absolute;
+  top: 234px;
+  left: 106px;
+  width: 85px;
+  height: 28px;
+  cursor: pointer;
+}
+.gd-add-Map .tipLayer .setCont {
+  position: absolute;
+  top: 75px;
+  left: 30px;
+  width: 200px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid #dadada;
+  box-shadow: 0 5px 5px rgba(0,0,0,.5);
+}
+.gd-add-Map .tipLayer .setCont p {
+  width: 100%;
+  line-height: 18px;
+  font-size: 12px;
+  color: #666;
+}
+.gd-add-Map .tipLayer .setCont a.tipClose {
+  display: inline-block;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  color: #ccc;
+  text-decoration: none;
+  font: 700 16px/14px Tahoma,Verdana,sans-serif;
+  width: 14px;
+  height: 14px;
+}
+.gd-add-Map .tipLayer .setCont a.tipClose:hover {
+  color: #aaa;
+}
+.gd-add-Map .tipLayer .setCont em {
+  font-style: normal;
+  color: #da3a4c;
+}
+.gd-add-Map .tipLayer .setCont i {
+  display: inline-block;
+  position: absolute;
+  bottom: -30px;
+  left: 118px;
+  font-style: normal;
+  width: 34px;
+  height: 30px;
+  background: url(../images/sharp.png) no-repeat;
+}
+.gd-add-Map .statusEdit {
+  display: inline-block;
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  width: 300px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+  color: #fff;
+  padding: 8px 0;
+  text-align: center;
+  z-index: 300;
+}
+.gd-add-Map .statusEdit p {
+  width: 100%;
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+}
+.gd-add-Map .statusEdit i {
+  display: inline-block;
+  font-style: normal;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.gd-add-Map .statusEdit i.right {
+  background: url(../images/map_right.png) no-repeat;
+}
+.gd-add-Map .statusEdit i.error {
+  background: url(../images/map_error.png) no-repeat;
+}
+.gd-add-Map .statusEdit b {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  font-size: 14px;
+}
+.gd-add-Map .statusEdit a {
+  display: inline-block;
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+  margin: 0 10px;
+  padding: 0 10px;
+  text-decoration: none;
+}
+.gd-add-Map .statusEdit .mapSave {
+  background: #da3a4c;
+  color: #fff;
+}
+.gd-add-Map .statusEdit .mapInit {
+  background: #f8f8f8;
+  color: #999;
+}
+.gd-add-Map .mapHide {
+  display: none;
+}
+.bigMapBg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10001;
+  background: rgb(0, 0, 0);
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+  display:none;
+}
+.bigMapArea {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 870px;
+  height: 470px;
+  z-index: 10001;
+  margin-left: -435px;
+  margin-top: -235px;
+  display:none;
+}
+.bigMapArea .bigMap {
+  width: 860px;
+  height: 460px;
+  border: 5px solid rgb(102, 102, 102);
+  background-color: #fff;
+  position: relative;
+}
+.bigMap .bigMapHide {
+  display: none;
+}
+.bigMapArea .bigMap p.maskTitleBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: rgb(0, 0, 0);
+  opacity: 0.6;
+  z-index: 5;
+}
+.bigMapArea .bigMap p.maskTitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  padding: 13px 0;
+  z-index: 10;
+}
+.bigMapArea .bigMap p.maskTitle span {
+  display: inline-block;
+  height: 24px;
+  line-height: 24px;
+  font-size: 20px;
+  color: #fff;
+  margin-left: 20px;
+  float: left;
+}
+.bigMapArea .bigMap p.maskTitle span b {
+  font-size: 24px;
+  color: #f22e00;
+}
+.bigMapArea .bigMap p.maskTitle a {
+  display: inline-block;
+  color: #ddd;
+  text-decoration: none;
+  font: 700 20px Tahoma,Verdana,sans-serif;
+  width: 24px;
+  height: 24px;
+  margin-right: 20px;
+  text-align: center;
+  float: right;
+}
+.bigMapArea .bigMap p.maskTitle a:hover {
+  color: #aaa;
+}
+.bigMapArea .bigMap .tipLayer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -108px;
+  margin-left: -120px;
+  z-index: 99999;
+}
+.bigMapArea .bigMap .tipLayer .setCont {
+  width: 200px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid #dadada;
+  box-shadow: 0 5px 5px rgba(0,0,0,.5);
+}
+.bigMapArea .bigMap .tipLayer .setCont p {
+  width: 100%;
+  line-height: 18px;
+  font-size: 12px;
+  color: #666;
+}
+.bigMapArea .bigMap .tipLayer .setCont em {
+  font-style: normal;
+  color: #da3a4c;
+}
+.bigMapArea .bigMap .tipLayer .setCont i {
+  display: inline-block;
+  position: absolute;
+  bottom: -29px;
+  left: 118px;
+  font-style: normal;
+  width: 34px;
+  height: 30px;
+  background: url(../images/sharp.png) no-repeat;
+}
+.bigMapArea .bigMap p.maskTipBg {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  width: 180px;
+  height: 36px;
+  margin-left: -90px;
+  background: rgb(0, 0, 0);
+  opacity: 0.6;
+  border-radius: 4px;
+  z-index: 5;
+}
+.bigMapArea .bigMap p.maskTip {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  width: 180px;
+  height: 36px;
+  margin-left: -90px;
+  text-align: center;
+  line-height: 36px;
+  font-size: 16px;
+  color: #fff;
+  z-index: 10;
+}
+.bigMapArea .bigMap p.maskOperBg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: rgb(0, 0, 0);
+  opacity: 0.6;
+  z-index: 5;
+}
+.bigMapArea .bigMap p.maskOper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  line-height: 24px;
+  padding: 13px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  z-index: 10;
+}
+.bigMapArea .bigMap p.maskOper i {
+  display: inline-block;
+  font-style: normal;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.bigMapArea .bigMap p.maskOper i.right {
+  background: url(../images/map_right.png) no-repeat;
+}
+.bigMapArea .bigMap p.maskOper i.error {
+  background: url(../images/map_error.png) no-repeat;
+}
+.bigMapArea .bigMap p.maskOper b {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  font-size: 14px;
+}
+.bigMapArea .bigMap p.maskOper a {
+  display: inline-block;
+  width: 65px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+  text-decoration: none;
+  position: absolute;
+  bottom: 13px;
+}
+.bigMapArea .bigMap p.maskOper .mapSave {
+  background: #da3a4c;
+  color: #fff;
+  right: 95px;
+}
+.bigMapArea .bigMap p.maskOper .mapInit {
+  background: #f8f8f8;
+  color: #999;
+  right: 10px;
+}
+.bigMapArea .bigMap p.maskOper em {
+  font-style: normal;
+  color: #da3a4c;
+}
+/**收货地址高德地图 @japin.pan 20151019 end**/

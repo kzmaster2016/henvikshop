@@ -1,0 +1,1826 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>{$goods.goods_name}-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+
+</head>
+<body>
+<!--------头部开始-------------->
+<include file="Public/header" />
+<!--------头部结束--------------> 
+	<div class="layout ov-hi">
+    	<div class="breadcrumb-area">
+        	<a href="">首页</a>
+            &nbsp;>&nbsp;
+            <a href="">手机</a>
+            &nbsp;>&nbsp;
+            <a href="">荣耀</a>
+            &nbsp;>&nbsp;
+            <span>{$goods.goods_name}</span>
+        </div>
+        <div class="layout pa-to-10">
+        	<div class="left-area">
+            	<div class="left-area-tb">
+                	<div class="left-area-img">
+                    	<img src="{$goods.original_img}"  width="800"  height="800" alt=""/>
+                    </div>
+                	<div class="left-area-nav po-re">
+                    	<a id="left-nav-le" href=""></a>
+                        <div class="pro-gallery-thumbs">
+                        	<ul>
+                            <foreach name="goods_images_list" item="v" key="k" >                            
+                        		<li><a href=""><img src="{$v.imgage_url}" width="55" height="55"></a></li>
+                            </foreach>
+                        	</ul>
+                        </div>
+                        <a id="left-nav-ri" href=""></a>
+                    </div>
+                </div>
+            </div>
+            <div class="right-area-num">
+                <div class="right-area">
+                    <div class="right-area-le30">
+                        <h1>{$goods.goods_name}</h1>
+                        <div class="cpxq-explain">{$goods.goods_remark}</div>
+                    </div>	
+                </div>
+                <div class="right-area ma-to--1">
+                	<div class="right-area-le30 pa-3-0-0-30">
+                    	<div class="pro-promotions-area">
+                            <table class="promotions-tab" width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td width="60px" align="right">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格：</td>
+                                <td><p class="co-red fo-si-24 ma-le-6">
+                                	￥<span class="co-red fo-si-24">{$goods.shop_price}</span>
+                                    </p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td width="60px" align="right">商品编号：</td>
+                                <td><p class=" ma-le-6">{$goods.goods_sn}</p></td>
+                              </tr>
+                              <tr>
+                                <td width="60px" align="right">商品评分：</td>
+                                <td>
+                                <p class="ma-le-6">
+                                	<span class="pf-comment">
+	                                <i class="score"></i>
+                                    </span>&nbsp;
+                                    <a href=""><span>(共&nbsp;{$goods.pl_count}&nbsp;条评论)</span></a>
+                                 </p>
+                               </td>
+                              </tr>
+                              <tr>
+                                <td width="60px" align="right">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费：</td>
+                                <td><p class="ma-le-6">满99免运费</p></td>
+                              </tr>
+                              <tr>
+                                <td width="60px" align="right">服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：</td>
+                                <td><p class="ma-le-6">由tpshop商城负责发货，并提供售后服务</p></td>
+                              </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-area he315 ma-to--1">
+                	<div class="right-area-le30 pa-3-0-0-30">
+                    	<div class="pro-promotions-area">
+                            <table class="promotions-tab he40-tr-td" width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <foreach name="filter_spec" item="v" key="k" > 
+                              <tr>
+                                <td width="60px" align="right">{$k}：</td>
+                                <td>
+                                	<ul class="choice-colol ma-le-6">
+                                       <foreach name="v" item="v2" key="k2" >      
+                                           <!--
+                                        <li>
+                                            <div class="sku sku-bo-blo">
+                                                <a class="choice-size" id="{$v2[item_id]}" >{$v2[item]}</a>
+                                                <s></s>
+                                            </div>
+                                        </li>
+                                        -->
+                                        
+                                        <li>
+                                        <div class="sku sku-bo-blo">
+                                            <a><img src="{$specImage[$v2[item_id]]}"></a>
+                                            <s></s>
+                                        </div>
+                                        <p>{$v2[item]}</p>
+                                        </li>
+                                        
+                                        
+                                        </foreach>          
+                                    </ul>
+                                </td>
+                              </tr>
+                             </foreach>
+                              <tr>
+                                <td width="60px" align="right">购买数量：</td>
+                                <td>
+                                	<ul class="choice-colol ma-le-6">
+                                        <li>
+											<a class="choice-number fl" title="减">-</a>
+                                            <input class="wi43 fl" type="text" value="1">
+                                            <a class="choice-number fl" title="加">+</a>
+                                        </li>
+                                </td>
+                              </tr>
+                            </table>
+                        </div>
+                        <div class="join-a-shopping-cart fl">
+                            <a class="jrgwc-shopping-img jrgwc-shopping-img2" href="">
+                                <span>立即购买</span>
+                            </a>
+                    	</div>
+                        <div class="join-a-shopping-cart ma-le-210 fl">
+                            <a class="jrgwc-shopping-img2" href="">
+                                <span>加入购物车</span>
+                            </a>
+                    	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layout ma-to-20">
+    	<div class="wi240 ov-hi fl">
+        	<div class="product-history-area">
+            	<div class="hi47 co-grey">
+                	<h3 class="fl browse-his">推荐商品</h3>
+                    <span class="fr pa-15-16-0-0"><a class="del-dust cu-po"></a></span>
+                </div>
+                <div class="history-bott">
+                	<ul class="history-comm">
+                     <tpshop sql="select * from `__PREFIX__goods` where is_recommend = 1 order by goods_id desc limit 5" item="v" key="k" >    
+                		<li>
+                        	<div>
+                        		<p class="p-img-comm fl">
+                                	<a href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}"><img class="img-comm" src="{$v.goods_id|goods_thum_images=60,60}" alt=""></a>
+                                </p>
+                        		<p class="p-name-comm">
+                                	<a href="{:U('Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">{$v.goods_name}</a>
+                                </p>
+                        		<p class="p-price-comm">
+                                	<b>¥{$v.shop_price}</b>
+                                </p>
+                        	</div>
+                        </li>
+                      </tpshop>
+                	</ul>
+                </div>
+            </div>
+        </div>
+    	<div class="wi940 ov-hi fr">
+        	<div class="comm-param">
+            	<div class="parame-title">
+                	<div class="par-titles co-grey">
+                    	<ul class="commodity-xq">
+                    		<li class="current cliks">
+                            	<a>商品详情</a>
+                            </li>
+                            <li class="cliks">
+                            	<a>用户评价（{$goods.pl_count}）</a>
+                            </li>
+                            <li class="cliks">
+                            	<a>规格参数</a>
+                            </li>
+                            <li class="cliks">
+                            	<a>包装清单</a>
+                            </li>
+                            <li class="cliks">
+                            	<a>售后服务</a>
+                            </li>
+                    	</ul>
+                    </div>
+                </div>
+                	<!-------------------商品详情------------------>
+            	<div class="parame-bott cliks-bn" style="display:block">
+                    <div class="commodity-num pro-feature-area">
+                      {$goods.goods_content|htmlspecialchars_decode}
+                    </div>
+                </div>
+                    <!-------------------规格参数------------------>
+                <div class="parame-bott cliks-bn" style="display:none">
+                    <div class="commodity-num pro-feature-area wi850">
+                    	<table class="modity-zhut" width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <th colspan="2"><h3>主体</h3></th>
+                          </tr>
+                          <tr>
+                            <td class="wi143">品牌</td>
+                            <td class="pa-5-0">荣耀</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">特色功能</td>
+                            <td class="pa-5-0">支持主题下载、省电管理、通知管理等特色功能</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">特色功能</td>
+                            <td class="pa-5-0">支持主题下载、省电管理、通知管理等特色功能</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">特色功能</td>
+                            <td class="pa-5-0">支持主题下载、省电管理、通知管理等特色功能</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">特色功能</td>
+                            <td class="pa-5-0">支持主题下载、省电管理、通知管理等特色功能</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">特色功能</td>
+                            <td class="pa-5-0">支持主题下载、省电管理、通知管理等特色功能</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">特色功能</td>
+                            <td class="pa-5-0">支持主题下载、省电管理、通知管理等特色功能</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">特色功能</td>
+                            <td class="pa-5-0">支持主题下载、省电管理、通知管理等特色功能</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">特色功能</td>
+                            <td class="pa-5-0">支持主题下载、省电管理、通知管理等特色功能</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">特色功能</td>
+                            <td class="pa-5-0">支持主题下载、省电管理、通知管理等特色功能</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">特色功能</td>
+                            <td class="pa-5-0">支持主题下载、省电管理、通知管理等特色功能</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">特色功能</td>
+                            <td class="pa-5-0">支持主题下载、省电管理、通知管理等特色功能</td>
+                          </tr>
+                          <tr>
+                            <th colspan="2"><h3>网络</h3></th>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">网络频率</td>
+                            <td class="pa-5-0">主卡：TDD-LTE: B38/B39/B40；TD-SCDMA：B34/B39；GSM：900/1800/1900MHz（支持中国移动4G/3G/2G，中国联通2G）；副卡：GSM: 900/1800/1900MHz（支持中国移动和中国联通2G）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <th colspan="2"><h3>屏幕</h3></th>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">网络频率</td>
+                            <td class="pa-5-0">主卡：TDD-LTE: B38/B39/B40；TD-SCDMA：B34/B39；GSM：900/1800/1900MHz（支持中国移动4G/3G/2G，中国联通2G）；副卡：GSM: 900/1800/1900MHz（支持中国移动和中国联通2G）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <th colspan="2"><h3>传感器</h3></th>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">网络频率</td>
+                            <td class="pa-5-0">主卡：TDD-LTE: B38/B39/B40；TD-SCDMA：B34/B39；GSM：900/1800/1900MHz（支持中国移动4G/3G/2G，中国联通2G）；副卡：GSM: 900/1800/1900MHz（支持中国移动和中国联通2G）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                          <tr>
+                            <td class="wi143">4G网络制式</td>
+                            <td class="pa-5-0">移动4G（TDD-LTE）</td>
+                          </tr>
+                        </table>
+                    </div>
+                </div>
+                    <!-------------------包装清单------------------>
+                <div class="parame-bott cliks-bn" style="display:none">
+                    <div class="commodity-num pro-feature-area wi850 padding36-0-36-0">
+                    	<p class="fo-si-14 li-hi-1-5 fo-fa">主机 x 1，数据线 x 1，充电器 x 1，快速指南 x 1，华为手机三包凭证 x 1，安全说明 x 1，捅针 x 1，电池盖贴膜x 1，金卡会员卡 x 1</p>
+                    </div>
+                </div>
+                    <!-------------------售后服务------------------>
+                <div class="parame-bott cliks-bn" style="display:none">
+                     <div class="commodity-num pro-feature-area wi850 padding36-0-36-0">
+                    	<p class="fo-si-14 li-hi-1-5 fo-fa">
+                        	本产品全国联保，享受三包服务，质保期为：一年质保
+                            <br>
+                            如因质量问题或故障，凭厂商维修中心或特约维修点的质量检测证明，享受7天内退货，15日内换货，15日以上在质保期内享受免费保修等三包服务！
+                            <br>
+                            售后服务电话：400-830-8300
+                            <br>
+                            <span>TPshop消费者官网： <a href="">http://www.tp-shop.com</a></span>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+                    <!-------------------用户评价------------------>
+                <div class="parame-bott ov-hi">
+                            <div class="evaluation-top fo-fa di-in-bl">
+                            	<div class="eval-le1 fl wi146 te-al">
+                                	<span><b>94</b>%</span>
+                                    <em>好评度</em>
+                                </div>
+                            	<div class="eval-le2 fl wi123 pa-to-7">
+                                	<dl>
+                                		<dt>好评<em>(94%)</em></dt>
+                                		<dd><s style=" width:94%"></s></dd>
+                                	</dl>
+                                	<dl>
+                                		<dt>中评<em>(2%)</em></dt>
+                                		<dd><s style=" width:2%"></s></dd>
+                                	</dl>
+                                	<dl>
+                                		<dt>差评<em>(4%)</em></dt>
+                                		<dd><s style=" width:4%"></s></dd>
+                                	</dl>
+                                </div>
+                            	<div class="eval-le3 fl wi516">
+                                	<dl>
+                                		<dt>买家印象：</dt>
+                                	</dl>
+                                </div>
+                            	<div class="eval-le4 fl wi150 pa-to-43 te-al">
+                                	<a href="">发表评价</a>
+                                </div>
+                            </div>
+                            <div class="evaluation-cen fo-fa">
+                            	<div class="eval-cen-le fl pa-le-12">
+                                	<ul>
+                                		<li class="curres cliks">
+                                            <a href="">
+                                                <span>
+                                                    全部评价
+                                                    <em>(33603)</em>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="cliks">
+                                            <a href="">
+                                                <span>
+                                                    好评
+                                                    <em>(31528)</em>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="cliks">
+                                            <a href="">
+                                                <span>
+                                                    中评
+                                                    <em>(818)</em>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="cliks">
+                                            <a href="">
+                                                <span>
+                                                    差评
+                                                    <em>(1257)</em>
+                                                </span>
+                                            </a>
+                                        </li>
+                                	</ul>
+                                </div>
+                            	<div class="eval-cen-ri fr pa-to-17 pa-ri-25 te-al-ri di-bl">
+                                	<!--------分页开始-------------->
+                                            <div class="pager-paging fr">
+                                                <ul>
+                                                    <li><a href=""><<</a></li>
+                                                    <li><a href=""><</a></li>
+                                                    <li class="pagin-one"><a href="">1</a></li>
+                                                    <li><a href="">2</a></li>
+                                                    <li><a href="">3</a></li>
+                                                    <li><a href="">4</a></li>
+                                                    <li><a href="">5</a></li>
+                                                    <li class="bbor-de0"><a href="">...</a></li>
+                                                    <li class="wi40"><a href="">300</a></li>
+                                                    <li><a href="">></a></li>
+                                                    <li><a href="">>></a></li>
+                                                </ul>
+                                            </div>
+                                    <!--------分页结束-------------->
+
+                                </div>
+                            </div>
+                            <!--------用户评价-start---------------->
+                            <!------全部评价------>
+                            <div class="evaluation-bott pa-to-25 cliks-bn" style="display:block">
+                            	<div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">四大皆空</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:60%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>3&nbsp;分</b>&nbsp;&nbsp;中评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">给朋友买的，官网是正品行货。外观方面个人觉得需创新，那就完美了！</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!------好评------>
+                            <div class="evaluation-bott pa-to-25 cliks-bn" style="display:none">
+                            	<div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">四大皆空</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:60%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>3&nbsp;分</b>&nbsp;&nbsp;中评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">给朋友买的，官网是正品行货。外观方面个人觉得需创新，那就完美了！</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!------中评------>
+                            <div class="evaluation-bott pa-to-25 cliks-bn" style="display:none">
+                            	<div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">四大皆空</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:60%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>3&nbsp;分</b>&nbsp;&nbsp;中评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">给朋友买的，官网是正品行货。外观方面个人觉得需创新，那就完美了！</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!------差评------>
+                            <div class="evaluation-bott pa-to-25 cliks-bn" style="display:none">
+                            	<div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">四大皆空</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:60%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>3&nbsp;分</b>&nbsp;&nbsp;中评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">给朋友买的，官网是正品行货。外观方面个人觉得需创新，那就完美了！</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="pro-comment-item po-re pa-bo-20 di-ta">
+                                	<div class="pro-comment-user fl te-al pa-0-15 wi90 po-re">
+                                    	<p class="procomment-img">
+                                        	<img src="__STATIC__/images/defaultface_user_small.png" alt="">
+                                        </p>
+                                    	<p class="procomment-name">清风</p>
+                                        <s class="procomment-tag">
+                                        	<i></i>
+                                        </s>
+                                    </div>
+                                	<div class="pro-user-comment-main ma-0-25-0-0 ov-hi">
+                                    	<div class="pro-user-comment">
+                                        	<div class="comm-t1 ov-hi">
+                                            	<div class="pro-user-score fl">
+                                                	<span>
+                                                    	<span class="starRating-area">
+                                                        	<s style="width:100%"></s>
+                                                        </span>
+                                                    </span>
+                                                    <em><b>5&nbsp;分</b>&nbsp;&nbsp;好评</em>
+                                                </div>
+                                            	<div class="pro-user-impre fl ov-hi">
+                                                	<ul>
+                                                		<li>不错</li>
+                                                        <li>大屏幕</li>
+                                                        <li>流畅</li>
+                                                	</ul>
+                                                </div>
+                                            	<div class="pro-user-time wh-sp">2015-11-05 13:47:33</div>
+                                            </div>
+                                        	<div class="comm-t2">还不错，手机照相很快，清晰</div>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--------用户评价-end---------------->
+                </div>
+            </div>
+            <div class="comm-param">
+            	<div class="parame-title">
+                	<div class="par-titles co-grey">
+                    	<ul class="commodity-xq">
+                    		<li class="current cliks">
+                            	<a>全部咨询</a>
+                            </li>
+                            <li class="cliks">
+                            	<a>常见问题</a>
+                            </li>
+                            <li class="cliks">
+                            	<a>商品咨询</a>
+                            </li>
+                            <li class="cliks">
+                            	<a>支付</a>
+                            </li>
+                            <li class="cliks">
+                            	<a>配送</a>
+                            </li>
+                            <li class="cliks">
+                            	<a>售后</a>
+                            </li>
+                            <li class="clear-all cliks">
+                            	<a>发表咨询 <span style="font-family:none">>></span></a>
+                            </li>
+                    	</ul>
+                    </div>
+                </div>
+                	<!-------------------全部咨询------------------>
+            	<div class="parame-bott cliks-bn" style="display:block">
+                    <div class="commodity-num">
+                    	<div class="spxqer-top">
+                        	<span class="colo-ora">温馨提示：</span>
+                            因产线可能更改商品包装、产地、附配件等未及时通知，且每位咨询者购买、提问时间等不同。为此，客服给到的回复仅对提问者3天内有效，其他网友仅供参考！给您带来的不便还请谅解，谢谢！
+                        </div>
+                        <div class="spxqer-cen">
+                        	<div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v1"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v2"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v3"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v4"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spxqer-bot">
+                        	<div class="spxqer-bo-le">共<em>3327</em>条</div>
+                        	<div class="spxqer-bo-ri fr di-in-bl ov-hi">
+                            	<!--------分页开始-------------->
+                                            <div class="pager-paging fr">
+                                                <ul>
+                                                    <li><a href=""><<</a></li>
+                                                    <li><a href=""><</a></li>
+                                                    <li class="pagin-one"><a href="">1</a></li>
+                                                    <li><a href="">2</a></li>
+                                                    <li><a href="">3</a></li>
+                                                    <li><a href="">4</a></li>
+                                                    <li><a href="">5</a></li>
+                                                    <li><a href="">6</a></li>
+                                                    <li><a href="">7</a></li>
+                                                    <li><a href="">8</a></li>
+                                                    <li><a href="">9</a></li>
+                                                    <li class="bbor-de0"><a href="">...</a></li>
+                                                    <li class="wi40"><a href="">666</a></li>
+                                                    <li><a href="">></a></li>
+                                                    <li><a href="">>></a></li>
+                                                </ul>
+                                            </div>
+                                <!--------分页结束-------------->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <!-------------------常见问题------------------>
+                <div class="parame-bott cliks-bn" style="display:none">
+                    <div class="commodity-num">
+                    	<div class="spxqer-top">
+                        	<span class="colo-ora">温馨提示：</span>
+                            因商城随时可能更新商品版本、价格、附配件、赠品等信息未及时通知，且每位顾客的购买情况等也不同，为此以下常见问题答复仅供参考，具体请以下单页面显示为准！若给您带来的不便还请谅解，谢谢！
+                        </div>
+                        <div class="spxqer-cen">
+                        	<div class="qerst-wy pa-18-25-22">
+                            	<dl class="st-wy-colo li-hi-20">
+                            		<dt>荣耀6plus 支持哪些制式的卡？</dt>
+                            		<dd>您好，（1）联通4G标准版(PE-UL00)：主卡：联通4G/联通3G/联通2G，副卡：联通2G，移动2G。（2）移动/联通双4G版(PE-TL10)：主卡：联通4G/联通3G/联通2G 或 移动4G/移动3G/移动2G，副卡：联通2G，移动2G。（3）移动4G标准版(PE-TL20)：主卡：移动4G/移动3G/移动2G，副卡：联通2G，移动2G。（4）电信4G标准版（PE-CL00）：主卡：电信4G/电信3G/电信2G，副卡：联通2G，移动2G。</dd>
+                            	</dl>
+                                <dl class="st-wy-colo li-hi-20">
+                            		<dt>荣耀6plus 单通还是双通？</dt>
+                            		<dd>您好，是双通的。</dd>
+                            	</dl>
+                                <dl class="st-wy-colo li-hi-20">
+                            		<dt>荣耀6plus 单通还是双通？</dt>
+                            		<dd>您好，是双通的。</dd>
+                            	</dl>
+                                <dl class="st-wy-colo li-hi-20">
+                            		<dt>荣耀6plus 单通还是双通？</dt>
+                            		<dd>您好，是双通的。</dd>
+                            	</dl>
+                                <dl class="st-wy-colo li-hi-20">
+                            		<dt>荣耀6plus 单通还是双通？</dt>
+                            		<dd>您好，是双通的。</dd>
+                            	</dl>
+                                <dl class="st-wy-colo li-hi-20">
+                            		<dt>荣耀6plus 单通还是双通？</dt>
+                            		<dd>您好，是双通的。</dd>
+                            	</dl>
+                                <dl class="st-wy-colo li-hi-20">
+                            		<dt>荣耀6plus 单通还是双通？</dt>
+                            		<dd>您好，是双通的。</dd>
+                            	</dl>
+                                <dl class="st-wy-colo li-hi-20">
+                            		<dt>荣耀6plus 单通还是双通？</dt>
+                            		<dd>您好，是双通的。</dd>
+                            	</dl>
+                            </div>
+                            <div class="spxqer-bot">
+                        	<div class="spxqer-bo-le">共<em>10</em>条</div>
+                        	<div class="spxqer-bo-ri fr di-in-bl ov-hi">
+                            	<!--------分页开始-------------->
+                                            <div class="pager-paging fr">
+                                                <ul>
+                                                    <li><a href=""><<</a></li>
+                                                    <li><a href=""><</a></li>
+                                                    <li class="pagin-one"><a href="">1</a></li>
+                                                    <li><a href="">></a></li>
+                                                    <li><a href="">>></a></li>
+                                                </ul>
+                                            </div>
+                                    <!--------分页结束-------------->
+                            </div>
+                        </div>
+                        </div> 
+                    </div>
+                </div>
+                    <!-------------------商品咨询------------------>
+                <div class="parame-bott cliks-bn" style="display:none">
+                    <div class="commodity-num">
+                    	<div class="spxqer-top">
+                        	<span class="colo-ora">温馨提示：</span>
+                            因产线可能更改商品包装、产地、附配件等未及时通知，且每位咨询者购买、提问时间等不同。为此，客服给到的回复仅对提问者3天内有效，其他网友仅供参考！给您带来的不便还请谅解，谢谢！
+                        </div>
+                        <div class="spxqer-cen">
+                        	<div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v1"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v2"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v3"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v4"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spxqer-bot">
+                        	<div class="spxqer-bo-le">共<em>2391</em>条</div>
+                        	<div class="spxqer-bo-ri fr di-in-bl ov-hi">
+                            	<!--------分页开始-------------->
+                                            <div class="pager-paging fr">
+                                                <ul>
+                                                    <li><a href=""><<</a></li>
+                                                    <li><a href=""><</a></li>
+                                                    <li class="pagin-one"><a href="">1</a></li>
+                                                    <li><a href="">2</a></li>
+                                                    <li><a href="">3</a></li>
+                                                    <li><a href="">4</a></li>
+                                                    <li><a href="">5</a></li>
+                                                    <li><a href="">6</a></li>
+                                                    <li><a href="">7</a></li>
+                                                    <li><a href="">8</a></li>
+                                                    <li><a href="">9</a></li>
+                                                    <li class="bbor-de0"><a href="">...</a></li>
+                                                    <li class="wi40"><a href="">479</a></li>
+                                                    <li><a href="">></a></li>
+                                                    <li><a href="">>></a></li>
+                                                </ul>
+                                            </div>
+                                <!--------分页结束-------------->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <!-------------------支付------------------>
+                <div class="parame-bott cliks-bn" style="display:none">
+                    <div class="commodity-num">
+                    	<div class="spxqer-top">
+                        	<span class="colo-ora">温馨提示：</span>
+                            因产线可能更改商品包装、产地、附配件等未及时通知，且每位咨询者购买、提问时间等不同。为此，客服给到的回复仅对提问者3天内有效，其他网友仅供参考！给您带来的不便还请谅解，谢谢！
+                        </div>
+                        <div class="spxqer-cen">
+                        	<div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v1"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v2"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v3"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v4"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spxqer-bot">
+                        	<div class="spxqer-bo-le">共<em>273</em>条</div>
+                        	<div class="spxqer-bo-ri fr di-in-bl ov-hi">
+                            	<!--------分页开始-------------->
+                                            <div class="pager-paging fr">
+                                                <ul>
+                                                    <li><a href=""><<</a></li>
+                                                    <li><a href=""><</a></li>
+                                                    <li class="pagin-one"><a href="">1</a></li>
+                                                    <li><a href="">2</a></li>
+                                                    <li><a href="">3</a></li>
+                                                    <li><a href="">4</a></li>
+                                                    <li><a href="">5</a></li>
+                                                    <li><a href="">6</a></li>
+                                                    <li><a href="">7</a></li>
+                                                    <li><a href="">8</a></li>
+                                                    <li><a href="">9</a></li>
+                                                    <li class="bbor-de0"><a href="">...</a></li>
+                                                    <li class="wi40"><a href="">55</a></li>
+                                                    <li><a href="">></a></li>
+                                                    <li><a href="">>></a></li>
+                                                </ul>
+                                            </div>
+                                <!--------分页结束-------------->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                	<!-------------------配送------------------>
+                <div class="parame-bott cliks-bn" style="display:none">
+                    <div class="commodity-num">
+                    	<div class="spxqer-top">
+                        	<span class="colo-ora">温馨提示：</span>
+                            因产线可能更改商品包装、产地、附配件等未及时通知，且每位咨询者购买、提问时间等不同。为此，客服给到的回复仅对提问者3天内有效，其他网友仅供参考！给您带来的不便还请谅解，谢谢！
+                        </div>
+                        <div class="spxqer-cen">
+                        	<div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v1"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v2"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v3"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v4"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spxqer-bot">
+                        	<div class="spxqer-bo-le">共<em>633</em>条</div>
+                        	<div class="spxqer-bo-ri fr di-in-bl ov-hi">
+                            	<!--------分页开始-------------->
+                                            <div class="pager-paging fr">
+                                                <ul>
+                                                    <li><a href=""><<</a></li>
+                                                    <li><a href=""><</a></li>
+                                                    <li class="pagin-one"><a href="">1</a></li>
+                                                    <li><a href="">2</a></li>
+                                                    <li><a href="">3</a></li>
+                                                    <li><a href="">4</a></li>
+                                                    <li><a href="">5</a></li>
+                                                    <li><a href="">6</a></li>
+                                                    <li><a href="">7</a></li>
+                                                    <li><a href="">8</a></li>
+                                                    <li><a href="">9</a></li>
+                                                    <li class="bbor-de0"><a href="">...</a></li>
+                                                    <li class="wi40"><a href="">127</a></li>
+                                                    <li><a href="">></a></li>
+                                                    <li><a href="">>></a></li>
+                                                </ul>
+                                            </div>
+                                <!--------分页结束-------------->
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+                    <!-------------------售后------------------>
+                <div class="parame-bott cliks-bn" style="display:none">
+                    <div class="commodity-num">
+                    	<div class="spxqer-top">
+                        	<span class="colo-ora">温馨提示：</span>
+                            因产线可能更改商品包装、产地、附配件等未及时通知，且每位咨询者购买、提问时间等不同。为此，客服给到的回复仅对提问者3天内有效，其他网友仅供参考！给您带来的不便还请谅解，谢谢！
+                        </div>
+                        <div class="spxqer-cen">
+                        	<div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v1"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v2"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v3"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                            <div class="qerst-wy">
+                            	<div class="wy1">
+                                	<span>网友：</span><span>爱你的羽</span>
+                                    <s><i class="v4"></i></s>
+                                    <em>2015-11-06 07:58:43</em>
+                                </div>
+                            	<div class="wy2">
+                                	<span>咨询内容：</span><span>昨天晚上下单支付后，大概要多久才可以收到货我是河南新乡的?要的比较急什么时候能到啊。</span>
+                                </div>
+                            	<div class="wy3">
+                                	<span>回复：</span><span>您好，理解您着急收货的心情的，仓库同事会尽快安排发货的，商品发出后快递正常的话7天内会送达。请您耐心等待一下哦，您也可以随时登录华为商城，在"我的订单"中查看物流信息。感谢您的支持。</span>
+                                    <em>2015-11-06 09:25:10</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spxqer-bot">
+                        	<div class="spxqer-bo-le">共<em>33</em>条</div>
+                        	<div class="spxqer-bo-ri fr di-in-bl ov-hi">
+                            	<!--------分页开始-------------->
+                                            <div class="pager-paging fr">
+                                                <ul>
+                                                    <li><a href=""><<</a></li>
+                                                    <li><a href=""><</a></li>
+                                                    <li class="pagin-one"><a href="">1</a></li>
+                                                    <li><a href="">2</a></li>
+                                                    <li><a href="">3</a></li>
+                                                    <li><a href="">4</a></li>
+                                                    <li><a href="">5</a></li>
+                                                    <li><a href="">6</a></li>
+                                                    <li><a href="">7</a></li>
+                                                    <!--<li><a href="">8</a></li>
+                                                    <li><a href="">9</a></li>
+                                                    <li class="bbor-de0"><a href="">...</a></li>
+                                                    <li class="wi40"><a href="">127</a></li>-->
+                                                    <li><a href="">></a></li>
+                                                    <li><a href="">>></a></li>
+                                                </ul>
+                                            </div>
+                                <!--------分页结束-------------->
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+                	<!-------------------发表咨询------------------>
+                <div class="parame-bott ma-to--21">
+                    <div class="commodity-num">
+                    	<div class="spxqer-top-t">
+                        	<h3 class="spxqer-topt-h3">发表咨询</h3>
+                        </div>
+                        <div class="spxqer-cen">
+                            <div class="spxqer-top pa-17-0-14">
+                                <span class="colo-ora">温馨提示：</span>
+                                因产线可能更改商品包装、产地、附配件等未及时通知，且每位咨询者购买、提问时间等不同。为此，客服给到的回复仅对提问者3天内有效，其他网友仅供参考！给您带来的不便还请谅解，谢谢！
+                            </div>
+                            <div class="form-edit-area">
+                        	<form action="">
+                            	<div class="form-table">
+                                	<p>
+                                    	<b>商品咨询：</b>
+                                        <input type="radio" name="spzx"><label for="">商品咨询</label>
+                                        <input type="radio" name="spzx"><label for="">支付</label>
+                                        <input type="radio" name="spzx"><label for="">配送</label>
+                                        <input type="radio" name="spzx"><label for="">售后</label>
+                                    </p>
+                                    <p><textarea name="" id=""  class="textarea"></textarea></p>
+                                    <p class="ma-to--15">
+                                    	<input type="checkbox" name="cus"><label for="">客服回复发送到我的安全邮箱</label>
+                                    </p>
+                                </div>
+                            	<div class="form-butt">
+                                	<input type="button" class="bu-tj" value="提交">
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                        
+                    </div>
+                </div>    
+        </div>
+    </div>
+<!--------footer-开始-------------->
+<include file="Public/footer" />
+<!--------footer-结束-------------->
+</body>
+</html>

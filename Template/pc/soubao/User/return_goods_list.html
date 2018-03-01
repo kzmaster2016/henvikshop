@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>退换货-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body> 
+<!-- 头部-s -->
+<style type="text/css">
+.return_area .return_goods li span.title_thired{ width:160px !important}
+.return_area .return_goods li span.title_second{ width:400px !important; overflow:hidden; text-overflow:ellipsis;white-space:nowrap;}
+.return_area .return_goods{ border:0 !important; border-bottom:1px solid #dedede !important}
+</style>
+<include file="User/header" />
+<!-- 头部-e -->
+<link rel="stylesheet" href="__STATIC__/css/return.sprite.css">
+
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">退换货</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+<div class="col_main noHidden"> 
+    <!--下面内内容自己添加 -->
+    <div class="return_area">
+      <div class="user-head clearfix">
+        <h3>退货管理</h3>
+        <!--<a class="" href="">
+                    查看退货规则
+                </a>--> 
+      </div>
+      <!-- tab -->
+      <div class="ui_tab">         
+        <div class="ui_tab_content J_order_list"> 
+          
+          <!--退货记录-->
+          <div style="display: block;" class="ui_panel">
+            <div class="return_goods clearfix l_ulj">
+              <ul class="l_ulj">
+                <li> <span class="title_first">订单号</span> </li>
+                <li> <span class="title_second">商品信息</span> </li>
+                <li> <span class="title_thired">申请时间</span> </li>
+                <li> <span class="title_thired">状态</span> </li>                
+                <li> <span class="title_fiveth">操作</span> </li>                
+              </ul>
+            </div>
+            <volist name="list" id="item">
+            <div class="return_goods clearfix" style=" background-color:inherit">
+                  <ul class="l_ulj">
+                    <li> <span class="title_first"><a target="_blank" href="{:U('Home/User/order_detail',array('id'=>$item['order_id']))}">{$item.order_sn}</a></span></li>
+                    <li> <span class="title_second"><a href="{:U('Home/Goods/goodsInfo',array('id'=>$item[goods_id]))}" target="_blank">{$goodsList[$item[goods_id]]|getSubstr=0,25}</a></span> </li>
+                    <li> <span class="title_thired">{$item.addtime|date="Y-m-d",###}</span> </li>
+                    <li>
+                      <span class="wi169">
+                        <if condition="$item['status'] eq 0">待客服处理</if>
+                        <if condition="$item['status'] eq 1">客服处理中</if>
+                        <if condition="$item['status'] eq 2">已完成</if>                    
+                      </span>
+                    </li>
+                    <li> <span class="wi63"><a href="{:U('Home/User/return_goods_info',array('id'=>$item[id]))}">查看</a></span> </li>
+                  </ul>
+            </div>
+            </volist>          
+            <div class="operating fixed" id="bottom">
+                <div class="fn_page clearfix" style="margin-top:10px">
+                        {$page} 
+                </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+      <!-- tab end--> 
+    </div>
+    
+    <!-- 以上为中间内容区域 注释自己2删除--> 
+  </div>   
+</div>
+ 
+<div style="clear: both;"></div>
+<include file="User/footer" />
+</body>
+</html>

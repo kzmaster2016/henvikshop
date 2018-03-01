@@ -1,0 +1,23 @@
+<foreach name="goods_list" item="vo" key="k">
+ <li>
+    <a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$vo[goods_id]))}" class="item">
+        <div class="pic_box">
+            <div class="active_box">
+                <span style=" background-position:0px -36px">New</span>
+            </div>
+            <img src="{$vo.goods_id|goods_thum_images=400,400}">
+        </div>
+        <div class="title_box">{$vo.goods_name}</div>
+        <div class="price_box">
+            <span class="new_price"><i>${$vo.shop_price}</i></span>
+        </div>
+        <div class="comment_box">sold</div>
+    </a>
+    <div class="ui-number b"> 
+        <a class="decrease" onClick="goods_cut({$vo.goods_id});">-</a>
+        <input class="num" id="number_{$vo.goods_id}" type="text" onBlur="changePrice();" value="1" onFocus="if(value=='1') {value=''}" size="4" maxlength="5">
+        <a class="increase" onClick="goods_add({$vo.goods_id});">+</a> 
+    </div>
+    <span class="bug_car" onClick="AjaxAddCart({$vo[goods_id]},1,0);"><i class="icon-shop_cart"></i></span>
+  </li>
+</foreach>

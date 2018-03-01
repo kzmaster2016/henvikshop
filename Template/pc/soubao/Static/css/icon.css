@@ -1,0 +1,87 @@
+﻿.icon_public,
+.icon_tea,
+.head_bg,
+.icon_purse,
+.icon_email,
+.icon_phone,
+.prev,
+.next,
+.icon_error,
+.icon_warning,
+.icon_correct,
+.icon_correct_big,
+.icon_big_warning,
+.icon_up_01,
+.icon_down_01,
+.icon_m_up,
+.icon_m_down,
+.icon-loss,
+.icon-warn,
+.icon_down,
+.icon_or_down,
+.icon_or_up,
+.icon_triangle,
+.icon_order_up,
+.icon_asc,
+.icon_desc,
+.icon_exp_up,
+.icon_exp_down,
+.tickets,
+.free_tickets,
+.icon_contact_no,
+.icon_sure,
+.icon_success,
+.star_01,
+.star_02,
+.edit_up,
+.arrows_up,
+.arrows_down,
+.icon_small_warning {margin: 0; font-style: normal; display: inline-block; *display: inline; vertical-align: middle; text-align: center; overflow: hidden; zoom: 1;}
+.icon_tea {width: 95px; height: 95px; line-height: 90px; background: -210px 0;}
+.head_bg {width: 90px; height: 90px; line-height: 90px; background: 0 -125px;}
+.icon_purse {width: 21px; height: 30px; line-height: 30px; background: -239px -125px;}
+.icon_email {width: 15px; height: 10px; line-height: 10px; background: -175px -196px;}
+.icon_phone {width: 10px; height: 14px; line-height: 14px; background: 0 -220px;}
+.prev {width: 14px; height: 19px; line-height: 19px; background: -157px -172px;}
+.prev:hover {text-decoration: none; background: -265px -125px;}
+.next {width: 14px; height: 19px; line-height: 19px; background: -284px -125px;}
+.next:hover {text-decoration: none; background: -176px -172px;}
+.icon_error {width: 14px; height: 14px; line-height: 14px; background: -233px -172px;}
+.icon_warning {width: 14px; height: 14px; line-height: 14px; background: -214px -172px;}
+.icon_correct {width: 42px; height: 42px; line-height: 42px; background: -95px -172px;}
+.icon_correct_big {width: 48px; height: 39px; line-height: 39px; background: -149px -125px;}
+.icon_big_warning {width: 49px; height: 42px; line-height: 42px; background: -95px -125px;}
+.icon_up_01 {width: 10px; height: 5px; line-height: 5px; background: -234px -196px;}
+.icon_down_01 {width: 10px; height: 5px; line-height: 5px; background: -219px -196px;}
+.icon_m_up {width: 10px; height: 5px; line-height: 5px; background: -279px -149px;}
+.icon_m_down {width: 10px; height: 5px; line-height: 5px; background: -249px -196px;}
+.icon-loss {width: 14px; height: 14px; line-height: 14px; background: -252px -172px;}
+.icon-warn {width: 14px; height: 14px; line-height: 14px; background: -195px -172px;}
+.icon_down {width: 9px; height: 11px; line-height: 11px; background: -30px -220px;}
+.icon_or_down {width: 5px; height: 3px; line-height: 3px; background: -291px -196px;}
+.icon_or_up {width: 5px; height: 3px; line-height: 3px; background: -294px -149px;}
+.icon_triangle {width: 8px; height: 3px; line-height: 3px; background: -278px -196px;}
+.icon_order_up {width: 9px; height: 6px; line-height: 6px; background: -265px -149px;}
+.icon_asc {width: 7px; height: 10px; line-height: 10px; background: -207px -196px;}
+.icon_desc {width: 7px; height: 10px; line-height: 10px; background: -195px -196px;}
+.icon_exp_up {width: 13px; height: 13px; line-height: 13px; background: -271px -172px;}
+.icon_exp_down {width: 13px; height: 13px; line-height: 13px; background: -157px -196px;}
+.tickets {width: 100px; height: 120px; line-height: 120px; background: -105px 0;}
+.free_tickets {width: 100px; height: 120px; line-height: 120px; background: 0 0;}
+
+.icon_contact {width: 71px;height: 19px;display: inline-block;*display: inline;zoom: 1;background: url("../images/oniu.gif") left top no-repeat;}
+.icon_contact_no {width: 71px; height: 17px; line-height: 16px; background:url("../images/niu.png") right top no-repeat;}
+
+
+.icon_sure {width: 18px; height: 18px; line-height: 18px; background: -260px -95px;}
+.icon_success {width: 32px; height: 32px; line-height: 32px; background: -202px -125px;}
+.star_01 {width: 20px; height: 19px; line-height: 19px; background: -235px -95px;}
+.star_02 {width: 20px; height: 19px; line-height: 19px; background: -210px -95px;}
+.edit_up {width: 9px; height: 5px; line-height: 5px; background: -264px -196px;}
+.arrows_up {width: 10px; height: 11px; line-height: 11px; background: -289px -172px;}
+.arrows_down {width: 10px; height: 11px; line-height: 11px; background: -15px -220px;}
+.icon_small_warning {width: 10px; height: 41px; line-height: 41px; background: -142px -172px;}
+.free_tickets,.tickets,.icon_tea,.head_bg,.icon_big_warning,.icon_correct_big,.icon_correct,.icon_success,.icon_purse,.icon_small_warning,.star_02,.star_01,.icon_sure,.prev:hover,.next,.prev,.next:hover,.icon-warn,.icon_warning,.icon_error,.icon-loss,.icon_exp_up,.icon_exp_down,.icon_email,.icon_phone,.arrows_up,.arrows_down,.icon_down,.icon_desc,.icon_asc,.icon_order_up,.icon_m_up,.icon_down_01,.icon_up_01,.icon_m_down,.edit_up,.icon_triangle,.icon_or_up,.icon_or_down{background-image: url(../images/sprite_icon_s.png);}
+
+
+.brand-icon { background: url(../images/brand-ico.jpg) no-repeat!important;}

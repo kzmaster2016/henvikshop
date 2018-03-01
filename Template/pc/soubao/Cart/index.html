@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://buy.tp-shop.cn/cart/index -->
+<html id="ng-app">
+<head lang="zh">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+@charset "UTF-8";
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
+	display: none !important;
+}
+ng\:form {
+	display: block;
+}
+.ng-animate-block-transitions {
+	transition: 0s all!important;
+	-webkit-transition: 0s all!important;
+}
+.ng-hide-add-active, .ng-hide-remove {
+	display: block!important;
+}
+</style>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<!--使360浏览器强制使用急速模式-->
+        <title>购物车-{$tpshop_config['shop_info_store_title']}</title>
+        <meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+        <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+		<link rel="stylesheet" href="__STATIC__/css/cart.min.css">
+        <link rel="stylesheet" href="__STATIC__/css/base.css">
+        <script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+		<script src="__PUBLIC__/js/layer/layer-min.js"></script>
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/bottom.css">
+		</head>
+		<body ng-controller="CartController" class="ng-scope">
+<!-- 头部顶栏 start [[-->
+
+<div class="global-topbar">
+          <div class="topbar-wrapper fixed wrapper1190">
+    <ul id="topbar-right" class="topbar-right">
+              <li>您好，13*******53<a href="">[退出]</a></li>
+              <li><a target="_blank" href="">我的账户</a></li>
+              <li class="link_signin"><a target="_blank" href="">卡券充值</a></li>
+              <li><a target="_blank" href="">帮助中心</a></li>
+            </ul>
+  </div>
+        </div>
+<div class="wrapper1190">
+          <div class="logo"> <a href=""><i class="fn-logo"></i></a> </div>
+        </div>
+
+<!-- 头部顶栏 end ]]-->
+<div class="fn-cart-clearing">
+          <div class="wrapper1190" my-cart=""> 
+    <!-- cart-title -->
+    <div class="cart-title">
+              <div class="ct-nav">
+        <div class="cn-1 on"> 1.我的购物车 <span></span> <i class="cart-nav-01"></i> <b><i class="icon-dot-01"></i></b> </div>
+        <div class="cn-2 on-next"> 2.填写核对订单信息 <span></span> <i class="cart-nav-01"></i> <b><i class="icon-dot-02"></i></b> </div>
+        <div class="cn-3 "> 3.成功提交订单 <span></span> <b><i class="icon-dot-03"></i></b> </div>
+      </div>
+              <div class="ct-bottom"> <i class="clearing-logo"></i>
+        <div class="cs-c fn-fr ng-scope" my-region="">
+                  <div id="selectCar" class="selectProarea fnProarea" ng-mouseleave="myTopBarData.onMouseLeave($event)" ng-class="{hover: myTopBarData.mouseoverAddr}"> <span class="curAdd" id="curSelect" ng-mouseover="myTopBarData.onMouseOver($event)">
+                    <div ng-bind="myTopBarData.area.selectedAreaName" class="ng-binding">北京 北京市 丰台区</div>
+                    <i></i></span>
+            <div class="proarea clearfix">
+                      <div class="_tab"> 
+                <!-- ngRepeat: (type, area) in myTopBarData.areas --><a ng-repeat="(type, area) in myTopBarData.areas" ng-class="{_cur:!area.tips.hide}" ng-click="myTopBarData.changeAreaTips(type)" href="" class="ng-scope"><b ng-bind="area.selected.name || area.tips.name" class="ng-binding">北京</b><i></i></a><!-- end ngRepeat: (type, area) in myTopBarData.areas --><a ng-repeat="(type, area) in myTopBarData.areas" ng-class="{_cur:!area.tips.hide}" ng-click="myTopBarData.changeAreaTips(type)" href="" class="ng-scope"><b ng-bind="area.selected.name || area.tips.name" class="ng-binding">北京市</b><i></i></a><!-- end ngRepeat: (type, area) in myTopBarData.areas --><a ng-repeat="(type, area) in myTopBarData.areas" ng-class="{_cur:!area.tips.hide}" ng-click="myTopBarData.changeAreaTips(type)" href="" class="ng-scope _cur"><b ng-bind="area.selected.name || area.tips.name" class="ng-binding">丰台区</b><i></i></a><!-- end ngRepeat: (type, area) in myTopBarData.areas --> 
+              </div>
+                      <div class="_tabCont clearfix"> 
+                <!-- ngRepeat: (type, area) in myTopBarData.areas -->
+                <div class="_cont clearfix ng-scope _hide" ng-repeat="(type, area) in myTopBarData.areas" ng-class="{_hide:area.tips.hide}">
+                          <ul>
+                    <!-- ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="安徽" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">安徽</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="北京" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">北京</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="重庆" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">重庆</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="福建" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">福建</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="广东" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">广东</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="广西" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">广西</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="贵州" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">贵州</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="甘肃" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">甘肃</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="河北" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">河北</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="黑龙江" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">黑龙江</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="海南" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">海南</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="湖北" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">湖北</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="湖南" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">湖南</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="河南" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">河南</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="江苏" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">江苏</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="吉林" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">吉林</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="江西" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">江西</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="辽宁" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">辽宁</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="内蒙古(西)" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">内蒙古(西)</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="内蒙古(东)" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">内蒙古(东)</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="宁夏" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">宁夏</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="青海" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">青海</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="上海" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">上海</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="山东" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">山东</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="山西" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">山西</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="四川" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">四川</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="陕西" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">陕西</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="天津" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">天津</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="新疆" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">新疆</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="西藏" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">西藏</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="云南" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">云南</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="浙江" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">浙江</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                  </ul>
+                </div>
+                <!-- end ngRepeat: (type, area) in myTopBarData.areas -->
+                <div class="_cont clearfix ng-scope _hide" ng-repeat="(type, area) in myTopBarData.areas" ng-class="{_hide:area.tips.hide}">
+                          <ul>
+                    <!-- ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="北京市" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">北京市</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                  </ul>
+                        </div>
+                <!-- end ngRepeat: (type, area) in myTopBarData.areas -->
+                <div class="_cont clearfix ng-scope" ng-repeat="(type, area) in myTopBarData.areas" ng-class="{_hide:area.tips.hide}">
+                          <ul>
+                    <!-- ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="东城区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">东城区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="西城区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">西城区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="朝阳区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">朝阳区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="丰台区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">丰台区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="石景山区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">石景山区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="海淀区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">海淀区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="门头沟区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">门头沟区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="房山区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">房山区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="通州区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">通州区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="顺义区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">顺义区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="昌平区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">昌平区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="大兴区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">大兴区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="怀柔区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">怀柔区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="平谷区" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">平谷区</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="密云县" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">密云县</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                    <li ng-repeat="(key, areaList) in area.list" class="ng-scope"><a href="" title="延庆县" ng-bind="areaList.name" ng-click="myTopBarData.changeArea(areaList.type,key)" class="ng-binding">延庆县</a> </li>
+                    <!-- end ngRepeat: (key, areaList) in area.list -->
+                  </ul>
+                        </div>
+                <!-- end ngRepeat: (type, area) in myTopBarData.areas --> 
+              </div>
+                    </div>
+          </div>
+                  <a ng-href="" class="cs-01 fn-fl" href="">继续购物<span class="fn-st">&gt;&gt;</span></a> </div>
+      </div>
+            </div>
+    <!-- end cart-title --> 
+    
+    <!--    购物车删除提示-->
+    <p class="wrapper1190 fn-delete-alert hidden ng-scope" my-del-msg="" ng-class="{hidden: !showDelMsg}"> 成功删除 <span class="ng-binding">0</span>件商品，如有误，<a ng-href="" ng-click="undo()">可撤销本次操作</a>。 </p>
+    <!--    end购物车删除提示-->
+    <div class="ui_tab"> 
+              <!-- ngIf: !status.overseasEmpty -->
+              <div class="ui_tab_content">
+        <div class="clearing-c cart-content">
+                  <div class="clearing-block cc-list-def">
+            <div class="cc-top">
+                      <ul>
+                <li class="th-01"> 
+                          <!-- ngIf: !overseasCart -->
+                          <input ng-if="!overseasCart" type="checkbox" class="all-select ng-scope ng-pristine ng-valid" id="qx-1" ng-model="cart.selectAll" ng-change="selectAll(overseasCart)">
+                          <!-- end ngIf: !overseasCart --> 
+                          <!-- ngIf: overseasCart -->
+                          <label for="qx-1">全选</label>
+                        </li>
+                <li class="th-02">商品名称</li>
+                <li class="th-06">规格</li>
+                <li class="th-03">单价（元）</li>
+                <li class="th-04">数量</li>
+                <li class="th-05">小计（元）</li>
+                <li class="th-07">重量</li>
+                <li class="th-08">操作</li>
+              </ul>
+                    </div>
+            <div class="c-package"> 
+                      <!--    购物车为空-->
+                      <div ng-class="{&#39;package-none&#39;: (status.loading || status.empty)}" class="">
+                <div class="clearing-loading ng-hide" ng-show="status.loading"> <span class="fn-fl loading-img"></span>
+                          <div class="fn-fl">
+                    <p>加载中，请耐心等候</p>
+                    <p>若页面长时间不显示商品，<a ng-href="" ng-click="refresh()">点此刷新</a></p>
+                  </div>
+                        </div>
+                <div class="clearing-noproduct hidden" ng-class="{hidden: !status.empty}"> <span class="fn-fl noproduct-img"></span>
+                          <div class="fn-fl">
+                    <p class="noproduct-tit">您的购物车还是空的</p>
+                  </div>
+                        </div>
+              </div>
+                      <!-- end 购物车为空--> 
+                      <!-- 包容器 package_collection begin --> 
+                      <!-- ngRepeat: (packageKey, package) in (packages|orderBy:predicate) track by package.shipmentCode -->
+                      <div ng-repeat="(packageKey, package) in (packages|orderBy:predicate) track by package.shipmentCode" my-package-collection="" data-cart-select-all="cart.selectAll" data-package-key="packageKey" data-package="package" data-index="$index" data-overseas-cart="overseasCart" id="anchor-0" ng-hide="overseasCart == 1 &amp;&amp; package.overseasPackage == 0" class="ng-scope ng-isolate-scope">
+                <div class="fee-top ng-scope" ng-controller="PackageHeaderController" id="anchor-0">
+                          <ul class="tit">
+                    <li class="th-01">
+                              <input type="checkbox" class="all-select ng-pristine ng-valid" id="fee-0" ng-model="package.selectAll" ng-change="changeSelected()" ng-disabled="!package.canSelect">
+                              <!-- ngIf: package.overseasPackage != 1 -->
+                              <label ng-if="package.overseasPackage != 1" for="fee-0" class="fn-fl ng-binding ng-scope" ng-bind="package.packageTitle">自营</label>
+                              <!-- end ngIf: package.overseasPackage != 1 --><!-- ngIf: package.overseasPackage == 1 --><span ng-show="package.hasFresh" class="fee-f ng-hide" style="padding-left: 5px;"></span><!-- ngIf: package.type == SOURCE.MALL --><!-- ngIf: package.type == SOURCE.FEINIU --><a ng-if="package.type == SOURCE.FEINIU" class="contactniu onniu ng-scope" ng-click="clickLive800()" title="在线客服" target="_blank"></a><!-- end ngIf: package.type == SOURCE.FEINIU --></li>
+                    <!-- ngIf: package.shipmentDiff != 0 || package.shipment --><!-- ngIf: package.shipmentDiff == 0 && !package.shipment -->
+                    <li class="th-02 ng-scope" ng-if="package.shipmentDiff == 0 &amp;&amp; !package.shipment"><span class="fee-t">免运费</span></li>
+                    <!-- end ngIf: package.shipmentDiff == 0 && !package.shipment -->
+                  </ul>
+                          <div class="clearing-recommend clearing-recommend-layer wrapper1190" ng-style="{display: header._showRecommend ? &#39;block&#39; : &#39;none&#39;}" style="display: none;">
+                    <div class="cr-block-01">
+                              <div class="cr-list-out ng-isolate-scope" my-slider="" data-type="1" data-data="header.more" data-is-show="header._showRecommend" data-show-close-btn="true" data-index="header.listIndex" data-line-size="header.lineSize" data-ref-data="header.refData(list)"> <!-- ngIf: showCloseBtn --><a class="fn-btn-carclose2 ng-scope" ng-href="" ng-click="hide()" ng-if="showCloseBtn"></a><!-- end ngIf: showCloseBtn --><!-- ngIf: itemList.length && itemList.length > 1 --><!-- ngIf: itemList.length && itemList.length > 1 -->
+                        <div class="cr-list fixed" ng-class="extraClass" ng-switch="1"><!-- ngSwitchWhen: 2 --><!-- ngSwitchDefault:  -->
+                                  <div class="slide-wrapper ng-scope" ng-switch-default=""><!-- ngRepeat: list in itemList --></div>
+                                </div>
+                      </div>
+                            </div>
+                  </div>
+                        </div>
+                <div class="one-package" ng-switch="overseasCart"><!-- ngIf: package.splitTipOne --><!-- ngSwitchWhen: 1 --><!-- ngSwitchWhen: 0 -->
+                  <div class="cc-list ng-scope" ng-switch-when="0"><!-- ngRepeat: (mainKey, mainInfo) in package.mainList track by mainInfo.id -->
+                    <div ng-repeat="(mainKey, mainInfo) in package.mainList track by mainInfo.id" ng-show="mainInfo.visible" class="ng-scope"><!-- ngRepeat: (itemKey, item) in (mainInfo.items | orderBy : 'sort')  track by item.trackId -->
+                              <ul class="fixed ng-scope ng-isolate-scope on" ng-class="lineClass" ng-mouseover="onUlMouse(true)" ng-mouseout="onUlMouse(false)" data-id="0" ng-repeat="(itemKey, item) in (mainInfo.items | orderBy : &#39;sort&#39;)  track by item.trackId" my-base-line="" data-item="item" data-kind="1" data-item-key="0" data-select-all="package.selectAll" data-customs-name="package.customsName" data-overseas-mode="package.overseasMode" data-deliver-deadline="mainInfo.deliverDeadline">
+                        <li class="td-01"><!-- ngIf: (item.kind | itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) && item.isSelling -->
+                                  <input ng-if="(item.kind | itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) &amp;&amp; item.isSelling" type="checkbox" ng-model="item.selected" ng-change="changeSelected()" class="ng-scope ng-pristine ng-valid">
+                                  <!-- end ngIf: (item.kind | itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) && item.isSelling --><!-- ngIf: (item.sellingStatus | itemKind:ITEM_STATUS.BASE_SALE_OUT:ITEM_STATUS.BASE_OUT_OF_AREA:ITEM_STATUS.BASE_OFF_THE_SHELF) && (item.kind == ITEM_KIND.KIND_MAIN || item.kind == ITEM_KIND.KIND_ADD) --></li>
+                        <li class="td-02">
+                                  <div class="t2-cg"><i class="icon-triangle-03"></i></div>
+                                  <div class="t2-c1"><a target="_blank" ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2016/0126/201601C260000218/201601C260000325_139955100_60x60.jpg" alt="one-xuan 春装新款蕾丝雪纺衫女蝴蝶结白衬衫女长袖上衣蕾丝打底衫 G339-8803" src="images/201601C260000325_139955100_60x60.jpg"></a><a target="_blank" ng-href="" href="">
+                                    <p class="ng-binding"><!-- ngRepeat: val in tagName -->one-xuan 春装新款蕾丝雪纺衫女蝴蝶结白衬衫女长袖上衣蕾丝打底衫 G339-8803</p>
+                                    <!-- ngRepeat: val in buyTypeName -->
+                                    <p ng-repeat="val in buyTypeName" ng-bind="val.name" ng-class="val.css" my-basic-line-buy-type-tip="" data-buy-type="item.buyType" data-overseas-mode="overseasMode" data-customs-name="customsName" data-deliver-deadline="deliverDeadline" class="ng-binding ng-scope span_delivery">商家直送，预计2天内发货</p>
+                                    <!-- end ngRepeat: val in buyTypeName --></a></div>
+                                </li>
+                        <li class="td-06"><!-- ngIf: item.color --><span class="span-spec ng-binding ng-scope" ng-if="item.color" ng-bind="item.color">白色</span><!-- end ngIf: item.color --><!-- ngIf: item.size --><span ng-if="item.size" ng-bind="item.size" class="ng-binding ng-scope">M</span><!-- end ngIf: item.size --></li>
+                        <li class="td-03" ng-class="{&#39;td-item&#39;:item.isShowScoreMarket}"><!-- ngIf: (IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE) && item.baseOrigin > item.baseActual --><span ng-if="(IS_VVIP == &#39;false&#39; || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) &amp;&amp; (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE) &amp;&amp; item.baseOrigin &gt; item.baseActual" ng-bind="(item.baseOrigin || 0) | currency:&#39;&#39;" class="ng-binding ng-scope">199.00</span><!-- end ngIf: (IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE) && item.baseOrigin > item.baseActual --><!-- ngIf: (IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) -->
+                                  <p ng-if="(IS_VVIP == &#39;false&#39; || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) &amp;&amp; (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN)" class="ng-scope"><b ng-bind="(item.baseActual || 0) | currency:&#39;&#39;" class="ng-binding">99.00</b><!-- ngIf: !item.isOverseas && IS_VVIP == 'true' && (item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) --></p>
+                                  <!-- end ngIf: (IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) --><!-- ngIf: IS_VVIP == 'true' && item.vvipEnjoyPrice == 1 && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) --><!-- ngIf: IS_VVIP == 'true' && item.vvipEnjoyPrice == 1 && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) --><!-- ngIf: item.isShowScoreMarket --></li>
+                        <li class="td-04 ng-isolate-scope" my-base-line-picker="" data-stock-hint="item.stockHint" data-is-prize="item.isPrize" data-base-purchases="item.basePurchases" data-in-stock="item.inStock" data-is-special="item.isSpecial" data-sourcesell="item.sourcesell" data-sourcesellsplit="item.sourcesellsplit" data-senlimit="item.senlimit" data-on-change="modify()" data-warning="item.warning || &#39;&#39;" data-selling-status="item.sellingStatus" data-kind="item.kind" data-is-overseas="item.isOverseas" data-overseas-quantity-min="item.overseasQuantityMin"><!-- ngIf: data.showPicker -->
+                                  <div ng-if="data.showPicker" class="add-minus ng-scope">
+                            <button class="icon-minus" ng-class="{&#39;icon-minus-gray&#39;: data.purchases &lt;= data.overseasQuantityMin || isPrize}" ng-click="sub()" ng-disabled="isPrize"> </button>
+                            <input type="text" ng-model="data.purchases" ng-disabled="isPrize" class="ng-pristine ng-valid">
+                            <button class="icon-add" ng-class="{&#39;icon-add-gray&#39;: data.purchases &gt;= inStock || isPrize}" ng-click="add()" ng-disabled="isPrize"></button>
+                          </div>
+                                  <!-- end ngIf: data.showPicker --><!-- ngIf: data.showPickerNum --><!-- ngIf: data.showWarning --></li>
+                        <li class="td-05" ng-class="{&#39;rydp&#39;: item.innerKind == 14 || item.innerKind == 3 }">
+                                  <div ng-class="{&#39;tier-1&#39;: item.groupStatus == TIPS_GROUP.TIPS_GROUP || item.isOverseas}"><!-- ngIf: (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) --><b ng-if="(item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN)" ng-bind="((IS_VVIP == &#39;true&#39; &amp;&amp; item.vvipEnjoyPrice == 1 ? item.vvipSubtotal : item.subtotal) || 0) | currency:&#39;&#39;" class="ng-binding ng-scope">198.00</b><!-- end ngIf: (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) --><!-- ngRepeat: val in tagName --><!-- ngIf: showPtax --></div>
+                                  <!-- ngIf: item.kind|itemKind:ITEM_KIND.KIND_MAIN && !!item.activityList && !!item.activityList.length --></li>
+                        <li class="td-07"><!-- ngIf: item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_GIFT:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_CAMP_AMOUNT_GIFT:ITEM_KIND.KIND_CAMP_NUMBER_GIFT:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN -->
+                                  <div ng-if="item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_GIFT:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_CAMP_AMOUNT_GIFT:ITEM_KIND.KIND_CAMP_NUMBER_GIFT:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN" ng-bind="(((item.baseWeight) || 0) | myNumber : 3) + &#39; kg&#39;" class="ng-binding ng-scope">1 kg</div>
+                                  <!-- end ngIf: item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_GIFT:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_CAMP_AMOUNT_GIFT:ITEM_KIND.KIND_CAMP_NUMBER_GIFT:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN --></li>
+                        <li class="td-08">
+                                  <div><!-- ngIf: item.displayAddFavorite --><a ng-href="" ng-class="{&#39;a-favorites&#39;: item.sellingStatus != ITEM_STATUS.BASE_OFF_THE_SHELF, &#39;a-unfavorites&#39;: item.sellingStatus == ITEM_STATUS.BASE_OFF_THE_SHELF}" ng-if="item.displayAddFavorite" ng-click="addFavorite($event)" class="ng-scope a-favorites">移入收藏夹</a><!-- end ngIf: item.displayAddFavorite --><!-- ngIf: (item.kind|itemKind:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) --><a ng-href="" class="a-delete ng-scope" ng-if="(item.kind|itemKind:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN)" ng-click="delItem($event)">删除</a><!-- end ngIf: (item.kind|itemKind:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) --></div>
+                                </li>
+                      </ul>
+                              <!-- end ngRepeat: (itemKey, item) in (mainInfo.items | orderBy : 'sort')  track by item.trackId --><!-- ngIf: mainInfo.baseWarning --><!-- ngIf: mainInfo.sellingStatus == ITEM_STATUS.BASE_OUT_OF_AREA -->
+                    </div>
+                     
+                     <div class="one-active ng-scope" ng-repeat="(activityCode, activity) in package.activities track by activity.activityCode"><ul style="" class="tr-activity"><li class="ta-01 ng-binding" ng-bind="'[' + (activity.activityInfo.activityType | activityTypeToText) + ']'">[满减]</li>
+                     <!-- ngIf: !activity.activityInfo.isActive --><!-- ngIf: activity.activityInfo.isActive -->
+                     <li class="ta-02 ng-scope" ng-if="activity.activityInfo.isActive">已满足</li>
+                     <!-- end ngIf: activity.activityInfo.isActive --><li class="ta-03">
+                     <a ng-href="http://www.tp-shop.cn/campaign/47197" ng-bind="activity.activityInfo.activityDesc" class="ng-binding" href="http://www.tp-shop.cn/campaign/47197">满149.0减20.0,满199.0减30.0,满299.0减50.0</a></li>
+                     <!-- ngIf: !activity.activityInfo.isActive --><li class="ta-04">
+                     <a ng-href="http://www.tp-shop.cn/campaign/47197" class="btn" href="http://www.tp-shop.cn/campaign/47197">继续购买 &gt;</a></li>
+                     <!-- ngIf: !activity.activityInfo.isGiftEnough && (activity.activityInfo.activityType == '1' || activity.activityInfo.activityType == '3' || activity.activityInfo.activityType == '7') -->
+                     <!-- ngIf: activity.activityInfo.showGiftButton --><!-- ngIf: activity.activityInfo.isActive && (activity.activityInfo.activityType != '1' && activity.activityInfo.activityType != '3' && activity.activityInfo.activityType != '7') -->
+                     <li class="ta-04 ng-scope" ng-if="activity.activityInfo.isActive &amp;&amp; (activity.activityInfo.activityType != '1' &amp;&amp; activity.activityInfo.activityType != '3' &amp;&amp; activity.activityInfo.activityType != '7')">已优惠: 
+                     <span class="price">-<em>¥</em><!-- ngIf: activity.activityInfo.discount >= 0 --><b ng-if="activity.activityInfo.discount >= 0" ng-bind="activity.activityInfo.discount | currency:''" class="ng-binding ng-scope">50.00</b><!-- end ngIf: activity.activityInfo.discount >= 0 --><!-- ngIf: activity.activityInfo.discount < 0 --></span>  共计:<span class="price"><!-- ngIf: activity.activityInfo.payable >= 0 -->
+                     <b ng-if="activity.activityInfo.payable >= 0" ng-bind="activity.activityInfo.payable | currency:''" class="ng-binding ng-scope">2,128.00</b>
+                     <!-- end ngIf: activity.activityInfo.payable >= 0 --><!-- ngIf: activity.activityInfo.payable < 0 --></span></li>
+                     <!-- end ngIf: activity.activityInfo.isActive && (activity.activityInfo.activityType != '1' && activity.activityInfo.activityType != '3' && activity.activityInfo.activityType != '7') -->            </ul>
+                     <!-- ngRepeat: (mainKey, mainInfo) in activity.mainList track by mainInfo.id -->
+                     <div ng-repeat="(mainKey, mainInfo) in activity.mainList track by mainInfo.id" ng-show="mainInfo.visible" class="ng-scope">
+                     <!-- ngRepeat: (itemKey, item) in (mainInfo.items | orderBy : 'sort') track by item.trackId -->
+                     <ul class="fixed ng-scope ng-isolate-scope on" ng-class="lineClass" ng-mouseover="onUlMouse(true)" ng-mouseout="onUlMouse(false)" data-id="0" ng-repeat="(itemKey, item) in (mainInfo.items | orderBy : 'sort') track by item.trackId" my-base-line="" data-item="item" data-kind="1" data-item-key="0" data-select-all="package.selectAll" data-customs-name="package.customsName" data-overseas-mode="package.overseasMode" data-deliver-deadline="mainInfo.deliverDeadline"> 
+                     <li class="td-01"><!-- ngIf: (item.kind | itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) && item.isSelling -->
+                     <input ng-if="(item.kind | itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) &amp;&amp; item.isSelling" type="checkbox" ng-model="item.selected" ng-change="changeSelected()" class="ng-scope ng-pristine ng-valid">
+                     <!-- end ngIf: (item.kind | itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) && item.isSelling -->
+                     <!-- ngIf: (item.sellingStatus | itemKind:ITEM_STATUS.BASE_SALE_OUT:ITEM_STATUS.BASE_OUT_OF_AREA:ITEM_STATUS.BASE_OFF_THE_SHELF) && (item.kind == ITEM_KIND.KIND_MAIN || item.kind == ITEM_KIND.KIND_ADD) --></li>
+                     <li class="td-02"><div class="t2-cg"><i class="icon-triangle-03">
+                     </i></div><div class="t2-c1"><a target="_blank" ng-href="http://www.tp-shop.cn/item/201601CM200001142" href="http://www.tp-shop.cn/item/201601CM200001142">
+                     <img ng-src="//img.tp-shop.cn/C/item/2016/0120/201601C200000256/201601C200000239_746438434_60x60.jpg" alt="如熙 2016春季新款女鞋韩版潮圆头单鞋水钻羊皮平底浅口休闲鞋 FN1637763" src="//img.tp-shop.cn/C/item/2016/0120/201601C200000256/201601C200000239_746438434_60x60.jpg"></a>
+                     <a target="_blank" ng-href="http://www.tp-shop.cn/item/201601CM200001142" href="http://www.tp-shop.cn/item/201601CM200001142"><p class="ng-binding">
+                     <!-- ngRepeat: val in tagName -->如熙 2016春季新款女鞋韩版潮圆头单鞋水钻羊皮平底浅口休闲鞋 FN1637763</p>
+                     <!-- ngRepeat: val in buyTypeName --><p ng-repeat="val in buyTypeName" ng-bind="val.name" ng-class="val.css" my-basic-line-buy-type-tip="" data-buy-type="item.buyType" data-overseas-mode="overseasMode" data-customs-name="customsName" data-deliver-deadline="deliverDeadline" class="ng-binding ng-scope span_delivery">商家直送，预计2天内发货</p>
+                     <!-- end ngRepeat: val in buyTypeName --></a></div></li><li class="td-06"><!-- ngIf: item.color --><span class="span-spec ng-binding ng-scope" ng-if="item.color" ng-bind="item.color">黑色</span><!-- end ngIf: item.color --><!-- ngIf: item.size --><span ng-if="item.size" ng-bind="item.size" class="ng-binding ng-scope">35</span><!-- end ngIf: item.size --></li>
+                     <li class="td-03" ng-class="{'td-item':item.isShowScoreMarket}"><!-- ngIf: (IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE) && item.baseOrigin > item.baseActual -->
+                     <span ng-if="(IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) &amp;&amp; (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE) &amp;&amp; item.baseOrigin > item.baseActual" ng-bind="(item.baseOrigin || 0) | currency:''" class="ng-binding ng-scope">489.00</span>
+                     <!-- end ngIf: (IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE) && item.baseOrigin > item.baseActual -->
+                     <!-- ngIf: (IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) -->
+                     <p ng-if="(IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) &amp;&amp; (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN)" class="ng-scope">
+                     <b ng-bind="(item.baseActual || 0) | currency:''" class="ng-binding">198.00</b><!-- ngIf: !item.isOverseas && IS_VVIP == 'true' && (item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) --></p>
+                     <!-- end ngIf: (IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) -->
+                     <!-- ngIf: IS_VVIP == 'true' && item.vvipEnjoyPrice == 1 && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) --><!-- ngIf: IS_VVIP == 'true' && item.vvipEnjoyPrice == 1 && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) --><!-- ngIf: item.isShowScoreMarket --></li>
+                     <li class="td-04 ng-isolate-scope" my-base-line-picker="" data-stock-hint="item.stockHint" data-is-prize="item.isPrize" data-base-purchases="item.basePurchases" data-in-stock="item.inStock" data-is-special="item.isSpecial" data-sourcesell="item.sourcesell" data-sourcesellsplit="item.sourcesellsplit" data-senlimit="item.senlimit" data-on-change="modify()" data-warning="item.warning || ''" data-selling-status="item.sellingStatus" data-kind="item.kind" data-is-overseas="item.isOverseas" data-overseas-quantity-min="item.overseasQuantityMin">
+                     <!-- ngIf: data.showPicker --><div ng-if="data.showPicker" class="add-minus ng-scope"> <button class="icon-minus" ng-class="{'icon-minus-gray': data.purchases <= data.overseasQuantityMin || isPrize}" ng-click="sub()" ng-disabled="isPrize"> </button>
+                     <input type="text" ng-model="data.purchases" ng-disabled="isPrize" class="ng-pristine ng-valid"><button class="icon-add icon-add-gray" ng-class="{'icon-add-gray': data.purchases >= inStock || isPrize}" ng-click="add()" ng-disabled="isPrize"></button></div><!-- end ngIf: data.showPicker -->
+                     <!-- ngIf: data.showPickerNum --><!-- ngIf: data.showWarning --></li><li class="td-05" ng-class="{'rydp': item.innerKind == 14 || item.innerKind == 3 }"><div ng-class="{'tier-1': item.groupStatus == TIPS_GROUP.TIPS_GROUP || item.isOverseas}">
+                     <!-- ngIf: (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) --><b ng-if="(item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN)" ng-bind="((IS_VVIP == 'true' &amp;&amp; item.vvipEnjoyPrice == 1 ? item.vvipSubtotal : item.subtotal) || 0) | currency:''" class="ng-binding ng-scope">1,584.00</b>
+                     <!-- end ngIf: (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) --><!-- ngRepeat: val in tagName --><!-- ngIf: showPtax --></div><!-- ngIf: item.kind|itemKind:ITEM_KIND.KIND_MAIN && !!item.activityList && !!item.activityList.length -->
+                     <a ng-href="" ng-controller="ActivitySelectorController" ng-if="item.kind|itemKind:ITEM_KIND.KIND_MAIN &amp;&amp; !!item.activityList &amp;&amp; !!item.activityList.length" class="chg-sale-tt ng-scope" ng-class="{'chg-hqg-sale': downPromotionBtn, 'chg-sale-tt-c': isShow}" ng-click="changeActivity($event)">修改优惠<i></i></a>
+                     <!-- end ngIf: item.kind|itemKind:ITEM_KIND.KIND_MAIN && !!item.activityList && !!item.activityList.length --></li><li class="td-07"><!-- ngIf: item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_GIFT:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_CAMP_AMOUNT_GIFT:ITEM_KIND.KIND_CAMP_NUMBER_GIFT:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN -->
+                     <div ng-if="item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_GIFT:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_CAMP_AMOUNT_GIFT:ITEM_KIND.KIND_CAMP_NUMBER_GIFT:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN" ng-bind="(((item.baseWeight) || 0) | myNumber : 3) + ' kg'" class="ng-binding ng-scope">8 kg</div>
+                     <!-- end ngIf: item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_GIFT:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_CAMP_AMOUNT_GIFT:ITEM_KIND.KIND_CAMP_NUMBER_GIFT:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN --></li><li class="td-08"><div>
+                     <!-- ngIf: item.displayAddFavorite --><a ng-href="" ng-class="{'a-favorites': item.sellingStatus != ITEM_STATUS.BASE_OFF_THE_SHELF, 'a-unfavorites': item.sellingStatus == ITEM_STATUS.BASE_OFF_THE_SHELF}" ng-if="item.displayAddFavorite" ng-click="addFavorite($event)" class="ng-scope a-favorites">移入收藏夹</a>
+                     <!-- end ngIf: item.displayAddFavorite --><!-- ngIf: (item.kind|itemKind:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) -->
+                     <a ng-href="" class="a-delete ng-scope" ng-if="(item.kind|itemKind:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN)" ng-click="delItem($event)">删除</a><!-- end ngIf: (item.kind|itemKind:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) --></div></li></ul><!-- end ngRepeat: (itemKey, item) in (mainInfo.items | orderBy : 'sort') track by item.trackId --><!-- ngIf: mainInfo.baseWarning --></div>
+                     <!-- end ngRepeat: (mainKey, mainInfo) in activity.mainList track by mainInfo.id -->
+                     <div ng-repeat="(mainKey, mainInfo) in activity.mainList track by mainInfo.id" ng-show="mainInfo.visible" class="ng-scope">
+                     <!-- ngRepeat: (itemKey, item) in (mainInfo.items | orderBy : 'sort') track by item.trackId -->
+                     <ul class="fixed ng-scope ng-isolate-scope on" ng-class="lineClass" ng-mouseover="onUlMouse(true)" ng-mouseout="onUlMouse(false)" data-id="1" ng-repeat="(itemKey, item) in (mainInfo.items | orderBy : 'sort') track by item.trackId" my-base-line="" data-item="item" data-kind="1" data-item-key="0" data-select-all="package.selectAll" data-customs-name="package.customsName" data-overseas-mode="package.overseasMode" data-deliver-deadline="mainInfo.deliverDeadline"> <li class="td-01">
+                     <!-- ngIf: (item.kind | itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) && item.isSelling -->
+                     <input ng-if="(item.kind | itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) &amp;&amp; item.isSelling" type="checkbox" ng-model="item.selected" ng-change="changeSelected()" class="ng-scope ng-pristine ng-valid">
+                     <!-- end ngIf: (item.kind | itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) && item.isSelling --><!-- ngIf: (item.sellingStatus | itemKind:ITEM_STATUS.BASE_SALE_OUT:ITEM_STATUS.BASE_OUT_OF_AREA:ITEM_STATUS.BASE_OFF_THE_SHELF) && (item.kind == ITEM_KIND.KIND_MAIN || item.kind == ITEM_KIND.KIND_ADD) --></li>
+                     <li class="td-02"><div class="t2-cg"><i class="icon-triangle-03"></i></div><div class="t2-c1"><a target="_blank" ng-href="http://www.tp-shop.cn/item/201601CM200001149" href="http://www.tp-shop.cn/item/201601CM200001149"><img ng-src="//img.tp-shop.cn/C/item/2016/0120/201601C200000256/201601C200000240_901931582_60x60.jpg" alt="如熙 2016春季新款女鞋韩版潮圆头单鞋水钻羊皮平底浅口休闲鞋 FN1637763" src="//img.tp-shop.cn/C/item/2016/0120/201601C200000256/201601C200000240_901931582_60x60.jpg"></a>
+                     <a target="_blank" ng-href="http://www.tp-shop.cn/item/201601CM200001149" href="http://www.tp-shop.cn/item/201601CM200001149">
+                     <p class="ng-binding"><!-- ngRepeat: val in tagName -->如熙 2016春季新款女鞋韩版潮圆头单鞋水钻羊皮平底浅口休闲鞋 FN1637763</p><!-- ngRepeat: val in buyTypeName --><p ng-repeat="val in buyTypeName" ng-bind="val.name" ng-class="val.css" my-basic-line-buy-type-tip="" data-buy-type="item.buyType" data-overseas-mode="overseasMode" data-customs-name="customsName" data-deliver-deadline="deliverDeadline" class="ng-binding ng-scope span_delivery">商家直送，预计2天内发货</p><!-- end ngRepeat: val in buyTypeName --></a></div></li><li class="td-06">
+                     <!-- ngIf: item.color --><span class="span-spec ng-binding ng-scope" ng-if="item.color" ng-bind="item.color">蓝色</span><!-- end ngIf: item.color -->
+                     <!-- ngIf: item.size --><span ng-if="item.size" ng-bind="item.size" class="ng-binding ng-scope">35</span><!-- end ngIf: item.size --></li><li class="td-03" ng-class="{'td-item':item.isShowScoreMarket}">
+                     <!-- ngIf: (IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE) && item.baseOrigin > item.baseActual --><span ng-if="(IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) &amp;&amp; (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE) &amp;&amp; item.baseOrigin > item.baseActual" ng-bind="(item.baseOrigin || 0) | currency:''" class="ng-binding ng-scope">489.00</span>
+                     <!-- end ngIf: (IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE) && item.baseOrigin > item.baseActual --><!-- ngIf: (IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) -->
+                     <p ng-if="(IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) &amp;&amp; (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN)" class="ng-scope"><b ng-bind="(item.baseActual || 0) | currency:''" class="ng-binding">198.00</b>
+                     <!-- ngIf: !item.isOverseas && IS_VVIP == 'true' && (item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) --></p><!-- end ngIf: (IS_VVIP == 'false' || item.vvipEnjoyPrice == 0 || item.vvipEnjoyPrice == null) && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) -->
+                     <!-- ngIf: IS_VVIP == 'true' && item.vvipEnjoyPrice == 1 && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) --><!-- ngIf: IS_VVIP == 'true' && item.vvipEnjoyPrice == 1 && (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) -->
+                     <!-- ngIf: item.isShowScoreMarket --></li><li class="td-04 ng-isolate-scope" my-base-line-picker="" data-stock-hint="item.stockHint" data-is-prize="item.isPrize" data-base-purchases="item.basePurchases" data-in-stock="item.inStock" data-is-special="item.isSpecial" data-sourcesell="item.sourcesell" data-sourcesellsplit="item.sourcesellsplit" data-senlimit="item.senlimit" data-on-change="modify()" data-warning="item.warning || ''" data-selling-status="item.sellingStatus" data-kind="item.kind" data-is-overseas="item.isOverseas" data-overseas-quantity-min="item.overseasQuantityMin">
+                     <!-- ngIf: data.showPicker --><div ng-if="data.showPicker" class="add-minus ng-scope"> <button class="icon-minus" ng-class="{'icon-minus-gray': data.purchases <= data.overseasQuantityMin || isPrize}" ng-click="sub()" ng-disabled="isPrize"> </button><input type="text" ng-model="data.purchases" ng-disabled="isPrize" class="ng-pristine ng-valid"><button class="icon-add" ng-class="{'icon-add-gray': data.purchases >= inStock || isPrize}" ng-click="add()" ng-disabled="isPrize"></button></div>
+                     <!-- end ngIf: data.showPicker --><!-- ngIf: data.showPickerNum --><!-- ngIf: data.showWarning --></li><li class="td-05" ng-class="{'rydp': item.innerKind == 14 || item.innerKind == 3 }"><div ng-class="{'tier-1': item.groupStatus == TIPS_GROUP.TIPS_GROUP || item.isOverseas}"><!-- ngIf: (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) -->
+                     <b ng-if="(item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN)" ng-bind="((IS_VVIP == 'true' &amp;&amp; item.vvipEnjoyPrice == 1 ? item.vvipSubtotal : item.subtotal) || 0) | currency:''" class="ng-binding ng-scope">594.00</b>
+                     <!-- end ngIf: (item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_THIRD_PART_MAIN) --><!-- ngRepeat: val in tagName --><!-- ngIf: showPtax --></div>
+                     <!-- ngIf: item.kind|itemKind:ITEM_KIND.KIND_MAIN && !!item.activityList && !!item.activityList.length --><a ng-href="" ng-controller="ActivitySelectorController" ng-if="item.kind|itemKind:ITEM_KIND.KIND_MAIN &amp;&amp; !!item.activityList &amp;&amp; !!item.activityList.length" class="chg-sale-tt ng-scope" ng-class="{'chg-hqg-sale': downPromotionBtn, 'chg-sale-tt-c': isShow}" ng-click="changeActivity($event)">修改优惠<i></i></a>
+                     <!-- end ngIf: item.kind|itemKind:ITEM_KIND.KIND_MAIN && !!item.activityList && !!item.activityList.length --></li>
+                     <li class="td-07"><!-- ngIf: item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_GIFT:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_CAMP_AMOUNT_GIFT:ITEM_KIND.KIND_CAMP_NUMBER_GIFT:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN -->
+                     <div ng-if="item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_GIFT:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_CAMP_AMOUNT_GIFT:ITEM_KIND.KIND_CAMP_NUMBER_GIFT:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN" ng-bind="(((item.baseWeight) || 0) | myNumber : 3) + ' kg'" class="ng-binding ng-scope">3 kg</div>
+                     <!-- end ngIf: item.kind|itemKind:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_GIFT:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_ACCESSORY:ITEM_KIND.KIND_CAMP_AMOUNT_GIFT:ITEM_KIND.KIND_CAMP_NUMBER_GIFT:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN --></li><li class="td-08"><div><!-- ngIf: item.displayAddFavorite --><a ng-href="" ng-class="{'a-favorites': item.sellingStatus != ITEM_STATUS.BASE_OFF_THE_SHELF, 'a-unfavorites': item.sellingStatus == ITEM_STATUS.BASE_OFF_THE_SHELF}" ng-if="item.displayAddFavorite" ng-click="addFavorite($event)" class="ng-scope a-favorites">移入收藏夹</a>
+                     <!-- end ngIf: item.displayAddFavorite --><!-- ngIf: (item.kind|itemKind:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) --><a ng-href="" class="a-delete ng-scope" ng-if="(item.kind|itemKind:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN)" ng-click="delItem($event)">删除</a><!-- end ngIf: (item.kind|itemKind:ITEM_KIND.KIND_ADD:ITEM_KIND.KIND_MAIN:ITEM_KIND.KIND_SALE_BASE:ITEM_KIND.KIND_THIRD_PART_MAIN) --></div></li></ul>
+                     <!-- end ngRepeat: (itemKey, item) in (mainInfo.items | orderBy : 'sort') track by item.trackId -->
+                     <!-- ngIf: mainInfo.baseWarning --></div><!-- end ngRepeat: (mainKey, mainInfo) in activity.mainList track by mainInfo.id --></div>         
+                              
+                    <!-- end ngRepeat: (mainKey, mainInfo) in package.mainList track by mainInfo.id -->
+                    <!-- ngRepeat: (activityCode, activity) in package.activities track by activity.activityCode -->
+                    <!-- ngRepeat: (mainKey, mainInfo) in package.unchecked track by mainInfo.id -->
+                    <ul class="cc-list-bottom">
+                              <li class="th_gray"><span class="th">数量</span><span class="number ng-binding" ng-bind="package.packageAmount.packageCount | number : 0">2</span></li>
+                              <li class="th_gray"><span class="th">重量</span><span class="number ng-binding" ng-bind="((package.packageAmount.packageWeight) | myNumber : 3) + &#39;kg&#39;">1kg</span></li>
+                              <li><span class="th">已优惠</span><span class="price">-<em>¥</em><!-- ngIf: package.packageAmount.packageDiscount >= 0 --><b ng-if="package.packageAmount.packageDiscount &gt;= 0" ng-bind="package.packageAmount.packageDiscount | currency:&#39;&#39;" class="ng-binding ng-scope">0.00</b><!-- end ngIf: package.packageAmount.packageDiscount >= 0 --><!-- ngIf: package.packageAmount.packageDiscount < 0 --></span></li>
+                              <!-- ngIf: IS_VVIP == 'true' -->
+                              <li><span class="th">运费（元）</span><span class="price"><em>¥</em><b ng-bind="package.packageAmount.packageShipment | currency:&#39;&#39;" class="ng-binding">0.00</b></span></li>
+                              <!-- ngIf: package.overseasPackage -->
+                              <li><span class="th">小计（元）</span><span class="price"><em>¥</em><b ng-bind="package.packageAmount.packageSubtotal | currency:&#39;&#39;" class="ng-binding">198.00</b></span></li>
+                              <li class="libot"><!-- ngIf: package.splitTipOne && package.overseasPackage --><!-- ngIf: package.splitTip --></li>
+                            </ul>
+                  </div>
+                        </div>
+                <!-- ngRepeat: (activityCode, activity) in package.activities track by activity.activityCode --> </div>
+                      <!-- end ngRepeat: (packageKey, package) in (packages|orderBy:predicate) track by package.shipmentCode --> 
+                      <!-- 包容器 package_collection end --> 
+                    </div>
+            <!-- 结算行 clearing_line begin --> 
+            <!-- ngIf: !status.loading && !status.empty -->
+            <div class="cc-total ng-scope" my-clearing-line="" ng-if="!status.loading &amp;&amp; !status.empty">
+                      <div class="div-02 cc-total-top " ng-class="{topchange:cart.topchange}">
+                <ul class="fixed fn-nborder">
+                          <li class="li-04">
+                    <dl class="dl-01">
+                              <dt class="dt-01">件数：</dt>
+                              <dd><span data-show="count" ng-bind="cart.nowTotalCount | number:0" class="ng-binding">2</span>件</dd>
+                              <dt class="dt-02">商品总重：</dt>
+                              <dd data-show="kg"><span ng-bind="(cart.nowTotalWeight) | myNumber : 3" class="ng-binding">1</span>kg</dd>
+                              <dt class="dt-03">商品总金额：</dt>
+                              <dd class="red"><em>¥</em><span data-show="amounts" ng-bind="cart.nowTotalPrice | currency:&#39;&#39;" class="ng-binding">198.00</span></dd>
+                              <dt class="dt-04">已优惠：</dt>
+                              <dd class="red">-<em>¥</em><!-- ngIf: cart.nowTotalDiscount>=0 --><span data-show="favorable" ng-if="cart.nowTotalDiscount&gt;=0" ng-bind="cart.nowTotalDiscount | currency:&#39;&#39;" class="ng-binding ng-scope">0.00</span><!-- end ngIf: cart.nowTotalDiscount>=0 --><!-- ngIf: cart.nowTotalDiscount<0 --></dd>
+                              <!-- ngIf: IS_VVIP == 'true' --><!-- ngIf: IS_VVIP == 'true' -->
+                            </dl>
+                  </li>
+                        </ul>
+              </div>
+                      <div class="div-02 cc-total-bot overseas-box" ng-class="{on:flow}">
+                <div class="clearing-hint hqgpay-tip ng-hide" ng-class="{&#39;hqgpay-tip-r&#39;:cart.goOverseasClearing}" ng-show="showMsgBox">
+                          <div class="ch-content">
+                    <div class="bg-t"></div>
+                    <div class="bg-r"></div>
+                    <div class="bg-b"></div>
+                    <div class="bg-l"></div>
+                    <div class="bg-s-1"></div>
+                    <div class="bg-s-2"></div>
+                    <div class="bg-s-3"></div>
+                    <div class="bg-s-4"></div>
+                    <i class="icon-triangle-04"></i>
+                    <div class="ch-block-01 fixed">
+                              <label class="msg_content">您有部分店铺商品总额超过海关限额，是否继续结算其他店铺商品？</label>
+                            </div>
+                    <div class="ch-block-02">
+                              <button class="btn" value="1" ng-click="reselection()">重选商品</button>
+                              <button class="btn  btn-red" value="0" ng-click="goOn()">继续结算</button>
+                            </div>
+                  </div>
+                        </div>
+                <ul class="fixed " ng-class="{ifixcart:flowWidth}">
+                          <li class="li-01"><!-- ngIf: !overseasCart -->
+                    <input ng-if="!overseasCart" type="checkbox" class="all-select ng-scope ng-pristine ng-valid" id="qx-2" ng-model="cart.selectAll" ng-change="selectAll(overseasCart)">
+                    <!-- end ngIf: !overseasCart --><!-- ngIf: overseasCart -->
+                    <label for="qx-2">全选</label>
+                  </li>
+                          <li class="li-02 a-delete"><a ng-href="" ng-click="clearSelected($event,overseasCart)">删除选中的商品</a></li>
+                          <li class="li-03"><a ng-href="" ng-click="clearAll($event,overseasCart)" ng-bind="clearingName" class="ng-binding">清空购物车</a></li>
+                          <!-- ngIf: cart.goFNClearing -->
+                          <li ng-if="cart.goFNClearing" class="li-05 ng-scope" ng-click="submit()"><i class="clearing-total2" data-mask="1" ng-class="{&#39;clearing-total2gray&#39;:cart.selectedClearing == true}"></i></li>
+                          <!-- end ngIf: cart.goFNClearing --><!-- ngIf: cart.goOverseasClearing --><!-- ngIf: cart.doubleClearing --><!-- ngIf: cart.doubleClearing --><!-- ngIf: overseasCart --><!-- ngIf: overseasCart && cart.overseasQty -->
+                          <li class="li-04">
+                    <dl class="dl-02">
+                              <dt>应付金额：</dt>
+                              <dd class="dd-01 red"><em>¥</em><span data-show="amount" ng-bind="cart.nowTotalPayable | currency:&#39;&#39;" class="ng-binding">198.00</span></dd>
+                              <dd class="dd-freight dd-tax">(含运费<em>¥</em><span ng-bind="cart.nowTotalFreight | currency:&#39;&#39;" class="ng-binding">0.00</span><!-- ngIf: cart.overseasQty -->)</dd>
+                              <dd class="dd-freight" ng-class="{&#39;dd-tax&#39;: !cart.goFNClearing,&#39;dd-normal&#39;: !cart.goFNClearing}"><a href="" target="_blank" title="运费说明">运费说明</a><!-- ngIf: cart.overseasQty --></dd>
+                            </dl>
+                  </li>
+                        </ul>
+                <div class="clearing-warn hidden" ng-class="{&#39;hidden&#39;:!cart.isShowScoreMsg}"><span>您的积分不足，当前积分为<em ng-bind="cart.memScore" class="ng-binding"></em>，请修改商品后再结算</span><i class="icon-triangle-01"></i></div>
+              </div>
+                    </div>
+            <!-- end ngIf: !status.loading && !status.empty --> 
+            <!-- 结算行 clearing_line end --> 
+          </div>
+                </div>
+      </div>
+            </div>
+    <div class="clearing-recommend wrapper1190"> 
+              <!-- 为您推荐 --> 
+              <!-- ngIf: specialOfferTips -->
+              <div class="cr-block-01 cr-block-preferbuy ng-scope ng-isolate-scope" my-tab-view="" ng-if="specialOfferTips" data-tips="specialOfferTips" data-type="1" data-selected="&#39;specialOffer&#39;">
+        <div class="cr-title" data-ys="0">
+                  <ul class="fn-tab-nav fn-fl">
+            <!-- ngRepeat: tip in tabData.tips -->
+            <li ng-repeat="tip in tabData.tips" class="ng-scope"><a ng-class="{titleon: tip.id == selected}" ng-href="" ng-click="clickTip(tip.id)" ng-bind="tip.name" class="ng-binding titleon">为您推荐</a></li>
+            <!-- end ngRepeat: tip in tabData.tips -->
+          </ul>
+                  <ul class="fn-slidepage-btn fn-fr">
+            <!-- ngRepeat: (itemId, item) in tabData.list -->
+            <li ng-repeat="(itemId, item) in tabData.list" class="ng-scope"><a ng-class="{on: tabData.listIndex == itemId}" ng-click="tabData.listIndex = itemId" class="on"></a></li>
+            <!-- end ngRepeat: (itemId, item) in tabData.list -->
+          </ul>
+                </div>
+        <div class="cr-list-out ng-isolate-scope" my-slider="" data-data="tabData.data" data-is-show="true" data-ref-data="tabData.refData(list)" data-type="1" data-index="tabData.listIndex" data-show-close-btn="false" data-extra-class="" data-line-size="tabData.lineSize"> <!-- ngIf: showCloseBtn --><!-- ngIf: itemList.length && itemList.length > 1 --><!-- ngIf: itemList.length && itemList.length > 1 -->
+                  <div class="cr-list fixed" ng-class="extraClass" ng-switch="1"><!-- ngSwitchWhen: 2 --><!-- ngSwitchDefault:  -->
+            <div class="slide-wrapper ng-scope" ng-switch-default=""><!-- ngRepeat: list in itemList -->
+                      <ul ng-repeat="list in itemList" ng-show="index == $index" class="ng-scope">
+                <!-- ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0321/201503C210002524/_360571759_80x80.jpg" alt="味聚特红油榨菜 138g/袋" src="images/_360571759_80x80.jpg"></a>
+                          <p><a ng-href="" ng-bind="item.title" class="ng-binding" href="">味聚特红油榨菜 138g/袋</a></p>
+                          <div class="div-01"><!-- ngIf: item.origin != null && item.origin > item.price --><del ng-if="item.origin != null &amp;&amp; item.origin &gt; item.price" class="ng-scope"><em>¥</em><span ng-bind="(item.origin || 0) | currency:&#39;&#39;" class="ng-binding">3.70</span></del><!-- end ngIf: item.origin != null && item.origin > item.price --><em>¥</em><span ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">3.20</span></div>
+                          <button class="btn add2cart" ng-click="addGood(item)">加入购物车</button>
+                        </li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0321/201503C210011954/_095608887_80x80.jpg" alt="红牛维生素功能饮料  250ml/罐" src="images/_095608887_80x80.jpg"></a>
+                          <p><a ng-href="" ng-bind="item.title" class="ng-binding" href="">红牛维生素功能饮料  250ml/罐</a></p>
+                          <div class="div-01"><!-- ngIf: item.origin != null && item.origin > item.price --><del ng-if="item.origin != null &amp;&amp; item.origin &gt; item.price" class="ng-scope"><em>¥</em><span ng-bind="(item.origin || 0) | currency:&#39;&#39;" class="ng-binding">6.50</span></del><!-- end ngIf: item.origin != null && item.origin > item.price --><em>¥</em><span ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">5.80</span></div>
+                          <button class="btn add2cart" ng-click="addGood(item)">加入购物车</button>
+                        </li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0321/201503C210007877/_342625318_80x80.jpg" alt="玉兰油美白清爽型香皂125g/块" src="images/_342625318_80x80.jpg"></a>
+                          <p><a ng-href="" ng-bind="item.title" class="ng-binding" href="">玉兰油美白清爽型香皂125g/块</a></p>
+                          <div class="div-01"><!-- ngIf: item.origin != null && item.origin > item.price --><del ng-if="item.origin != null &amp;&amp; item.origin &gt; item.price" class="ng-scope"><em>¥</em><span ng-bind="(item.origin || 0) | currency:&#39;&#39;" class="ng-binding">7.90</span></del><!-- end ngIf: item.origin != null && item.origin > item.price --><em>¥</em><span ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">6.90</span></div>
+                          <button class="btn add2cart" ng-click="addGood(item)">加入购物车</button>
+                        </li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0321/201503C210005059/_879537904_80x80.jpg" alt="韩国进口 乐天牛奶苏打水  250ml/听" src="images/_879537904_80x80.jpg"></a>
+                          <p><a ng-href="" ng-bind="item.title" class="ng-binding" href="">韩国进口 乐天牛奶苏打水  250ml/听</a></p>
+                          <div class="div-01"><!-- ngIf: item.origin != null && item.origin > item.price --><del ng-if="item.origin != null &amp;&amp; item.origin &gt; item.price" class="ng-scope"><em>¥</em><span ng-bind="(item.origin || 0) | currency:&#39;&#39;" class="ng-binding">6.90</span></del><!-- end ngIf: item.origin != null && item.origin > item.price --><em>¥</em><span ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">4.40</span></div>
+                          <button class="btn add2cart" ng-click="addGood(item)">加入购物车</button>
+                        </li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0729/201507C290000608/_941584230_80x80.png" alt="白猫 威煌速溶高效洗衣粉 1.8kg/袋" src="images/_941584230_80x80.png"></a>
+                          <p><a ng-href="" ng-bind="item.title" class="ng-binding" href="">白猫 威煌速溶高效洗衣粉 1.8kg/袋</a></p>
+                          <div class="div-01"><!-- ngIf: item.origin != null && item.origin > item.price --><em>¥</em><span ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">14.60</span></div>
+                          <button class="btn add2cart" ng-click="addGood(item)">加入购物车</button>
+                        </li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0321/201503C210013380/_222305962_80x80.jpg" alt="龙士达三连格调味盒" src="images/_222305962_80x80.jpg"></a>
+                          <p><a ng-href="" ng-bind="item.title" class="ng-binding" href="">龙士达三连格调味盒</a></p>
+                          <div class="div-01"><!-- ngIf: item.origin != null && item.origin > item.price --><del ng-if="item.origin != null &amp;&amp; item.origin &gt; item.price" class="ng-scope"><em>¥</em><span ng-bind="(item.origin || 0) | currency:&#39;&#39;" class="ng-binding">28.90</span></del><!-- end ngIf: item.origin != null && item.origin > item.price --><em>¥</em><span ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">18.90</span></div>
+                          <button class="btn add2cart" ng-click="addGood(item)">加入购物车</button>
+                        </li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0907/201509C070000688/_925477310_80x80.jpg" alt="奇智创意积木 18*12*5cm" src="images/_925477310_80x80.jpg"></a>
+                          <p><a ng-href="" ng-bind="item.title" class="ng-binding" href="">奇智创意积木 18*12*5cm</a></p>
+                          <div class="div-01"><!-- ngIf: item.origin != null && item.origin > item.price --><em>¥</em><span ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">13.80</span></div>
+                          <button class="btn add2cart" ng-click="addGood(item)">加入购物车</button>
+                        </li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0624/201506C240000190/201506C240000268_413073755_80x80.jpg" alt="伶俐 蝴蝶结头扣" src="images/201506C240000268_413073755_80x80.jpg"></a>
+                          <p><a ng-href="" ng-bind="item.title" class="ng-binding" href="">伶俐 蝴蝶结头扣</a></p>
+                          <div class="div-01"><!-- ngIf: item.origin != null && item.origin > item.price --><em>¥</em><span ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">15.00</span></div>
+                          <button class="btn add2cart" ng-click="addGood(item)">加入购物车</button>
+                        </li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0821/201508C210000652/_411469811_80x80.jpg" alt="贝亲 自然实感宽口径安全硅胶奶嘴L 单个盒装 BA60" src="images/_411469811_80x80.jpg"></a>
+                          <p><a ng-href="" ng-bind="item.title" class="ng-binding" href="">贝亲 自然实感宽口径安全硅胶奶嘴L 单个盒装 BA60</a></p>
+                          <div class="div-01"><!-- ngIf: item.origin != null && item.origin > item.price --><del ng-if="item.origin != null &amp;&amp; item.origin &gt; item.price" class="ng-scope"><em>¥</em><span ng-bind="(item.origin || 0) | currency:&#39;&#39;" class="ng-binding">32.00</span></del><!-- end ngIf: item.origin != null && item.origin > item.price --><em>¥</em><span ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">19.90</span></div>
+                          <button class="btn add2cart" ng-click="addGood(item)">加入购物车</button>
+                        </li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0325/201503C250028410/_454062165_80x80.png" alt="硕美科 （Somic） ST-458 耳机 （白色）" src="images/_454062165_80x80.png"></a>
+                          <p><a ng-href="" ng-bind="item.title" class="ng-binding" href="">硕美科 （Somic） ST-458 耳机 （白色）</a></p>
+                          <div class="div-01"><!-- ngIf: item.origin != null && item.origin > item.price --><del ng-if="item.origin != null &amp;&amp; item.origin &gt; item.price" class="ng-scope"><em>¥</em><span ng-bind="(item.origin || 0) | currency:&#39;&#39;" class="ng-binding">38.90</span></del><!-- end ngIf: item.origin != null && item.origin > item.price --><em>¥</em><span ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">29.00</span></div>
+                          <button class="btn add2cart" ng-click="addGood(item)">加入购物车</button>
+                        </li>
+                <!-- end ngRepeat: item in list -->
+              </ul>
+                      <!-- end ngRepeat: list in itemList --></div>
+          </div>
+                </div>
+      </div>
+              <!-- end ngIf: specialOfferTips --> 
+              <!-- end为您推荐 --> 
+              <!-- 猜你喜欢 --> 
+              <!-- ngIf: recommendTips -->
+              <div class="cr-block-02 ng-scope ng-isolate-scope" my-tab-view="" ng-if="recommendTips" data-tips="recommendTips" data-type="2" data-selected="&#39;recommend&#39;" data-extra-class="goods-youlike">
+        <div class="cr-title" data-ys="0">
+          <ul class="fn-tab-nav fn-fl">
+            <!-- ngRepeat: tip in tabData.tips -->
+            <li ng-repeat="tip in tabData.tips" class="ng-scope"><a ng-class="{titleon: tip.id == selected}" ng-href="" ng-click="clickTip(tip.id)" ng-bind="tip.name" class="ng-binding titleon">猜您喜欢</a></li>
+            <!-- end ngRepeat: tip in tabData.tips -->
+          </ul>
+          <ul class="fn-slidepage-btn fn-fr">
+            <!-- ngRepeat: (itemId, item) in tabData.list -->
+            <li ng-repeat="(itemId, item) in tabData.list" class="ng-scope"><a ng-class="{on: tabData.listIndex == itemId}" ng-click="tabData.listIndex = itemId" class="on"></a></li>
+            <!-- end ngRepeat: (itemId, item) in tabData.list -->
+            <li ng-repeat="(itemId, item) in tabData.list" class="ng-scope"><a ng-class="{on: tabData.listIndex == itemId}" ng-click="tabData.listIndex = itemId"></a></li>
+            <!-- end ngRepeat: (itemId, item) in tabData.list -->
+            <li ng-repeat="(itemId, item) in tabData.list" class="ng-scope"><a ng-class="{on: tabData.listIndex == itemId}" ng-click="tabData.listIndex = itemId"></a></li>
+            <!-- end ngRepeat: (itemId, item) in tabData.list -->
+            <li ng-repeat="(itemId, item) in tabData.list" class="ng-scope"><a ng-class="{on: tabData.listIndex == itemId}" ng-click="tabData.listIndex = itemId"></a></li>
+            <!-- end ngRepeat: (itemId, item) in tabData.list -->
+          </ul>
+        </div>
+        <div class="cr-list-out ng-isolate-scope" my-slider="" data-data="tabData.data" data-is-show="true" data-ref-data="tabData.refData(list)" data-type="2" data-index="tabData.listIndex" data-show-close-btn="false" data-extra-class="goods-youlike" data-line-size="tabData.lineSize"> <!-- ngIf: showCloseBtn --><!-- ngIf: itemList.length && itemList.length > 1 --><a class="fn-slide-btn fn-slideprev-btn ng-scope" ng-click="showPrev()" ng-if="itemList.length &amp;&amp; itemList.length &gt; 1" href=""></a><!-- end ngIf: itemList.length && itemList.length > 1 --><!-- ngIf: itemList.length && itemList.length > 1 --><a class="fn-slide-btn fn-slidenext-btn ng-scope" ng-click="showNext()" ng-if="itemList.length &amp;&amp; itemList.length &gt; 1" href=""></a><!-- end ngIf: itemList.length && itemList.length > 1 -->
+           <div class="cr-list fixed goods-youlike" ng-class="extraClass" ng-switch="2"><!-- ngSwitchWhen: 2 -->
+            <div class="slide-wrapper ng-scope" ng-switch-when="2"><!-- ngRepeat: list in itemList -->
+              <ul ng-repeat="list in itemList" ng-show="index == $index" class="ng-scope">
+                <!-- ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2016/0126/201601C260000163/201601C260000273_125142069_400x400.jpg" alt="one-xuan 雪纺衫女长袖春装新款韩版修身中长款蕾丝打底衫秋冬上衣潮 FG339-8802" src="images/201601C260000273_125142069_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">one-xuan 雪纺衫女长袖春装新款韩版修身中长款蕾丝打底衫秋冬上衣潮 FG339-8802</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">118.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0622/201506C220000129/201506C220000191_662085078_400x400.jpg" alt="茜舞 漏肩修身印花吊带背心打底衫上衣潮 17926" src="images/201506C220000191_662085078_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">茜舞 漏肩修身印花吊带背心打底衫上衣潮 17926</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">99.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0917/201509C170000310/201509C170000416_350400426_400x400.jpg" alt="BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395" src="images/201509C170000416_350400426_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">59.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0917/201509C170000310/201509C170000417_072433318_400x400.jpg" alt="BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395" src="images/201509C170000417_072433318_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">59.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2016/0111/201601C110000174/201601C110000207_140241176_400x400.jpg" alt="轩品媛 百搭时尚女装性感透肉女潮蕾丝打底衫 1300103" src="images/201601C110000207_140241176_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">轩品媛 百搭时尚女装性感透肉女潮蕾丝打底衫 1300103</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">119.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+              </ul>
+                      <!-- end ngRepeat: list in itemList -->
+             <ul ng-repeat="list in itemList" ng-show="index == $index" class="ng-scope ng-hide">
+                <!-- ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0917/201509C170000310/201509C170000418_429609537_400x400.jpg" alt="BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395" src="images/201509C170000418_429609537_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">59.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2016/0205/201602C050000009/201602C050000009_616481363_400x400.jpg" alt="one-xuan 春装新款女装打底衫圆领大码宽松蕾丝上衣长袖雪纺衫潮 FG466-1912" src="images/201602C050000009_616481363_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">one-xuan 春装新款女装打底衫圆领大码宽松蕾丝上衣长袖雪纺衫潮 FG466-1912</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">108.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/1106/201511C060000558/201511C060000462_617078313_400x400.jpg" alt="雅奴天使 秋冬新款女装时尚修身印花上衣长袖蕾丝气质打底衫 DH47804" src="images/201511C060000462_617078313_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">雅奴天使 秋冬新款女装时尚修身印花上衣长袖蕾丝气质打底衫 DH47804</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">135.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0917/201509C170000310/201509C170000413_148363583_400x400.jpg" alt="BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395" src="images/201509C170000413_148363583_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">59.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0824/201508C240000951/201508C240000982_370274796_400x400.jpg" alt="海贝 彼得潘领纯色长袖修身显瘦蕾丝雪纺衫  E4R09B126211" src="images/201508C240000982_370274796_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">海贝 彼得潘领纯色长袖修身显瘦蕾丝雪纺衫  E4R09B126211</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">109.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+              </ul>
+                      <!-- end ngRepeat: list in itemList -->
+              <ul ng-repeat="list in itemList" ng-show="index == $index" class="ng-scope ng-hide">
+                <!-- ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0917/201509C170000310/201509C170000414_061153236_400x400.jpg" alt="BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395" src="images/201509C170000414_061153236_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">59.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0813/201508C130000719/201508C130000164_828293289_400x400.jpg" alt="百依恋歌 韩版新款显瘦蕾丝女士打底衫雪纺网纱小衫上衣女" src="images/201508C130000164_828293289_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">百依恋歌 韩版新款显瘦蕾丝女士打底衫雪纺网纱小衫上衣女</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">138.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2016/0228/201602C280000131/201602C280000296_194616647_400x400.jpg" alt="one-xuan 春装新款娃娃领雪纺衫 882D108" src="images/201602C280000296_194616647_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">one-xuan 春装新款娃娃领雪纺衫 882D108</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">99.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2016/0111/201601C110000174/201601C110000208_851241851_400x400.jpg" alt="轩品媛 百搭时尚女装性感透肉女潮蕾丝打底衫 1300103" src="images/201601C110000208_851241851_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">轩品媛 百搭时尚女装性感透肉女潮蕾丝打底衫 1300103</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">119.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2016/0127/201601C270000288/201601C270000241_734435526_400x400.jpg" alt="one-xuan 春装新款女装韩版宽松雪纺衫中长款蕾丝打底衫七分袖蕾丝衫上衣潮 FG339-8805" src="images/201601C270000241_734435526_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">one-xuan 春装新款女装韩版宽松雪纺衫中长款蕾丝打底衫七分袖蕾丝衫上衣潮 FG339-8805</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">118.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+              </ul>
+              <!-- end ngRepeat: list in itemList -->
+              <ul ng-repeat="list in itemList" ng-show="index == $index" class="ng-scope ng-hide">
+                <!-- ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2016/0114/201601C140005547/201601C140000446_299122182_400x400.jpg" alt="茜舞 2016春装新款韩版黑白条纹女士长袖雪纺衬衫 35C157" src="images/201601C140000446_299122182_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">茜舞 2016春装新款韩版黑白条纹女士长袖雪纺衬衫 35C157</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">129.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0917/201509C170000310/201509C170000419_109881947_400x400.jpg" alt="BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395" src="images/201509C170000419_109881947_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">59.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0917/201509C170000310/201509C170000411_873017718_400x400.jpg" alt="BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395" src="images/201509C170000411_873017718_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">BRIOSO 新款宽松韩版短袖上衣翻领通勤款欧美范大码女装雪纺衫衬衣 WE12395</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">59.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2016/0220/201602C200000073/201602C200000147_390710137_400x400.jpg" alt="one-xuan 款韩版V领大码修身蕾丝拼接网纱打底衫 2072-G337" src="images/201602C200000147_390710137_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">one-xuan 款韩版V领大码修身蕾丝拼接网纱打底衫 2072-G337</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">139.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+                <li ng-repeat="item in list" class="ng-scope"><a ng-href="" href=""><img ng-src="//img.tp-shop.cn/C/item/2015/0325/201503C250022716/201503C250002345_755030071_400x400.jpg" alt="轩品媛 新款通勤镂空蕾丝衫 荷叶边雪纺衫T恤 LMJ886" src="images/201503C250002345_755030071_400x400.jpg"><span class="name ng-binding" ng-bind="item.title">轩品媛 新款通勤镂空蕾丝衫 荷叶边雪纺衫T恤 LMJ886</span><span class="price"><em>¥</em><b ng-bind="(item.price || 0) | currency:&#39;&#39;" class="ng-binding">139.00</b></span></a></li>
+                <!-- end ngRepeat: item in list -->
+              </ul>
+            <!-- end ngRepeat: list in itemList --></div>
+            <!-- ngSwitchDefault:  --></div>
+          </div>
+      </div>
+              <!-- end ngIf: recommendTips --> 
+            </div>
+    <!-- other goods --> 
+  </div>
+</div>
+<include file="Public/min-footer" />
+<div class="clearing-hint ng-isolate-scope ng-hide" ng-show="show" ng-style="{right: offset.right, bottom: offset.bottom}" my-del-confirm-box="" data-type="1" style="right: 0px; bottom: 0px;">
+          <div class="ch-content">
+    <div class="bg-t"></div>
+    <div class="bg-r"></div>
+    <div class="bg-b"></div>
+    <div class="bg-l"></div>
+    <div class="bg-s-1"></div>
+    <div class="bg-s-2"></div>
+    <div class="bg-s-3"></div>
+    <div class="bg-s-4"></div>
+    <i class="icon-triangle-04"></i>
+    <div class="ch-block-01 fixed">
+              <label class="msg_content ng-binding"></label>
+              <!-- ngIf: CONFIRM_BOX_TYPE.CHANGE_ACTIVITY == type --></div>
+    <div class="ch-block-02">
+              <button class="btn btn-red btn_confirm" ng-click="confirm($event)">确认</button>
+              <button class="btn btn_cancel" ng-click="cancel()">取消</button>
+            </div>
+  </div>
+        </div>
+<div class="chg-sale-cont ng-scope ng-hide" style="display: block; left: 0px; top: 0px;" ng-show="isShow" ng-style="{left: offset.left, top: offset.top}" my-activity-selector="" data-type="2"><!-- ngRepeat: (key, val) in activityList --></div>
+<div ng-show="show" my-goods-selector="" class="ng-isolate-scope ng-hide">
+          <div class="box-container" style="position: fixed; z-index: 1011; padding: 0px; margin: 0px; left: 0px; top: 0px; background-color: rgb(255, 255, 255);" ng-style="{left: style.left, top: style.top}">
+    <div class="fn-sizeselect-box">
+              <div class="mk-title">
+        <h3>请选择规格属性</h3>
+        <i data-x="1" title="关闭" ng-click="cancel()">x</i></div>
+              <!-- ngRepeat: (specKey, specInfo) in data.data --><a class="fn-btn-carconfirm" ng-href="" ng-click="confirm()">确定</a></div>
+  </div>
+          <div style="z-index: 1000; border: none; margin: 0; padding: 0; width: 100%; height: 100%; top: 0; left: 0; FILTER: alpha(opacity=60); opacity: 0.6; cursor: default; position: fixed; background-color: rgb(0, 0, 0);"></div>
+        </div>
+<div ng-class="{hidden: hide}" class="hidden ng-isolate-scope" my-submit-confirm=""> <!-- ngIf: type == TYPE.ALERT --><!-- ngIf: type == TYPE.WARNING -->
+          <div class="fn-abnormal-alert ng-scope" ng-if="type == TYPE.WARNING" style="z-index: 9999; left: 0px; top: 100px;" ng-style="{left: offset.left, top: offset.top}">
+    <p>您的：</p>
+    <!-- ngRepeat: item in items -->
+    <p><strong>发生变化，请重新确认！</strong></p>
+  </div>
+          <!-- end ngIf: type == TYPE.WARNING -->
+          <div ng-click="hidden($event)" style="z-index: 1000; border: none; margin: 0; padding: 0; width: 100%; height: 100%; top: 0; left: 0; FILTER: alpha(opacity=60); opacity: 0.6; cursor: default; position: fixed; background-color: rgb(0, 0, 0);"></div>
+        </div>
+<div class="hidden ng-isolate-scope" ng-class="{hidden: hideLoading}" my-loading="">
+          <div class="loading" style="z-index: 9999; top: 0px; left: 0px;" ng-style="{top: offset.top, left: offset.left}"></div>
+          <div style="z-index: 1000; border: none; margin: 0; padding: 0; width: 100%; height: 100%; top: 0; left: 0; FILTER: alpha(opacity=60); opacity: 0.6; cursor: default; position: fixed; background-color: rgb(0, 0, 0);"></div>
+        </div>
+<div id="UniSwfStore_uniswfstore_0" style="position: absolute; top: -2000px; left: -2000px;">
+          <object height="1" width="1" codebase="https://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab" id="UniSwfStore_uniswfstore_1" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+    <param value="http://sit.gentags.net/adagent/gunic.swf" name="movie">
+    <param value="logfn=UniSwfStore.uniswfstore.log&amp;" name="FlashVars">
+    <param value="always" name="allowScriptAccess">
+    <embed height="1" align="middle" width="1" pluginspage="https://www.macromedia.com/go/getflashplayer" flashvars="logfn=UniSwfStore.uniswfstore.log&amp;" type="application/x-shockwave-flash" allowscriptaccess="always" quality="high" loop="false" play="true" name="UniSwfStore_uniswfstore_1" bgcolor="#ffffff" src="http://sit.gentags.net/adagent/gunic.swf">
+  </object>
+</div>
+<script type="text/javascript">
+$('.clearing-total2').click(function(){
+    layer.open({
+        type: 2,
+        title: '<b>登TPshop网</b>',
+        skin: 'layui-layer-rim',
+        shadeClose: true,
+        shade: 0.5,
+        area: ['470px', '450px'],
+        content: "{:U('Home/User/pop_login')}", 
+    });
+})
+</script>
+</body>
+</html>

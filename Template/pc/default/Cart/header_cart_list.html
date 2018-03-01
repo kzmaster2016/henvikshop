@@ -1,0 +1,44 @@
+<if condition="count($cartList) eq 0">
+    <div class="micart-about">
+        <span class="micart-xg">Your Carts is Empty，Continue Shopping！</span>
+    </div>
+</if>
+<div class="commod">
+<ul>
+<foreach name="cartList" item="v"  key="k">
+    <li class="goods">
+        <div>
+            <div class="p-img">
+                <a href="">
+                    <img src="{$v.goods_id|goods_thum_images=80,80}" alt="">
+                </a>
+             </div>
+             <div class="p-name">
+                <a href="">
+                    <span class="p-slogan">{$v[goods_name]}</span>
+                    <span class="p-promotions hide"></span>
+                </a>
+             </div>
+             <div class="p-status">
+                <div class="p-price">
+                    <b>$&nbsp;{$v[member_goods_price]}</b>
+                    <em>x</em>
+                    <span>{$v[goods_num]}</span>
+                </div>
+                <div class="p-tags"></div>
+             </div>
+             <!--
+             <a href="" class="icon-minicart-del" title="删除">删除</a>
+               -->
+        </div>
+    </li>
+ </foreach>   							
+</ul>
+</div>
+<div class="settle">
+    <p>All<em>{$cart_total_price[num]}</em>Pieces Goods，total<b>$&nbsp;{$cart_total_price[total_fee]}</b></p>
+    <a class="js-button" href="{:U('Home/Cart/cart')}">To Checkout</a>
+</div>
+<script>
+   $(".shopping-num > em").text('{$cart_total_price[anum]}'); // 购物车的总数量
+</script>

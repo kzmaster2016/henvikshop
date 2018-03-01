@@ -1,0 +1,23 @@
+<div class="sideBar_nav">
+<dl>
+  <dt>交易中心 </dt>
+  <dd><i class="icon_square"></i><a class="target_no <if condition="strtolower(ACTION_NAME)  eq 'order_list'">active</if>" href="{:U('Home/User/order_list')}">我的订单</a></dd>
+  <dd><i class="icon_square"></i><a class="target_no <if condition="strtolower(ACTION_NAME)  eq 'comment'">active</if>" href="{:U('Home/User/comment')}">我的评价</a></dd>
+  <dd><i class="icon_square"></i><a class="target_no <if condition="strtolower(ACTION_NAME)  eq 'coupon'">active</if>" href="{:U('Home/User/coupon')}">优惠券</a></dd>
+  <dd><i class="icon_square"></i><a class="target_no <if condition="strtolower(ACTION_NAME)  eq 'account'">active</if>" href="{:U('Home/User/account')}">我的积分</a></dd>
+  <dd><i class="icon_square"></i><a class="target_no <if condition="strtolower(ACTION_NAME)  eq 'goods_collect'">active</if>" href="{:U('Home/User/goods_collect')}">我的收藏</a></dd>
+  <dd><i class="icon_square"></i><a class="target_no <if condition="strtolower(ACTION_NAME)  eq 'withdrawals'">active</if>" href="{:U('User/withdrawals')}">申请提现</a></dd>  
+</dl>
+<dl>
+  <dt>个人中心</dt>
+  <dd><i class="icon_square"></i><a class="target_no <if condition="strtolower(ACTION_NAME)  eq 'info'">active</if>" href="{:U('Home/User/info')}">个人信息</a></dd>
+  <dd><i class="icon_square"></i><a class="target_no <if condition="strtolower(ACTION_NAME)  eq 'message_notice'">active</if>" href="{:U('Home/User/message_notice')}">消息通知</a></dd>
+  <dd><i class="icon_square"></i><a class="target_no <if condition="strtolower(ACTION_NAME)  eq 'address_list'">active</if>" href="{:U('Home/User/address_list')}">地址管理</a></dd>
+  <dd><i class="icon_square"></i><a class="target_no <if condition="strtolower(ACTION_NAME)  eq 'safety_settings'">active</if>" href="{:U('Home/User/safety_settings')}">安全设置</a></dd>
+  <dd><i class="icon_square"></i><a class="target_no <if condition="strtolower(ACTION_NAME)  eq 'mywallet'">active</if>" href="{:U('Home/User/recharge')}">我的余额</a></dd>
+</dl>
+<dl class="service_center">
+  <dt>服务中心</dt>
+  <dd><i class="icon_square"></i><a class="target_no <if condition="strtolower(ACTION_NAME)  eq 'return_goods_list'">active</if>" href="{:U('Home/User/return_goods_list')}">退货管理</a></dd>
+</dl>
+</div>

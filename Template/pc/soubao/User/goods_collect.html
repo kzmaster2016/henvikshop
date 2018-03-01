@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>商品收藏-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+</head>
+<body> 
+<!-- 头部-s -->
+<include file="User/header" />
+<!-- 头部-e -->  
+<link rel="stylesheet" href="__STATIC__/css/favorite.css">
+
+<div class="wrap">
+  <div class="bread_crumbs"> <a href="{:U('Home/User/index')}" class="crumbs_font">我的TPshop</a>&gt;<span class="color">我的收藏</span></div>
+  <!--菜单--> 
+  <include file="User/menu" /> 
+  <!--菜单-->     
+  <!--侧边导航栏结束-->
+   <div class="col_main">
+    <div class="main favorites"> 
+      <!-- themes star -->
+      <div class="themes_title">
+        <h3>我的收藏</h3>
+      </div>
+      <!-- 收藏商品  start -->
+      <div class="ui_tab myfavorites">    
+      
+<if condition="1">      
+      <!--有收藏商品 start-->
+        <div class="ui_tab_content"> 
+          <!-- Items Collect star -->
+          <div id="myFavorites" style="display: block;" class="ui_panel">  
+            <div class="favorites_list">   
+              <div class="favorites_title">
+                <ul>
+                  <li class="th_01">商品</li>
+                  <li class="th_02">单价</li>
+                  <li class="th_03">收藏时间</li>
+                  <li class="th_04">操作</li>
+                </ul>
+              </div>
+              <!-- list title end -->                             
+              <div id="favList" class="favorites_content">
+              <volist name="lists" id="list">
+                <ul class="clearfix">
+                  <li class="td_01">
+                    <div class="item clearfix">
+                      <div class="item_img"> <a target="_blank" href="{:U('Home/Goods/goodsInfo',array('id'=>$list['goods_id']))}"><img width="80" height="80" alt="" src="{$list.original_img}"></a></div>
+                      <div class="item_des">
+                          <a target="_blank" class="order_name" href="{:U('Home/Goods/goodsInfo',array('id'=>$list['goods_id']))}">{$list.goods_name}</a>
+                          <span class="order_time"></span> 
+                      </div>
+                    </div>
+                  </li>
+                  <li class="td_02 available"> <em class="rmb">￥</em>{$list.shop_price}</li>
+                  <li class="td_03">{$list.add_time|date="Y-m-d",###}</li>
+                  <li class="td_04 last"> 
+                      <a class="j_add_sing btn_add target_no" href="{:U('Home/Goods/goodsInfo',array('id'=>$list['goods_id']))}">去购买</a> 
+                      <a data-attr="0" class="d_del_sing btn_delete target_no" href="{:U('Home/User/del_goods_collect',array('id'=>$list['collect_id']))}">删除</a> 
+                  </li>
+                </ul>
+                </volist>
+              </div>
+              
+              <div class="operating fixed" id="bottom">                
+                <!-- page next star -->
+                <div class="fn_page clearfix">
+                  {$page}
+                </div>
+                <!-- page next end --> 
+              </div> 
+            </div>
+          </div>
+        </div>
+      <!--有收藏商品 end-->        
+<else />        
+<!--无收藏商品时 start-->
+        <div class="no_favorites" style="display: block;">暂无收藏</div>
+<!--无收藏商品时 end -->
+</if>        
+      </div>
+      <!-- col main end --> 
+    </div>
+  </div>
+</div>
+ 
+<div style="clear: both;"></div>
+<include file="User/footer" />
+</body>
+</html>

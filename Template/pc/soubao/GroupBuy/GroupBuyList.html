@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>团购活动-{$tpshop_config['shop_info_store_title']}</title>
+<meta http-equiv="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<link rel="stylesheet" href="__STATIC__/css/promoteList.css" type="text/css">
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/pc_common.js"></script>
+</head>
+<body>
+<!--------头部开始-------------->
+<include file="Public/header" />
+<!--------头部结束-------------->
+ 
+<!--------促销列表------------->
+ 
+<body>
+<div class="dircontent">
+    <div class="sort container">
+      <div class="berserk clearfix">
+		<script>
+        // 倒计时
+        function GetRTime2(){
+            //var text = GetRTime('2016/02/27 17:34:00');
+           <foreach name="list" item="v" key="k" >			
+            var text{$v[goods_id]} = GetRTime('{$v.end_time|date="Y/m/d H:i:s",###}');								
+            $("#surplus_text{$v[goods_id]}").text(text{$v[goods_id]});
+		   </foreach>
+        }
+        setInterval(GetRTime2,1000);
+    </script>
+      <foreach name="list" item="v" key="k" >
+        <div class="berserk-item scale" id="zxmp_32268" data-fixsite="1" data-activityid="32268" isstarted="true" data-starttime="1456365600000" data-endtime="1456797599000" data-couponid="321844" data-total-count="1" data-total-page="4" data-current-page="1">
+          <div class="berserk-pic"> 
+              <a href="{:U('/Home/GroupBuy/goodsInfo',array('id'=>$v[goods_id]))}" target="_blank"> 
+	              <img  src="{$v.goods_id|goods_thum_images=250,250}"  class="scale-img"> 
+              </a>
+            <div class="time">
+              <div class="time-bg"> <i class="icon sprite"></i> </div>
+              <div class="time-txt">&nbsp;&nbsp;剩余：<i class="sprite" id="surplus_text{$v[goods_id]}">2天18时6分14秒</i></div>
+            </div>
+          </div>
+          <div class="berserk-info info">
+            <div class="info-txt">
+              <h4 class="discountstr"><strong>{$v[groupbuy_rebate]}</strong>折起</h4>
+              <p class="saleNum">{$v[virtual_num] + $v[buyer_count]}人参团</p>
+            </div>
+            <div class="info-logo"> 
+              <a href="javascript:void(0);" target="_blank">
+              <p class="title">{$v[groupbuy_name]|getSubstr=0,35}</p>
+              <p class="info"> 限购{$v[buy_limit]} </p>
+              </a> </div>
+          </div>
+        </div>
+        </foreach>
+                
+      </div>
+    </div>
+</div>
+
+<!--------促销列表 end------------->
+<!--------底部banner-开始-------------->
+<!--------底部banner-结束-------------->
+
+<!--------footer-开始-------------->
+<include file="Public/footer" />
+<!--------footer-结束-------------->
+</body>
+</html>
