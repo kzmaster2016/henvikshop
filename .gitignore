@@ -1,6 +1,7 @@
 backup
 Install
 Application/Runtime
+Application/Common/Conf/db.php
 Public/upload
 Template/pc/soubao
 paypal_api.txt
