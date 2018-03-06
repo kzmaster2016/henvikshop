@@ -53,7 +53,10 @@ em,i{font-style:normal}
 .t1font span{ background:url(../images/t2.png) no-repeat;position: absolute;margin-top: 13px;width: 7px;height: 4px;line-height: 0;background-position: -34px 0; margin-left:3px}
 .t1font a:hover span{background-position: 0px 0;}
 .t1font a:hover{color:#fff;}
+.site-topbar .social-list{overflow: hidden;margin: 2px 0 0;}
+.site-topbar .social-list li{line-height: 0;margin-right: 5px;}
 .t1-l-ul{float: left;}
+.t1-l-ul li{float: left;}
 .t1-r-ul{float:right; }
 .logon{}
 .about{ border:1px solid #ededed; position:absolute; width:60px; left:-11px; display:none;background-color:#fff;}
