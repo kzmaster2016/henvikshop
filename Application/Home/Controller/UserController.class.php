@@ -25,7 +25,7 @@ class UserController extends BaseController {
         	$this->assign('user_id',$this->user_id);
         }else{
         	$nologin = array(
-        			'login','pop_login','do_login','logout','verify','set_98-pwd','finished',
+        			'login','pop_login','do_login','logout','verify','set_pwd','finished',
         			'verifyHandle','reg','send_sms_reg_code','identity','check_validate_code',
         			'forget_pwd','check_captcha','check_username','send_validate_code','facebookLogin',
         	);
@@ -107,7 +107,7 @@ class UserController extends BaseController {
 
     public function pop_login(){
     	if($this->user_id > 0){
-    		header("Location: ".U('Home/User/Index'));
+    		header("Location: ".U('Home/User/index'));
     	}
         $referurl = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : U("Home/User/index");
         $this->assign('referurl',$referurl);
@@ -757,13 +757,13 @@ class UserController extends BaseController {
     	if(empty($check)){
     		header("Location:".U('Home/User/forget_pwd'));
     	}elseif($check['is_check']==0){
-    		$this->error('验证码还未验证通过',U('Home/User/forget_pwd'));
+    		$this->error('The authentication code has not been verified yet',U('Home/User/forget_pwd'));
     	}    	
     	if(IS_POST){
     		$password = I('post.password');
     		$password2 = I('post.password2');
     		if($password2 != $password){
-    			$this->error('两次密码不一致',U('Home/User/forget_pwd'));
+    			$this->error('confirm password is not right',U('Home/User/forget_pwd'));
     		}  		
     		if($check['is_check']==1){
     			//$user = get_user_info($check['sender'],1);
@@ -772,7 +772,7 @@ class UserController extends BaseController {
     			session('validate_code',null);
     			header("Location:".U('Home/User/finished'));
     		}else{
-    			$this->error('验证码还未验证通过',U('Home/User/forget_pwd'));
+    			$this->error('The authentication code has not been verified yet',U('Home/User/forget_pwd'));
     		}
     	}
     	$this->display();

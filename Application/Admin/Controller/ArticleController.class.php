@@ -79,6 +79,32 @@ class ArticleController extends BaseController {
         $this->initEditor();
         $this->display();
     }
+
+    public function email(){
+        $this->initEditor();
+        $this->display();
+    }
+
+    //发送测试邮件
+    public function send_email(){
+        $param = I('post.');
+        $target_items = explode(PHP_EOL, $param['target']);        
+        foreach ($target_items as $key => $val)  // 去除空格
+        {        
+            $val = trim($val);
+            if(empty($val)) 
+                unset($target_items[$key]);
+            else                     
+                $target_items[$key] = $val;
+        }
+
+        // tpCache($param['inc_type'],$param);
+        if(send_templ_email($param['user'].'@henvik.com',$param['password'],$target_items,$param['title'],'welcome to henvik shop!<br/>'.$param['content'])){
+            exit(json_encode(1));
+        }else{
+            exit(json_encode(0));
+        }
+    }
     
     
     /**

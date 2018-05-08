@@ -6,11 +6,9 @@ return array(
     
     'LOAD_EXT_FILE' =>'common',//加载公共函数 
     'AUTH_CODE' => "TPSHOP", //安装完毕之后不要改变，否则所有密码都会出错
-    //'URL_CASE_INSENSITIVE' => false, //URL大小写不敏感
     'LOAD_EXT_CONFIG'=>'db,route', // 加载数据库配置文件
     
-    'DATA_CACHE_TIME' => 60,
-    
+    'DATA_CACHE_TIME' => 60, 
     //'URL_MODEL'=>2, // 如果需要 隐藏 index.php  打开这行"URL_MODEL"注释 同时在apache环境下 开启 伪静态模块，  如果在nginx 下需要另外配置，参考thinkphp官网手册
     /*
      * RBAC认证配置信息
@@ -35,10 +33,10 @@ return array(
     'RBAC_USER_TABLE'           => 'think_role_user',
     'RBAC_ACCESS_TABLE'         => 'think_access',
     'RBAC_NODE_TABLE'           => 'think_node',
-    'SHOW_PAGE_TRACE'           =>0,         //显示调试信息
+    'SHOW_PAGE_TRACE'           => 0,         //显示调试信息
     //'RBAC_ERROR_PAGE'         => '/Public/tp404.html',
     //'ERROR_PAGE'=>'/Index/Index/error_page.html',
-    'ERROR_PAGE'=>'/index.php/Home/Tperror/tp404.html',    
+    // 'ERROR_PAGE'=>'/index.php/Home/Tperror/tp404.html',    
     // 表单令牌验证相关的配置参数
     'TOKEN_ON'      =>    true,  // 是否开启令牌验证 默认关闭
     'TOKEN_NAME'    =>    '__hash__',    // 令牌验证的表单隐藏字段名称，默认为__hash__
@@ -130,4 +128,5 @@ return array(
      */
     'SPHINX_HOST'         =>      '127.0.0.1',
     'SPHINX_PORT'         =>      '9312',
+    'SHOW_ERROR_MSG'        =>  true,
 );

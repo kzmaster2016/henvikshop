@@ -213,7 +213,8 @@ function send_email($to,$subject='',$content=''){
     //端口 - likely to be 25, 465 or 587
     $mail->Port = $config['smtp_port'];
 	
-	if($mail->Port === 465) $mail->SMTPSecure = 'ssl';// 使用安全协议
+	// if($mail->Port === 465) 
+    $mail->SMTPSecure = 'ssl';// 使用安全协议
     //Whether to use SMTP authentication
     $mail->SMTPAuth = true;
     //用户名

@@ -78,9 +78,9 @@ header:after{ content:""; clear:both; display:block}
 .logo{padding-top:20px; width:345px; float:left}
 .searchBar{float:left; padding:40px 7px 15px 0;}
 .searchBar-form {width: 408px;   overflow:hidden; }
-.text{ width:335px; height: 29px;line-height: 28px;padding-left: 5px;float: left; border:1px solid #337ab7;border-top-left-radius:2px;border-bottom-left-radius:2px; font-family: 'Tahoma',\5FAE\8F6F\96C5\9ED1;}
+.text{ width:335px; height: 29px;line-height: 28px;padding-left: 5px;float: left; border:1px solid #b1b2b3;border-top-left-radius:2px;border-bottom-left-radius:2px; font-family: 'Tahoma',\5FAE\8F6F\96C5\9ED1;}
 .text:focus{ outline:none}
-.searchBar-form .button {width: 62px; height: 31px;float:left; cursor: pointer;border:1px solid #337ab7; border-top-right-radius:2px;border-bottom-right-radius:2px;text-indent: 500px;  background: #337ab7 url(../images/tips/icon-search_2.png) center center no-repeat;background-size: 20px; font-size: 14px;color: #FFF;}
+.searchBar-form .button {width: 62px; height: 31px;float:left; cursor: pointer;border:1px solid #b1b2b3; border-top-right-radius:2px;border-bottom-right-radius:2px;text-indent: 500px;  background: #b1b2b3 url(../images/tips/icon-search_2.png) center center no-repeat;background-size: 20px; font-size: 14px;color: #FFF;}
 .searchBar-form .button:hover{opacity: 0.9;}
 .searchBar-hot{ width:365px;padding: 3px 0 0 1px; white-space: nowrap; }
 .searchBar-hot b{font-weight: 400;color: #999;margin-right: 4px;line-height: 1.5; font-size:12px}

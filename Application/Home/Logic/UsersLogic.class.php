@@ -724,18 +724,18 @@ class UsersLogic extends RelationModel
     	$check = session('validate_code');
     	if(empty($check))
     	{
-    		$res = array('status'=>0,'msg'=>'请先获取验证码');
+    		$res = array('status'=>0,'msg'=>'Please get the verification code first');
     	}elseif($check['time']<time())
     	{
-    		$res = array('status'=>0,'msg'=>'验证码已超时失效');
+    		$res = array('status'=>0,'msg'=>'The verification code has gone out of time');
     	}elseif($code!=$check['code'] || $check['sender']!=$sender)
-    	{
-    		$res = array('status'=>0,'msg'=>'验证失败,验证码有误');
+    	{ 
+    		$res = array('status'=>0,'msg'=>'Validate is failure, verification code error');
     	}else
     	{
     		$check['is_check'] = 1; //标示验证通过
     		session('validate_code',$check);
-    		$res = array('status'=>1,'msg'=>'验证成功');
+    		$res = array('status'=>1,'msg'=>'Validate is successful');
     	}
     	return $res;
     }

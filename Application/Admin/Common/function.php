@@ -118,6 +118,73 @@ function getMenuList($act_list){
 	return $menu_list;
 }
 
+/**
+ * 邮件发送
+ * @param $to    接收人
+ * @param string $subject   邮件标题
+ * @param string $content   邮件内容(html模板渲染后的内容)
+ * @throws Exception
+ * @throws phpmailerException
+ */
+function send_templ_email($user,$pwd,$to,$subject='',$content){
+    require_once THINK_PATH.'Library/Vendor/phpmailer/PHPMailerAutoload.php';
+    $mail = new PHPMailer;
+    $config = tpCache('smtp');
+
+	$mail->CharSet  = 'UTF-8'; //设定邮件编码，默认ISO-8859-1，如果发中文此项必须设置，否则乱码
+	$mail->Encoding = "base64"; 
+    $mail->isSMTP();
+    //Enable SMTP debugging
+    // 0 = off (for production use)
+    // 1 = client messages
+    // 2 = client and server messages
+    $mail->SMTPDebug = 1;
+    //调试输出格式
+	//$mail->Debugoutput = 'html';
+    //smtp服务器
+    $mail->Host = $config['smtp_server'];
+    //端口 - likely to be 25, 465 or 587
+    $mail->Port = $config['smtp_port'];
+	
+	// if($mail->Port === 465) 
+    $mail->SMTPSecure = 'ssl';// 使用安全协议
+    //Whether to use SMTP authentication
+    $mail->SMTPAuth = true;
+    //用户名
+    $mail->Username = $user;
+    //密码
+    $mail->Password = $pwd;
+    //Set who the message is to be sent from
+    $mail->setFrom($user);
+    //回复地址
+    //$mail->addReplyTo('replyto@example.com', 'First Last');
+    //接收邮件方
+    if(is_array($to)){
+    	foreach ($to as $v){
+    		$mail->addAddress($v);
+    	}
+    }else{
+    	$mail->addAddress($to);
+    }
+
+    $mail->isHTML(true);// send as HTML
+    //标题
+    $mail->Subject = $subject;
+    //HTML内容转换
+
+    $mail->isHTML(true);// send as HTML
+    // $mail->msgHTML($content);
+    $mail->Body = $content;
+    $mail->isHTML(true);// send as HTML
+    //Replace the plain text body with one created manually
+    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    //添加附件
+    //$mail->addAttachment('images/phpmailer_mini.png');
+    //send the message, check for errors
+    return $mail->send();
+
+}
+
 function getAllMenu(){
 	return	array(
 			'system' => array('name'=>'系统设置','icon'=>'fa-cog','sub_menu'=>array(
@@ -176,6 +243,7 @@ function getAllMenu(){
 					//array('name' => '帮助管理', 'act'=>'help_list', 'control'=>'Article'),
 					//array('name' => '公告管理', 'act'=>'notice_list', 'control'=>'Article'),
 					array('name' => '专题列表', 'act'=>'topicList', 'control'=>'Topic'),
+					array('name' => '邮件模板', 'act'=>'email', 'control'=>'Article'),
 			)),
 			
 			'theme' => array('name' => '模板管理', 'icon'=>'fa-adjust', 'sub_menu' => array(
